@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ParkHelper.Common.Database_Access
+﻿namespace ParkHelper.Common.WebService_Connexion
 {
     public interface IRepository
     {
