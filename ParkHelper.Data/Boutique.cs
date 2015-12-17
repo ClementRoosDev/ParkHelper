@@ -12,26 +12,19 @@ namespace ParkHelper.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Attraction
+    public partial class Boutique
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Attraction()
+        public Boutique()
         {
-            this.IndicationParAttractions = new HashSet<IndicationParAttraction>();
+            this.IndicationParBoutiques = new HashSet<IndicationParBoutique>();
         }
     
         public int Id { get; set; }
         public string Libelle { get; set; }
         public string Description { get; set; }
-        public string LienGif { get; set; }
-        public Nullable<decimal> Latittude { get; set; }
-        public Nullable<decimal> Longitude { get; set; }
-        public Nullable<int> Attente { get; set; }
-        public Nullable<int> CapaciteWagon { get; set; }
-        public Nullable<int> IdType { get; set; }
     
-        public virtual Type Type { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<IndicationParAttraction> IndicationParAttractions { get; set; }
+        public virtual ICollection<IndicationParBoutique> IndicationParBoutiques { get; set; }
     }
 }

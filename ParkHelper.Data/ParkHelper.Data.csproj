@@ -54,6 +54,21 @@
     <Compile Include="Attraction.cs">
       <DependentUpon>ParkHelperModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Boutique.cs">
+      <DependentUpon>ParkHelperModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Indication.cs">
+      <DependentUpon>ParkHelperModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IndicationParAttraction.cs">
+      <DependentUpon>ParkHelperModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IndicationParBoutique.cs">
+      <DependentUpon>ParkHelperModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IndicationParRestaurant.cs">
+      <DependentUpon>ParkHelperModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ParkHelperModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -70,6 +85,12 @@
       <DependentUpon>ParkHelperModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Restaurant.cs">
+      <DependentUpon>ParkHelperModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Type.cs">
+      <DependentUpon>ParkHelperModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

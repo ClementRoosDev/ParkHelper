@@ -4,43 +4,495 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ParcHelperModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Attractions">
+    <Schema Namespace="ParcHelperModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Attraction">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="nom" Type="varchar" MaxLength="50" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="varchar" MaxLength="255" />
+          <Property Name="Description" Type="varchar" MaxLength="5000" />
+          <Property Name="LienGif" Type="varchar" MaxLength="500" />
+          <Property Name="Latittude" Type="decimal" Precision="25" Scale="2" />
+          <Property Name="Longitude" Type="decimal" Precision="25" Scale="2" />
+          <Property Name="Attente" Type="int" />
+          <Property Name="CapaciteWagon" Type="int" />
+          <Property Name="IdType" Type="int" />
         </EntityType>
+        <EntityType Name="Boutique">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="varchar" MaxLength="256" />
+          <Property Name="Description" Type="varchar" MaxLength="5000" />
+        </EntityType>
+        <EntityType Name="Indication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="varchar" MaxLength="256" />
+          <Property Name="Description" Type="varchar" MaxLength="5000" />
+          <Property Name="LienLogo" Type="varchar" MaxLength="256" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ParcHelper.dbo.IndicationParAttraction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="IndicationParAttraction">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdAttraction" />
+            <PropertyRef Name="IdIndication" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdAttraction" Type="int" Nullable="false" />
+          <Property Name="IdIndication" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ParcHelper.dbo.IndicationParBoutique' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="IndicationParBoutique">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdIndication" />
+            <PropertyRef Name="IdBoutique" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdIndication" Type="int" Nullable="false" />
+          <Property Name="IdBoutique" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ParcHelper.dbo.IndicationParRestaurant' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="IndicationParRestaurant">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdRestaurant" />
+            <PropertyRef Name="IdIndication" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdRestaurant" Type="int" Nullable="false" />
+          <Property Name="IdIndication" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="varchar" MaxLength="256" />
+          <Property Name="Description" Type="varchar" MaxLength="5000" />
+          <Property Name="NbCouvert" Type="int" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Attraction_ToTableType">
+          <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
+          <End Role="Attraction" Type="Self.Attraction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Attraction">
+              <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="IndicationParRestaurant" Type="Self.IndicationParRestaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IndicationParRestaurant">
+              <PropertyRef Name="IdRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToAttraction">
+          <End Role="Attraction" Type="Self.Attraction" Multiplicity="1" />
+          <End Role="IndicationParAttraction" Type="Self.IndicationParAttraction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attraction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IndicationParAttraction">
+              <PropertyRef Name="IdAttraction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToBoutique">
+          <End Role="Boutique" Type="Self.Boutique" Multiplicity="1" />
+          <End Role="IndicationParBoutique" Type="Self.IndicationParBoutique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Boutique">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IndicationParBoutique">
+              <PropertyRef Name="IdBoutique" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToIndication">
+          <End Role="Indication" Type="Self.Indication" Multiplicity="1" />
+          <End Role="IndicationParAttraction" Type="Self.IndicationParAttraction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Indication">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IndicationParAttraction">
+              <PropertyRef Name="IdIndication" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToIndication2">
+          <End Role="Indication" Type="Self.Indication" Multiplicity="1" />
+          <End Role="IndicationParBoutique" Type="Self.IndicationParBoutique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Indication">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IndicationParBoutique">
+              <PropertyRef Name="IdIndication" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ParcHelperModelStoreContainer">
-          <EntitySet Name="Attractions" EntityType="Self.Attractions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attraction" EntityType="Self.Attraction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Boutique" EntityType="Self.Boutique" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Indication" EntityType="Self.Indication" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurant" EntityType="Self.Restaurant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IndicationParAttraction" EntityType="Self.IndicationParAttraction" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [IndicationParAttraction].[Id] AS [Id], 
+    [IndicationParAttraction].[IdAttraction] AS [IdAttraction], 
+    [IndicationParAttraction].[IdIndication] AS [IdIndication]
+    FROM [dbo].[IndicationParAttraction] AS [IndicationParAttraction]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="IndicationParBoutique" EntityType="Self.IndicationParBoutique" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [IndicationParBoutique].[Id] AS [Id], 
+    [IndicationParBoutique].[IdIndication] AS [IdIndication], 
+    [IndicationParBoutique].[IdBoutique] AS [IdBoutique]
+    FROM [dbo].[IndicationParBoutique] AS [IndicationParBoutique]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="IndicationParRestaurant" EntityType="Self.IndicationParRestaurant" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [IndicationParRestaurant].[Id] AS [Id], 
+    [IndicationParRestaurant].[IdRestaurant] AS [IdRestaurant], 
+    [IndicationParRestaurant].[IdIndication] AS [IdIndication]
+    FROM [dbo].[IndicationParRestaurant] AS [IndicationParRestaurant]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Attraction_ToTableType" Association="Self.FK_Attraction_ToTableType">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Attraction" EntitySet="Attraction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Restaurant" Association="Self.FK_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="IndicationParRestaurant" EntitySet="IndicationParRestaurant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToAttraction" Association="Self.FK_ToAttraction">
+            <End Role="Attraction" EntitySet="Attraction" />
+            <End Role="IndicationParAttraction" EntitySet="IndicationParAttraction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToBoutique" Association="Self.FK_ToBoutique">
+            <End Role="Boutique" EntitySet="Boutique" />
+            <End Role="IndicationParBoutique" EntitySet="IndicationParBoutique" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToIndication" Association="Self.FK_ToIndication">
+            <End Role="Indication" EntitySet="Indication" />
+            <End Role="IndicationParAttraction" EntitySet="IndicationParAttraction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToIndication2" Association="Self.FK_ToIndication2">
+            <End Role="Indication" EntitySet="Indication" />
+            <End Role="IndicationParBoutique" EntitySet="IndicationParBoutique" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ParcHelperModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ParcHelperEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Attractions" EntityType="ParcHelperModel.Attraction" />
+          <EntitySet Name="Boutiques" EntityType="ParcHelperModel.Boutique" />
+          <EntitySet Name="Indications" EntityType="ParcHelperModel.Indication" />
+          <EntitySet Name="Restaurants" EntityType="ParcHelperModel.Restaurant" />
+          <EntitySet Name="Types" EntityType="ParcHelperModel.Type" />
+          <EntitySet Name="IndicationParAttractions" EntityType="ParcHelperModel.IndicationParAttraction" />
+          <EntitySet Name="IndicationParBoutiques" EntityType="ParcHelperModel.IndicationParBoutique" />
+          <EntitySet Name="IndicationParRestaurants" EntityType="ParcHelperModel.IndicationParRestaurant" />
+          <AssociationSet Name="FK_Attraction_ToTableType" Association="ParcHelperModel.FK_Attraction_ToTableType">
+            <End Role="Type" EntitySet="Types" />
+            <End Role="Attraction1" EntitySet="Attractions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToAttraction" Association="ParcHelperModel.FK_ToAttraction">
+            <End Role="Attraction1" EntitySet="Attractions" />
+            <End Role="IndicationParAttraction" EntitySet="IndicationParAttractions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToBoutique" Association="ParcHelperModel.FK_ToBoutique">
+            <End Role="Boutique" EntitySet="Boutiques" />
+            <End Role="IndicationParBoutique" EntitySet="IndicationParBoutiques" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToIndication" Association="ParcHelperModel.FK_ToIndication">
+            <End Role="Indication" EntitySet="Indications" />
+            <End Role="IndicationParAttraction" EntitySet="IndicationParAttractions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToIndication2" Association="ParcHelperModel.FK_ToIndication2">
+            <End Role="Indication" EntitySet="Indications" />
+            <End Role="IndicationParBoutique" EntitySet="IndicationParBoutiques" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Restaurant" Association="ParcHelperModel.FK_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="IndicationParRestaurant" EntitySet="IndicationParRestaurants" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Attraction">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="LienGif" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Latittude" Type="Decimal" Precision="25" Scale="2" />
+          <Property Name="Longitude" Type="Decimal" Precision="25" Scale="2" />
+          <Property Name="Attente" Type="Int32" />
+          <Property Name="CapaciteWagon" Type="Int32" />
+          <Property Name="IdType" Type="Int32" />
+          <NavigationProperty Name="Type" Relationship="ParcHelperModel.FK_Attraction_ToTableType" FromRole="Attraction1" ToRole="Type" />
+          <NavigationProperty Name="IndicationParAttractions" Relationship="ParcHelperModel.FK_ToAttraction" FromRole="Attraction1" ToRole="IndicationParAttraction" />
         </EntityType>
-        <EntityContainer Name="ParcHelperEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Attractions" EntityType="Self.Attraction" />
-        </EntityContainer>
+        <EntityType Name="Boutique">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="IndicationParBoutiques" Relationship="ParcHelperModel.FK_ToBoutique" FromRole="Boutique" ToRole="IndicationParBoutique" />
+        </EntityType>
+        <EntityType Name="Indication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="LienLogo" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="IndicationParAttractions" Relationship="ParcHelperModel.FK_ToIndication" FromRole="Indication" ToRole="IndicationParAttraction" />
+          <NavigationProperty Name="IndicationParBoutiques" Relationship="ParcHelperModel.FK_ToIndication2" FromRole="Indication" ToRole="IndicationParBoutique" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="NbCouvert" Type="Int32" />
+          <NavigationProperty Name="IndicationParRestaurants" Relationship="ParcHelperModel.FK_Restaurant" FromRole="Restaurant" ToRole="IndicationParRestaurant" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Attractions" Relationship="ParcHelperModel.FK_Attraction_ToTableType" FromRole="Type" ToRole="Attraction1" />
+        </EntityType>
+        <EntityType Name="IndicationParAttraction">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdAttraction" />
+            <PropertyRef Name="IdIndication" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAttraction" Type="Int32" Nullable="false" />
+          <Property Name="IdIndication" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Attraction" Relationship="ParcHelperModel.FK_ToAttraction" FromRole="IndicationParAttraction" ToRole="Attraction1" />
+          <NavigationProperty Name="Indication" Relationship="ParcHelperModel.FK_ToIndication" FromRole="IndicationParAttraction" ToRole="Indication" />
+        </EntityType>
+        <EntityType Name="IndicationParBoutique">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdIndication" />
+            <PropertyRef Name="IdBoutique" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdIndication" Type="Int32" Nullable="false" />
+          <Property Name="IdBoutique" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Boutique" Relationship="ParcHelperModel.FK_ToBoutique" FromRole="IndicationParBoutique" ToRole="Boutique" />
+          <NavigationProperty Name="Indication" Relationship="ParcHelperModel.FK_ToIndication2" FromRole="IndicationParBoutique" ToRole="Indication" />
+        </EntityType>
+        <EntityType Name="IndicationParRestaurant">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdRestaurant" />
+            <PropertyRef Name="IdIndication" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdRestaurant" Type="Int32" Nullable="false" />
+          <Property Name="IdIndication" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Restaurant" Relationship="ParcHelperModel.FK_Restaurant" FromRole="IndicationParRestaurant" ToRole="Restaurant" />
+        </EntityType>
+        <Association Name="FK_Attraction_ToTableType">
+          <End Type="ParcHelperModel.Type" Role="Type" Multiplicity="0..1" />
+          <End Type="ParcHelperModel.Attraction" Role="Attraction1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Attraction1">
+              <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToAttraction">
+          <End Type="ParcHelperModel.Attraction" Role="Attraction1" Multiplicity="1" />
+          <End Type="ParcHelperModel.IndicationParAttraction" Role="IndicationParAttraction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attraction1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IndicationParAttraction">
+              <PropertyRef Name="IdAttraction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToBoutique">
+          <End Type="ParcHelperModel.Boutique" Role="Boutique" Multiplicity="1" />
+          <End Type="ParcHelperModel.IndicationParBoutique" Role="IndicationParBoutique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Boutique">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IndicationParBoutique">
+              <PropertyRef Name="IdBoutique" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToIndication">
+          <End Type="ParcHelperModel.Indication" Role="Indication" Multiplicity="1" />
+          <End Type="ParcHelperModel.IndicationParAttraction" Role="IndicationParAttraction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Indication">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IndicationParAttraction">
+              <PropertyRef Name="IdIndication" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToIndication2">
+          <End Type="ParcHelperModel.Indication" Role="Indication" Multiplicity="1" />
+          <End Type="ParcHelperModel.IndicationParBoutique" Role="IndicationParBoutique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Indication">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IndicationParBoutique">
+              <PropertyRef Name="IdIndication" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Restaurant">
+          <End Type="ParcHelperModel.Restaurant" Role="Restaurant" Multiplicity="1" />
+          <End Type="ParcHelperModel.IndicationParRestaurant" Role="IndicationParRestaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IndicationParRestaurant">
+              <PropertyRef Name="IdRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ParcHelperModelStoreContainer" CdmEntityContainer="ParcHelperEntities">
-          <EntitySetMapping Name="Attractions">
+        <EntitySetMapping Name="Attractions">
             <EntityTypeMapping TypeName="ParcHelperModel.Attraction">
-              <MappingFragment StoreEntitySet="Attractions">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nom" ColumnName="nom" />
+              <MappingFragment StoreEntitySet="Attraction">
+                <ScalarProperty Name="IdType" ColumnName="IdType" />
+                <ScalarProperty Name="CapaciteWagon" ColumnName="CapaciteWagon" />
+                <ScalarProperty Name="Attente" ColumnName="Attente" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latittude" ColumnName="Latittude" />
+                <ScalarProperty Name="LienGif" ColumnName="LienGif" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Boutiques">
+            <EntityTypeMapping TypeName="ParcHelperModel.Boutique">
+              <MappingFragment StoreEntitySet="Boutique">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Indications">
+            <EntityTypeMapping TypeName="ParcHelperModel.Indication">
+              <MappingFragment StoreEntitySet="Indication">
+                <ScalarProperty Name="LienLogo" ColumnName="LienLogo" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurants">
+            <EntityTypeMapping TypeName="ParcHelperModel.Restaurant">
+              <MappingFragment StoreEntitySet="Restaurant">
+                <ScalarProperty Name="NbCouvert" ColumnName="NbCouvert" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types">
+            <EntityTypeMapping TypeName="ParcHelperModel.Type">
+              <MappingFragment StoreEntitySet="Type">
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IndicationParAttractions">
+            <EntityTypeMapping TypeName="ParcHelperModel.IndicationParAttraction">
+              <MappingFragment StoreEntitySet="IndicationParAttraction">
+                <ScalarProperty Name="IdIndication" ColumnName="IdIndication" />
+                <ScalarProperty Name="IdAttraction" ColumnName="IdAttraction" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IndicationParBoutiques">
+            <EntityTypeMapping TypeName="ParcHelperModel.IndicationParBoutique">
+              <MappingFragment StoreEntitySet="IndicationParBoutique">
+                <ScalarProperty Name="IdBoutique" ColumnName="IdBoutique" />
+                <ScalarProperty Name="IdIndication" ColumnName="IdIndication" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IndicationParRestaurants">
+            <EntityTypeMapping TypeName="ParcHelperModel.IndicationParRestaurant">
+              <MappingFragment StoreEntitySet="IndicationParRestaurant">
+                <ScalarProperty Name="IdIndication" ColumnName="IdIndication" />
+                <ScalarProperty Name="IdRestaurant" ColumnName="IdRestaurant" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
