@@ -20,34 +20,41 @@ namespace ParkHelperDataTest
 
         private static bool MethodeCalculParcours()
         {
+            Console.WriteLine("******TEST CALCUL PARCOURS*******");
             int[] testAttraction = new int[3] {1,3,4 };
             CalculParcours CP = new CalculParcours(testAttraction);
             CP.CalculeParcoursOptimal();
-            foreach (var item in CP.Parcours.ListeParcours)
+            foreach (var item in CP.Parcours.ListeParcours.OrderBy(a=>a.Ordre))
             {
+                Console.WriteLine("Ordre : " + item.Ordre);
                 if (item is Deplacement)
                 {
-                    Console.WriteLine(item.Duree + item.Ordre);
+                    Console.WriteLine("Deplacement : " + item.Duree );
                 }
                 if (item is Attraction)
                 {
-                    Console.WriteLine(((Attraction)item).Ordre + "   "+ ((Attraction)item).Libelle);
+                    Console.WriteLine("Attraction : "+ ((Attraction)item).Libelle);
                 }                
             }
+            Console.WriteLine("******FIN TEST*******");
             return false;
         }
 
         private static bool TestCalculDeplacement()
         {
+            Console.WriteLine("******TEST Calcul Deplacement*******");
             Attraction a1 = new Attraction { Latittude = 5, Longitude = 10};
             Attraction a2 = new Attraction { Latittude = 8, Longitude = 15 };
             Deplacement d = new Deplacement(a1, a2);
             Console.WriteLine("Durée : {0}",d.Duree);
+            Console.WriteLine("******FIN TEST*******");
             return false;
         }
 
         private static bool TestAttractionLaPlusProche()
         {
+            Console.WriteLine("******TEST Attraction la plus proche*******");
+
             Attraction a1 = new Attraction {Libelle="Splash", Latittude = 5, Longitude = 10 };
             Attraction a2 = new Attraction {Libelle = "Grand 8", Latittude = 8, Longitude = 15 };
             Attraction a3 = new Attraction {Libelle = "Maison Hantée", Latittude = 4, Longitude = 8 };
@@ -58,7 +65,9 @@ namespace ParkHelperDataTest
             listeAttractions.Add(a3);
 
             Localisation l = new Localisation(a1,listeAttractions);
+            l.CalculeAttractionLaPlusPres();
             Console.WriteLine("Attraction la plus pres : {0}", l.AttractionLaPlusPres.Libelle);
+            Console.WriteLine("******FIN TEST*******");
             return false;
         }       
 

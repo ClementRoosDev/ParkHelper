@@ -13,7 +13,8 @@ namespace ParkHelper.Api.Models
 
         private Attraction attractionDeDepart;
         private IEnumerable<Attraction> listeAttractions;
-        
+        private Attraction attractionLaPlusPres;
+
         #endregion
 
         #region Properties
@@ -22,15 +23,11 @@ namespace ParkHelper.Api.Models
         {
             get
             {
-                Dictionary<Attraction, int> AttractionEtDistance = new Dictionary<Attraction, int>();
-                foreach (var item in listeAttractions.Where(a=>a.EstDejaDansLeParcours == false))
-                {
-                        Deplacement d = new Deplacement(attractionDeDepart,item);
-                        AttractionEtDistance.Add(item,d.Duree);   
-                }
-                Attraction attractionResult = AttractionEtDistance.OrderBy(d => d.Value).First().Key;
-                attractionResult.EstDejaDansLeParcours = true;
-                return attractionResult;
+                return attractionLaPlusPres;
+            }
+            set
+            {
+                attractionLaPlusPres = value;
             }
         }
 
@@ -48,6 +45,17 @@ namespace ParkHelper.Api.Models
 
         #region Methodes
         
+        public void CalculeAttractionLaPlusPres()
+        {
+            Dictionary<Attraction, int> AttractionEtDistance = new Dictionary<Attraction, int>();
+            foreach (var item in listeAttractions.Where(a => a.EstDejaDansLeParcours == false))
+            {
+                Deplacement d = new Deplacement(attractionDeDepart, item);
+                AttractionEtDistance.Add(item, d.Duree);
+            }
+            AttractionLaPlusPres = AttractionEtDistance.OrderBy(d => d.Value).First().Key;
+            AttractionLaPlusPres.EstDejaDansLeParcours = true;            
+        }
 
         #endregion
     }
