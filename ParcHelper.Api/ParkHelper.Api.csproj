@@ -161,6 +161,8 @@
     <Compile Include="Models\ParcoursRepository.cs" />
     <Compile Include="Models\AttractionsRepository.cs" />
     <Compile Include="Models\CalculParcours.cs" />
+    <Compile Include="Models\IParkHelperRepository.cs" />
+    <Compile Include="Models\ParkHelperRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
