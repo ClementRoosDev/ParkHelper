@@ -50,8 +50,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ParkHelper.Api\ParkHelper.Api.csproj">
-      <Project>{136e2026-f0fc-475a-87a8-7ebdeda04a79}</Project>
+    <ProjectReference Include="..\ParcHelper.Api\ParkHelper.Api.csproj">
+      <Project>{cd8776d1-6f92-44aa-9df4-b3bd97e5fb26}</Project>
       <Name>ParkHelper.Api</Name>
     </ProjectReference>
     <ProjectReference Include="..\ParkHelper.Data\ParkHelper.Data.csproj">

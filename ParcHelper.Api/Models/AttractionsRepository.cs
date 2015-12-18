@@ -2,7 +2,7 @@
 using System.Linq;
 using ParkHelper.Data;
 
-namespace ProjectTrackingServices.Models
+namespace ParkHelper.Api.Models
 {
     public class AttractionsRepository
     {

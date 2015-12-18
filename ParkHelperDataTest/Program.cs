@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ParkHelper.Api.Controllers;
+using ParkHelper.Api.Models;
 
 namespace ParkHelperDataTest
 {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ParkHelper.Api.Controllers
+namespace ParkHelper.Api.Models
 {
     public class CalculParcours
     {
