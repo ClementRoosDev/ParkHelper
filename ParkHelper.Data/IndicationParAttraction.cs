@@ -18,7 +18,6 @@ namespace ParkHelper.Data
         public int IdAttraction { get; set; }
         public int IdIndication { get; set; }
     
-        public virtual Attraction Attraction { get; set; }
         public virtual Indication Indication { get; set; }
     }
 }
