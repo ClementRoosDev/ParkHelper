@@ -6,7 +6,7 @@ namespace ParkHelper.Api.Models
 {
     public class ParkHelperRepository : IParkHelperRepository
     {
-        private ParcHelperEntities _context;
+        private readonly ParcHelperEntities _context;
 
         public ParkHelperRepository(ParcHelperEntities context)
         {
@@ -19,7 +19,7 @@ namespace ParkHelper.Api.Models
 
         public bool SaveAll()
         {
-            return _context
+            return _context.SaveChanges() > 0;
         }
 
         public List<Attraction> SearchAttractionsByName(string name)
@@ -60,11 +60,10 @@ namespace ParkHelper.Api.Models
         }
         public List<Attraction> DeleteAttraction(Attraction e)
         {
-            
-                var attraction = _context.Attractions.FirstOrDefault(i => i.Id == e.Id);
-                _context.Attractions.Remove(attraction);
-                _context.SaveChanges();
-            
+            var attraction = _context.Attractions.FirstOrDefault(i => i.Id == e.Id);
+            _context.Attractions.Remove(attraction);
+            _context.SaveChanges();
+
             /**var emp = (from employee in dataContext.Employees
                        where employee.EmployeeID == e.EmployeeID
                        select employee).SingleOrDefault();

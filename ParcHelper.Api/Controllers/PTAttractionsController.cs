@@ -10,12 +10,19 @@ namespace ParkHelper.Api.Controllers
     [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
     public class PTAttractionsController : ApiController
     {
+        private IParkHelperRepository _repository;
+
+        public PTAttractionsController(IParkHelperRepository repository)
+        {
+            _repository = repository;
+        }
+
         #region Attractions GET
         // GET api/ptattractions
         [Route("api/ptattractions")]
         public HttpResponseMessage Get()
         {
-            var attractions = AttractionsRepository.GetAllAttractions();
+            var attractions = _repository.GetAllAttractions();
             var response = Request.CreateResponse(HttpStatusCode.OK, attractions);
             return response;
         }
@@ -24,7 +31,7 @@ namespace ParkHelper.Api.Controllers
         [Route("api/ptattractions/{id?}")]
         public HttpResponseMessage Get(int id)
         {
-            var attraction = AttractionsRepository.GetAttraction(id);
+            var attraction = _repository.GetAttraction(id);
             var response = Request.CreateResponse(HttpStatusCode.OK, attraction);
             return response;
         }
@@ -32,7 +39,7 @@ namespace ParkHelper.Api.Controllers
         [Route("api/ptattractions/{name:alpha}")]
         public HttpResponseMessage Get(string name)
         {
-            var attraction = AttractionsRepository.SearchAttractionsByName(name);
+            var attraction = _repository.SearchAttractionsByName(name);
             var response = Request.CreateResponse(HttpStatusCode.OK, attraction);
             return response;
         }
@@ -42,7 +49,7 @@ namespace ParkHelper.Api.Controllers
         [Route("api/ptattractions")]
         public HttpResponseMessage Post(Attraction e)
         {
-            var attractions = AttractionsRepository.InsertAttraction(e);
+            var attractions = _repository.InsertAttraction(e);
             var response = Request.CreateResponse(HttpStatusCode.OK, attractions);
             return response;
         }
@@ -52,7 +59,7 @@ namespace ParkHelper.Api.Controllers
         [Route("api/ptatttractions")]
         public HttpResponseMessage Put(Attraction e)
         {
-            var attractions = AttractionsRepository.UpdateAttraction(e);
+            var attractions = _repository.UpdateAttraction(e);
             var response = Request.CreateResponse(HttpStatusCode.OK, attractions);
             return response;
         }
@@ -62,7 +69,7 @@ namespace ParkHelper.Api.Controllers
         [Route("api/ptattractions")]
         public HttpResponseMessage Delete(Attraction e)
         {
-            var attractions = AttractionsRepository.DeleteAttraction(e);
+            var attractions = _repository.DeleteAttraction(e);
             var response = Request.CreateResponse(HttpStatusCode.OK, attractions);
             return response;
         }
