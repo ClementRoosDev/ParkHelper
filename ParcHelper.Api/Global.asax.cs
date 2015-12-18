@@ -25,18 +25,6 @@ namespace ProjectTrackingServices
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            // Create a new Unity dependency injection container
-            /**var unity = new UnityContainer();
-
-            // Register the Controllers that should be injectable
-            unity.RegisterType<PTAttractionsController>();
-            unity.RegisterType<PTParcoursController>();
-
-            // Register instances to be used when resolving constructor parameter dependencies
-            unity.RegisterInstance(new ParkHelperRepository(new ParcHelperEntities()));
-
-            // Finally, override the default dependency resolver with Unity
-            GlobalConfiguration.Configuration.DependencyResolver = new IoCContainer(unity);*/
         }
     }
 }

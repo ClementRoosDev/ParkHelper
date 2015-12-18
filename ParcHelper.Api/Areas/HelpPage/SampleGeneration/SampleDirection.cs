@@ -1,4 +1,4 @@
-namespace ProjectTrackingServices.Areas.HelpPage
+namespace ParkHelper.Api.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response

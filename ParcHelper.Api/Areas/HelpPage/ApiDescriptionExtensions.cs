@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace ProjectTrackingServices.Areas.HelpPage
+namespace ParkHelper.Api.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {
@@ -31,7 +31,7 @@ namespace ProjectTrackingServices.Areas.HelpPage
                 localPath.Replace("/", "-").Replace("{", String.Empty).Replace("}", String.Empty));
             if (queryKeyString != null)
             {
-                friendlyPath.AppendFormat("_{0}", queryKeyString);
+                friendlyPath.AppendFormat("_{0}", queryKeyString.Replace('.', '-'));
             }
             return friendlyPath.ToString();
         }
