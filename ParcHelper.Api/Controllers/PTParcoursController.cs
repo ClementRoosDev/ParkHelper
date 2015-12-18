@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using ParkHelper.Api.Models;
-using ParkHelper.Data;
 
 namespace ParkHelper.Api.Controllers
 {

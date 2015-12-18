@@ -10,7 +10,7 @@ namespace ParkHelper.Api.Controllers
     [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
     public class PTAttractionsController : ApiController
     {
-        private IParkHelperRepository _repository;
+        private readonly IParkHelperRepository _repository;
 
         public PTAttractionsController(IParkHelperRepository repository)
         {

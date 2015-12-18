@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using ParkHelper.Data;
 
 namespace ParkHelper.Api.Models
