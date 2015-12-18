@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Web.Http;
@@ -24,7 +25,11 @@ namespace ParkHelper.Api.Controllers
         public HttpResponseMessage Get()
         {
             var attractions = _repository.GetAllAttractions();
-            var response = Request.CreateResponse(HttpStatusCode.OK, attractions);
+            HttpResponseMessage response = new HttpResponseMessage
+            {
+                Content = new ObjectContent<List<Attraction>>
+                    (attractions, new JsonMediaTypeFormatter(), "application/json")
+            };
             return response;
         }
 
@@ -33,7 +38,11 @@ namespace ParkHelper.Api.Controllers
         public HttpResponseMessage Get(int id)
         {
             var attraction = _repository.GetAttraction(id);
-            var response = Request.CreateResponse(HttpStatusCode.OK, attraction);
+            HttpResponseMessage response = new HttpResponseMessage
+            {
+                Content = new ObjectContent<Attraction>
+                    (attraction, new JsonMediaTypeFormatter(), "application/json")
+            };
             return response;
         }
 
@@ -41,7 +50,11 @@ namespace ParkHelper.Api.Controllers
         public HttpResponseMessage Get(string name)
         {
             var attraction = _repository.SearchAttractionsByName(name);
-            var response = Request.CreateResponse(HttpStatusCode.OK, attraction);
+            HttpResponseMessage response = new HttpResponseMessage
+            {
+                Content = new ObjectContent<List<Attraction>>
+                    (attraction, new JsonMediaTypeFormatter(), "application/json")
+            };
             return response;
         }
         #endregion
@@ -51,7 +64,11 @@ namespace ParkHelper.Api.Controllers
         public HttpResponseMessage Post(Attraction e)
         {
             var attractions = _repository.InsertAttraction(e);
-            var response = Request.CreateResponse(HttpStatusCode.OK, attractions);
+            HttpResponseMessage response = new HttpResponseMessage
+            {
+                Content = new ObjectContent<List<Attraction>>
+                    (attractions, new JsonMediaTypeFormatter(), "application/json")
+            };
             return response;
         }
         #endregion
@@ -61,7 +78,11 @@ namespace ParkHelper.Api.Controllers
         public HttpResponseMessage Put(Attraction e)
         {
             var attractions = _repository.UpdateAttraction(e);
-            var response = Request.CreateResponse(HttpStatusCode.OK, attractions);
+            HttpResponseMessage response = new HttpResponseMessage
+            {
+                Content = new ObjectContent<List<Attraction>>
+                     (attractions, new JsonMediaTypeFormatter(), "application/json")
+            };
             return response;
         }
         #endregion
@@ -71,7 +92,11 @@ namespace ParkHelper.Api.Controllers
         public HttpResponseMessage Delete(Attraction e)
         {
             var attractions = _repository.DeleteAttraction(e);
-            var response = Request.CreateResponse(HttpStatusCode.OK, attractions);
+            HttpResponseMessage response = new HttpResponseMessage
+            {
+                Content = new ObjectContent<List<Attraction>>
+                    (attractions, new JsonMediaTypeFormatter(), "application/json")
+            };
             return response;
         }
         #endregion
