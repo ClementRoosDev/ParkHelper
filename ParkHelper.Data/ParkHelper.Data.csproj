@@ -69,6 +69,10 @@
     <Compile Include="IndicationParRestaurant.cs">
       <DependentUpon>ParkHelperModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Parcours\Attraction.cs" />
+    <Compile Include="Parcours\Deplacement.cs" />
+    <Compile Include="Parcours\ElementDeParcours.cs" />
+    <Compile Include="Parcours\Parcours.cs" />
     <Compile Include="ParkHelperModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
