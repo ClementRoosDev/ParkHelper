@@ -50,9 +50,13 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParAttraction' does not h
           <Property Name="IdAttraction" Type="int" Nullable="false" />
           <Property Name="IdIndication" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ParcHelper.dbo.IndicationParBoutique' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="IndicationParBoutique">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="IdIndication" />
+            <PropertyRef Name="IdBoutique" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdIndication" Type="int" Nullable="false" />
@@ -149,7 +153,6 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParRestaurant' does not h
         <EntityContainer Name="ParcHelperModelStoreContainer">
           <EntitySet Name="Boutique" EntityType="Self.Boutique" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Indication" EntityType="Self.Indication" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="IndicationParBoutique" EntityType="Self.IndicationParBoutique" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Restaurant" EntityType="Self.Restaurant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attraction" EntityType="Self.Attraction" store:Type="Tables" store:Schema="dbo">
@@ -171,6 +174,13 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParRestaurant' does not h
     [IndicationParAttraction].[IdAttraction] AS [IdAttraction], 
     [IndicationParAttraction].[IdIndication] AS [IdIndication]
     FROM [dbo].[IndicationParAttraction] AS [IndicationParAttraction]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="IndicationParBoutique" EntityType="Self.IndicationParBoutique" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [IndicationParBoutique].[Id] AS [Id], 
+    [IndicationParBoutique].[IdIndication] AS [IdIndication], 
+    [IndicationParBoutique].[IdBoutique] AS [IdBoutique]
+    FROM [dbo].[IndicationParBoutique] AS [IndicationParBoutique]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="IndicationParRestaurant" EntityType="Self.IndicationParRestaurant" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
