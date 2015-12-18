@@ -15,8 +15,8 @@ namespace ParkHelper.Api.Controllers
         [Route("api/ptattractions")]
         public HttpResponseMessage Get()
         {
-            var employees= AttractionsRepository.GetAllAttractions();
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+            var attractions = AttractionsRepository.GetAllAttractions();
+            var response = Request.CreateResponse(HttpStatusCode.OK, attractions);
             return response;
         }
 
@@ -24,16 +24,16 @@ namespace ParkHelper.Api.Controllers
         [Route("api/ptattractions/{id?}")]
         public HttpResponseMessage Get(int id)
         {
-            var employees = AttractionsRepository.GetAttraction(id);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+            var attraction = AttractionsRepository.GetAttraction(id);
+            var response = Request.CreateResponse(HttpStatusCode.OK, attraction);
             return response;
         }
 
         [Route("api/ptattractions/{name:alpha}")]
         public HttpResponseMessage Get(string name)
         {
-            var employees = AttractionsRepository.SearchAttractionsByName(name);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+            var attraction = AttractionsRepository.SearchAttractionsByName(name);
+            var response = Request.CreateResponse(HttpStatusCode.OK, attraction);
             return response;
         }
         #endregion
@@ -42,8 +42,8 @@ namespace ParkHelper.Api.Controllers
         [Route("api/ptattractions")]
         public HttpResponseMessage Post(Attraction e)
         {
-            var employees = AttractionsRepository.InsertAttraction(e);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+            var attractions = AttractionsRepository.InsertAttraction(e);
+            var response = Request.CreateResponse(HttpStatusCode.OK, attractions);
             return response;
         }
         #endregion
@@ -52,8 +52,8 @@ namespace ParkHelper.Api.Controllers
         [Route("api/ptatttractions")]
         public HttpResponseMessage Put(Attraction e)
         {
-            var employees = AttractionsRepository.UpdateAttraction(e);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+            var attractions = AttractionsRepository.UpdateAttraction(e);
+            var response = Request.CreateResponse(HttpStatusCode.OK, attractions);
             return response;
         }
         #endregion
@@ -62,8 +62,8 @@ namespace ParkHelper.Api.Controllers
         [Route("api/ptattractions")]
         public HttpResponseMessage Delete(Attraction e)
         {
-            var employees = AttractionsRepository.DeleteAttraction(e);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+            var attractions = AttractionsRepository.DeleteAttraction(e);
+            var response = Request.CreateResponse(HttpStatusCode.OK, attractions);
             return response;
         }
         #endregion
