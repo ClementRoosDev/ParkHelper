@@ -25,7 +25,6 @@ namespace ParkHelper.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Attraction> Attractions { get; set; }
         public virtual DbSet<Boutique> Boutiques { get; set; }
         public virtual DbSet<Indication> Indications { get; set; }
         public virtual DbSet<Restaurant> Restaurants { get; set; }
@@ -33,5 +32,6 @@ namespace ParkHelper.Data
         public virtual DbSet<IndicationParAttraction> IndicationParAttractions { get; set; }
         public virtual DbSet<IndicationParBoutique> IndicationParBoutiques { get; set; }
         public virtual DbSet<IndicationParRestaurant> IndicationParRestaurants { get; set; }
+        public virtual DbSet<Attraction> Attractions { get; set; }
     }
 }

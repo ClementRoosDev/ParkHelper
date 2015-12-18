@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="3a309d4644d24073b13aee73c61a3718" Name="Diagram1">
-        <EntityTypeShape EntityType="ParcHelperModel.Attraction" Width="1.5" PointX="3.375" PointY="10.125" />
         <EntityTypeShape EntityType="ParcHelperModel.Boutique" Width="1.5" PointX="3.375" PointY="7.25" />
         <EntityTypeShape EntityType="ParcHelperModel.Indication" Width="1.5" PointX="3.375" PointY="3.625" />
         <EntityTypeShape EntityType="ParcHelperModel.Restaurant" Width="1.5" PointX="5.375" PointY="7.25" />
@@ -13,12 +12,12 @@
         <EntityTypeShape EntityType="ParcHelperModel.IndicationParAttraction" Width="1.5" PointX="5.625" PointY="3.75" />
         <EntityTypeShape EntityType="ParcHelperModel.IndicationParBoutique" Width="1.5" PointX="5.625" PointY="0.75" />
         <EntityTypeShape EntityType="ParcHelperModel.IndicationParRestaurant" Width="1.5" PointX="7.625" PointY="7.375" />
-        <AssociationConnector Association="ParcHelperModel.FK_Attraction_ToTableType" />
-        <AssociationConnector Association="ParcHelperModel.FK_ToAttraction" />
         <AssociationConnector Association="ParcHelperModel.FK_ToBoutique" />
         <AssociationConnector Association="ParcHelperModel.FK_ToIndication" />
         <AssociationConnector Association="ParcHelperModel.FK_ToIndication2" />
         <AssociationConnector Association="ParcHelperModel.FK_Restaurant" />
+        <EntityTypeShape EntityType="ParcHelperModel.Attraction" Width="1.5" PointX="3.375" PointY="10.375" />
+        <AssociationConnector Association="ParcHelperModel.FK_Attraction_ToTableType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
