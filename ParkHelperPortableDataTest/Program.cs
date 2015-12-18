@@ -12,14 +12,15 @@ namespace ParkHelperPortableDataTest
     {
         private const string Urlattractions = "http://parkhelperapi.azurewebsites.net/api/ptattractions";
 
-        private const string Urlparours = "http://parkhelperapi.azurewebsites.net/api/ptattractions";
+        private const string Urlparours = "http://parkhelperapi.azurewebsites.net/api/ptparcours";
 
         static void Main(string[] args)
         {
             var attractions = getAttractions();
-            foreach (var item in attractions.Result)
+            var result = attractions.Result;
+            foreach (var item in result)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(item.Type);
             }
             Console.ReadKey();
         }
@@ -40,8 +41,7 @@ namespace ParkHelperPortableDataTest
                 {
                     var result = await apiResponse.Content.ReadAsStringAsync();
 
-                    attractions.AddRange(result.Split(',').ToList().Select(JsonConvert.DeserializeObject<Attraction>));
-                    return attractions;
+                    return JsonConvert.DeserializeObject<List<Attraction>>(result);
                 }
                 return null;
             }
@@ -50,7 +50,18 @@ namespace ParkHelperPortableDataTest
 
     class Attraction
     {
-        private int Id { get; set; }
-        private string Libelle { get; set; }
+        public object Type { get; set; }
+        public int Id { get; set; }
+        public string Libelle { get; set; }
+        public string Description { get; set; }
+        public object LienGif { get; set; }
+        public double Latittude { get; set; }
+        public double Longitude { get; set; }
+        public int Attente { get; set; }
+        public int CapaciteWagon { get; set; }
+        public object IdType { get; set; }
+        public int Duree { get; set; }
+        public bool EstDejaDansLeParcours { get; set; }
+        public int Ordre { get; set; }
     }
 }
