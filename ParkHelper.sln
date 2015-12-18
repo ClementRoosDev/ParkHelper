@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portable", "Portable", "{F6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Webservice", "Webservice", "{D138A1AA-1C4E-4A1A-B5DD-5A4F3BBBB16E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkHelper.Api", "ProjectTrackingServices\ParkHelper.Api.csproj", "{CD8776D1-6F92-44AA-9DF4-B3BD97E5FB26}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkHelper.Api", "ParcHelper.Api\ParkHelper.Api.csproj", "{CD8776D1-6F92-44AA-9DF4-B3BD97E5FB26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
