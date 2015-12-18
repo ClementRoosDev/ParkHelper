@@ -21,6 +21,7 @@ namespace ParkHelper.Api.Models
                 return db.Attractions.Where(i => i.Libelle.Equals(name)).ToList();
             }
         }
+
         public static Attraction GetAttraction(int iD)
         {
             using (var db = new ParcHelperEntities())
@@ -28,6 +29,7 @@ namespace ParkHelper.Api.Models
                 return db.Attractions.FirstOrDefault(i => i.Id == iD);
             }
         }
+
         public static List<Attraction> InsertAttraction(Attraction attraction)
         {
             using (var db = new ParcHelperEntities())
