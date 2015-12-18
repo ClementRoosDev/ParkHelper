@@ -8,6 +8,6 @@ namespace ParkHelper.Data
 {
     public class Parcours
     {
-        List<ElementDeParcours> ListeParcours { get; set; }
+        public IEnumerable<IElementDeParcours> ListeParcours { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ParkHelper.Data
 {
-    public class ElementDeParcours
+    public interface IElementDeParcours
     {
         int Duree { get; set; }
         int Ordre { get; set; }
