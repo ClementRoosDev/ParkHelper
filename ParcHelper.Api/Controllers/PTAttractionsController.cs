@@ -1,15 +1,16 @@
-﻿using ParkHelper.Api.Models;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using ParkHelper.Api.Models;
 using ParkHelper.Data;
 
-namespace ProjectTrackingServices.Controllers
+namespace ParkHelper.Api.Controllers
 {
     [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
     public class PTAttractionsController : ApiController
     {
+        #region Attractions GET
         // GET api/ptattractions
         [Route("api/ptattractions")]
         public HttpResponseMessage Get()
@@ -18,6 +19,7 @@ namespace ProjectTrackingServices.Controllers
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
             return response;
         }
+
         // GET api/ptattractions/5
         [Route("api/ptattractions/{id?}")]
         public HttpResponseMessage Get(int id)
@@ -34,7 +36,9 @@ namespace ProjectTrackingServices.Controllers
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
             return response;
         }
+        #endregion
 
+        #region Attractions POST
         [Route("api/ptattractions")]
         public HttpResponseMessage Post(Attraction e)
         {
@@ -42,7 +46,9 @@ namespace ProjectTrackingServices.Controllers
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
             return response;
         }
+        #endregion
 
+        #region Attractions PUT
         [Route("api/ptatttractions")]
         public HttpResponseMessage Put(Attraction e)
         {
@@ -50,7 +56,9 @@ namespace ProjectTrackingServices.Controllers
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
             return response;
         }
+        #endregion
 
+        #region Attractions POST
         [Route("api/ptattractions")]
         public HttpResponseMessage Delete(Attraction e)
         {
@@ -58,5 +66,6 @@ namespace ProjectTrackingServices.Controllers
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
             return response;
         }
+        #endregion
     }
 }
