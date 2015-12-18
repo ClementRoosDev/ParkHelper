@@ -6,9 +6,19 @@ using System.Threading.Tasks;
 
 namespace ParkHelper.Data
 {
-    public class Deplacement : ElementDeParcours
+    public class Deplacement : IElementDeParcours
     {
         public Attraction LieuDepart { get; set; }
         public Attraction LieuArrivee { get; set; }
+
+        public int Duree
+        {
+            get; set;
+        }
+
+        public int Ordre
+        {
+            get; set;
+        }
     }
 }

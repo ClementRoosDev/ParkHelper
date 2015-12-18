@@ -153,10 +153,12 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PTParcoursController.cs" />
     <Compile Include="Controllers\PTAttractionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ParcoursRepository.cs" />
     <Compile Include="Models\AttractionsRepository.cs" />
     <Compile Include="Models\CalculParcours.cs" />
     <Compile Include="Models\IParkHelperRepository.cs" />

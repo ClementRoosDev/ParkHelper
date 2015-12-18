@@ -17,7 +17,7 @@ namespace ParkHelper.Api.Models
 
         public Parcours Parcours { get; set; }
 
-        private List<Attraction> ListeAttraction { get; set; }
+        private IEnumerable<Attraction> ListeAttraction { get; set; }
 
         #endregion
 
@@ -26,6 +26,7 @@ namespace ParkHelper.Api.Models
         public CalculParcours(int[] listeIdAttractions)
         {
             this.ListeAttraction = ConvertIdToAttraction(listeIdAttractions);
+            this.Parcours = new Parcours { ListeParcours = ListeAttraction };
         }
 
         #endregion
@@ -36,7 +37,9 @@ namespace ParkHelper.Api.Models
         {
             using (var db = new ParcHelperEntities())
             {
-                return db.Attractions.Where(a => listeIdAttractions.Contains(a.Id)).ToList();
+                List<Attraction> ListeResultats = db.Attractions.Where(a => listeIdAttractions.Contains(a.Id)).ToList();
+                ListeResultats= ListeResultats.Select(a => { a.EstLePremierDuParcours = false; return a; }).ToList();
+                return ListeResultats;
             }
         }
 
@@ -44,8 +47,17 @@ namespace ParkHelper.Api.Models
         {
             if (Settings.Default.FeatureGeolocalition)
             {
+                //TODO : Calculer le manège le plus près de l'utilisateur
+            }
+            else
+            {
+                //On va dire que on doit commencer par la première
+                ListeAttraction.First().EstLePremierDuParcours = true;
+                
             }
         }
+
+        
 
         #endregion
     }

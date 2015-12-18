@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace ProjectTrackingServices.Controllers
+namespace ParkHelper.Api.Controllers
 {
     public class HomeController : Controller
     {
