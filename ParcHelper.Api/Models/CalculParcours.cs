@@ -1,4 +1,5 @@
 ﻿using ParkHelper.Data;
+using ParkHelper.Api.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,11 +42,11 @@ namespace ParkHelper.Api.Models
 
         private void SequencerAttraction()
         {
-
+            if (Settings.Default.FeatureGeolocalition)
+            {
+            }
         }
 
         #endregion
-
-
     }
 }
