@@ -18,8 +18,8 @@ namespace ParkHelper.Data
         public string Libelle { get; set; }
         public string Description { get; set; }
         public string LienGif { get; set; }
-        public Nullable<decimal> Latittude { get; set; }
-        public Nullable<decimal> Longitude { get; set; }
+        public Nullable<double> Latittude { get; set; }
+        public Nullable<double> Longitude { get; set; }
         public Nullable<int> Attente { get; set; }
         public Nullable<int> CapaciteWagon { get; set; }
         public Nullable<int> IdType { get; set; }

@@ -15,8 +15,8 @@ warning 6002: The table/view 'ParcHelper.dbo.Attraction' does not have a primary
           <Property Name="Libelle" Type="varchar" MaxLength="255" />
           <Property Name="Description" Type="varchar" MaxLength="5000" />
           <Property Name="LienGif" Type="varchar" MaxLength="500" />
-          <Property Name="Latittude" Type="decimal" Precision="25" Scale="2" />
-          <Property Name="Longitude" Type="decimal" Precision="25" Scale="2" />
+          <Property Name="Latittude" Type="float" />
+          <Property Name="Longitude" Type="float" />
           <Property Name="Attente" Type="int" />
           <Property Name="CapaciteWagon" Type="int" />
           <Property Name="IdType" Type="int" />
@@ -219,16 +219,11 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParRestaurant' does not h
           <EntitySet Name="Indications" EntityType="ParcHelperModel.Indication" />
           <EntitySet Name="Restaurants" EntityType="ParcHelperModel.Restaurant" />
           <EntitySet Name="Types" EntityType="ParcHelperModel.Type" />
-          <EntitySet Name="IndicationParAttractions" EntityType="ParcHelperModel.IndicationParAttraction" />
           <EntitySet Name="IndicationParBoutiques" EntityType="ParcHelperModel.IndicationParBoutique" />
           <EntitySet Name="IndicationParRestaurants" EntityType="ParcHelperModel.IndicationParRestaurant" />
           <AssociationSet Name="FK_ToBoutique" Association="ParcHelperModel.FK_ToBoutique">
             <End Role="Boutique" EntitySet="Boutiques" />
             <End Role="IndicationParBoutique" EntitySet="IndicationParBoutiques" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ToIndication" Association="ParcHelperModel.FK_ToIndication">
-            <End Role="Indication" EntitySet="Indications" />
-            <End Role="IndicationParAttraction" EntitySet="IndicationParAttractions" />
           </AssociationSet>
           <AssociationSet Name="FK_ToIndication2" Association="ParcHelperModel.FK_ToIndication2">
             <End Role="Indication" EntitySet="Indications" />
@@ -239,6 +234,11 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParRestaurant' does not h
             <End Role="IndicationParRestaurant" EntitySet="IndicationParRestaurants" />
           </AssociationSet>
           <EntitySet Name="Attractions" EntityType="ParcHelperModel.Attraction" />
+          <EntitySet Name="IndicationParAttractions" EntityType="ParcHelperModel.IndicationParAttraction" />
+          <AssociationSet Name="FK_ToIndication" Association="ParcHelperModel.FK_ToIndication">
+            <End Role="Indication" EntitySet="Indications" />
+            <End Role="IndicationParAttraction" EntitySet="IndicationParAttractions" />
+          </AssociationSet>
           <AssociationSet Name="FK_Attraction_ToTableType" Association="ParcHelperModel.FK_Attraction_ToTableType">
             <End Role="Type" EntitySet="Types" />
             <End Role="Attraction" EntitySet="Attractions" />
@@ -261,8 +261,8 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParRestaurant' does not h
           <Property Name="Libelle" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
           <Property Name="LienLogo" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="IndicationParAttractions" Relationship="ParcHelperModel.FK_ToIndication" FromRole="Indication" ToRole="IndicationParAttraction" />
           <NavigationProperty Name="IndicationParBoutiques" Relationship="ParcHelperModel.FK_ToIndication2" FromRole="Indication" ToRole="IndicationParBoutique" />
+          <NavigationProperty Name="IndicationParAttractions" Relationship="ParcHelperModel.FK_ToIndication" FromRole="Indication" ToRole="IndicationParAttraction" />
         </EntityType>
         <EntityType Name="Restaurant">
           <Key>
@@ -281,17 +281,6 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParRestaurant' does not h
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Attractions" Relationship="ParcHelperModel.FK_Attraction_ToTableType" FromRole="Type" ToRole="Attraction" />
-        </EntityType>
-        <EntityType Name="IndicationParAttraction">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="IdAttraction" />
-            <PropertyRef Name="IdIndication" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdAttraction" Type="Int32" Nullable="false" />
-          <Property Name="IdIndication" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Indication" Relationship="ParcHelperModel.FK_ToIndication" FromRole="IndicationParAttraction" ToRole="Indication" />
         </EntityType>
         <EntityType Name="IndicationParBoutique">
           <Key>
@@ -328,18 +317,6 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParRestaurant' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ToIndication">
-          <End Type="ParcHelperModel.Indication" Role="Indication" Multiplicity="1" />
-          <End Type="ParcHelperModel.IndicationParAttraction" Role="IndicationParAttraction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Indication">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="IndicationParAttraction">
-              <PropertyRef Name="IdIndication" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ToIndication2">
           <End Type="ParcHelperModel.Indication" Role="Indication" Multiplicity="1" />
           <End Type="ParcHelperModel.IndicationParBoutique" Role="IndicationParBoutique" Multiplicity="*" />
@@ -372,13 +349,36 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParRestaurant' does not h
           <Property Name="Libelle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
           <Property Name="LienGif" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Latittude" Type="Decimal" Precision="25" Scale="2" />
-          <Property Name="Longitude" Type="Decimal" Precision="25" Scale="2" />
+          <Property Name="Latittude" Type="Double" />
+          <Property Name="Longitude" Type="Double" />
           <Property Name="Attente" Type="Int32" />
           <Property Name="CapaciteWagon" Type="Int32" />
           <Property Name="IdType" Type="Int32" />
           <NavigationProperty Name="Type" Relationship="ParcHelperModel.FK_Attraction_ToTableType" FromRole="Attraction" ToRole="Type" />
         </EntityType>
+        <EntityType Name="IndicationParAttraction">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdAttraction" />
+            <PropertyRef Name="IdIndication" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAttraction" Type="Int32" Nullable="false" />
+          <Property Name="IdIndication" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Indication" Relationship="ParcHelperModel.FK_ToIndication" FromRole="IndicationParAttraction" ToRole="Indication" />
+        </EntityType>
+        <Association Name="FK_ToIndication">
+          <End Type="ParcHelperModel.Indication" Role="Indication" Multiplicity="1" />
+          <End Type="ParcHelperModel.IndicationParAttraction" Role="IndicationParAttraction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Indication">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IndicationParAttraction">
+              <PropertyRef Name="IdIndication" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Attraction_ToTableType">
           <End Type="ParcHelperModel.Type" Role="Type" Multiplicity="0..1" />
           <End Type="ParcHelperModel.Attraction" Role="Attraction" Multiplicity="*" />
@@ -434,15 +434,6 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParRestaurant' does not h
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="IndicationParAttractions">
-            <EntityTypeMapping TypeName="ParcHelperModel.IndicationParAttraction">
-              <MappingFragment StoreEntitySet="IndicationParAttraction">
-                <ScalarProperty Name="IdIndication" ColumnName="IdIndication" />
-                <ScalarProperty Name="IdAttraction" ColumnName="IdAttraction" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="IndicationParBoutiques">
             <EntityTypeMapping TypeName="ParcHelperModel.IndicationParBoutique">
               <MappingFragment StoreEntitySet="IndicationParBoutique">
@@ -472,6 +463,15 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParRestaurant' does not h
                 <ScalarProperty Name="LienGif" ColumnName="LienGif" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IndicationParAttractions">
+            <EntityTypeMapping TypeName="ParcHelperModel.IndicationParAttraction">
+              <MappingFragment StoreEntitySet="IndicationParAttraction">
+                <ScalarProperty Name="IdIndication" ColumnName="IdIndication" />
+                <ScalarProperty Name="IdAttraction" ColumnName="IdAttraction" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

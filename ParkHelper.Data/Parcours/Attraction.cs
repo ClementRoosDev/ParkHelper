@@ -8,16 +8,10 @@ namespace ParkHelper.Data
 {
     partial class Attraction : IElementDeParcours
     {
-        public int Duree
-        {
-            get; set;
-        }
+        public int Duree { get; set; }
 
-        public bool EstLePremierDuParcours { get; set; }
+        public bool EstDejaDansLeParcours { get; set; }
 
-        public int Ordre
-        {
-            get; set;
-        }
+        public int Ordre { get; set; }
     }
 }

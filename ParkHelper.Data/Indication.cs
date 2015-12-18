@@ -17,8 +17,8 @@ namespace ParkHelper.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Indication()
         {
-            this.IndicationParAttractions = new HashSet<IndicationParAttraction>();
             this.IndicationParBoutiques = new HashSet<IndicationParBoutique>();
+            this.IndicationParAttractions = new HashSet<IndicationParAttraction>();
         }
     
         public int Id { get; set; }
@@ -27,8 +27,8 @@ namespace ParkHelper.Data
         public string LienLogo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<IndicationParAttraction> IndicationParAttractions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IndicationParBoutique> IndicationParBoutiques { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IndicationParAttraction> IndicationParAttractions { get; set; }
     }
 }

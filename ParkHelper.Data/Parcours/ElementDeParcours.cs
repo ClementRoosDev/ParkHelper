@@ -10,5 +10,6 @@ namespace ParkHelper.Data
     {
         int Duree { get; set; }
         int Ordre { get; set; }
+        bool EstDejaDansLeParcours { get; set; }
     }
 }
