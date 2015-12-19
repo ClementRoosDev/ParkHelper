@@ -1,16 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using System.Web.Script.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
 using ParkHelper.Api.Repository;
 using ParkHelper.Data;
 
@@ -32,7 +23,6 @@ namespace ParkHelper.Api.Controllers
         public HttpResponseMessage Get()
         {
             var attractions = _repository.List;
-
             var response = Request.CreateResponse(HttpStatusCode.OK, attractions);
             return response;
         }

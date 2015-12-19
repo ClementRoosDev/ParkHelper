@@ -42,9 +42,9 @@ namespace ParkHelper.Api.Models
         {
             using (var db = new ParcHelperEntities())
             {
-                List<Attraction> ListeResultats = db.Attractions.Where(a => listeIdAttractions.Contains(a.Id)).ToList();
-                ListeResultats= ListeResultats.Select(a => { a.Ordre = 0; return a; }).ToList();
-                return ListeResultats;
+                var listeResultats = db.Attractions.Where(a => listeIdAttractions.Contains(a.Id)).ToList();
+                listeResultats= listeResultats.Select(a => { a.Ordre = 0; return a; }).ToList();
+                return listeResultats;
             }
         }
 
