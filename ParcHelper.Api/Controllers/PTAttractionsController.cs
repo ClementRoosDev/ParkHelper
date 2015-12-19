@@ -42,11 +42,7 @@ namespace ParkHelper.Api.Controllers
         public HttpResponseMessage Get(int id)
         {
             var attraction = _repository.FindById(id);
-            HttpResponseMessage response = new HttpResponseMessage
-            {
-                Content = new ObjectContent<Attraction>
-                    (attraction, new JsonMediaTypeFormatter(), "application/json")
-            };
+            var response = Request.CreateResponse(HttpStatusCode.OK, attraction);
             return response;
         }
 
@@ -54,11 +50,7 @@ namespace ParkHelper.Api.Controllers
         public HttpResponseMessage Get(string name)
         {
             var attraction = _repository.FindByName(name);
-            HttpResponseMessage response = new HttpResponseMessage
-            {
-                Content = new ObjectContent<List<Attraction>>
-                    (attraction, new JsonMediaTypeFormatter(), "application/json")
-            };
+            var response = Request.CreateResponse(HttpStatusCode.OK, attraction);
             return response;
         }
         #endregion
@@ -70,11 +62,7 @@ namespace ParkHelper.Api.Controllers
 //            var attractions = _repository.InsertAttraction(e);
             _repository.Add(e);
             _repository.Save();
-            HttpResponseMessage response = new HttpResponseMessage
-            {
-                Content = new ObjectContent<List<Attraction>>
-                    (_repository.List, new JsonMediaTypeFormatter(), "application/json")
-            };
+            var response = Request.CreateResponse(HttpStatusCode.OK, _repository.List);
             return response;
         }
         #endregion
@@ -86,11 +74,7 @@ namespace ParkHelper.Api.Controllers
 //            var attractions = _repository.UpdateAttraction(e);
             _repository.Update(e);
             _repository.Save();
-            HttpResponseMessage response = new HttpResponseMessage
-            {
-                Content = new ObjectContent<List<Attraction>>
-                     (_repository.List, new JsonMediaTypeFormatter(), "application/json")
-            };
+            var response = Request.CreateResponse(HttpStatusCode.OK, _repository.List);
             return response;
         }
         #endregion
@@ -102,11 +86,7 @@ namespace ParkHelper.Api.Controllers
 //            var attractions = _repository.DeleteAttraction(e);
             _repository.Delete(e);
             _repository.Save();
-            HttpResponseMessage response = new HttpResponseMessage
-            {
-                Content = new ObjectContent<List<Attraction>>
-                    (_repository.List, new JsonMediaTypeFormatter(), "application/json")
-            };
+            var response = Request.CreateResponse(HttpStatusCode.OK, _repository.List);
             return response;
         }
         #endregion
