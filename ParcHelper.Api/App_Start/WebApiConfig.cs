@@ -17,10 +17,9 @@ namespace ParkHelper.Api
             //    routeTemplate: "api/{controller}/{id}",
             //    defaults: new { id = RouteParameter.Optional }
             //);
-            var json = config.Formatters.JsonFormatter;
-            json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
-            json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            
             config.Formatters.Remove(config.Formatters.XmlFormatter);
+            ((DefaultContractResolver)config.Formatters.JsonFormatter.SerializerSettings.ContractResolver).IgnoreSerializableAttribute = true;
         }
     }
 }

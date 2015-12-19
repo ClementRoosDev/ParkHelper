@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using ParkHelper.Api.Repository;
-using Attraction = ParkHelper.Data.Attraction;
+using ParkHelper.Data;
 
 namespace ParkHelper.Api.Controllers
 {
@@ -34,7 +34,6 @@ namespace ParkHelper.Api.Controllers
             var attractions = _repository.List;
 
             var response = Request.CreateResponse(HttpStatusCode.OK, attractions);
-            response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             return response;
         }
 

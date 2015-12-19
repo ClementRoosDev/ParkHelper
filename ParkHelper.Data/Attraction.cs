@@ -7,11 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Runtime.Serialization;
+
 namespace ParkHelper.Data
 {
     using System;
     using System.Collections.Generic;
-    
+
+    [KnownType(typeof(Attraction))]
     public partial class Attraction
     {
         public int Id { get; set; }

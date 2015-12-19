@@ -10,9 +10,9 @@ namespace ParkHelperPortableDataTest
 {
     class Program
     {
-        private const string Urlattractions = "http://parkhelperapi.azurewebsites.net/api/ptattractions";
+        private const string Urlattractions = "http://parkhelperapi.azurewebsites.net/api/ptattractions?type=json";
 
-        private const string Urlparours = "http://parkhelperapi.azurewebsites.net/api/ptparcours";
+        private const string Urlparours = "http://parkhelperapi.azurewebsites.net/api/ptparcours?type=json";
 
         static void Main(string[] args)
         {
