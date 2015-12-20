@@ -1,11 +1,13 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ParkHelper.ViewModels
 {
     public class HomePageViewModel : BaseViewModel
     {
         #region Fields
-        private string textTest = "THIS IS A TEST !";
+        private string textTest = "THIS IS A TEST ! Je suis un fraisier";
         #endregion
 
         #region Constuctor
@@ -26,12 +28,24 @@ namespace ParkHelper.ViewModels
                 this.textTest = value;
                 OnPropertyChanged("TextTest");
             }
+
         }
 
         #endregion
 
         #region Methods
+        async void OnButtonClicked(object sender, EventArgs args)
+        {
+            Button button = (Button)sender;
+            await DisplayAlert("Clicked!",
+                "The button labeled '" + button.Text + "' has been clicked",
+                "OK");
+        }
 
+        private async Task<string> DisplayAlert(string v1, string v2, string v3)
+        {
+            return "tata";
+        }
         #endregion
     }
 }

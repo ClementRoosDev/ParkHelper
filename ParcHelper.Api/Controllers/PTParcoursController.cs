@@ -15,6 +15,7 @@ namespace ParkHelper.Api.Controllers
     public class PTParcoursController : ApiController
     {
         #region Parcours GET
+        //api/ptparcours/1,2,3
         [Route("api/ptparcours/{listeAttractions}")]
         public HttpResponseMessage Get([FromUri]IEnumerable<string> listeAttractions)
         {
