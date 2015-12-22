@@ -3,11 +3,11 @@ using System.Data.Entity;
 using System.Linq;
 using ParkHelper.Data;
 
-namespace ParkHelper.Api.Repository
+namespace ParkHelper.OData.Repository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly ParcHelperEntities _context;
+        readonly ParcHelperEntities _context;
         protected readonly DbSet<T> Table; 
 
         public GenericRepository()

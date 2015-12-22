@@ -1,11 +1,7 @@
-using System.Linq;
 using System.Web.Http;
-using System.Web.Http.Controllers;
 using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Mvc;
-using ParkHelper.Api.Controllers;
-using ParkHelper.Api.Models;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(ParkHelper.Api.App_Start.UnityWebActivator), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(ParkHelper.Api.App_Start.UnityWebActivator), "Shutdown")]

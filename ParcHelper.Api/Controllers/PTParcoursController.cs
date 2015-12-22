@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using ParkHelper.Api.Models;
-using System.Web.Routing;
 using Microsoft.Ajax.Utilities;
 
 namespace ParkHelper.Api.Controllers

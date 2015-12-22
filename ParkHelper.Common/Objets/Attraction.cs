@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ParkHelper.Common.Objets
 {
-    class Attraction
+    public class Attraction
     {
-        public object Type { get; set; }
+        public Type Type { get; set; }
         public int Id { get; set; }
         public string Libelle { get; set; }
         public string Description { get; set; }

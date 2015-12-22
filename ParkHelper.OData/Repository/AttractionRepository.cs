@@ -2,8 +2,9 @@
 using System.Linq;
 using ParkHelper.Data;
 
-namespace ParkHelper.Api.Repository
+namespace ParkHelper.OData.Repository
 {
+
     public class AttractionRepository : GenericRepository<Attraction>
     {
         public List<Attraction> FindByName(string name)

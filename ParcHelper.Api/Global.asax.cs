@@ -1,15 +1,11 @@
-﻿using System.Linq;
-using System.Net.Http.Formatting;
-using System.Net.Http.Headers;
-using System.Web.Http;
-using System.Web.Mvc;
-using System.Web.Optimization;
-using System.Web.Routing;
-using Newtonsoft.Json;
-using ParkHelper.Api;
-
-namespace ProjectTrackingServices
+﻿namespace ParkHelper.Api
 {
+    using System.Web.Http;
+    using System.Web.Mvc;
+    using System.Web.Optimization;
+    using System.Web.Routing;
+    using Newtonsoft.Json;
+
     public class WebApiApplication : System.Web.HttpApplication
     {
         protected void Application_Start()

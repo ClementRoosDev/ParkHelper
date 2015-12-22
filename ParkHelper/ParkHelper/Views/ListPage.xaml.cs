@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace ParkHelper.Views
 {
-    public partial class ListPage : ContentPage
+    public partial class ListPage
     {
         public ListPage()
         {

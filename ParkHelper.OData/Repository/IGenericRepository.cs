@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ParkHelper.Api.Repository
+namespace ParkHelper.OData.Repository
 {
     public interface IGenericRepository<T> where T : class
     {

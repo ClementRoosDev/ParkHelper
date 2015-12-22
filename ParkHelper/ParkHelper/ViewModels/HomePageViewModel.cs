@@ -14,6 +14,12 @@ namespace ParkHelper.ViewModels
         public HomePageViewModel(Page page) : base(page)
         {
         }
+
+        public HomePageViewModel()
+            : base(null)
+        {
+        }
+
         #endregion
 
         #region Properties

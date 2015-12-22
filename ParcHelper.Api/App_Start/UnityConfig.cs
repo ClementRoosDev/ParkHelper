@@ -1,8 +1,6 @@
 using Microsoft.Practices.Unity;
 using System.Web.Http;
-using Microsoft.Practices.Unity.Mvc;
 using ParkHelper.Api.Models;
-using Unity.WebApi;
 using UnityDependencyResolver = Unity.WebApi.UnityDependencyResolver;
 
 namespace ParkHelper.Api

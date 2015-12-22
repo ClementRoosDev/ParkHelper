@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace ParkHelper.Views
 {
-    public partial class HomePage : ContentPage
+    public partial class HomePage
     {
         public HomePage()
         {
