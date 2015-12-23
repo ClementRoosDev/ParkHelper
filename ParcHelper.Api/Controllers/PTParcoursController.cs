@@ -5,14 +5,21 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using ParkHelper.Api.Models;
 using Microsoft.Ajax.Utilities;
+using ParkHelper.Api.Repository;
 
 namespace ParkHelper.Api.Controllers
 {
     [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
     public class PTParcoursController : ApiController
     {
+        readonly ParcoursRepository _repository;
+
+        public PTParcoursController()
+        {
+            _repository = new ParcoursRepository();
+        }
+
         #region Parcours GET
         //api/ptparcours/1,2,3
         [Route("api/ptparcours/{listeAttractions}")]
@@ -26,7 +33,7 @@ namespace ParkHelper.Api.Controllers
                 var conversion = element.TryParseIntInvariant(NumberStyles.Any, out nombre);
                 liste.Add(nombre);
             }
-            var parcours = ParcoursRepository.GetBestParcours(liste);
+            var parcours = _repository.GetBestParcours(liste);
             var response = Request.CreateResponse(HttpStatusCode.OK, parcours);
             return response;
         }

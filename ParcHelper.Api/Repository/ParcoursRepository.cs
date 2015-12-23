@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using ParkHelper.Api.Models;
 using ParkHelper.Data;
 
-namespace ParkHelper.Api.Models
+namespace ParkHelper.Api.Repository
 {
-    public class ParcoursRepository
+    public class ParcoursRepository : GenericRepository<Parcours>
     {
-        public static Parcours GetBestParcours(List<int> attractions)
+        public Parcours GetBestParcours(List<int> attractions)
         {
             var parcours = new CalculParcours(attractions.ToArray());
             return parcours.Parcours;

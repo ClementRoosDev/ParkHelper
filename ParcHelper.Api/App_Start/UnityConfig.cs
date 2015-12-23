@@ -15,9 +15,9 @@ namespace ParkHelper.Api
             // it is NOT necessary to register your controllers
             
             // e.g. container.RegisterType<ITestService, TestService>();
-            container.RegisterType<IParkHelperRepository, ParkHelperRepository>();
+            /*container.RegisterType<IParkHelperRepository, ParkHelperRepository>();
             
-            GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
+            GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);*/
         }
     }
 }
