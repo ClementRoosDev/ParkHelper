@@ -9,7 +9,7 @@ namespace ParkHelper
     public class App : Application
     {
         private static Locator _locator;
-        public static Locator Locator { get { return _locator ?? (_locator = new Locator()); } }
+        public static Locator Locator => _locator ?? (_locator = new Locator());
 
         public App()
         {
@@ -20,7 +20,7 @@ namespace ParkHelper
             nav.Configure(Locator.HomePage, typeof(HomePage));
             nav.Configure(Locator.ListPage, typeof(ListPage));
             nav.Configure(Locator.MapPage, typeof(MapPage));
-            nav.Configure(Locator.AttractionDetailsPage, typeof(AttractionDetailPage));
+            nav.Configure(Locator.AttractionDetailsPage, typeof(AttractionDetailsPage));
             SimpleIoc.Default.Register<INavigationService>(() => nav);
 
             var firstPage = new NavigationPage(new HomePage());

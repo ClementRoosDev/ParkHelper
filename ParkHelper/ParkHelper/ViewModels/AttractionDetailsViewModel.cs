@@ -7,6 +7,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using ParkHelper.Common.Objets;
 
 namespace ParkHelper.ViewModels
 {
@@ -30,7 +31,7 @@ namespace ParkHelper.ViewModels
         #endregion
         #region Properties
         public ICommand ItineraireCommand { get; set; }
-        public string AttractionId { get; set; }
+        public string Attraction { get; set; }
         #endregion
         #region Methods
         #endregion

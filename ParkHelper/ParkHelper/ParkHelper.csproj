@@ -48,8 +48,8 @@
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\ListPageViewModel.cs" />
     <Compile Include="ViewModels\MapPageViewModel.cs" />
-    <Compile Include="Views\AttractionDetailPage.xaml.cs">
-      <DependentUpon>AttractionDetailPage.xaml</DependentUpon>
+    <Compile Include="Views\AttractionDetailsPage.xaml.cs">
+      <DependentUpon>AttractionDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -124,7 +124,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\AttractionDetailPage.xaml">
+    <EmbeddedResource Include="Views\AttractionDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

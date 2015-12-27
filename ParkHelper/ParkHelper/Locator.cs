@@ -68,7 +68,7 @@ namespace ParkHelper
         }
 
         /// <summary>
-        /// Gets the third property.
+        /// Gets the detailsPage property.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",

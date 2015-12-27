@@ -26,10 +26,12 @@ namespace ParkHelper.ViewModels
 
             HomeCommand = new RelayCommand(() => { _navigationService.GoBack(); });
 
+            Parameter = "2";
+
             ItemDetailsCommand =
                 new RelayCommand(() =>
                 {
-                    _navigationService.NavigateTo(Locator.AttractionDetailsPage, Parameter ?? string.Empty);
+                    _navigationService.NavigateTo(Locator.AttractionDetailsPage, Parameter);
                 });
 
             Attractions = new List<Attraction>();

@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
-
+using ParkHelper.Common.Objets;
 using Xamarin.Forms;
 
 namespace ParkHelper.Views
 {
-    public partial class AttractionDetailPage : ContentPage
+    public partial class AttractionDetailsPage
     {
-        public AttractionDetailPage(string attractionId)
+        public AttractionDetailsPage(string attraction)
         {
             InitializeComponent();
             var viewModel = App.Locator.AttractionDetailsView;
             BindingContext = viewModel;
 
-            viewModel.AttractionId = string.IsNullOrEmpty(attractionId) ? "No parameter set" : attractionId;
+            viewModel.Attraction = attraction;
         }
     }
 }
