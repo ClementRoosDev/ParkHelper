@@ -2,6 +2,24 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ParkHelper.Views.ListPage"
-             Title="Liste">
-  <Button Text="Back" Command="{Binding HomeCommand}" />
+             Title="Attractions">
+  <!--<Button Text="Back" Command="{Binding HomeCommand}" />-->
+  <ListView ItemsSource="{Binding Listes}">
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <ViewCell>
+          <StackLayout BackgroundColor="#eee"
+          Orientation="Vertical">
+            <StackLayout Orientation="Horizontal">
+              <Label Text="{Binding Libelle}"
+              TextColor="#f35e20" />
+              <Label Text="{Binding Id}"
+              HorizontalOptions="EndAndExpand"
+              TextColor="#503026" />
+            </StackLayout>
+          </StackLayout>
+        </ViewCell>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+  </ListView>
 </ContentPage>

@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight.Views;
 using System.Collections.Generic;
 using System.Linq;
 using ParkHelper.Common.Objets;
+using Type = ParkHelper.Common.Objets.Type;
 
 namespace ParkHelper.ViewModels
 {
@@ -13,7 +14,7 @@ namespace ParkHelper.ViewModels
     {
         #region Fields
 
-        private INavigationService _navigationService;
+        private readonly INavigationService _navigationService;
 
         #endregion
 
@@ -24,28 +25,26 @@ namespace ParkHelper.ViewModels
             _navigationService = navigationService;
 
             HomeCommand = new RelayCommand(() => { _navigationService.GoBack(); });
-            /**ItineraireCommand = new RelayCommand(() =>
-            {
-                _navigationService.NavigateTo(
-                    Locator.ListPage);
-            });
 
-            MapCommand = new RelayCommand(() =>
-            {
-                _navigationService.NavigateTo(
-                    Locator.MapPage);
-            });*/
+            ItemDetailsCommand =
+                new RelayCommand(() =>
+                {
+                    _navigationService.NavigateTo(Locator.AttractionDetailsPage, Parameter ?? string.Empty);
+                });
+
             Attractions = new List<Attraction>();
+            Listes = Attractions;
             InitAttractions();
-            Listes = Attractions.GroupBy(i => i.Type.Id);
+            Listes = Attractions.OrderBy(i => i.Id).ToList();
         }
         #endregion
 
         #region Properties
         public List<Attraction> Attractions { get; set; }
-
-        public IEnumerable<IGrouping<int, Attraction>> Listes { get; set; }
+        public List<Attraction> Listes { get; set; }
         public ICommand HomeCommand { get; set; }
+        public ICommand ItemDetailsCommand { get; set; }
+        public string Parameter { get; set; }
         #endregion
 
         #region Methods

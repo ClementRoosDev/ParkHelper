@@ -44,6 +44,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AttractionDetailsViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\ListPageViewModel.cs" />
     <Compile Include="ViewModels\MapPageViewModel.cs" />

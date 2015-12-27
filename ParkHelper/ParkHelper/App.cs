@@ -20,6 +20,7 @@ namespace ParkHelper
             nav.Configure(Locator.HomePage, typeof(HomePage));
             nav.Configure(Locator.ListPage, typeof(ListPage));
             nav.Configure(Locator.MapPage, typeof(MapPage));
+            nav.Configure(Locator.AttractionDetailsPage, typeof(AttractionDetailPage));
             SimpleIoc.Default.Register<INavigationService>(() => nav);
 
             var firstPage = new NavigationPage(new HomePage());

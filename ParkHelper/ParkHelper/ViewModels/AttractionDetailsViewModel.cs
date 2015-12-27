@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -6,14 +10,13 @@ using GalaSoft.MvvmLight.Views;
 
 namespace ParkHelper.ViewModels
 {
-    public class HomePageViewModel : ViewModelBase
+    public class AttractionDetailsViewModel : ViewModelBase
     {
         #region Fields
         private readonly INavigationService _navigationService;
         #endregion
-
-        #region Constuctor
-        public HomePageViewModel(INavigationService navigationService)
+        #region Constructor
+        public AttractionDetailsViewModel(INavigationService navigationService)
         {
             if (navigationService == null) throw new ArgumentNullException("navigationService");
             _navigationService = navigationService;
@@ -23,21 +26,12 @@ namespace ParkHelper.ViewModels
                 _navigationService.NavigateTo(
                     Locator.ListPage);
             });
-
-            MapCommand = new RelayCommand(() =>
-            {
-                _navigationService.NavigateTo(
-                    Locator.MapPage);
-            });
         }
         #endregion
-
         #region Properties
-        public string TextTest { get; set; } = "THIS IS A TEST ! Je suis un fraisier";
         public ICommand ItineraireCommand { get; set; }
-        public ICommand MapCommand { get; set; }
+        public string AttractionId { get; set; }
         #endregion
-
         #region Methods
         #endregion
     }

@@ -8,9 +8,8 @@ namespace ParkHelper.ViewModels
 {
     public class MapPageViewModel : ViewModelBase
     {
-        private INavigationService _navigationService;
-
         #region Fields
+        private INavigationService _navigationService;
         #endregion
 
         #region Constuctor
