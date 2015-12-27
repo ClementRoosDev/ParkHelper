@@ -6,34 +6,18 @@
   <StackLayout>
     <Label Text="{Binding TextTest}" VerticalOptions="Center" HorizontalOptions="Center" />
     <Button
-      Text="Click Me!" 
+      Text="Itineraire"
       x:Name="button1" 
+      Command="{Binding ItineraireCommand}"
       HorizontalOptions="Center" 
       VerticalOptions="Center"
       />
        <Button
-      Text="Click Me!" 
-      x:Name="button2" 
+      Text="Plan" 
+      x:Name="button2"
+      Command="{Binding MapCommand}"
       HorizontalOptions="Center" 
       VerticalOptions="Center"
       />
-       <Button
-      Text="Click Me!" 
-      x:Name="button3" 
-      HorizontalOptions="Center" 
-      VerticalOptions="Center"
-      /><!--<Button Text="Click Me!"
-            HorizontalOptions="Center"
-            VerticalOptions="CenterAndExpand" />-->
-    <!--<Button
-			  x:Name="NewStore"
-				BackgroundColor="#3498DB"
-				BorderRadius="0"
-				TextColor="White"
-				Text="New Store"/>-->
-   <!-- <Button
-      Text="Mettre à jour"
-      id="buttonPlan" />-->
-
   </StackLayout>
 </ContentPage>

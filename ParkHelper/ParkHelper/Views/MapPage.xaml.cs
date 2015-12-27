@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace ParkHelper.Views
 {
@@ -13,6 +7,8 @@ namespace ParkHelper.Views
         public MapPage()
         {
             InitializeComponent();
+            var viewModel = App.Locator.MapPageView;
+            BindingContext = viewModel;
         }
     }
 }

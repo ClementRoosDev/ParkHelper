@@ -1,10 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:ParkHelper.ViewModels;assembly=ParkHelper"
-             x:Class="ParkHelper.Views.ListPage">
-  <ContentPage.BindingContext>
-    <vm:ListPageViewModel />
-  </ContentPage.BindingContext>
-  <ListView ItemsSource="{Binding Listes[0]}" VerticalOptions="Center" HorizontalOptions="Center" />
+             x:Class="ParkHelper.Views.ListPage"
+             Title="Liste">
+  <Button Text="Back" Command="{Binding HomeCommand}" />
 </ContentPage>

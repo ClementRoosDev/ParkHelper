@@ -1,57 +1,48 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using Xamarin.Forms;
 
 namespace ParkHelper.ViewModels
 {
-    public class HomePageViewModel : BaseViewModel
+    public class HomePageViewModel : ViewModelBase
     {
+        private readonly INavigationService _navigationService;
+
         #region Fields
-        private string textTest = "THIS IS A TEST ! Je suis un fraisier";
+
         #endregion
 
         #region Constuctor
-        public HomePageViewModel(Page page) : base(page)
+        public HomePageViewModel(INavigationService navigationService)
         {
-        }
+            if (navigationService == null) throw new ArgumentNullException("navigationService");
+            _navigationService = navigationService;
 
-        public HomePageViewModel()
-            : base(null)
-        {
-        }
+            ItineraireCommand = new RelayCommand(() =>
+            {
+                _navigationService.NavigateTo(
+                    Locator.ListPage);
+            });
 
+            MapCommand = new RelayCommand(() =>
+            {
+                _navigationService.NavigateTo(
+                    Locator.MapPage);
+            });
+        }
         #endregion
 
         #region Properties
-        public string TextTest
-        {
-            get
-            {
-                return this.textTest;
-            }
-            set
-            {
-                this.textTest = value;
-                OnPropertyChanged("TextTest");
-            }
-
-        }
-
+        public string TextTest { get; set; } = "THIS IS A TEST ! Je suis un fraisier";
+        public ICommand ItineraireCommand { get; set; }
+        public ICommand MapCommand { get; set; }
         #endregion
 
         #region Methods
-        async void OnButtonClicked(object sender, EventArgs args)
-        {
-            Button button = (Button)sender;
-            await DisplayAlert("Clicked!",
-                "The button labeled '" + button.Text + "' has been clicked",
-                "OK");
-        }
-
-        private async Task<string> DisplayAlert(string v1, string v2, string v3)
-        {
-            return "tata";
-        }
         #endregion
     }
 }

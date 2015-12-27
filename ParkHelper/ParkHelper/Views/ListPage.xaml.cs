@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Xamarin.Forms;
 
 namespace ParkHelper.Views
 {
@@ -13,6 +12,7 @@ namespace ParkHelper.Views
         public ListPage()
         {
             InitializeComponent();
+            BindingContext = App.Locator.ListPageView;
         }
     }
 }

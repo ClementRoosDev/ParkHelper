@@ -1,69 +1,58 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using System.Windows.Input;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
+using System.Collections.Generic;
+using System.Linq;
+using ParkHelper.Common.Objets;
 
 namespace ParkHelper.ViewModels
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using ParkHelper.Common.Objets;
-
-    public class ListPageViewModel : BaseViewModel
+    public class ListPageViewModel : ViewModelBase
     {
         #region Fields
-        private List<Attraction> attractions;
-        private IEnumerable<IGrouping<int, Attraction>> listes;
+
+        private INavigationService _navigationService;
+
         #endregion
 
         #region Constuctor
-        public ListPageViewModel(Page page) : base(page)
+        public ListPageViewModel(INavigationService navigationService)
         {
-            attractions = new List<Attraction>();
-            InitAttractions();
-            Listes = attractions.GroupBy(i => i.Type.Id);
-        }
+            if (navigationService == null) throw new ArgumentNullException("navigationService");
+            _navigationService = navigationService;
 
-        public ListPageViewModel()
-            : base(null)
-        {
-            attractions = new List<Attraction>();
-            InitAttractions();
-            Listes = attractions.GroupBy(i => i.Type.Id);
-        }
+            HomeCommand = new RelayCommand(() => { _navigationService.GoBack(); });
+            /**ItineraireCommand = new RelayCommand(() =>
+            {
+                _navigationService.NavigateTo(
+                    Locator.ListPage);
+            });
 
+            MapCommand = new RelayCommand(() =>
+            {
+                _navigationService.NavigateTo(
+                    Locator.MapPage);
+            });*/
+            Attractions = new List<Attraction>();
+            InitAttractions();
+            Listes = Attractions.GroupBy(i => i.Type.Id);
+        }
         #endregion
 
         #region Properties
-        public List<Attraction> Attractions 
-        {
-            get
-            {
-                return attractions;
-            }
-            set
-            {
-                attractions = value;
-                OnPropertyChanged("Attractions");
-            }
-        }
+        public List<Attraction> Attractions { get; set; }
 
-        public IEnumerable<IGrouping<int, Attraction>> Listes
-        {
-            get
-            {
-                return listes;
-            }
-            set
-            {
-                listes = value;
-                OnPropertyChanged("Listes");
-            }
-        }
+        public IEnumerable<IGrouping<int, Attraction>> Listes { get; set; }
+        public ICommand HomeCommand { get; set; }
         #endregion
 
         #region Methods
 
         private void InitAttractions()
         {
-            attractions = new List<Attraction>()
+            Attractions = new List<Attraction>()
             {
                 new Attraction()
                 {
