@@ -1,11 +1,10 @@
 ﻿using Xamarin.Forms;
+using ParkHelper.Common.Objets;
+using ParkHelper.Controls;
+using ParkHelper.ViewModels;
 
 namespace ParkHelper.Views
 {
-    using ParkHelper.Common.Objets;
-    using ParkHelper.Controls;
-    using ParkHelper.ViewModels;
-
     public partial class ListPage
     {
         ListPageViewModel viewModel;
@@ -23,6 +22,7 @@ namespace ParkHelper.Views
         {
             var dataTemplate = new DataTemplate(typeof(CustomCell));
             dataTemplate.SetBinding(TextCell.TextProperty, "Libelle");
+            dataTemplate.SetBinding(Switch.IsToggledProperty, "EstDejaDansLeParcours");
             this.listView.ItemTemplate = dataTemplate;
 
 
@@ -30,7 +30,7 @@ namespace ParkHelper.Views
             {
                 IsGroupingEnabled = true,
                 GroupDisplayBinding = new Binding("Name"),
-                GroupShortNameBinding = new Binding("Id"),
+                GroupShortNameBinding = new Binding("Name"),
                 ItemsSource = viewModel.Listes,
                 ItemTemplate = dataTemplate
             };
@@ -45,9 +45,9 @@ namespace ParkHelper.Views
             };
         }
 
-        public async void Init()
+        /**public void Init()
         {
-            //this.listView.ItemsSource = (await ApiClient.FindAll<Item>()).Result;
-        }
+            this.listView.ItemsSource = (await ApiClient.FindAll<Item>()).Result;
+        }*/
     }
 }

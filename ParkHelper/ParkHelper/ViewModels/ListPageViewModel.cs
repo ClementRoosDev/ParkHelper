@@ -7,11 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using ParkHelper.Common.Objets;
 using Type = ParkHelper.Common.Objets.Type;
+using ParkHelper.Model;
 
 namespace ParkHelper.ViewModels
 {
-    using ParkHelper.Model;
-
     public class ListPageViewModel : ViewModelBase
     {
         #region Fields
@@ -50,6 +49,11 @@ namespace ParkHelper.ViewModels
                     _navigationService.NavigateTo(Locator.AttractionDetailsPage, Parameter);
                 });
 
+            ItineraireCommand = new RelayCommand(() =>
+            {
+                _navigationService.NavigateTo(Locator.AttractionDetailsPage, Parameter);
+            });
+
             Attractions = new List<Attraction>();
             Listes = new List<Categorie>();
             InitAttractions();
@@ -59,16 +63,28 @@ namespace ParkHelper.ViewModels
     
         #region Properties
         public List<Attraction> Attractions { get; set; }
+        
+        #region Liste
         public List<Categorie> Listes { get; set; }
-        public ICommand HomeCommand { get; set; }
         public ICommand ItemDetailsCommand { get; set; }
         public Attraction Parameter { get; set; }
+        #endregion
+
+        #region Home
+        public ICommand HomeCommand { get; set; }
+        #endregion
+
+        #region Itineraire
+        public ICommand ItineraireCommand { get; set; }
+        #endregion
+        
         #endregion
 
         #region Methods
         List<Categorie> ConvertFrom(List<Attraction> attractions)
         {
-            var extractSubList = Attractions.GroupBy(i => i.Type.Id);
+            //TODO : Call the API and extract the full list
+            //var extractSubList = Attractions.GroupBy(i => i.Type.Id);
 
             return new List<Categorie>() {
             new Categorie("Attractions")
@@ -239,7 +255,7 @@ namespace ParkHelper.ViewModels
         };
         }
 
-        private void InitAttractions()
+        void InitAttractions()
         {
             Attractions = new List<Attraction>()
             {

@@ -1,9 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
              x:Class="ParkHelper.Views.ListPage"
              Title="Attractions">
   <!--  <Button Text="Go to details" Command="{Binding ItemDetailsCommand}" />-->
-  <ListView x:Name="listView" ItemsSource="{Binding Listes}">
-  </ListView>
+  <StackLayout>
+    <SearchBar></SearchBar>
+    
+    <ListView x:Name="listView"
+              ItemsSource="{Binding Listes}"/>
+    
+    <Button Text="Go !" Command="{Binding ItineraireCommand}"/>
+  </StackLayout>
 </ContentPage>

@@ -3,8 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ParkHelper.Views.AttractionDetailsPage"
              Title = "Details">
-  <Label Text="Test" VerticalOptions="Center" HorizontalOptions="Center" />
-  
-  <Label Text="{Binding Attraction.Id}" VerticalOptions="Center" HorizontalOptions="Center" />
-  
+  <StackLayout>
+ 
+  <Label Text="{Binding Attraction.Libelle}" VerticalOptions="Center" HorizontalOptions="Center" />
+
+  <Label Text="{Binding Attraction.LienGif}" VerticalOptions="Center" HorizontalOptions="Center" />
+
+  <Label Text="Description :" VerticalOptions="Center" HorizontalOptions="Center" />
+  <Label Text="{Binding Attraction.Description}" VerticalOptions="Center" HorizontalOptions="Center" />
+
+  <Label Text="Capacite :" VerticalOptions="Center" HorizontalOptions="Center" />
+  <Label Text="{Binding Attraction.CapaciteWagon}" VerticalOptions="Center" HorizontalOptions="Center" />
+
+  <Label Text="Durée d'attente moyenne :" VerticalOptions="Center" HorizontalOptions="Center" />
+  <Label Text="{Binding Attraction.Attente}" VerticalOptions="Center" HorizontalOptions="Center" />
+
+  <Label Text="Durée de l'attraction :" VerticalOptions="Center" HorizontalOptions="Center" />
+  <Label Text="{Binding Attraction.Duree}" VerticalOptions="Center" HorizontalOptions="Center" />
+  </StackLayout>
 </ContentPage>

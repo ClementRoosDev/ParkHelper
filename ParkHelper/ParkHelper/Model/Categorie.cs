@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using ParkHelper.Common.Objets;
 
 namespace ParkHelper.Model
 {
-    using System.Collections.ObjectModel;
-    using System.Globalization;
-    using ParkHelper.Common.Objets;
-
     public class Categorie : ObservableCollection<Attraction>
     {
         public Categorie(string name)
@@ -17,6 +10,6 @@ namespace ParkHelper.Model
             Name = name;
         }
 
-        public string Name { get; set; }
+        string Name { get; set; }
     }
 }
