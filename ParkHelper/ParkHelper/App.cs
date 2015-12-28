@@ -8,8 +8,8 @@ namespace ParkHelper
 {
     public class App : Application
     {
-        private static Locator _locator;
-        public static Locator Locator => _locator ?? (_locator = new Locator());
+        static Locator _locator;
+        public static Locator Locator { get { return _locator ?? (_locator = new Locator()); } }
 
         public App()
         {

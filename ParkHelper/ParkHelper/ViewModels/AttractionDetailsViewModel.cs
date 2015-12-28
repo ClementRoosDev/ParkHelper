@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
-using ParkHelper.Common.Objets;
 
 namespace ParkHelper.ViewModels
 {
+    using ParkHelper.Common.Objets;
+
     public class AttractionDetailsViewModel : ViewModelBase
     {
         #region Fields
-        private readonly INavigationService _navigationService;
+        readonly INavigationService _navigationService;
         #endregion
+
         #region Constructor
         public AttractionDetailsViewModel(INavigationService navigationService)
         {
@@ -29,10 +27,12 @@ namespace ParkHelper.ViewModels
             });
         }
         #endregion
+
         #region Properties
         public ICommand ItineraireCommand { get; set; }
-        public string Attraction { get; set; }
+        public Attraction Attraction { get; set; }
         #endregion
+
         #region Methods
         #endregion
     }

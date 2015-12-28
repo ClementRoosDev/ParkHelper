@@ -9,7 +9,9 @@ namespace ParkHelper.ViewModels
     public class HomePageViewModel : ViewModelBase
     {
         #region Fields
-        private readonly INavigationService _navigationService;
+
+        readonly INavigationService _navigationService;
+
         #endregion
 
         #region Constuctor
@@ -29,11 +31,13 @@ namespace ParkHelper.ViewModels
                 _navigationService.NavigateTo(
                     Locator.MapPage);
             });
+            TextTest = "THIS IS A TEST ! Je suis un fraisier";
         }
         #endregion
 
         #region Properties
-        public string TextTest { get; set; } = "THIS IS A TEST ! Je suis un fraisier";
+
+        public string TextTest { get; set; }
         public ICommand ItineraireCommand { get; set; }
         public ICommand MapCommand { get; set; }
         #endregion

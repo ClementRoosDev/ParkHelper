@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel.Channels;
-using System.Text;
-using System.Threading.Tasks;
-using ParkHelper.Common.Objets;
-using Xamarin.Forms;
-
-namespace ParkHelper.Views
+﻿namespace ParkHelper.Views
 {
+    using ParkHelper.Common.Objets;
+
     public partial class AttractionDetailsPage
     {
-        public AttractionDetailsPage(string attraction)
+        public AttractionDetailsPage(Attraction attraction)
         {
             InitializeComponent();
             var viewModel = App.Locator.AttractionDetailsView;
-            BindingContext = viewModel;
-
             viewModel.Attraction = attraction;
+            BindingContext = viewModel;
         }
     }
 }

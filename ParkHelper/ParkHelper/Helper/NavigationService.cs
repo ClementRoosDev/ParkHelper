@@ -9,9 +9,11 @@ namespace ParkHelper.Helper
 {
     class NavigationService : INavigationService
     {
-        private readonly Dictionary<string, Type> _pagesByKey = new Dictionary<string, Type>();
-        private NavigationPage _navigation;
-
+        #region Fields
+        readonly Dictionary<string, Type> _pagesByKey = new Dictionary<string, Type>();
+        NavigationPage _navigation;
+        #endregion
+        #region Properties
         public string CurrentPageKey
         {
             get
@@ -31,7 +33,8 @@ namespace ParkHelper.Helper
                 }
             }
         }
-
+        #endregion
+        #region Methods
         public void GoBack()
         {
             _navigation.PopAsync();
@@ -119,5 +122,6 @@ namespace ParkHelper.Helper
         {
             _navigation = navigation;
         }
+        #endregion
     }
 }

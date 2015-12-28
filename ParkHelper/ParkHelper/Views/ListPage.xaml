@@ -3,22 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ParkHelper.Views.ListPage"
              Title="Attractions">
-  <Button Text="Go to details" Command="{Binding ItemDetailsCommand}" />
-  <!--  <ListView x:Name="listView" ItemsSource="{Binding Listes}">
-    <ListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell>
-          <StackLayout BackgroundColor="#eee"
-          Orientation="Vertical">
-            <StackLayout Orientation="Horizontal">
-              <Button Text="{Binding Id}"  />
-              <Label Text="{Binding Libelle}"
-              TextColor="#f35e20" />
-            </StackLayout>
-          </StackLayout>
-        </ViewCell>
-      </DataTemplate>
-    </ListView.ItemTemplate>
-  </ListView>-->
-
+  <!--  <Button Text="Go to details" Command="{Binding ItemDetailsCommand}" />-->
+  <ListView x:Name="listView" ItemsSource="{Binding Listes}">
+  </ListView>
 </ContentPage>
