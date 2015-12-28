@@ -1,5 +1,5 @@
 ﻿using Xamarin.Forms;
-using ParkHelper.Common.Objets;
+using Attraction = ParkHelper.Common.Objets.Attraction;
 using ParkHelper.Controls;
 using ParkHelper.ViewModels;
 
@@ -20,7 +20,7 @@ namespace ParkHelper.Views
 
         void InitializeTemplate()
         {
-            var dataTemplate = new DataTemplate(typeof(CustomCell));
+            var dataTemplate = new DataTemplate(typeof(AttractionsListViewCell));
             dataTemplate.SetBinding(TextCell.TextProperty, "Libelle");
             dataTemplate.SetBinding(Switch.IsToggledProperty, "EstDejaDansLeParcours");
             this.listView.ItemTemplate = dataTemplate;
@@ -37,9 +37,9 @@ namespace ParkHelper.Views
 
             Content = listView;
 
-            listView.ItemSelected += (object sender, SelectedItemChangedEventArgs e) =>
+            listView.ItemSelected += (sender, e) =>
             {
-                var attraction = listView.SelectedItem as Attraction;
+                var attraction = (Attraction)listView.SelectedItem;
                 viewModel.Parameter = attraction;
                 viewModel.ItemDetailsCommand.Execute(viewModel.Parameter);
             };

@@ -10,6 +10,7 @@ namespace ParkHelper.Model
             Name = name;
         }
 
-        string Name { get; set; }
+        //NED TO BE PUBLIC FOR THE VIEW
+        public string Name { get; set; }
     }
 }

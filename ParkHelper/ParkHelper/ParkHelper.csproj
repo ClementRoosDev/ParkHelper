@@ -36,7 +36,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="Controls\CustomCell.cs" />
+    <Compile Include="Controls\AttractionsListViewCell.cs" />
+    <Compile Include="Controls\AttractionsListViewHeader.cs" />
     <Compile Include="Helper\NavigationService.cs" />
     <Compile Include="Locator.cs" />
     <Compile Include="Model\Categorie.cs" />

@@ -153,7 +153,7 @@ namespace ParkHelper.ViewModels
                     Ordre = 0
                 },
             },
-            new Categorie("Restaurant")
+            new Categorie("Restaurants")
             {
                 new Attraction()
                 {
