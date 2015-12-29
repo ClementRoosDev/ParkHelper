@@ -1,7 +1,7 @@
-﻿namespace ParkHelper.Views
-{
-    using ParkHelper.Common.Objets;
+﻿using ParkHelper.Common.Objets;
 
+namespace ParkHelper.Views
+{
     public partial class AttractionDetailsPage
     {
         public AttractionDetailsPage(Attraction attraction)

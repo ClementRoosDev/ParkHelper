@@ -1,5 +1,4 @@
-﻿
-namespace ParkHelper.Views
+﻿namespace ParkHelper.Views
 {
     public partial class HomePage
     {

@@ -1,14 +1,8 @@
-﻿using Xamarin.Forms;
-using Attraction = ParkHelper.Common.Objets.Attraction;
-using ParkHelper.Controls;
+﻿using Attraction = ParkHelper.Common.Objets.Attraction;
 using ParkHelper.ViewModels;
 
 namespace ParkHelper.Views
 {
-    using System;
-    using System.Collections.ObjectModel;
-    using System.Threading.Tasks;
-
     public partial class ListPage
     {
         ListPageViewModel viewModel;

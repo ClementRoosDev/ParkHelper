@@ -36,6 +36,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Commands\CreateItineraireCommand.cs" />
+    <Compile Include="Commands\GetItineraireCommand.cs" />
     <Compile Include="Helper\NavigationService.cs" />
     <Compile Include="Locator.cs" />
     <Compile Include="Model\Categorie.cs" />

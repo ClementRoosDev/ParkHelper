@@ -3,11 +3,10 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using ParkHelper.Common.Objets;
 
 namespace ParkHelper.ViewModels
 {
-    using ParkHelper.Common.Objets;
-
     public class AttractionDetailsViewModel : ViewModelBase
     {
         #region Fields

@@ -8,6 +8,7 @@ using System.Linq;
 using ParkHelper.Common.Objets;
 using Type = ParkHelper.Common.Objets.Type;
 using ParkHelper.Model;
+using ParkHelper.Commands;
 
 namespace ParkHelper.ViewModels
 {
@@ -58,6 +59,8 @@ namespace ParkHelper.ViewModels
             Listes = new List<Categorie>();
             Listes = ConvertFrom(Attractions);
             IsBusy = true;
+
+            CreateItineraire = new CreateItineraireCommand(ItineraireCommand);
         }
         #endregion
     
@@ -76,6 +79,8 @@ namespace ParkHelper.ViewModels
 
         #region Itineraire
         public ICommand ItineraireCommand { get; set; }
+        public CreateItineraireCommand CreateItineraire { get; set; }
+
         #endregion
 
         #endregion

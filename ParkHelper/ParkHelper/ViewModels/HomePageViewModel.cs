@@ -20,18 +20,13 @@ namespace ParkHelper.ViewModels
             if (navigationService == null) throw new ArgumentNullException("navigationService");
             _navigationService = navigationService;
 
-            ItineraireCommand = new RelayCommand(() =>
-            {
-                _navigationService.NavigateTo(
-                    Locator.ListPage);
-            });
-
             MapCommand = new RelayCommand(() =>
             {
                 _navigationService.NavigateTo(
                     Locator.MapPage);
             });
             TextTest = "THIS IS A TEST ! Je suis un fraisier";
+            TryToOpenItineraire();
         }
         #endregion
 
@@ -43,6 +38,24 @@ namespace ParkHelper.ViewModels
         #endregion
 
         #region Methods
+
+        void TryToOpenItineraire()
+        {
+            //fileName = "";
+            //if()
+            ItineraireCommand = new RelayCommand(() =>
+            {
+                _navigationService.NavigateTo(
+                    Locator.ListPage);
+            });
+            /**}else{
+            ItineraireCommand = new RelayCommand(() =>
+            {
+                _navigationService.NavigateTo(
+                    Locator.ItinerairePage, fileName);
+            });
+            }*/
+        }
         #endregion
     }
 }
