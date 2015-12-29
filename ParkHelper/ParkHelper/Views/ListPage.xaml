@@ -4,11 +4,15 @@
              x:Class="ParkHelper.Views.ListPage"
              Title="Attractions">
   <!--  <Button Text="Go to details" Command="{Binding ItemDetailsCommand}" />-->
-  <RelativeLayout>
-    <SearchBar VerticalOptions="Center" HorizontalOptions="Center">
-    </SearchBar>
-    <ListView VerticalOptions="Center" HorizontalOptions="Center"
-              x:Name="listView"
-              ItemsSource="{Binding Listes}"/>
-  </RelativeLayout>
+  <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+      <SearchBar VerticalOptions="Center" HorizontalOptions="Center">
+      </SearchBar>
+      <ListView VerticalOptions="Center" HorizontalOptions="Center"
+                x:Name="listView"
+                ItemsSource="{Binding Listes}"/>
+    <ActivityIndicator
+                      IsVisible="{Binding IsBusy}"
+                      IsRunning="{Binding IsBusy}"
+                      Color="Black" />
+  </Grid>
 </ContentPage>

@@ -57,12 +57,13 @@ namespace ParkHelper.ViewModels
             Attractions = new List<Attraction>();
             Listes = new List<Categorie>();
             Listes = ConvertFrom(Attractions);
+            IsBusy = true;
         }
         #endregion
     
         #region Properties
         public List<Attraction> Attractions { get; set; }
-        
+        public bool IsBusy { get; set; }
         #region Liste
         public List<Categorie> Listes { get; set; }
         public ICommand ItemDetailsCommand { get; set; }
@@ -327,5 +328,10 @@ namespace ParkHelper.ViewModels
             };
         }
         #endregion
+
+        public void Update()
+        {
+            Listes.ElementAt(2).ElementAt(1).EstDejaDansLeParcours = true;
+        }
     }
 }
