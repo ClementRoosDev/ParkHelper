@@ -17,6 +17,7 @@ namespace ParkHelper.ViewModels
         #region Fields
 
         readonly INavigationService _navigationService;
+        string texteATrouver;
 
         #endregion
 
@@ -61,12 +62,15 @@ namespace ParkHelper.ViewModels
             IsBusy = true;
 
             CreateItineraire = new CreateItineraireCommand(ItineraireCommand);
+
+            TexteATrouver = "Rechercher";
         }
         #endregion
     
         #region Properties
         public List<Attraction> Attractions { get; set; }
         public bool IsBusy { get; set; }
+
         #region Liste
         public List<Categorie> Listes { get; set; }
         public ICommand ItemDetailsCommand { get; set; }
@@ -80,7 +84,19 @@ namespace ParkHelper.ViewModels
         #region Itineraire
         public ICommand ItineraireCommand { get; set; }
         public CreateItineraireCommand CreateItineraire { get; set; }
+        #endregion
 
+        #region SearchBar
+
+        public string TexteATrouver
+        {
+            get { return texteATrouver; }
+            set
+            {
+                texteATrouver = value;
+                FilterListes();
+            }
+        }
         #endregion
 
         #endregion
@@ -334,9 +350,19 @@ namespace ParkHelper.ViewModels
         }
         #endregion
 
-        public void Update()
+        void FilterListes()
         {
-            Listes.ElementAt(2).ElementAt(1).EstDejaDansLeParcours = true;
+            if (Listes != null && !TexteATrouver.Equals("Rechercher"))
+            {
+                if (string.IsNullOrEmpty(TexteATrouver))
+                {
+                    Listes = Listes;
+                }
+                else {
+                    /**Listes = Listes.Where(x => x.Name.ToLower().Contains(TexteATrouver.ToLower())
+                       || x.Libelle.ToLower().Contains(TexteATrouver.ToLower())).ToList();*/
+                }
+            }
         }
     }
 }

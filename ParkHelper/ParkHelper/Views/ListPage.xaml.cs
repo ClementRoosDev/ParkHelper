@@ -5,7 +5,7 @@ namespace ParkHelper.Views
 {
     public partial class ListPage
     {
-        ListPageViewModel viewModel;
+        readonly ListPageViewModel viewModel;
 
         public ListPage()
         {
@@ -23,9 +23,9 @@ namespace ParkHelper.Views
 
         void InitializeTemplate()
         {
-            listView.ItemSelected += (sender, e) =>
+            ListView.ItemSelected += (sender, e) =>
             {
-                var attraction = (Attraction)listView.SelectedItem;
+                var attraction = (Attraction)ListView.SelectedItem;
                 viewModel.Parameter = attraction;
                 viewModel.ItemDetailsCommand.Execute(viewModel.Parameter);
             };

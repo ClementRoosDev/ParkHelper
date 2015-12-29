@@ -15,13 +15,13 @@
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="50"/>
     </Grid.RowDefinitions>
-      <SearchBar Grid.Row ="0"
+      <SearchBar Grid.Row ="0" x:Name="SearchBar"
                  VerticalOptions="Center"
                  HorizontalOptions="Center"
-                 Text="Rechercher">
+                 Text="{Binding TexteATrouver}">
       </SearchBar>
       <ListView Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center"
-                x:Name="listView"
+                x:Name="ListView"
                 ItemsSource="{Binding Listes}"
                 IsGroupingEnabled="True"
                 GroupDisplayBinding="{Binding Name}"
