@@ -18,12 +18,14 @@ namespace ParkHelper
             SimpleIoc.Default.Register<ListPageViewModel>();
             SimpleIoc.Default.Register<MapPageViewModel>();
             SimpleIoc.Default.Register<AttractionDetailsViewModel>();
+            SimpleIoc.Default.Register<ItinerairePageViewModel>();
         }
 
         public const string HomePage = "HomePage";
         public const string ListPage = "ListPage";
         public const string MapPage = "MapPage";
         public const string AttractionDetailsPage = "AttractionDetailsPage";
+        public const string ItinerairePage = "itinerairePage";
 
         /// <summary>
         /// Gets the Main property.
@@ -78,6 +80,20 @@ namespace ParkHelper
             get
             {
                 return ServiceLocator.Current.GetInstance<AttractionDetailsViewModel>();
+            }
+        }
+
+        /// <summary>
+        /// Gets the itinerairePage property.
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public ItinerairePageViewModel ItineraireView
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ItinerairePageViewModel>();
             }
         }
     }
