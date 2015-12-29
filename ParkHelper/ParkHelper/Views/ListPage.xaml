@@ -4,15 +4,39 @@
              x:Class="ParkHelper.Views.ListPage"
              Title="Attractions">
   <!--  <Button Text="Go to details" Command="{Binding ItemDetailsCommand}" />-->
-  <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-      <SearchBar VerticalOptions="Center" HorizontalOptions="Center">
-      </SearchBar>
-      <ListView VerticalOptions="Center" HorizontalOptions="Center"
-                x:Name="listView"
-                ItemsSource="{Binding Listes}"/>
+  
     <ActivityIndicator
                       IsVisible="{Binding IsBusy}"
                       IsRunning="{Binding IsBusy}"
                       Color="Black" />
+  <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="50"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="50"/>
+    </Grid.RowDefinitions>
+      <SearchBar Grid.Row ="0"
+                 VerticalOptions="Center"
+                 HorizontalOptions="Center"
+                 Text="Rechercher">
+      </SearchBar>
+      <ListView Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center"
+                x:Name="listView"
+                ItemsSource="{Binding Listes}"
+                IsGroupingEnabled="True"
+                GroupDisplayBinding="{Binding Name}"
+                GroupShortNameBinding="{Binding Name}">
+                <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Spacing="0" Padding="10, 5, 10, 5">
+                                <Label Text="{Binding Libelle}" HorizontalOptions="FillAndExpand"/>
+                                <Switch HorizontalOptions="End" IsToggled="{Binding EstDejaDansLeParcours}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+  <Button Grid.Row="2" Text="Créer itinéraire" Command="{Binding ItineraireCommand}" />
   </Grid>
 </ContentPage>

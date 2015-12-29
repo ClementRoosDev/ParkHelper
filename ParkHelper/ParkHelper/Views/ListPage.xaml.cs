@@ -13,45 +13,28 @@ namespace ParkHelper.Views
     {
         ListPageViewModel viewModel;
 
-
         public ListPage()
         {
             InitializeComponent();
             viewModel = App.Locator.ListPageView;
             viewModel.IsBusy = true;
+            if (viewModel.Listes.Count == 0)
+            {
+                viewModel.InitListAttractions();
+            }
             BindingContext = viewModel;
             InitializeTemplate();
+            viewModel.IsBusy = false;
         }
 
         void InitializeTemplate()
         {
-            var dataTemplate = new DataTemplate(typeof(CustomSwitchCell));
-            dataTemplate.SetBinding(TextCell.TextProperty, "Libelle");
-            dataTemplate.SetBinding(Switch.IsToggledProperty, "EstDejaDansLeParcours");
-            listView.ItemTemplate = dataTemplate;
-
-            var listViewLocal = new ListView()
+            listView.ItemSelected += (sender, e) =>
             {
-                IsGroupingEnabled = true,
-                GroupDisplayBinding = new Binding("Name"),
-                GroupShortNameBinding = new Binding("Name"),
-                ItemsSource = viewModel.Listes,
-                ItemTemplate = dataTemplate
-            };
-
-            listViewLocal.ItemSelected += (sender, e) =>
-            {
-                var attraction = (Attraction)listViewLocal.SelectedItem;
+                var attraction = (Attraction)listView.SelectedItem;
                 viewModel.Parameter = attraction;
                 viewModel.ItemDetailsCommand.Execute(viewModel.Parameter);
             };
-
-            Content = listViewLocal;
-            viewModel.IsBusy = false;
         }
-        /**public void Init()
-        {
-            this.listView.ItemsSource = (await ApiClient.FindAll<Item>()).Result;
-        }*/
     }
 }
