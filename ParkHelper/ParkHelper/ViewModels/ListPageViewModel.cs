@@ -56,7 +56,6 @@ namespace ParkHelper.ViewModels
 
             Attractions = new List<Attraction>();
             Listes = new List<Categorie>();
-            InitAttractions();
             Listes = ConvertFrom(Attractions);
         }
         #endregion
@@ -77,10 +76,31 @@ namespace ParkHelper.ViewModels
         #region Itineraire
         public ICommand ItineraireCommand { get; set; }
         #endregion
-        
+
         #endregion
 
         #region Methods
+
+        public void InitListAttractions()
+        {
+            InitAttractions();
+            AddingEventToList();
+        }
+
+        void AddingEventToList()
+        {
+            foreach (var itemLieu in Listes.SelectMany(subList => subList))
+            {
+                itemLieu.OnToggled += ToggleSelection;
+            }
+        }
+
+        void ToggleSelection(object sender, EventArgs e)
+        {
+            var attraction = sender as Attraction;
+            //System.Console.WriteLine("{0} has been toggled to {1}", attraction.Libelle, attraction.EstDejaDansLeParcours);
+        }
+
         List<Categorie> ConvertFrom(List<Attraction> attractions)
         {
             //TODO : Call the API and extract the full list

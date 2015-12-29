@@ -1,7 +1,11 @@
 ﻿namespace ParkHelper.Common.Objets
 {
+    using System;
+
     public class Attraction
     {
+        public event EventHandler<EventArgs> OnToggled = delegate { };
+
         public Type Type { get; set; }
         public int Id { get; set; }
         public string Libelle { get; set; }
@@ -13,7 +17,26 @@
         public int CapaciteWagon { get; set; }
         public object IdType { get; set; }
         public int Duree { get; set; }
-        public bool EstDejaDansLeParcours { get; set; }
+        public bool EstDejaDansLeParcours
+        {
+            get { return estDejaDansLeParcours.Value; }
+            set
+            {
+                if (estDejaDansLeParcours.HasValue && estDejaDansLeParcours.Value != value)
+                {
+                    estDejaDansLeParcours = value;
+                    OnToggled(this, new EventArgs());
+                }
+                else
+                {
+                    estDejaDansLeParcours = value;
+                }
+                //	System.Diagnostics.Debug.WriteLine ("IsSelected for {0} updated to {1}", Name, value);
+            }
+        }
+
+        bool? estDejaDansLeParcours;
+
         public int Ordre { get; set; }
     }
 }

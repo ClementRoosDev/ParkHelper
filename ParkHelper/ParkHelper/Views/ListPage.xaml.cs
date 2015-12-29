@@ -20,7 +20,7 @@ namespace ParkHelper.Views
 
         void InitializeTemplate()
         {
-            var dataTemplate = new DataTemplate(typeof(AttractionsListViewCell));
+            /**var dataTemplate = new DataTemplate(typeof(AttractionsListViewCell));
             dataTemplate.SetBinding(TextCell.TextProperty, "Libelle");
             dataTemplate.SetBinding(Switch.IsToggledProperty, "EstDejaDansLeParcours");
             this.listView.ItemTemplate = dataTemplate;
@@ -42,7 +42,31 @@ namespace ParkHelper.Views
                 var attraction = (Attraction)listView.SelectedItem;
                 viewModel.Parameter = attraction;
                 viewModel.ItemDetailsCommand.Execute(viewModel.Parameter);
+            };*/
+            viewModel.InitListAttractions();
+
+            var dataTemplate = new DataTemplate(typeof(CustomSwitchCell));
+            dataTemplate.SetBinding(TextCell.TextProperty, "Libelle");
+            dataTemplate.SetBinding(Switch.IsToggledProperty, "EstDejaDansLeParcours");
+            this.listView.ItemTemplate = dataTemplate;
+
+            var listView = new ListView()
+            {
+                IsGroupingEnabled = true,
+                GroupDisplayBinding = new Binding("Name"),
+                GroupShortNameBinding = new Binding("Name"),
+                ItemsSource = viewModel.Listes,
+                ItemTemplate = dataTemplate
             };
+
+            listView.ItemSelected += (sender, e) =>
+            {
+                var attraction = (Attraction)listView.SelectedItem;
+                viewModel.Parameter = attraction;
+                viewModel.ItemDetailsCommand.Execute(viewModel.Parameter);
+            };
+
+            Content = listView;
         }
 
         /**public void Init()

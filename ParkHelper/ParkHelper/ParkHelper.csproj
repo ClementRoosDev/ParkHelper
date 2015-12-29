@@ -38,6 +38,7 @@
     <Compile Include="App.cs" />
     <Compile Include="Controls\AttractionsListViewCell.cs" />
     <Compile Include="Controls\AttractionsListViewHeader.cs" />
+    <Compile Include="Controls\CustomSwitchCell.cs" />
     <Compile Include="Helper\NavigationService.cs" />
     <Compile Include="Locator.cs" />
     <Compile Include="Model\Categorie.cs" />
