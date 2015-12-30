@@ -16,7 +16,7 @@ namespace ParkHelper
         {
             // The root page of your application
             //MainPage = new NavigationPage(new HomePage());
-            SimpleIoc.Default.Unregister<INavigationService>();
+
             nav = new NavigationService();
             nav.Configure(Locator.HomePage, typeof(HomePage));
             nav.Configure(Locator.ListPage, typeof(ListPage));
