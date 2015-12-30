@@ -5,7 +5,7 @@ namespace ParkHelper.Views
 {
     using ParkHelper.ViewModels;
 
-    public partial class ItinerairePage : ContentPage
+    public partial class ItinerairePage : NavigationPage
     {
         ItinerairePageViewModel viewModel;
 

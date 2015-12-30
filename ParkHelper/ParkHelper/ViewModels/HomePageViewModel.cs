@@ -6,6 +6,8 @@ using GalaSoft.MvvmLight.Views;
 
 namespace ParkHelper.ViewModels
 {
+    using Plugin.Geolocator.Abstractions;
+
     public class HomePageViewModel : ViewModelBase
     {
         #region Fields
@@ -35,6 +37,8 @@ namespace ParkHelper.ViewModels
         public string TextTest { get; set; }
         public ICommand ItineraireCommand { get; set; }
         public ICommand MapCommand { get; set; }
+        public Position Test { get; set; }
+
         #endregion
 
         #region Methods
