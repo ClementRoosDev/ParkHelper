@@ -9,7 +9,7 @@ namespace ParkHelper
         /// <summary>
         /// Register all the used ViewModels, Services et. al. witht the IoC Container
         /// </summary>
-        public Locator()
+        static Locator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
@@ -37,6 +37,8 @@ namespace ParkHelper
         {
             get
             {
+                if (!SimpleIoc.Default.IsRegistered<HomePageViewModel>())
+                    SimpleIoc.Default.Register<HomePageViewModel>();
                 return ServiceLocator.Current.GetInstance<HomePageViewModel>();
             }
         }
@@ -51,6 +53,8 @@ namespace ParkHelper
         {
             get
             {
+                if (!SimpleIoc.Default.IsRegistered<ListPageViewModel>())
+                    SimpleIoc.Default.Register<ListPageViewModel>();
                 return ServiceLocator.Current.GetInstance<ListPageViewModel>();
             }
         }
@@ -65,6 +69,8 @@ namespace ParkHelper
         {
             get
             {
+                if (!SimpleIoc.Default.IsRegistered<MapPageViewModel>())
+                    SimpleIoc.Default.Register<MapPageViewModel>();
                 return ServiceLocator.Current.GetInstance<MapPageViewModel>();
             }
         }
@@ -79,6 +85,8 @@ namespace ParkHelper
         {
             get
             {
+                if (!SimpleIoc.Default.IsRegistered<AttractionDetailsViewModel>())
+                    SimpleIoc.Default.Register<AttractionDetailsViewModel>();
                 return ServiceLocator.Current.GetInstance<AttractionDetailsViewModel>();
             }
         }
@@ -93,6 +101,8 @@ namespace ParkHelper
         {
             get
             {
+                if (!SimpleIoc.Default.IsRegistered<ItinerairePageViewModel>())
+                    SimpleIoc.Default.Register<ItinerairePageViewModel>();
                 return ServiceLocator.Current.GetInstance<ItinerairePageViewModel>();
             }
         }
