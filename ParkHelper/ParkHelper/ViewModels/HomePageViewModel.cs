@@ -29,7 +29,7 @@ namespace ParkHelper.ViewModels
             TryToOpenItineraire();
         }
         #endregion
-
+        
         #region Properties
 
         public string TextTest { get; set; }

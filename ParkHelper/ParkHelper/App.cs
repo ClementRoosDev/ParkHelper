@@ -9,14 +9,15 @@ namespace ParkHelper
     public class App : Application
     {
         static Locator _locator;
+        NavigationService nav;
         public static Locator Locator { get { return _locator ?? (_locator = new Locator()); } }
 
         public App()
         {
             // The root page of your application
             //MainPage = new NavigationPage(new HomePage());
-
-            var nav = new NavigationService();
+            SimpleIoc.Default.Unregister<INavigationService>();
+            nav = new NavigationService();
             nav.Configure(Locator.HomePage, typeof(HomePage));
             nav.Configure(Locator.ListPage, typeof(ListPage));
             nav.Configure(Locator.MapPage, typeof(MapPage));

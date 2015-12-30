@@ -16,7 +16,7 @@ namespace ParkHelper.ViewModels
     {
         #region Fields
 
-        readonly INavigationService _navigationService;
+        readonly INavigationService navigationService;
         string texteATrouver;
 
         #endregion
@@ -25,9 +25,9 @@ namespace ParkHelper.ViewModels
         public ListPageViewModel(INavigationService navigationService)
         {
             if (navigationService == null) throw new ArgumentNullException("navigationService");
-            _navigationService = navigationService;
+            this.navigationService = navigationService;
 
-            HomeCommand = new RelayCommand(() => { _navigationService.GoBack(); });
+            HomeCommand = new RelayCommand(() => { this.navigationService.GoBack(); });
 
             Parameter = new Attraction()
             {
@@ -48,12 +48,12 @@ namespace ParkHelper.ViewModels
             ItemDetailsCommand =
                 new RelayCommand(() =>
                 {
-                    _navigationService.NavigateTo(Locator.AttractionDetailsPage, Parameter);
+                    this.navigationService.NavigateTo(Locator.AttractionDetailsPage, Parameter);
                 });
 
             ItineraireCommand = new RelayCommand(() =>
             {
-                _navigationService.NavigateTo(Locator.AttractionDetailsPage, Parameter);
+                this.navigationService.NavigateTo(Locator.ItinerairePage, Parameter);
             });
 
             Attractions = new List<Attraction>();

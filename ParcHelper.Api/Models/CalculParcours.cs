@@ -14,8 +14,7 @@ namespace ParkHelper.Api.Models
         #region Properties
 
         public Parcours Parcours { get; set; }
-
-        private List<Attraction> ListeAttraction { get; set; }
+        List<Attraction> ListeAttraction { get; set; }
 
         #endregion
 
@@ -23,8 +22,8 @@ namespace ParkHelper.Api.Models
 
         public CalculParcours(int[] listeIdAttractions)
         {
-            this.ListeAttraction = ConvertIdToAttraction(listeIdAttractions);
-            this.Parcours = new Parcours { ListeParcours = ListeAttraction.Cast<IElementDeParcours>().ToList() };
+            ListeAttraction = ConvertIdToAttraction(listeIdAttractions);
+            Parcours = new Parcours { ListeParcours = ListeAttraction.Cast<IElementDeParcours>().ToList() };
         }
 
         #endregion
@@ -36,9 +35,9 @@ namespace ParkHelper.Api.Models
             DeterminePremiereAttraction();
             DetermineOrdreAttractions();
             AjoutDeplacements();
-        }        
+        }
 
-        private List<Attraction> ConvertIdToAttraction(int[] listeIdAttractions)
+        List<Attraction> ConvertIdToAttraction(int[] listeIdAttractions)
         {
             using (var db = new ParcHelperEntities())
             {
@@ -48,7 +47,7 @@ namespace ParkHelper.Api.Models
             }
         }
 
-        private void DeterminePremiereAttraction()
+        void DeterminePremiereAttraction()
         {
             if (Settings.Default.FeatureGeolocalition)
             {
@@ -62,7 +61,7 @@ namespace ParkHelper.Api.Models
             }
         }
 
-        private void DetermineOrdreAttractions()
+        void DetermineOrdreAttractions()
         {
             Attraction attractionTemp = ListeAttraction.First(a => a.Ordre == 1);
             for (int i = 3; i <= ListeAttraction.Count()*2; i+=2)
@@ -74,7 +73,7 @@ namespace ParkHelper.Api.Models
             }
         }
 
-        private void AjoutDeplacements()
+        void AjoutDeplacements()
         {
             for (int i = 2 ; i < ListeAttraction.Count()*2; i+=2)
             {
