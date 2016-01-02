@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 using ParkHelper.Common.Objets;
 
 namespace ParkHelper.Views
@@ -21,6 +22,11 @@ namespace ParkHelper.Views
             }*/
             BindingContext = viewModel;
             viewModel.IsBusy = false;
+        }
+
+        private void ItinerairePage_OnDisappearing(object sender, EventArgs e)
+        {
+            //viewModel.HomeCommand.Execute(null);
         }
     }
 }

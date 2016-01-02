@@ -19,5 +19,10 @@ namespace ParkHelper.Model
         string Heure { get; set; }
 
         Attraction AttractionAFaire { get; set; }
+
+        public override string ToString()
+        {
+            return AttractionAFaire.Libelle;
+        }
     }
 }

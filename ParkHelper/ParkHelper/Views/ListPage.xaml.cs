@@ -1,4 +1,5 @@
-﻿using Attraction = ParkHelper.Common.Objets.Attraction;
+﻿using System;
+using Attraction = ParkHelper.Common.Objets.Attraction;
 using ParkHelper.ViewModels;
 
 namespace ParkHelper.Views
