@@ -11,5 +11,12 @@ namespace ParkHelper.Api.Repository
             return Table.Where(a => a.Libelle == name).ToList();
         }
 
+        public List<Attraction> ConvertIdToAttraction(int[] listeIdAttractions)
+        {
+            var listeResultats = Table.Where(a => listeIdAttractions.Contains(a.Id)).ToList();
+            listeResultats = listeResultats.Select(a => { a.Ordre = 0; return a; }).ToList();
+            return listeResultats;
+        }
+
     }
 }
