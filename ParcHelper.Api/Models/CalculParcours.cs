@@ -2,6 +2,7 @@
 using ParkHelper.Api.Properties;
 using System.Collections.Generic;
 using System.Linq;
+using ParkHelper.Api.Repository;
 
 namespace ParkHelper.Api.Models
 {
@@ -39,12 +40,17 @@ namespace ParkHelper.Api.Models
 
         List<Attraction> ConvertIdToAttraction(int[] listeIdAttractions)
         {
-            using (var db = new ParcHelperEntities())
+            /*using (var db = new ParcHelperEntities())
             {
                 var listeResultats = db.Attractions.Where(a => listeIdAttractions.Contains(a.Id)).ToList();
                 listeResultats= listeResultats.Select(a => { a.Ordre = 0; return a; }).ToList();
                 return listeResultats;
-            }
+            }*/
+
+            var repository = new AttractionRepository();
+            var listeResultats = repository.ConvertIdToAttraction(listeIdAttractions);
+
+            return listeResultats;
         }
 
         void DeterminePremiereAttraction()
