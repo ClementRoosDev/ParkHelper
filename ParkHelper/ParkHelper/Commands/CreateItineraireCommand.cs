@@ -5,11 +5,11 @@ namespace ParkHelper.Commands
 {
     public class CreateItineraireCommand : ICommand
     {
-        readonly ICommand command;
+        readonly ICommand _command;
 
         public CreateItineraireCommand(ICommand command)
         {
-            this.command = command;
+            _command = command;
         }
         public bool CanExecute(object parameter)
         {
@@ -18,7 +18,7 @@ namespace ParkHelper.Commands
 
         public void Execute(object parameter)
         {
-            command.Execute(null);
+            _command.Execute(null);
         }
 
         public event EventHandler CanExecuteChanged;

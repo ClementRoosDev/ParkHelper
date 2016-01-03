@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ParkHelper.Common.Objets;
 
 namespace ParkHelper.Model
 {
-    using ParkHelper.Common.Objets;
-
     public class EtapeParcours
     {
         public EtapeParcours(string heure, Attraction attractionAFaire)

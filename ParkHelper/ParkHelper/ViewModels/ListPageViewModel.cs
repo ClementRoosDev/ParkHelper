@@ -5,8 +5,8 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using System.Collections.Generic;
 using System.Linq;
-using ParkHelper.Common.Objets;
 using Type = ParkHelper.Common.Objets.Type;
+using Attraction = ParkHelper.Common.Objets.Attraction;
 using ParkHelper.Model;
 using ParkHelper.Commands;
 
@@ -16,8 +16,8 @@ namespace ParkHelper.ViewModels
     {
         #region Fields
 
-        readonly INavigationService navigationService;
-        string texteATrouver;
+        private readonly INavigationService _navigationService;
+        string _texteATrouver;
 
         #endregion
 
@@ -25,9 +25,9 @@ namespace ParkHelper.ViewModels
         public ListPageViewModel(INavigationService navigationService)
         {
             if (navigationService == null) throw new ArgumentNullException("navigationService");
-            this.navigationService = navigationService;
+            this._navigationService = navigationService;
 
-            HomeCommand = new RelayCommand(() => { this.navigationService.GoBack(); });
+            HomeCommand = new RelayCommand(() => { _navigationService.GoBack(); });
 
             Parameter = new Attraction()
             {
@@ -48,12 +48,12 @@ namespace ParkHelper.ViewModels
             ItemDetailsCommand =
                 new RelayCommand(() =>
                 {
-                    this.navigationService.NavigateTo(Locator.AttractionDetailsPage, Parameter);
+                    _navigationService.NavigateTo(Locator.AttractionDetailsPage, Parameter);
                 });
 
             ItineraireCommand = new RelayCommand(() =>
             {
-                this.navigationService.NavigateTo(Locator.ItinerairePage, Parameter);
+                _navigationService.NavigateTo(Locator.ItinerairePage, Parameter);
             });
 
             Attractions = new List<Attraction>();
@@ -66,7 +66,7 @@ namespace ParkHelper.ViewModels
             TexteATrouver = "Rechercher";
         }
         #endregion
-    
+
         #region Properties
         public List<Attraction> Attractions { get; set; }
         public bool IsBusy { get; set; }
@@ -90,10 +90,10 @@ namespace ParkHelper.ViewModels
 
         public string TexteATrouver
         {
-            get { return texteATrouver; }
+            get { return _texteATrouver; }
             set
             {
-                texteATrouver = value;
+                _texteATrouver = value;
                 FilterListes();
             }
         }
@@ -103,12 +103,6 @@ namespace ParkHelper.ViewModels
 
         #region Methods
 
-        public void InitListAttractions()
-        {
-            InitAttractions();
-            AddingEventToList();
-        }
-
         void AddingEventToList()
         {
             foreach (var itemLieu in Listes.SelectMany(subList => subList))
@@ -117,13 +111,14 @@ namespace ParkHelper.ViewModels
             }
         }
 
-        void ToggleSelection(object sender, EventArgs e)
+        private static void ToggleSelection(object sender, EventArgs e)
         {
             var attraction = sender as Attraction;
+            //TODO : Verifier possibilité d'ajout à l'itinéraire
             //System.Console.WriteLine("{0} has been toggled to {1}", attraction.Libelle, attraction.EstDejaDansLeParcours);
         }
 
-        List<Categorie> ConvertFrom(List<Attraction> attractions)
+        internal List<Categorie> ConvertFrom(List<Attraction> attractions)
         {
             //TODO : Call the API and extract the full list
             //var extractSubList = Attractions.GroupBy(i => i.Type.Id);
@@ -296,60 +291,6 @@ namespace ParkHelper.ViewModels
             }
         };
         }
-
-        void InitAttractions()
-        {
-            Attractions = new List<Attraction>()
-            {
-                new Attraction()
-                {
-                    Attente = 20,
-                    CapaciteWagon = 4,
-                    Description = "Attraction super cool",
-                    Duree = 10,
-                    EstDejaDansLeParcours = false,
-                    Id = 1,
-                    IdType = new Type(){Id = 1, Libelle = "Type 1"},
-                    Latittude = 38.99,
-                    Longitude = 37.87,
-                    Libelle = "Attraction 1",
-                    LienGif = "http://aaa.com/a.gif",
-                    Ordre = 0
-                },
-                new Attraction()
-                {
-                    Attente = 30,
-                    CapaciteWagon = 8,
-                    Description = "Attraction pas tres cool",
-                    Duree = 160,
-                    EstDejaDansLeParcours = false,
-                    Id = 2,
-                    IdType = new Type(){Id = 2, Libelle = "Type 2"},
-                    Latittude = 35.20,
-                    Longitude = 40.60,
-                    Libelle = "Attraction 2",
-                    LienGif = "http://aaa.com/b.gif",
-                    Ordre = 0
-                },
-                new Attraction()
-                {
-                    Attente = 0,
-                    CapaciteWagon = 1,
-                    Description = "Attraction hyper cool",
-                    Duree = 20,
-                    EstDejaDansLeParcours = false,
-                    Id = 3,
-                    IdType = new Type(){Id = 3, Libelle = "Type 3"},
-                    Latittude = 37.20,
-                    Longitude = 10.60,
-                    Libelle = "Attraction 3",
-                    LienGif = "http://aaa.com/c.gif",
-                    Ordre = 0
-                }
-            };
-        }
-        #endregion
-
         void FilterListes()
         {
             if (Listes != null && !TexteATrouver.Equals("Rechercher"))
@@ -364,5 +305,9 @@ namespace ParkHelper.ViewModels
                 }
             }
         }
+
+        #endregion
+
+
     }
 }

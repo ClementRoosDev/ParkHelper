@@ -1,8 +1,6 @@
-﻿using Xamarin.Forms;
-
-namespace ParkHelper.Views
+﻿namespace ParkHelper.Views
 {
-    public partial class MapPage : ContentPage
+    public partial class MapPage
     {
         public MapPage()
         {

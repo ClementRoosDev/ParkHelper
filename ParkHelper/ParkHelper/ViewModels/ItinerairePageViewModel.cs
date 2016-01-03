@@ -1,15 +1,14 @@
 ﻿using GalaSoft.MvvmLight;
 using System;
 using GalaSoft.MvvmLight.Views;
+using System.Collections.Generic;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
+using ParkHelper.Common.Objets;
+using ParkHelper.Model;
 
 namespace ParkHelper.ViewModels
 {
-    using System.Collections.Generic;
-    using System.Windows.Input;
-    using GalaSoft.MvvmLight.Command;
-    using ParkHelper.Common.Objets;
-    using ParkHelper.Model;
-
     public class ItinerairePageViewModel : ViewModelBase
     {
         #region Fields
@@ -95,7 +94,7 @@ namespace ParkHelper.ViewModels
                         Duree = 20,
                         EstDejaDansLeParcours = false,
                         Id = 3,
-                        IdType = new Type() { Id = 3, Libelle = "Type 3" },
+                        IdType = new Type { Id = 3, Libelle = "Type 3" },
                         Latittude = 37.20,
                         Longitude = 10.60,
                         Libelle = "Le camp",

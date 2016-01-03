@@ -13,6 +13,7 @@ namespace ParkHelper.Helper
         readonly Dictionary<string, Type> _pagesByKey = new Dictionary<string, Type>();
         NavigationPage _navigation;
         #endregion
+
         #region Properties
         public string CurrentPageKey
         {
@@ -34,6 +35,7 @@ namespace ParkHelper.Helper
             }
         }
         #endregion
+
         #region Methods
         public void GoBack()
         {

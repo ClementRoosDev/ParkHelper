@@ -1,11 +1,10 @@
 ﻿using System;
 using Xamarin.Forms;
 using ParkHelper.Common.Objets;
+using ParkHelper.ViewModels;
 
 namespace ParkHelper.Views
 {
-    using ParkHelper.ViewModels;
-
     public partial class ItinerairePage : NavigationPage
     {
         ItinerairePageViewModel viewModel;
