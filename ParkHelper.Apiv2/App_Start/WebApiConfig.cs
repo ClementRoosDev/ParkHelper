@@ -27,6 +27,7 @@ namespace ParkHelper.Apiv2
             builder.EntitySet<Lieu>("Lieux");
             builder.EntitySet<TypeDeLieu>("TypeDeLieux");
             builder.EntitySet<Indication>("Indications");
+
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 
         }

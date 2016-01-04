@@ -119,7 +119,6 @@ namespace ParkHelper.ViewModels
 
         internal void ConvertFrom(List<Attraction> attractions)
         {
-            //TODO : Fix a bug here, between these comments and the list with dummy datas
             var extractSubList = attractions.GroupBy(i => i.IdType);
             foreach (var subList in extractSubList)
             {
