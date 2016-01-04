@@ -20,7 +20,6 @@
       </SearchBar>
       <ListView Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center"
                 x:Name="ListView"
-                ItemsSource="{Binding Listes}"
                 IsGroupingEnabled="True"
                 GroupDisplayBinding="{Binding Name}"
                 GroupShortNameBinding="{Binding Name}">

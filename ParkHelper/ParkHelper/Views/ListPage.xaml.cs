@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using ParkHelper.ViewModels;
+using Newtonsoft.Json;
+using ParkHelper.Common.Objets;
 
 namespace ParkHelper.Views
 {
-    using Newtonsoft.Json;
-    using ParkHelper.Common.Objets;
-
     public partial class ListPage
     {
         readonly ListPageViewModel _viewModel;
@@ -38,19 +35,22 @@ namespace ParkHelper.Views
         async void ListPage_OnAppearing(object sender, EventArgs e)
         {
             OnAppearing();
-            await GetAttractions();
-            if(_viewModel.Listes.Count > 0)
+            if(_viewModel.Listes.Count == 0)
             {
-                ListView.ItemsSource = _viewModel.Listes;
-                _viewModel.ItineraireCommand.CanExecute(null);
-                setUIElements(true);
-            }
-            else
-            {
-                ActivityIndicator.IsRunning = false;
-                await DisplayAlert("Error", "Connection Error", "OK", "Cancel");
-                System.Diagnostics.Debug.WriteLine("ERROR!");
-                _viewModel.HomeCommand.Execute(null);
+                await GetAttractions();
+                if(_viewModel.Listes.Count > 0)
+                {
+                    ListView.ItemsSource = _viewModel.Listes;
+                    _viewModel.ItineraireCommand.CanExecute(null);
+                    setUIElements(true);
+                }
+                else
+                {
+                    ActivityIndicator.IsRunning = false;
+                    await DisplayAlert("Error", "Connection Error", "OK", "Cancel");
+                    System.Diagnostics.Debug.WriteLine("ERROR!");
+                    _viewModel.HomeCommand.Execute(null);
+                }
             }
         }
 
