@@ -9,8 +9,8 @@ namespace ParkHelper.Data
     public class Deplacement : IElementDeParcours
     {
         #region Fields
-        private Attraction LieuDepart { get; set; }
-        private Attraction LieuArrivee { get; set; }
+        private Lieu LieuDepart { get; set; }
+        private Lieu LieuArrivee { get; set; }
         public int Duree { get; set; }
         public int Ordre { get; set; }
 
@@ -20,7 +20,7 @@ namespace ParkHelper.Data
 
         #region Constructeur
 
-        public Deplacement(Attraction LieuDepart, Attraction LieuArrivee)
+        public Deplacement(Lieu LieuDepart, Lieu LieuArrivee)
         {
             this.LieuDepart = LieuDepart;
             this.LieuArrivee = LieuArrivee;
@@ -32,7 +32,7 @@ namespace ParkHelper.Data
         #region Methodes
 
         //Calcule la durée entre deux point (on va dire que distance = durée)
-        private void CalculeDuree()
+        void CalculeDuree()
         {
             double duree =
             Math.Sqrt

@@ -4,14 +4,14 @@ using ParkHelper.Data;
 
 namespace ParkHelper.Api.Repository
 {
-    public class AttractionRepository : GenericRepository<Attraction>
+    public class AttractionRepository : GenericRepository<Lieu>
     {
-        public List<Attraction> FindByName(string name)
+        public List<Lieu> FindByName(string name)
         {
             return Table.Where(a => a.Libelle == name).ToList();
         }
 
-        public List<Attraction> ConvertIdToAttraction(int[] listeIdAttractions)
+        public List<Lieu> ConvertIdToAttraction(int[] listeIdAttractions)
         {
             var listeResultats = Table.Where(a => listeIdAttractions.Contains(a.Id)).ToList();
             listeResultats = listeResultats.Select(a => { a.Ordre = 0; return a; }).ToList();

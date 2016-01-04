@@ -9,16 +9,18 @@ using ParkHelper.ViewModels;
 
 namespace ParkHelper.Views
 {
+    using Newtonsoft.Json;
+    using ParkHelper.Common.Objets;
+
     public partial class ListPage
     {
-        private readonly ListPageViewModel _viewModel;
+        readonly ListPageViewModel _viewModel;
 
         public ListPage()
         {
             InitializeComponent();
-            ListView.IsVisible = false;
-            SearchBar.IsVisible = false;
-            ItineraireCommand.IsVisible = false;
+            setUIElements(false);
+            this.ActivityIndicator.IsRunning = true;
             _viewModel = App.Locator.ListPageView;
             BindingContext = _viewModel;
             InitializeTemplate();
@@ -35,55 +37,68 @@ namespace ParkHelper.Views
             };
         }
 
-        private async void ListPage_OnAppearing(object sender, EventArgs e)
+        async void ListPage_OnAppearing(object sender, EventArgs e)
         {
             OnAppearing();
             var attractions = await GetConferences();
             if(attractions.Count > 0)
             {
-                ListView.IsVisible = true;
-                SearchBar.IsVisible = true;
-                ItineraireCommand.IsVisible = true;
+                setUIElements(true);
                 ListView.ItemsSource = _viewModel.ConvertFrom(attractions);
                 _viewModel.ItineraireCommand.CanExecute(null);
             }
             else
             {
+                ActivityIndicator.IsRunning = false;
                 await DisplayAlert("Error", "Connection Error", "OK", "Cancel");
                 System.Diagnostics.Debug.WriteLine("ERROR!");
+                _viewModel.HomeCommand.Execute(null);
             }
         }
 
         public async Task<List<Attraction>> GetConferences()
         {
-            IEnumerable<Attraction> conferences = Enumerable.Empty<Attraction>();
+            IEnumerable<Attraction> attractions = Enumerable.Empty<Attraction>();
 
             using (var httpClient = CreateClient())
             {
-                var response = await httpClient.GetAsync("Attractions").ConfigureAwait(false);
+                var response = await httpClient.GetAsync("Lieux").ConfigureAwait(false);
                 if (response.IsSuccessStatusCode)
                 {
-                    var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    //var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var json = "{\r\n  \"odata.metadata\":\"http://parkhelperodata.azurewebsites.net/odata/$metadata#Lieux\"," +
+                               "\"value\":[\r\n    {\r\n      \"Id\":1,\"Libelle\":\"Tonnerre de Zeus\"," +
+                               "\"Description\":\"Montez au sommet de l\\u2019Olympe et lancez-vous dans une descente vertigineuse de plus de 30 m\\u00e8tres !\\r\\n\"," +
+                               "\"LienGif\":null,\"Latittude\":8.0,\"Longitude\":3.0,\"Attente\":20,\"Duree\":10,\"CapaciteWagon\":4,\"IdType\":1,\"Ordre\":0," +
+                               "\"EstDejaDansLeParcours\":false\r\n    },{\r\n      \"Id\":2,\"Libelle\":\"Goudurix\"," +
+                               "\"Description\":\"Le grand huit aux 7 loopings pour ceux qui ont le go\\u00fbt du risque\\r\\n\"," +
+                               "\"LienGif\":null,\"Latittude\":15.0,\"Longitude\":10.0,\"Attente\":15,\"Duree\":20,\"CapaciteWagon\":3," +
+                               "\"IdType\":1,\"Ordre\":0,\"EstDejaDansLeParcours\":false\r\n    },{\r\n      \"Id\":3," +
+                               "\"Libelle\":\"La trace du houra\",\"Description\":\"Vivez une exp\\u00e9rience de glisse incomparable \\u00e0 pr\\u00e8s de 60km/h\\r\\n\"," +
+                               "\"LienGif\":null,\"Latittude\":18.0,\"Longitude\":2.0,\"Attente\":10,\"Duree\":30,\"CapaciteWagon\":4,\"IdType\":2,\"Ordre\":0," +
+                               "\"EstDejaDansLeParcours\":false\r\n    },{\r\n      \"Id\":4,\"Libelle\":\"Le grand splash\"," +
+                               "\"Description\":\"N\\u2019ayez pas peur des \\u00e9claboussures\",\"LienGif\":null,\"Latittude\":13.0," +
+                               "\"Longitude\":8.0,\"Attente\":25,\"Duree\":15,\"CapaciteWagon\":4,\"IdType\":3,\"Ordre\":0,\"EstDejaDansLeParcours\":false\r\n    }\r\n  ]\r\n}";
                     if (!string.IsNullOrWhiteSpace(json))
                     {
                         //TODO : Deserializer ici puis sotcker dans le VM
-                        /**conferences = await Task.Run(() =>
-                            //Mapper.Map<IEnumerable<Attraction>>(conferenceDtos)
-                        ).ConfigureAwait(false);*/
+                        var jsonv2 = json.Replace("odata.metadata", "metadata");
+                        var objectWithFormat = JsonConvert.DeserializeObject<RequeteListe>(jsonv2);
+                        return objectWithFormat.value;
                     }
                 }
             }
 
-            return conferences.ToList();
+            return attractions.ToList();
         }
 
-        private const string ApiBaseAddress = "http://parkhelperodata.azurewebsites.net/odata/";
+        const string API_BASE_ADDRESS = "http://parkhelperodata.azurewebsites.net/odata/";
 
-        private static HttpClient CreateClient()
+        static HttpClient CreateClient()
         {
             var httpClient = new HttpClient
             {
-                BaseAddress = new Uri(ApiBaseAddress)
+                BaseAddress = new Uri(API_BASE_ADDRESS)
             };
 
             httpClient.DefaultRequestHeaders.Accept.Clear();
@@ -92,5 +107,11 @@ namespace ParkHelper.Views
             return httpClient;
         }
 
+        void setUIElements(bool choixAappliquer)
+        {
+            ListView.IsVisible = choixAappliquer;
+            SearchBar.IsVisible = choixAappliquer;
+            ItineraireCommand.IsVisible = choixAappliquer;
+        }
     }
 }

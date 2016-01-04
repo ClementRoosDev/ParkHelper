@@ -12,19 +12,18 @@ namespace ParkHelper.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Boutique
+    public partial class TypeDeLieu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Boutique()
+        public TypeDeLieu()
         {
-            this.IndicationParBoutiques = new HashSet<IndicationParBoutique>();
+            this.Lieux = new HashSet<Lieu>();
         }
     
         public int Id { get; set; }
         public string Libelle { get; set; }
-        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<IndicationParBoutique> IndicationParBoutiques { get; set; }
+        public virtual ICollection<Lieu> Lieux { get; set; }
     }
 }

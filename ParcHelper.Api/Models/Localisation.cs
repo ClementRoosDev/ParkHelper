@@ -9,15 +9,15 @@ namespace ParkHelper.Api.Models
 
         #region Fields
 
-        private Attraction attractionDeDepart;
-        private IEnumerable<Attraction> listeAttractions;
-        private Attraction attractionLaPlusPres;
+        Lieu attractionDeDepart;
+        IEnumerable<Lieu> listeAttractions;
+        Lieu attractionLaPlusPres;
 
         #endregion
 
         #region Properties
 
-        public Attraction AttractionLaPlusPres
+        public Lieu AttractionLaPlusPres
         {
             get
             {
@@ -33,7 +33,7 @@ namespace ParkHelper.Api.Models
 
         #region Constructeur
 
-        public Localisation(Attraction attractionDeDepart, IEnumerable<Attraction> listeAttractions)
+        public Localisation(Lieu attractionDeDepart, IEnumerable<Lieu> listeAttractions)
         {
             this.attractionDeDepart = attractionDeDepart;
             this.listeAttractions = listeAttractions;
@@ -45,7 +45,7 @@ namespace ParkHelper.Api.Models
         
         public void CalculeAttractionLaPlusPres()
         {
-            Dictionary<Attraction, int> AttractionEtDistance = new Dictionary<Attraction, int>();
+            Dictionary<Lieu, int> AttractionEtDistance = new Dictionary<Lieu, int>();
             foreach (var item in listeAttractions.Where(a => a.EstDejaDansLeParcours == false))
             {
                 Deplacement d = new Deplacement(attractionDeDepart, item);

@@ -15,7 +15,7 @@ namespace ParkHelper.Api.Models
         #region Properties
 
         public Parcours Parcours { get; set; }
-        List<Attraction> ListeAttraction { get; set; }
+        List<Lieu> ListeAttraction { get; set; }
 
         #endregion
 
@@ -38,7 +38,7 @@ namespace ParkHelper.Api.Models
             AjoutDeplacements();
         }
 
-        List<Attraction> ConvertIdToAttraction(int[] listeIdAttractions)
+        List<Lieu> ConvertIdToAttraction(int[] listeIdAttractions)
         {
             /*using (var db = new ParcHelperEntities())
             {
@@ -69,7 +69,7 @@ namespace ParkHelper.Api.Models
 
         void DetermineOrdreAttractions()
         {
-            Attraction attractionTemp = ListeAttraction.First(a => a.Ordre == 1);
+            Lieu attractionTemp = ListeAttraction.First(a => a.Ordre == 1);
             for (int i = 3; i <= ListeAttraction.Count()*2; i+=2)
             {
                 Localisation l = new Localisation(attractionTemp,ListeAttraction);

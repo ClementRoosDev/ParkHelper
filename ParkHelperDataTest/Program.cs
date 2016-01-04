@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ParkHelper.Api.Models;
 using ParkHelper.Data;
 
@@ -31,9 +29,9 @@ namespace ParkHelperDataTest
                 {
                     Console.WriteLine("Deplacement : " + item.Duree );
                 }
-                if (item is Attraction)
+                if (item is Lieu)
                 {
-                    Console.WriteLine("Attraction : "+ ((Attraction)item).Libelle);
+                    Console.WriteLine("Attraction : "+ ((Lieu)item).Libelle);
                 }                
             }
             Console.WriteLine("******FIN TEST*******");
@@ -43,8 +41,8 @@ namespace ParkHelperDataTest
         private static bool TestCalculDeplacement()
         {
             Console.WriteLine("******TEST Calcul Deplacement*******");
-            Attraction a1 = new Attraction { Latittude = 5, Longitude = 10};
-            Attraction a2 = new Attraction { Latittude = 8, Longitude = 15 };
+            Lieu a1 = new Lieu { Latittude = 5, Longitude = 10};
+            Lieu a2 = new Lieu { Latittude = 8, Longitude = 15 };
             Deplacement d = new Deplacement(a1, a2);
             Console.WriteLine("Durée : {0}",d.Duree);
             Console.WriteLine("******FIN TEST*******");
@@ -55,11 +53,11 @@ namespace ParkHelperDataTest
         {
             Console.WriteLine("******TEST Attraction la plus proche*******");
 
-            Attraction a1 = new Attraction {Libelle="Splash", Latittude = 5, Longitude = 10 };
-            Attraction a2 = new Attraction {Libelle = "Grand 8", Latittude = 8, Longitude = 15 };
-            Attraction a3 = new Attraction {Libelle = "Maison Hantée", Latittude = 4, Longitude = 8 };
+            Lieu a1 = new Lieu { Libelle="Splash", Latittude = 5, Longitude = 10 };
+            Lieu a2 = new Lieu { Libelle = "Grand 8", Latittude = 8, Longitude = 15 };
+            Lieu a3 = new Lieu { Libelle = "Maison Hantée", Latittude = 4, Longitude = 8 };
 
-            List<Attraction> listeAttractions = new List<Attraction>();
+            List<Lieu> listeAttractions = new List<Lieu>();
             listeAttractions.Add(a1);
             listeAttractions.Add(a2);
             listeAttractions.Add(a3);

@@ -24,8 +24,9 @@ namespace ParkHelper.Apiv2
 
 
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-            builder.EntitySet<Attraction>("Attractions");
-            builder.EntitySet<Data.Type>("Types");
+            builder.EntitySet<Lieu>("Lieux");
+            builder.EntitySet<TypeDeLieu>("TypeDeLieux");
+            builder.EntitySet<Indication>("Indications");
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 
         }

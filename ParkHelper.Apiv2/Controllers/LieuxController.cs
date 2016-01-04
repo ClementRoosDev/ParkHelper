@@ -1,7 +1,6 @@
 ﻿using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.OData;
 using ParkHelper.Data;
@@ -15,30 +14,31 @@ namespace ParkHelper.Apiv2.Controllers
     using System.Web.Http.OData.Extensions;
     using ParkHelper.Data;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<Type>("Types");
-    builder.EntitySet<Attraction>("Attractions"); 
+    builder.EntitySet<Lieu>("Lieux");
+    builder.EntitySet<TypeDeLieu>("TypeDeLieux"); 
+    builder.EntitySet<Indication>("Indications"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class TypesController : ODataController
+    public class LieuxController : ODataController
     {
         private ParcHelperEntities db = new ParcHelperEntities();
 
-        // GET: odata/Types
+        // GET: odata/Lieux
         [EnableQuery]
-        public IQueryable<Data.Type> GetTypes()
+        public IQueryable<Lieu> GetLieux()
         {
-            return db.Types;
+            return db.Lieux;
         }
 
-        // GET: odata/Types(5)
+        // GET: odata/Lieux(5)
         [EnableQuery]
-        public SingleResult<Data.Type> GetType([FromODataUri] int key)
+        public SingleResult<Lieu> GetLieu([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Types.Where(type => type.Id == key));
+            return SingleResult.Create(db.Lieux.Where(lieu => lieu.Id == key));
         }
 
-        // PUT: odata/Types(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<Data.Type> patch)
+        // PUT: odata/Lieux(5)
+        public IHttpActionResult Put([FromODataUri] int key, Delta<Lieu> patch)
         {
             Validate(patch.GetEntity());
 
@@ -47,21 +47,21 @@ namespace ParkHelper.Apiv2.Controllers
                 return BadRequest(ModelState);
             }
 
-            Data.Type type = await db.Types.FindAsync(key);
-            if (type == null)
+            Lieu lieu = db.Lieux.Find(key);
+            if (lieu == null)
             {
                 return NotFound();
             }
 
-            patch.Put(type);
+            patch.Put(lieu);
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TypeExists(key))
+                if (!LieuExists(key))
                 {
                     return NotFound();
                 }
@@ -71,26 +71,26 @@ namespace ParkHelper.Apiv2.Controllers
                 }
             }
 
-            return Updated(type);
+            return Updated(lieu);
         }
 
-        // POST: odata/Types
-        public async Task<IHttpActionResult> Post(Data.Type type)
+        // POST: odata/Lieux
+        public IHttpActionResult Post(Lieu lieu)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Types.Add(type);
-            await db.SaveChangesAsync();
+            db.Lieux.Add(lieu);
+            db.SaveChanges();
 
-            return Created(type);
+            return Created(lieu);
         }
 
-        // PATCH: odata/Types(5)
+        // PATCH: odata/Lieux(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<Data.Type> patch)
+        public IHttpActionResult Patch([FromODataUri] int key, Delta<Lieu> patch)
         {
             Validate(patch.GetEntity());
 
@@ -99,21 +99,21 @@ namespace ParkHelper.Apiv2.Controllers
                 return BadRequest(ModelState);
             }
 
-            Data.Type type = await db.Types.FindAsync(key);
-            if (type == null)
+            Lieu lieu = db.Lieux.Find(key);
+            if (lieu == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(type);
+            patch.Patch(lieu);
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TypeExists(key))
+                if (!LieuExists(key))
                 {
                     return NotFound();
                 }
@@ -123,29 +123,36 @@ namespace ParkHelper.Apiv2.Controllers
                 }
             }
 
-            return Updated(type);
+            return Updated(lieu);
         }
 
-        // DELETE: odata/Types(5)
-        public async Task<IHttpActionResult> Delete([FromODataUri] int key)
+        // DELETE: odata/Lieux(5)
+        public IHttpActionResult Delete([FromODataUri] int key)
         {
-            Data.Type type = await db.Types.FindAsync(key);
-            if (type == null)
+            Lieu lieu = db.Lieux.Find(key);
+            if (lieu == null)
             {
                 return NotFound();
             }
 
-            db.Types.Remove(type);
-            await db.SaveChangesAsync();
+            db.Lieux.Remove(lieu);
+            db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/Types(5)/Attractions
+        // GET: odata/Lieux(5)/TypeDeLieu
         [EnableQuery]
-        public IQueryable<Attraction> GetAttractions([FromODataUri] int key)
+        public SingleResult<TypeDeLieu> GetTypeDeLieu([FromODataUri] int key)
         {
-            return db.Types.Where(m => m.Id == key).SelectMany(m => m.Attractions);
+            return SingleResult.Create(db.Lieux.Where(m => m.Id == key).Select(m => m.TypeDeLieu));
+        }
+
+        // GET: odata/Lieux(5)/Indications
+        [EnableQuery]
+        public IQueryable<Indication> GetIndications([FromODataUri] int key)
+        {
+            return db.Lieux.Where(m => m.Id == key).SelectMany(m => m.Indications);
         }
 
         protected override void Dispose(bool disposing)
@@ -157,9 +164,9 @@ namespace ParkHelper.Apiv2.Controllers
             base.Dispose(disposing);
         }
 
-        private bool TypeExists(int key)
+        private bool LieuExists(int key)
         {
-            return db.Types.Count(e => e.Id == key) > 0;
+            return db.Lieux.Count(e => e.Id == key) > 0;
         }
     }
 }

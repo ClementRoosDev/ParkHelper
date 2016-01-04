@@ -29,7 +29,7 @@ namespace ParkHelper.ViewModels
                     Locator.HomePage);
             });
             Listes = new List<Parcours>();
-            Listes = DummyParcours();
+            //Listes = DummyParcours();
             IsBusy = true;
         }
         #endregion
@@ -48,7 +48,7 @@ namespace ParkHelper.ViewModels
 
         #region Methods
 
-        List<Parcours> DummyParcours()
+        /**List<Parcours> DummyParcours()
         {
             return new List<Parcours>
             {
@@ -63,7 +63,7 @@ namespace ParkHelper.ViewModels
                             Duree = 20,
                             EstDejaDansLeParcours = false,
                             Id = 3,
-                            IdType = new Type() { Id = 3, Libelle = "Type 3" },
+                            IdType = new TypeDeLieu() { Id = 3, Libelle = "Type 3" },
                             Latittude = 37.20,
                             Longitude = 10.60,
                             Libelle = "Entrée",
@@ -71,7 +71,7 @@ namespace ParkHelper.ViewModels
                             Ordre = 0
                         }))
                 {
-                    new Attraction()
+                    /**new Attraction()
                     {
                         Attente = 0,
                         CapaciteWagon = 1,
@@ -103,7 +103,7 @@ namespace ParkHelper.ViewModels
                     }
                 },
             };
-        }
+        }*/
 
         #endregion
     }
