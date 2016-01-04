@@ -37,7 +37,6 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
           <Property Name="Attente" Type="int" />
           <Property Name="Duree" Type="int" />
           <Property Name="CapaciteWagon" Type="int" />
-          <Property Name="Ordre" Type="int" />
           <Property Name="IdType" Type="int" />
         </EntityType>
         <EntityType Name="TypeDeLieu">
@@ -149,7 +148,6 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
           <Property Name="IdType" Type="Int32" />
           <NavigationProperty Name="TypeDeLieu" Relationship="ParcHelperModel.FK_Attraction_ToTableType" FromRole="Lieu" ToRole="TypeDeLieu" />
           <NavigationProperty Name="Indications" Relationship="ParcHelperModel.IndicationParLieu" FromRole="Lieu" ToRole="Indication" />
-          <Property Name="Ordre" Type="Int32" />
         </EntityType>
         <EntityType Name="TypeDeLieu">
           <Key>
@@ -194,7 +192,6 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
           <EntitySetMapping Name="Lieux">
             <EntityTypeMapping TypeName="ParcHelperModel.Lieu">
               <MappingFragment StoreEntitySet="Lieu">
-                <ScalarProperty Name="Ordre" ColumnName="Ordre" />
                 <ScalarProperty Name="IdType" ColumnName="IdType" />
                 <ScalarProperty Name="CapaciteWagon" ColumnName="CapaciteWagon" />
                 <ScalarProperty Name="Duree" ColumnName="Duree" />

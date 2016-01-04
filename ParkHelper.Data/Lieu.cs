@@ -30,7 +30,7 @@ namespace ParkHelper.Data
         public Nullable<int> Duree { get; set; }
         public Nullable<int> CapaciteWagon { get; set; }
         public Nullable<int> IdType { get; set; }
-        public Nullable<int> Ordre { get; set; }
+        public int Ordre { get; set; }
         public bool EstDejaDansLeParcours { get; set; }
         public virtual TypeDeLieu TypeDeLieu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
