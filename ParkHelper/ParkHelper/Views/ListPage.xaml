@@ -3,9 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ParkHelper.Views.ListPage"
              Title="Attractions" Appearing="ListPage_OnAppearing">
-  <!--  <Button Text="Go to details" Command="{Binding ItemDetailsCommand}" />-->
-  
-    <ActivityIndicator x:Name="ActivityIndicator"
+<ActivityIndicator x:Name="ActivityIndicator"
                       IsVisible="{Binding IsBusy}"
                       IsRunning="{Binding IsBusy}"
                       Color="Black" />

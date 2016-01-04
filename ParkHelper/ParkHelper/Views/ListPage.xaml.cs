@@ -23,7 +23,6 @@ namespace ParkHelper.Views
             _viewModel = App.Locator.ListPageView;
             BindingContext = _viewModel;
             InitializeTemplate();
-            
         }
 
         void InitializeTemplate()
@@ -39,13 +38,12 @@ namespace ParkHelper.Views
         async void ListPage_OnAppearing(object sender, EventArgs e)
         {
             OnAppearing();
-            var attractions = await GetAttractions();
-            if(attractions.Count > 0)
+            await GetAttractions();
+            if(_viewModel.Listes.Count > 0)
             {
-                setUIElements(true);
-                _viewModel.ConvertFrom(attractions);
                 ListView.ItemsSource = _viewModel.Listes;
                 _viewModel.ItineraireCommand.CanExecute(null);
+                setUIElements(true);
             }
             else
             {
@@ -56,10 +54,8 @@ namespace ParkHelper.Views
             }
         }
 
-        public async Task<List<Attraction>> GetAttractions()
+        public async Task GetAttractions()
         {
-            IEnumerable<Attraction> attractions = Enumerable.Empty<Attraction>();
-
             using (var httpClient = CreateClient())
             {
                 var response = await httpClient.GetAsync("Lieux").ConfigureAwait(false);
@@ -70,11 +66,14 @@ namespace ParkHelper.Views
                     {
                         var jsonv2 = json.Replace("odata.metadata", "metadata");
                         var objectWithFormat = JsonConvert.DeserializeObject<RequeteListe>(jsonv2);
-                        return objectWithFormat.value;
+                        
+                        await Task.Run(() =>
+                            _viewModel.ConvertFrom(objectWithFormat.value)
+                        ).ConfigureAwait(false);
+
                     }
                 }
             }
-            return attractions.ToList();
         }
 
         const string API_BASE_ADDRESS = "http://parkhelperodata.azurewebsites.net/odata/";

@@ -119,16 +119,186 @@ namespace ParkHelper.ViewModels
 
         internal void ConvertFrom(List<Attraction> attractions)
         {
-            var extractSubList = attractions.GroupBy(i => i.IdType);
+            //TODO : Fix a bug here, between these comments and the list with dummy datas
+            /**var extractSubList = attractions.GroupBy(i => i.IdType);
             foreach (var subList in extractSubList)
             {
-                var categorie = new Categorie(subList.Key.ToString())
+                var categorie = new Categorie(subList.Key.ToString());
+                foreach (var item in subList)
                 {
-                    //subList.Select(i => i.Id)
-                };
-                
+                    item.LienGif = "http://aaa.com/a.gif";
+                    categorie.Add(item);
+                }
                 Listes.Add(categorie);
+            }*/
+
+            Listes = new List<Categorie>() {
+            new Categorie("Attractions")
+            {
+                new Attraction()
+                {
+                    Attente = 20,
+                    CapaciteWagon = 4,
+                    Description = "Attraction super cool",
+                    Duree = 10,
+                    EstDejaDansLeParcours = false,
+                    Id = 1,
+                    IdType = new Type(){Id = 1, Libelle = "Type 1"},
+                    Latittude = 38.99,
+                    Longitude = 37.87,
+                    Libelle = "Grand splash !",
+                    LienGif = "http://aaa.com/a.gif",
+                    Ordre = 0
+                },
+                new Attraction()
+                {
+                    Attente = 20,
+                    CapaciteWagon = 4,
+                    Description = "Attraction super cool",
+                    Duree = 10,
+                    EstDejaDansLeParcours = false,
+                    Id = 1,
+                    IdType = new Type(){Id = 1, Libelle = "Type 1"},
+                    Latittude = 38.99,
+                    Longitude = 37.87,
+                    Libelle = "Bateau pirate",
+                    LienGif = "http://aaa.com/a.gif",
+                    Ordre = 0
+                },
+            },
+            new Categorie("Shopping")
+            {
+                new Attraction()
+                {
+                    Attente = 30,
+                    CapaciteWagon = 8,
+                    Description = "Attraction pas tres cool",
+                    Duree = 160,
+                    EstDejaDansLeParcours = false,
+                    Id = 2,
+                    IdType = new Type(){Id = 2, Libelle = "Type 2"},
+                    Latittude = 35.20,
+                    Longitude = 40.60,
+                    Libelle = "Les galeries de césar",
+                    LienGif = "http://aaa.com/b.gif",
+                    Ordre = 0
+                },
+                new Attraction()
+                {
+                    Attente = 30,
+                    CapaciteWagon = 8,
+                    Description = "Attraction pas tres cool",
+                    Duree = 160,
+                    EstDejaDansLeParcours = false,
+                    Id = 2,
+                    IdType = new Type(){Id = 2, Libelle = "Type 2"},
+                    Latittude = 35.20,
+                    Longitude = 40.60,
+                    Libelle = "Au poisson frais",
+                    LienGif = "http://aaa.com/b.gif",
+                    Ordre = 0
+                },
+            },
+            new Categorie("Restaurants")
+            {
+                new Attraction()
+                {
+                    Attente = 0,
+                    CapaciteWagon = 1,
+                    Description = "Attraction hyper cool",
+                    Duree = 20,
+                    EstDejaDansLeParcours = false,
+                    Id = 3,
+                    IdType = new Type(){Id = 3, Libelle = "Type 3"},
+                    Latittude = 37.20,
+                    Longitude = 10.60,
+                    Libelle = "Abribus",
+                    LienGif = "http://aaa.com/c.gif",
+                    Ordre = 0
+                },
+                new Attraction()
+                {
+                    Attente = 0,
+                    CapaciteWagon = 1,
+                    Description = "Attraction hyper cool",
+                    Duree = 20,
+                    EstDejaDansLeParcours = false,
+                    Id = 3,
+                    IdType = new Type(){Id = 3, Libelle = "Type 3"},
+                    Latittude = 37.20,
+                    Longitude = 10.60,
+                    Libelle = "Boulangerie",
+                    LienGif = "http://aaa.com/c.gif",
+                    Ordre = 0
+                }
+            },
+            new Categorie("Services")
+            {
+                new Attraction()
+                {
+                    Attente = 0,
+                    CapaciteWagon = 1,
+                    Description = "Attraction hyper cool",
+                    Duree = 20,
+                    EstDejaDansLeParcours = false,
+                    Id = 3,
+                    IdType = new Type(){Id = 3, Libelle = "Type 3"},
+                    Latittude = 37.20,
+                    Longitude = 10.60,
+                    Libelle = "Infirmerie",
+                    LienGif = "http://aaa.com/c.gif",
+                    Ordre = 0
+                },
+                new Attraction()
+                {
+                    Attente = 0,
+                    CapaciteWagon = 1,
+                    Description = "Attraction hyper cool",
+                    Duree = 20,
+                    EstDejaDansLeParcours = false,
+                    Id = 3,
+                    IdType = new Type(){Id = 3, Libelle = "Type 3"},
+                    Latittude = 37.20,
+                    Longitude = 10.60,
+                    Libelle = "Reception",
+                    LienGif = "http://aaa.com/c.gif",
+                    Ordre = 0
+                }
+            },
+            new Categorie("Hotels")
+            {
+                new Attraction()
+                {
+                    Attente = 0,
+                    CapaciteWagon = 1,
+                    Description = "Attraction hyper cool",
+                    Duree = 20,
+                    EstDejaDansLeParcours = false,
+                    Id = 3,
+                    IdType = new Type(){Id = 3, Libelle = "Type 3"},
+                    Latittude = 37.20,
+                    Longitude = 10.60,
+                    Libelle = "Le village",
+                    LienGif = "http://aaa.com/c.gif",
+                    Ordre = 0
+                },
+                new Attraction()
+                {
+                    Attente = 0,
+                    CapaciteWagon = 1,
+                    Description = "Attraction hyper cool",
+                    Duree = 20,
+                    EstDejaDansLeParcours = false,
+                    Id = 3,
+                    IdType = new Type(){Id = 3, Libelle = "Type 3"},
+                    Latittude = 37.20,
+                    Longitude = 10.60,
+                    Libelle = "Le camp",
+                    LienGif = "http://aaa.com/c.gif",
+                    Ordre = 0
+                }
             }
+        };
 
             AddingEventToList();
         }
