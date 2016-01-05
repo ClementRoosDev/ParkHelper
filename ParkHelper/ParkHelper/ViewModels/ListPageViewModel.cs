@@ -56,8 +56,8 @@ namespace ParkHelper.ViewModels
                 this.navigationService.NavigateTo(Locator.ItinerairePage, Parameter);
             });
 
-            Attractions = new List<Attraction>();
             Listes = new List<Categorie>();
+            ListesBackup = new List<Categorie>();
             IsBusy = true;
 
             CreateItineraire = new CreateItineraireCommand(ItineraireCommand);
@@ -67,17 +67,20 @@ namespace ParkHelper.ViewModels
         #endregion
 
         #region Properties
-        public List<Attraction> Attractions { get; set; }
         public bool IsBusy { get; set; }
-
+        public Attraction Parameter { get; set; }
         #region Liste
         public List<Categorie> Listes { get; set; }
-        public ICommand ItemDetailsCommand { get; set; }
-        public Attraction Parameter { get; set; }
+        public List<Categorie> ListesBackup { get; set; }
+        public int ListesCount { get; set; }
         #endregion
 
         #region Home
         public ICommand HomeCommand { get; set; }
+        #endregion
+
+        #region ItemDetails
+        public ICommand ItemDetailsCommand { get; set; }
         #endregion
 
         #region Itineraire
@@ -93,7 +96,10 @@ namespace ParkHelper.ViewModels
             set
             {
                 texteATrouver = value;
-                FilterListes();
+                if (!texteATrouver.Equals("Rechercher"))
+                {
+                    FilterListes();
+                }
             }
         }
         #endregion
@@ -135,19 +141,19 @@ namespace ParkHelper.ViewModels
 
         void FilterListes()
         {
-            if (Listes != null && !TexteATrouver.Equals("Rechercher"))
+            ListesCount = Listes.Count;
+            if (Listes != null && !TexteATrouver.Equals(""))
             {
-                if (string.IsNullOrEmpty(TexteATrouver))
-                {
-                    Listes = Listes;
-                }
-                else {
-                    /**Listes = Listes.Where(x => x.Name.ToLower().Contains(TexteATrouver.ToLower())
-                       || x.Libelle.ToLower().Contains(TexteATrouver.ToLower())).ToList();*/
-                }
-    }
+                ListesBackup = Listes;
+                Listes = Listes.Where(x => x.Any(a => a.Libelle.Contains(texteATrouver))).ToList();
+                ListesCount = Listes.Count;
+            }
+            else
+            {
+                Listes = ListesBackup;
+                ListesCount = Listes.Count;
+            }
         }
-
         #endregion
     }
 }

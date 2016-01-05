@@ -16,7 +16,9 @@
       <SearchBar Grid.Row ="0" x:Name="SearchBar"
                  VerticalOptions="Center"
                  HorizontalOptions="Center"
-                 Text="{Binding TexteATrouver}">
+                 Text="{Binding TexteATrouver}" 
+                 PropertyChanged="SearchBar_OnPropertyChanged"
+                 TextChanged="SearchBar_OnTextChanged">
       </SearchBar>
       <ListView Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center"
                 x:Name="ListView"

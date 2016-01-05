@@ -97,5 +97,23 @@ namespace ParkHelper.Views
             SearchBar.IsVisible = choixAappliquer;
             ItineraireCommand.IsVisible = choixAappliquer;
         }
+
+        void SearchBar_OnPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (SearchBar != null && _viewModel!=null && !SearchBar.Text.Equals("Rechercher") &&
+            _viewModel.Listes.Count < _viewModel.ListesCount && _viewModel.Listes.Count > 0)
+            {
+                ListView.ItemsSource = _viewModel.Listes;
+            }
+        }
+
+        void SearchBar_OnTextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e)
+        {
+            if (!SearchBar.Text.Equals("Rechercher") &&
+                _viewModel.Listes.Count < _viewModel.ListesCount && _viewModel.Listes.Count > 0)
+            {
+                ListView.ItemsSource = _viewModel.Listes;
+            }
+        }
     }
 }
