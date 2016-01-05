@@ -27,7 +27,7 @@ namespace ParkHelper.Apiv2.Controllers
         [EnableQuery]
         public IQueryable<Lieu> GetLieux()
         {
-            return db.Lieux;
+            return db.Lieux.Include("IdType");
         }
 
         // GET: odata/Lieux(5)
