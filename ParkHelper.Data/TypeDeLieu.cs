@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace ParkHelper.Data
 {
     using System;
@@ -19,7 +21,8 @@ namespace ParkHelper.Data
         {
             this.Lieux = new HashSet<Lieu>();
         }
-    
+
+        [Key]
         public int Id { get; set; }
         public string Libelle { get; set; }
     

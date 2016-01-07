@@ -21,20 +21,20 @@ namespace ParkHelper.Apiv2.Controllers
     */
     public class LieuxController : ODataController
     {
-        private ParcHelperEntities db = new ParcHelperEntities();
+        private readonly ParcHelperEntities _db = new ParcHelperEntities();
 
         // GET: odata/Lieux
         [EnableQuery]
         public IQueryable<Lieu> GetLieux()
         {
-            return db.Lieux.Include("IdType");
+            return _db.Lieux;
         }
 
         // GET: odata/Lieux(5)
         [EnableQuery]
         public SingleResult<Lieu> GetLieu([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Lieux.Where(lieu => lieu.Id == key));
+            return SingleResult.Create(_db.Lieux.Where(lieu => lieu.Id == key));
         }
 
         // PUT: odata/Lieux(5)
@@ -47,7 +47,7 @@ namespace ParkHelper.Apiv2.Controllers
                 return BadRequest(ModelState);
             }
 
-            Lieu lieu = db.Lieux.Find(key);
+            var lieu = _db.Lieux.Find(key);
             if (lieu == null)
             {
                 return NotFound();
@@ -57,7 +57,7 @@ namespace ParkHelper.Apiv2.Controllers
 
             try
             {
-                db.SaveChanges();
+                _db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -82,8 +82,8 @@ namespace ParkHelper.Apiv2.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Lieux.Add(lieu);
-            db.SaveChanges();
+            _db.Lieux.Add(lieu);
+            _db.SaveChanges();
 
             return Created(lieu);
         }
@@ -99,7 +99,7 @@ namespace ParkHelper.Apiv2.Controllers
                 return BadRequest(ModelState);
             }
 
-            Lieu lieu = db.Lieux.Find(key);
+            Lieu lieu = _db.Lieux.Find(key);
             if (lieu == null)
             {
                 return NotFound();
@@ -109,7 +109,7 @@ namespace ParkHelper.Apiv2.Controllers
 
             try
             {
-                db.SaveChanges();
+                _db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -129,14 +129,14 @@ namespace ParkHelper.Apiv2.Controllers
         // DELETE: odata/Lieux(5)
         public IHttpActionResult Delete([FromODataUri] int key)
         {
-            Lieu lieu = db.Lieux.Find(key);
+            Lieu lieu = _db.Lieux.Find(key);
             if (lieu == null)
             {
                 return NotFound();
             }
 
-            db.Lieux.Remove(lieu);
-            db.SaveChanges();
+            _db.Lieux.Remove(lieu);
+            _db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -145,28 +145,28 @@ namespace ParkHelper.Apiv2.Controllers
         [EnableQuery]
         public SingleResult<TypeDeLieu> GetTypeDeLieu([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Lieux.Where(m => m.Id == key).Select(m => m.TypeDeLieu));
+            return SingleResult.Create(_db.Lieux.Where(m => m.Id == key).Select(m => m.TypeDeLieu));
         }
 
         // GET: odata/Lieux(5)/Indications
         [EnableQuery]
         public IQueryable<Indication> GetIndications([FromODataUri] int key)
         {
-            return db.Lieux.Where(m => m.Id == key).SelectMany(m => m.Indications);
+            return _db.Lieux.Where(m => m.Id == key).SelectMany(m => m.Indications);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool LieuExists(int key)
         {
-            return db.Lieux.Count(e => e.Id == key) > 0;
+            return _db.Lieux.Count(e => e.Id == key) > 0;
         }
     }
 }
