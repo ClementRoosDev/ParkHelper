@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using ParkHelper.Common.Objets;
 using ParkHelper.ViewModels;
+using System.Collections.Generic;
 
 namespace ParkHelper.Views
 {
@@ -9,11 +10,11 @@ namespace ParkHelper.Views
     {
         ItinerairePageViewModel viewModel;
 
-        public ItinerairePage(Attraction attraction)
+        public ItinerairePage(List<int> listeIdAttractions)
         {
             InitializeComponent();
             viewModel = App.Locator.ItineraireView;
-            viewModel.Parameter = attraction;
+            viewModel.ListeIdAttractions = listeIdAttractions;
             viewModel.IsBusy = true;
             /**if (viewModel.Listes.Count == 0)
             {

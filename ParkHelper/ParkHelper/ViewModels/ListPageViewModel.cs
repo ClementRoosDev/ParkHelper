@@ -22,6 +22,7 @@ namespace ParkHelper.ViewModels
         #endregion
 
         #region Constuctor
+
         public ListPageViewModel(INavigationService navigationService)
         {
             if (navigationService == null) throw new ArgumentNullException("navigationService");
@@ -53,17 +54,20 @@ namespace ParkHelper.ViewModels
 
             ItineraireCommand = new RelayCommand(() =>
             {
-                this.navigationService.NavigateTo(Locator.ItinerairePage, Parameter);
+                    this.navigationService.NavigateTo(Locator.ItinerairePage, listeAppliSelectionnees);
+
             });
 
             Listes = new List<Categorie>();
             ListesBackup = new List<Categorie>();
+            listeAppliSelectionnees = new List<int>();
             IsBusy = true;
 
             CreateItineraire = new CreateItineraireCommand(ItineraireCommand);
 
             TexteATrouver = "Rechercher";
         }
+
         #endregion
 
         #region Properties
@@ -122,7 +126,15 @@ namespace ParkHelper.ViewModels
         private void ToggleSelection(object sender, EventArgs e)
         {
             var attraction = sender as Attraction;
-            listeAppliSelectionnees.Add(attraction.Id);
+            if (attraction.EstDejaDansLeParcours)
+            {
+                listeAppliSelectionnees.Add(attraction.Id);
+            }
+            else
+            {
+                listeAppliSelectionnees.Remove(attraction.Id);
+            }
+            
             //TODO : Verifier possibilité d'ajout à l'itinéraire
             //System.Console.WriteLine("{0} has been toggled to {1}", attraction.Libelle, attraction.EstDejaDansLeParcours);
         }

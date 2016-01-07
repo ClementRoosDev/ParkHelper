@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ParkHelper.ViewModels;
 using Newtonsoft.Json;
 using ParkHelper.Common.Objets;
+using ParkHelper.Common.WebService;
 
 namespace ParkHelper.Views
 {
@@ -37,8 +38,14 @@ namespace ParkHelper.Views
             OnAppearing();
             if(_viewModel.Listes.Count == 0)
             {
-                await GetAttractions();
-                if(_viewModel.Listes.Count > 0)
+                ParkHelperWebservice Ws = new ParkHelperWebservice();
+                 var objectWithFormat = await Ws.GetAttractions();
+
+                await Task.Run(() =>
+                    _viewModel.ConvertFrom(objectWithFormat.value)
+                ).ConfigureAwait(false);
+
+                if (_viewModel.Listes.Count > 0)
                 {
                     ListView.ItemsSource = _viewModel.Listes;
                     _viewModel.ItineraireCommand.CanExecute(null);
@@ -53,43 +60,9 @@ namespace ParkHelper.Views
                 }
             }
         }
+                          
 
-        public async Task GetAttractions()
-        {
-            using (var httpClient = CreateClient())
-            {
-                var response = await httpClient.GetAsync("Lieux").ConfigureAwait(false);
-                if (response.IsSuccessStatusCode)
-                {
-                    var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    if (!string.IsNullOrWhiteSpace(json))
-                    {
-                        var jsonv2 = json.Replace("odata.metadata", "metadata");
-                        var objectWithFormat = JsonConvert.DeserializeObject<RequeteListe>(jsonv2);
-                        
-                        await Task.Run(() =>
-                            _viewModel.ConvertFrom(objectWithFormat.value)
-                        ).ConfigureAwait(false);
 
-                    }
-                }
-            }
-        }
-
-        const string API_BASE_ADDRESS = "http://parkhelperodata.azurewebsites.net/odata/";
-
-        static HttpClient CreateClient()
-        {
-            var httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(API_BASE_ADDRESS)
-            };
-
-            httpClient.DefaultRequestHeaders.Accept.Clear();
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            return httpClient;
-        }
 
         void setUIElements(bool choixAappliquer)
         {

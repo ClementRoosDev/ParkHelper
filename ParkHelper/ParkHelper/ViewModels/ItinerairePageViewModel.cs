@@ -6,6 +6,8 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using ParkHelper.Common.Objets;
 using ParkHelper.Model;
+using ParkHelper.Common.WebService;
+using System.Linq;
 
 namespace ParkHelper.ViewModels
 {
@@ -31,10 +33,35 @@ namespace ParkHelper.ViewModels
             Listes = new List<Parcours>();
             //Listes = DummyParcours();
             IsBusy = true;
+
+            InitialiseParcours();
+
+        }
+
+
+        #endregion
+
+        #region Properties
+        #region General
+        public ICommand HomeCommand { get; set; }
+        #endregion
+        #region Local
+        public List<Parcours> Listes { get; set; }
+        public bool IsBusy { get; set; }
+        public List<int> ListeIdAttractions { get; set; }
+
+        #endregion
+        #endregion
+
+        #region Methods
+
+        private async void InitialiseParcours()
+        {
+            var value = new ParkHelperWebservice();
+            var resultParcours = await value.GetParcours(ListeIdAttractions);
             /*
-            foreach (var item in CP.Parcours.ListeParcours.OrderBy(a => a.Ordre))
+            foreach (var item in resultParcours.ListeParcours.OrderBy(a => a.Ordre))
             {
-                Console.WriteLine("Ordre : " + item.Ordre);
                 if (item is Deplacement)
                 {
                     Console.WriteLine("Deplacement : " + item.Duree);
@@ -45,22 +72,6 @@ namespace ParkHelper.ViewModels
                 }
             }*/
         }
-        #endregion
-
-        #region Properties
-        #region General
-        public ICommand HomeCommand { get; set; }
-        #endregion
-        #region Local
-        public List<Parcours> Listes { get; set; }
-        public bool IsBusy { get; set; }
-        public Attraction Parameter { get; set; }
-
-        #endregion
-        #endregion
-
-        #region Methods
-
         /**List<Parcours> DummyParcours()
         {
             return new List<Parcours>

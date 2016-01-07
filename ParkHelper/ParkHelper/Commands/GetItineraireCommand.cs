@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace ParkHelper.Commands
@@ -14,7 +15,10 @@ namespace ParkHelper.Commands
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            var liste = parameter as List<int>;
+            return liste.Count
+                >
+                0;
         }
 
         public void Execute(object parameter)

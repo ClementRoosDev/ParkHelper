@@ -21,8 +21,7 @@ namespace ParkHelper.Apiv2.Controllers
 
         [AllowAnonymous]
         public Parcours Get([FromUri] int[] values)
-        {
-            
+        {            
             CalculParcours CP = new CalculParcours(values);
             CP.CalculeParcoursOptimal();
             return CP.Parcours;
