@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using ParkHelper.Data;
+using ParkHelper.Apiv2.Models;
 
 namespace ParkHelper.Apiv2.Controllers
 {
@@ -18,13 +20,16 @@ namespace ParkHelper.Apiv2.Controllers
         }*/
 
         [AllowAnonymous]
-        public Parcours Get(int[] values)
+        public Parcours Get([FromUri] int[] values)
         {
-            //calcul parcours
-            //return parcours
+            
+            CalculParcours CP = new CalculParcours(values);
+            CP.CalculeParcoursOptimal();
+            return CP.Parcours;
         }
 
         // GET api/values/5
+        [AllowAnonymous]
         public string Get(int id)
         {
             return "value";

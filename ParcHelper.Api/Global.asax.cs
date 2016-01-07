@@ -5,6 +5,7 @@
     using System.Web.Optimization;
     using System.Web.Routing;
     using Newtonsoft.Json;
+    using System.Data.Entity;
 
     public class WebApiApplication : System.Web.HttpApplication
     {
@@ -17,9 +18,15 @@
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            GlobalConfiguration.Configuration.Formatters.RemoveAt(1);
-            GlobalConfiguration.Configuration.Formatters.RemoveAt(1);
+            
+
+            //GlobalConfiguration.Configuration.Formatters.RemoveAt(1);
+            //GlobalConfiguration.Configuration.Formatters.RemoveAt(1);
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            GlobalConfiguration.Configuration.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
+
+
+
         }
     }
 }

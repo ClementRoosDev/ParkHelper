@@ -6,19 +6,26 @@ using System.Threading.Tasks;
 
 namespace ParkHelper.Data
 {
-    partial class Attraction : IElementDeParcours
+    partial class Lieu : IElementDeParcours
     {
-        public int Duree { get; set; }
-
-        public bool EstDejaDansLeParcours { get; set; }
-
-        public int Ordre { get; set; }
-
         public Type type
         {
             get
             {
                 return this.GetType();
+            }
+        }
+
+        int IElementDeParcours.Duree
+        {
+            get
+            {
+                return (int)Duree;
+            }
+
+            set
+            {
+                throw new NotImplementedException();
             }
         }
     }

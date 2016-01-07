@@ -18,6 +18,7 @@ namespace ParkHelper.Data
         public ParcHelperEntities()
             : base("name=ParcHelperEntities")
         {
+            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

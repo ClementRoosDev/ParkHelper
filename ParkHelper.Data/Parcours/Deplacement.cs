@@ -29,6 +29,14 @@ namespace ParkHelper.Data
 
         #endregion
 
+        public Type type
+        {
+            get
+            {
+                return this.GetType();
+            }
+        }
+
         #region Methodes
 
         //Calcule la durée entre deux point (on va dire que distance = durée)

@@ -20,6 +20,14 @@ namespace ParkHelper.Api
             
             config.Formatters.Remove(config.Formatters.XmlFormatter);
             ((DefaultContractResolver)config.Formatters.JsonFormatter.SerializerSettings.ContractResolver).IgnoreSerializableAttribute = true;
+
+            var json = config.Formatters.JsonFormatter;
+            json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+
+
+
+
         }
     }
 }
