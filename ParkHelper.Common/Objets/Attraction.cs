@@ -6,7 +6,7 @@
     {
         public event EventHandler<EventArgs> OnToggled = delegate { };
 
-        public Type Type { get; set; }
+        public TypeDeLieu TypeDeLieu { get; set; }
         public int Id { get; set; }
         public string Libelle { get; set; }
         public string Description { get; set; }
@@ -14,9 +14,9 @@
         public double Latittude { get; set; }
         public double Longitude { get; set; }
         public int Attente { get; set; }
-        public int CapaciteWagon { get; set; }
-        public object IdType { get; set; }
         public int Duree { get; set; }
+        public int CapaciteWagon { get; set; }
+        public int IdType { get; set; }
         public bool EstDejaDansLeParcours
         {
             get { return estDejaDansLeParcours.Value; }

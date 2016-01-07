@@ -43,7 +43,7 @@
     <Compile Include="Objets\Attraction.cs" />
     <Compile Include="Objets\RequeteListe.cs" />
     <Compile Include="Objets\RequeteListeParcours.cs" />
-    <Compile Include="Objets\Type.cs" />
+    <Compile Include="Objets\TypeDeLieu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebService\ParkHelperWebservice.cs" />
   </ItemGroup>

@@ -5,7 +5,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using System.Collections.Generic;
 using System.Linq;
-using Type = ParkHelper.Common.Objets.Type;
+using Type = ParkHelper.Common.Objets.TypeDeLieu;
 using Attraction = ParkHelper.Common.Objets.Attraction;
 using ParkHelper.Model;
 using ParkHelper.Commands;
@@ -16,8 +16,8 @@ namespace ParkHelper.ViewModels
     {
         #region Fields
 
-        readonly INavigationService navigationService;
-        string texteATrouver;
+        readonly INavigationService _navigationService;
+        string _texteATrouver;
 
         #endregion
 
@@ -26,41 +26,24 @@ namespace ParkHelper.ViewModels
         public ListPageViewModel(INavigationService navigationService)
         {
             if (navigationService == null) throw new ArgumentNullException("navigationService");
-            this.navigationService = navigationService;
+            _navigationService = navigationService;
 
-            HomeCommand = new RelayCommand(() => { this.navigationService.GoBack(); });
-            /*
-            Parameter = new Attraction()
-            {
-                Attente = 20,
-                CapaciteWagon = 4,
-                Description = "Attraction super cool",
-                Duree = 10,
-                EstDejaDansLeParcours = false,
-                Id = 1,
-                IdType = new Type() { Id = 1, Libelle = "Type 1" },
-                Latittude = 38.99,
-                Longitude = 37.87,
-                Libelle = "Grand splash !",
-                LienGif = "http://aaa.com/a.gif",
-                Ordre = 0
-            };*/
+            HomeCommand = new RelayCommand(() => { _navigationService.GoBack(); });
 
             ItemDetailsCommand =
                 new RelayCommand(() =>
                 {
-                    this.navigationService.NavigateTo(Locator.AttractionDetailsPage, Parameter);
+                    _navigationService.NavigateTo(Locator.AttractionDetailsPage, Parameter);
                 });
 
             ItineraireCommand = new RelayCommand(() =>
             {
-                    this.navigationService.NavigateTo(Locator.ItinerairePage, listeAppliSelectionnees);
-
+                    _navigationService.NavigateTo(Locator.ItinerairePage, ListeAppliSelectionnees);
             });
 
             Listes = new List<Categorie>();
             ListesBackup = new List<Categorie>();
-            listeAppliSelectionnees = new List<int>();
+            ListeAppliSelectionnees = new List<int>();
             IsBusy = true;
 
             CreateItineraire = new CreateItineraireCommand(ItineraireCommand);
@@ -79,7 +62,7 @@ namespace ParkHelper.ViewModels
         public List<Categorie> Listes { get; set; }
         public List<Categorie> ListesBackup { get; set; }
         public int ListesCount { get; set; }
-        private List<int> listeAppliSelectionnees { get; set; }
+        private List<int> ListeAppliSelectionnees { get; set; }
         #endregion
 
         #region Home
@@ -99,11 +82,11 @@ namespace ParkHelper.ViewModels
 
         public string TexteATrouver
         {
-            get { return texteATrouver; }
+            get { return _texteATrouver; }
             set
             {
-                texteATrouver = value;
-                if (!texteATrouver.Equals("Rechercher"))
+                _texteATrouver = value;
+                if (!_texteATrouver.Equals("Rechercher"))
                 {
                     FilterListes();
                 }
@@ -125,14 +108,14 @@ namespace ParkHelper.ViewModels
 
         private void ToggleSelection(object sender, EventArgs e)
         {
-            var attraction = sender as Attraction;
+            var attraction = (Attraction)sender;
             if (attraction.EstDejaDansLeParcours)
             {
-                listeAppliSelectionnees.Add(attraction.Id);
+                ListeAppliSelectionnees.Add(attraction.Id);
             }
             else
             {
-                listeAppliSelectionnees.Remove(attraction.Id);
+                ListeAppliSelectionnees.Remove(attraction.Id);
             }
             
             //TODO : Verifier possibilité d'ajout à l'itinéraire
@@ -141,10 +124,10 @@ namespace ParkHelper.ViewModels
 
         internal void ConvertFrom(List<Attraction> attractions)
         {
-            var extractSubList = attractions.GroupBy(i => i.IdType);
+            var extractSubList = attractions.GroupBy(i => i.TypeDeLieu.Libelle);
             foreach (var subList in extractSubList)
             {
-                var categorie = new Categorie(subList.Key.ToString());
+                var categorie = new Categorie(subList.Key);
                 foreach (var item in subList)
                 {
                     item.LienGif = "http://aaa.com/a.gif";
@@ -161,7 +144,7 @@ namespace ParkHelper.ViewModels
             if (Listes != null && !TexteATrouver.Equals(""))
             {
                 ListesBackup = Listes;
-                Listes = Listes.Where(x => x.Any(a => a.Libelle.Contains(texteATrouver))).ToList();
+                Listes = Listes.Where(x => x.Any(a => a.Libelle.Contains(_texteATrouver))).ToList();
                 ListesCount = Listes.Count;
             }
             else
