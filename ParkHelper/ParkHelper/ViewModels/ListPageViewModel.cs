@@ -28,7 +28,7 @@ namespace ParkHelper.ViewModels
             this.navigationService = navigationService;
 
             HomeCommand = new RelayCommand(() => { this.navigationService.GoBack(); });
-
+            /*
             Parameter = new Attraction()
             {
                 Attente = 20,
@@ -43,7 +43,7 @@ namespace ParkHelper.ViewModels
                 Libelle = "Grand splash !",
                 LienGif = "http://aaa.com/a.gif",
                 Ordre = 0
-            };
+            };*/
 
             ItemDetailsCommand =
                 new RelayCommand(() =>
@@ -67,12 +67,15 @@ namespace ParkHelper.ViewModels
         #endregion
 
         #region Properties
+
         public bool IsBusy { get; set; }
-        public Attraction Parameter { get; set; }
+        public object Parameter { get; set; }
+
         #region Liste
         public List<Categorie> Listes { get; set; }
         public List<Categorie> ListesBackup { get; set; }
         public int ListesCount { get; set; }
+        private List<int> listeAppliSelectionnees { get; set; }
         #endregion
 
         #region Home
@@ -108,7 +111,7 @@ namespace ParkHelper.ViewModels
 
         #region Methods
 
-        void AddingEventToList()
+        private void AddingEventToList()
         {
             foreach (var itemLieu in Listes.SelectMany(subList => subList))
             {
@@ -116,9 +119,10 @@ namespace ParkHelper.ViewModels
             }
         }
 
-        static void ToggleSelection(object sender, EventArgs e)
+        private void ToggleSelection(object sender, EventArgs e)
         {
             var attraction = sender as Attraction;
+            listeAppliSelectionnees.Add(attraction.Id);
             //TODO : Verifier possibilité d'ajout à l'itinéraire
             //System.Console.WriteLine("{0} has been toggled to {1}", attraction.Libelle, attraction.EstDejaDansLeParcours);
         }

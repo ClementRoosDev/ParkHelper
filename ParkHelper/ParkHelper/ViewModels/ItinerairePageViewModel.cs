@@ -31,6 +31,19 @@ namespace ParkHelper.ViewModels
             Listes = new List<Parcours>();
             //Listes = DummyParcours();
             IsBusy = true;
+            /*
+            foreach (var item in CP.Parcours.ListeParcours.OrderBy(a => a.Ordre))
+            {
+                Console.WriteLine("Ordre : " + item.Ordre);
+                if (item is Deplacement)
+                {
+                    Console.WriteLine("Deplacement : " + item.Duree);
+                }
+                if (item is Lieu)
+                {
+                    Console.WriteLine("Attraction : " + ((Lieu)item).Libelle);
+                }
+            }*/
         }
         #endregion
 
