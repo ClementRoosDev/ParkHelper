@@ -11,10 +11,17 @@ namespace ParkHelper.Apiv2.Controllers
     public class ValuesController : ApiController
     {
         // GET api/values
-        [AllowAnonymous]
+        /**[AllowAnonymous]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
+        }*/
+
+        [AllowAnonymous]
+        public Parcours Get(int[] values)
+        {
+            //calcul parcours
+            //return parcours
         }
 
         // GET api/values/5
