@@ -43,12 +43,12 @@ namespace ParkHelper.Views
 
                 await Task.Run(() =>
                     _viewModel.ConvertFrom(objectWithFormat.value)
-                ).ConfigureAwait(false);
+                );
 
                 if (_viewModel.Listes.Count > 0)
                 {
                     ListView.ItemsSource = _viewModel.Listes;
-                    _viewModel.ItineraireCommand.CanExecute(null);
+                    _viewModel.ItineraireCommand.CanExecute(_viewModel.Listes);
                     setUIElements(true);
                 }
                 else
