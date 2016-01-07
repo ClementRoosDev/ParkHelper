@@ -3,6 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ParkHelper.Views.MapPage"
              Title="Plan">
-  <Button Text="Back" Command="{Binding HomeCommand}" />
-  <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+  <ScrollView HorizontalOptions="Center"
+            VerticalOptions="Center">
+    <Image Source="PlanParcBig.png" 
+           Aspect="Fill"              
+           HorizontalOptions="Center"
+            VerticalOptions="Center"/>
+  </ScrollView>
 </ContentPage>

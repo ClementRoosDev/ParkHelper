@@ -4,7 +4,6 @@
              x:Class="ParkHelper.Views.HomePage"
              Title="ParkHelper">
   <StackLayout>
-    <Label Text="{Binding TextTest}" VerticalOptions="Center" HorizontalOptions="Center" />
     <Button
       Text="Itineraire"
       x:Name="button1" 
@@ -16,11 +15,6 @@
       Text="Plan" 
       x:Name="button2"
       Command="{Binding MapCommand}"
-      HorizontalOptions="Center" 
-      VerticalOptions="Center"
-      />
-   <Label
-      Text="[Binding Test}" 
       HorizontalOptions="Center" 
       VerticalOptions="Center"
       />
