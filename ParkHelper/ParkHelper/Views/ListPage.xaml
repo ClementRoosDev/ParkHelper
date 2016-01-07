@@ -39,6 +39,6 @@
   <Button Grid.Row="2" x:Name="ItineraireCommand"
           Text="Créer itinéraire"
           Command="{Binding CreateItineraire}"
-          CommandParameter="{Binding}"/>
+          CommandParameter="{Binding}" IsEnabled="{Binding ItineraireCanBeGenerated}"/>
   </Grid>
 </ContentPage>

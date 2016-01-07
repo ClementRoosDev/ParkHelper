@@ -46,7 +46,8 @@ namespace ParkHelper.ViewModels
             IsBusy = true;
 
             CreateItineraire = new CreateItineraireCommand(ItineraireCommand);
-
+            CreateItineraire.SetSourceLieux(Listes);
+            CreateItineraire.CanExecute(null);
             TexteATrouver = "Rechercher";
         }
 
@@ -55,6 +56,20 @@ namespace ParkHelper.ViewModels
         #region Properties
 
         public bool IsBusy { get; set; }
+
+        private bool _itineraireCanBeGenerated;
+
+        public bool ItineraireCanBeGenerated
+        {
+            get {
+                return _itineraireCanBeGenerated;
+            }
+            set
+            {
+                _itineraireCanBeGenerated = value;
+                RaisePropertyChanged(() => ItineraireCanBeGenerated);
+            }    
+        }
         public object Parameter { get; set; }
 
         #region Liste
@@ -117,6 +132,7 @@ namespace ParkHelper.ViewModels
                 ListeAppliSelectionnees.Remove(attraction.Id);
             }
             
+            ItineraireCanBeGenerated = CreateItineraire.CanExecute(ListeAppliSelectionnees);
             //TODO : Verifier possibilité d'ajout à l'itinéraire
             //System.Console.WriteLine("{0} has been toggled to {1}", attraction.Libelle, attraction.EstDejaDansLeParcours);
         }
@@ -135,6 +151,7 @@ namespace ParkHelper.ViewModels
                 Listes.Add(categorie);
             }
             AddingEventToList();
+            CreateItineraire.SetSourceLieux(Listes);
         }
 
         void FilterListes()
@@ -152,6 +169,7 @@ namespace ParkHelper.ViewModels
                 Listes = ListesBackup;
                 ListesCount = Listes.Count;
             }
+            CreateItineraire.SetSourceLieux(Listes);
         }
         #endregion
     }
