@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
+using ParkHelper.ViewModels;
 
 namespace ParkHelper.Commands
 {
@@ -18,7 +20,8 @@ namespace ParkHelper.Commands
 
         public void Execute(object parameter)
         {
-            _command.Execute(null);
+            var viewModel= (ListPageViewModel) parameter;
+            _command.Execute(viewModel.ListeAppliSelectionnees);
         }
 
         public event EventHandler CanExecuteChanged;

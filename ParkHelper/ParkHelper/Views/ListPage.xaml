@@ -36,6 +36,9 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-  <Button Grid.Row="2" x:Name="ItineraireCommand" Text="Créer itinéraire" Command="{Binding CreateItineraire}" />
+  <Button Grid.Row="2" x:Name="ItineraireCommand"
+          Text="Créer itinéraire"
+          Command="{Binding CreateItineraire}"
+          CommandParameter="{Binding}"/>
   </Grid>
 </ContentPage>

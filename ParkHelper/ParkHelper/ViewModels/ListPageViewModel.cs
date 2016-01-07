@@ -5,7 +5,6 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using System.Collections.Generic;
 using System.Linq;
-using Type = ParkHelper.Common.Objets.TypeDeLieu;
 using Attraction = ParkHelper.Common.Objets.Attraction;
 using ParkHelper.Model;
 using ParkHelper.Commands;
@@ -62,7 +61,7 @@ namespace ParkHelper.ViewModels
         public List<Categorie> Listes { get; set; }
         public List<Categorie> ListesBackup { get; set; }
         public int ListesCount { get; set; }
-        private List<int> ListeAppliSelectionnees { get; set; }
+        public List<int> ListeAppliSelectionnees { get; set; }
         #endregion
 
         #region Home
@@ -141,7 +140,8 @@ namespace ParkHelper.ViewModels
         void FilterListes()
         {
             ListesCount = Listes.Count;
-            if (Listes != null && !TexteATrouver.Equals(""))
+            if (TexteATrouver.Length <= 3) return;
+            if (Listes != null && !TexteATrouver.Equals("") && !TexteATrouver.Equals("Rechercher"))
             {
                 ListesBackup = Listes;
                 Listes = Listes.Where(x => x.Any(a => a.Libelle.Contains(_texteATrouver))).ToList();

@@ -2,12 +2,11 @@
 using System;
 using GalaSoft.MvvmLight.Views;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using ParkHelper.Common.Objets;
 using ParkHelper.Model;
-using ParkHelper.Common.WebService;
-using System.Linq;
 
 namespace ParkHelper.ViewModels
 {
@@ -31,20 +30,22 @@ namespace ParkHelper.ViewModels
                     Locator.HomePage);
             });
             Listes = new List<Parcours>();
-            //Listes = DummyParcours();
             IsBusy = true;
 
-            InitialiseParcours();
-
+            ListeIdAttractions = new List<int>();
         }
 
 
         #endregion
 
         #region Properties
+        
         #region General
+
         public ICommand HomeCommand { get; set; }
+
         #endregion
+        
         #region Local
         public List<Parcours> Listes { get; set; }
         public bool IsBusy { get; set; }
@@ -55,80 +56,10 @@ namespace ParkHelper.ViewModels
 
         #region Methods
 
-        private async void InitialiseParcours()
+        public void ConvertFrom(List<ListeParcour> ListeParcours)
         {
-            var value = new ParkHelperWebservice();
-            var resultParcours = await value.GetParcours(ListeIdAttractions);
-            /*
-            foreach (var item in resultParcours.ListeParcours.OrderBy(a => a.Ordre))
-            {
-                if (item is Deplacement)
-                {
-                    Console.WriteLine("Deplacement : " + item.Duree);
-                }
-                if (item is Lieu)
-                {
-                    Console.WriteLine("Attraction : " + ((Lieu)item).Libelle);
-                }
-            }*/
+            var parcoursOrdonne = ListeParcours.OrderBy(i => i.Ordre);
         }
-        /**List<Parcours> DummyParcours()
-        {
-            return new List<Parcours>
-            {
-                new Parcours(
-                    new EtapeParcours(
-                        "9H",
-                        new Attraction
-                        {
-                            Attente = 0,
-                            CapaciteWagon = 1,
-                            Description = "Attraction hyper cool",
-                            Duree = 20,
-                            EstDejaDansLeParcours = false,
-                            Id = 3,
-                            IdType = new TypeDeLieu() { Id = 3, Libelle = "Type 3" },
-                            Latittude = 37.20,
-                            Longitude = 10.60,
-                            Libelle = "Entrée",
-                            LienGif = "http://aaa.com/c.gif",
-                            Ordre = 0
-                        }))
-                {
-                    /**new Attraction()
-                    {
-                        Attente = 0,
-                        CapaciteWagon = 1,
-                        Description = "Attraction hyper cool",
-                        Duree = 20,
-                        EstDejaDansLeParcours = false,
-                        Id = 3,
-                        IdType = new Type() { Id = 3, Libelle = "Type 3" },
-                        Latittude = 37.20,
-                        Longitude = 10.60,
-                        Libelle = "Le village",
-                        LienGif = "http://aaa.com/c.gif",
-                        Ordre = 0
-                    },
-                    new Attraction()
-                    {
-                        Attente = 0,
-                        CapaciteWagon = 1,
-                        Description = "Attraction hyper cool",
-                        Duree = 20,
-                        EstDejaDansLeParcours = false,
-                        Id = 3,
-                        IdType = new Type { Id = 3, Libelle = "Type 3" },
-                        Latittude = 37.20,
-                        Longitude = 10.60,
-                        Libelle = "Le camp",
-                        LienGif = "http://aaa.com/c.gif",
-                        Ordre = 0
-                    }
-                },
-            };
-        }*/
-
         #endregion
     }
 }

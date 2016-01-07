@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using ParkHelper.ViewModels;
-using Newtonsoft.Json;
 using ParkHelper.Common.Objets;
 using ParkHelper.Common.WebService;
 
@@ -61,9 +58,6 @@ namespace ParkHelper.Views
             }
         }
                           
-
-
-
         void setUIElements(bool choixAappliquer)
         {
             ListView.IsVisible = choixAappliquer;
@@ -73,11 +67,11 @@ namespace ParkHelper.Views
 
         void SearchBar_OnPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (SearchBar != null && _viewModel!=null && !SearchBar.Text.Equals("Rechercher") &&
+            /**if (SearchBar != null && _viewModel!=null && !SearchBar.Text.Equals("Rechercher") &&
             _viewModel.Listes.Count < _viewModel.ListesCount && _viewModel.Listes.Count > 0)
             {
                 ListView.ItemsSource = _viewModel.Listes;
-            }
+            }*/
         }
 
         void SearchBar_OnTextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e)
