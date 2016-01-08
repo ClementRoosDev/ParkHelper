@@ -4,12 +4,10 @@
              x:Class="ParkHelper.Views.MapPage"
              Title="Plan">
       <ScrollView
-        Orientation="Horizontal">         
-        
-        <Image
-          WidthRequest="600"
+        Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Image 
               Source="PlanParcFinal.jpg"                      
-               HorizontalOptions="Center"
-                VerticalOptions="Center"/>
+               HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"/>
       </ScrollView>
 </ContentPage>

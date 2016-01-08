@@ -146,6 +146,30 @@
     <AndroidResource Include="Resources\drawable-xhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\PlanParcFinal.jpg" />
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
+    <AndroidResource Include="Resources\drawable\MapIcon.png" />
+    <AndroidResource Include="Resources\drawable\Itineraire.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\MapIcon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Itineraire.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\MapIcon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Itineraire.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\MapIcon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\Itineraire.png" />
+    <AndroidResource Include="Resources\drawable\AmusementPark2.jpg" />
+    <AndroidResource Include="Resources\drawable\AmusementPark1.jpg" />
+    <AndroidResource Include="Resources\drawable-hdpi\AmusementPark2.jpg" />
+    <AndroidResource Include="Resources\drawable-hdpi\AmusementPark1.jpg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\AmusementPark2.jpg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\AmusementPark1.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\AmusementPark2.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\AmusementPark1.jpg" />
+    <AndroidResource Include="Resources\drawable\AmusementPark4.jpg" />
+    <AndroidResource Include="Resources\drawable\AmusementPark3.jpg" />
+    <AndroidResource Include="Resources\drawable-hdpi\AmusementPark4.jpg" />
+    <AndroidResource Include="Resources\drawable-hdpi\AmusementPark3.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\AmusementPark4.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\AmusementPark3.jpg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\AmusementPark4.jpg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\AmusementPark3.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ParkHelper\ParkHelper.csproj">

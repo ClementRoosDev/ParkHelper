@@ -2,21 +2,71 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ParkHelper.Views.HomePage"
+             BackgroundColor="Gray"
              Title="ParkHelper">
-  <StackLayout>
-    <Button
-      Text="Itineraire"
-      x:Name="button1" 
-      Command="{Binding ItineraireCommand}"
-      HorizontalOptions="Center" 
-      VerticalOptions="Center"
-      />
-       <Button
-      Text="Plan" 
-      x:Name="button2"
-      Command="{Binding MapCommand}"
-      HorizontalOptions="Center" 
-      VerticalOptions="Center"
-      />
-  </StackLayout>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="1.5*"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    
+    
+    <ScrollView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+      <StackLayout Orientation="Horizontal">
+        <Image Source="AmusementPark1.jpg"></Image>
+        <Image Source="AmusementPark3.jpg"></Image>
+        <Image Source="AmusementPark4.jpg"></Image>
+        <Image Source="AmusementPark2.jpg"></Image>
+      </StackLayout>
+    </ScrollView>
+    
+    <Grid Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" >
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="0.3*"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Image Source="Itineraire.png" WidthRequest="50" VerticalOptions="Center" Grid.Column="0" Grid.Row="0" HorizontalOptions="Center">
+      </Image>
+      <Button Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" HorizontalOptions="Center" VerticalOptions="FillAndExpand"
+          x:Name="button1"
+          BackgroundColor="Transparent"
+          Command="{Binding ItineraireCommand}"
+          
+          HeightRequest="50"
+          BorderRadius="15"
+          >
+      </Button>
+      <Label Text="Itineraire" Grid.Column="0" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center"></Label>
+    </Grid>
+    
+    <Grid Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="0.3*"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Image Source="MapIcon.png" WidthRequest="50" VerticalOptions="FillAndExpand" Grid.Column="0" Grid.Row="0"  HorizontalOptions="Center">
+      </Image>
+      <Button Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" HorizontalOptions="Center"
+       BorderRadius="15"
+       x:Name="button2"
+       BackgroundColor="Transparent"
+       Command="{Binding MapCommand}"
+       HeightRequest="50"          
+       VerticalOptions="FillAndExpand"/>
+      <Label Text="Plan"  Grid.Column="0" Grid.Row="1" HorizontalOptions="Center"></Label>
+    </Grid>
+    
+  </Grid>
+
 </ContentPage>

@@ -8,5 +8,7 @@
             var viewModel = App.Locator.Main;
             BindingContext = viewModel;
         }
+
+
     }
 }
