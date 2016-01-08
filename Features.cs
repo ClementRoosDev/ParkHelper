@@ -26,7 +26,7 @@ ParkHelper : Features list
 2:
 - F : Amélioration du ParcoursController
 
------------------------- API ODATA ------------------------
+------------------------ SQL / SQL SERVER -----------------
 1:
 - Schema basique avec 3 tables :
 Lieux
