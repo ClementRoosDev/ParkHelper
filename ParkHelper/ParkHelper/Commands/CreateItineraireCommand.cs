@@ -9,7 +9,7 @@ namespace ParkHelper.Commands
     public class CreateItineraireCommand : ICommand
     {
         readonly ICommand _command;
-        private List<Categorie> _lieux;
+        public List<Categorie> Lieux { get; private set; }
 
         public CreateItineraireCommand(ICommand command)
         {
@@ -43,7 +43,7 @@ namespace ParkHelper.Commands
 
         public void SetSourceLieux(List<Categorie> lieux)
         {
-            _lieux = lieux;
+            Lieux = lieux;
         }
     }
 }

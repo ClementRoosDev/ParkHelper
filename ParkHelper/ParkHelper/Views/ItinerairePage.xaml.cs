@@ -14,7 +14,7 @@ namespace ParkHelper.Views
         public ItinerairePage(List<int> listeIdAttractions)
         {
             InitializeComponent();
-            setUIElements(false);
+            //setUIElements(false);
             _viewModel = App.Locator.ItineraireView;
             _viewModel.ListeIdAttractions = listeIdAttractions;
             _viewModel.IsBusy = true;
@@ -42,7 +42,7 @@ namespace ParkHelper.Views
                 if (_viewModel.Listes.Count > 0)
                 {
                     ListView.ItemsSource = _viewModel.Listes;
-                    setUIElements(true);
+                    //setUIElements(true);
                 }
                 else
                 {

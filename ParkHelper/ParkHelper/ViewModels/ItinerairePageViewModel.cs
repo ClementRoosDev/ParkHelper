@@ -29,7 +29,7 @@ namespace ParkHelper.ViewModels
                 _navigationService.NavigateTo(
                     Locator.HomePage);
             });
-            Listes = new List<Parcours>();
+            Listes = new List<ListeParcour>();
             IsBusy = true;
 
             ListeIdAttractions = new List<int>();
@@ -47,7 +47,7 @@ namespace ParkHelper.ViewModels
         #endregion
         
         #region Local
-        public List<Parcours> Listes { get; set; }
+        public List<ListeParcour> Listes { get; set; }
         public bool IsBusy { get; set; }
         public List<int> ListeIdAttractions { get; set; }
 
@@ -58,7 +58,7 @@ namespace ParkHelper.ViewModels
 
         public void ConvertFrom(List<ListeParcour> ListeParcours)
         {
-            var parcoursOrdonne = ListeParcours.OrderBy(i => i.Ordre);
+            Listes = ListeParcours.OrderBy(i => i.Ordre).ToList();
         }
         #endregion
     }

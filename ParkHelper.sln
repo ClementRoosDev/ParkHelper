@@ -25,6 +25,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkHelperDataTest", "ParkH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkHelper.Apiv2", "ParkHelper.Apiv2\ParkHelper.Apiv2.csproj", "{762E9249-C6BA-4179-87A6-87ABFEA1DF54}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{596E0863-4423-4B94-9596-C4D305C390AF}"
+	ProjectSection(SolutionItems) = preProject
+		Features.cs = Features.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
