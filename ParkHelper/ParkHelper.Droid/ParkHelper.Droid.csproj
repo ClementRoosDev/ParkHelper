@@ -170,6 +170,10 @@
     <AndroidResource Include="Resources\drawable-xhdpi\AmusementPark3.jpg" />
     <AndroidResource Include="Resources\drawable-xxhdpi\AmusementPark4.jpg" />
     <AndroidResource Include="Resources\drawable-xxhdpi\AmusementPark3.jpg" />
+    <AndroidResource Include="Resources\drawable\logo.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\logo.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\logo.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\logo.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ParkHelper\ParkHelper.csproj">

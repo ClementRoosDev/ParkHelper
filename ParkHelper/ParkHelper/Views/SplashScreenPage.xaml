@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ParkHelper.Views.SplashScreenPage"
+             BackgroundColor="Gray" 
+             Appearing="SplashScreen_OnAppearing"
+             >
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*"></RowDefinition>
+      <RowDefinition Height="3*"></RowDefinition>
+      <RowDefinition Height="*"></RowDefinition>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"></ColumnDefinition>
+      <ColumnDefinition Width="4*"></ColumnDefinition>
+      <ColumnDefinition Width="*"></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+    <Image Grid.Row="1"  Grid.Column="1"
+      Source="logo.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Image>
+    <ActivityIndicator Grid.Row="2" Grid.Column="1"
+      HorizontalOptions="Center" VerticalOptions="Center"
+      IsRunning="True"></ActivityIndicator>
+  
+  </Grid>
+  
+  
+</ContentPage>

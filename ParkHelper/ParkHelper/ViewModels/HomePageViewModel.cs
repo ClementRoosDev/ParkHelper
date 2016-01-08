@@ -25,7 +25,6 @@ namespace ParkHelper.ViewModels
                 _navigationService.NavigateTo(
                     Locator.MapPage);
             });
-            TextTest = "THIS IS A TEST ! Je suis un fraisier";
             TryToOpenItineraire();
         }
         #endregion
