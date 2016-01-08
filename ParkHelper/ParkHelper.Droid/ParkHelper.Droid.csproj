@@ -137,25 +137,15 @@
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\icon.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\icon.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
-    <AndroidResource Include="Resources\drawable\PlanParcBig.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable-hdpi\PlanParcBig.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable-xhdpi\PlanParcBig.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable-xxhdpi\PlanParcBig.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\PlanParcFinal.jpg" />
+    <AndroidResource Include="Resources\drawable\icon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\PlanParcFinal.jpg" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\PlanParcFinal.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\PlanParcFinal.jpg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ParkHelper\ParkHelper.csproj">

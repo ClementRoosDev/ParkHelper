@@ -3313,7 +3313,7 @@ namespace ParkHelper.Droid
 			public const int notification_template_icon_bg = 2130837604;
 			
 			// aapt resource value: 0x7f020063
-			public const int PlanParcBig = 2130837603;
+			public const int PlanParcFinal = 2130837603;
 			
 			static Drawable()
 			{
