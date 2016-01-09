@@ -14,7 +14,7 @@ namespace ParkHelper.Views
         public ItinerairePage(List<int> listeIdAttractions)
         {
             InitializeComponent();
-            //setUIElements(false);
+            setUIElements(false);
             _viewModel = App.Locator.ItineraireView;
             _viewModel.ListeIdAttractions = listeIdAttractions;
             _viewModel.IsBusy = true;
@@ -30,8 +30,6 @@ namespace ParkHelper.Views
         async void ItinerairePage_OnAppearing(object sender, EventArgs e)
         {
             OnAppearing();
-            if (_viewModel.Listes.Count == 0)
-            {
                 var Ws = new ParkHelperWebservice();
                 var objectWithFormat = await Ws.GetParcours(_viewModel.ListeIdAttractions);
 
@@ -41,8 +39,8 @@ namespace ParkHelper.Views
 
                 if (_viewModel.Listes.Count > 0)
                 {
-                    ListView.ItemsSource = _viewModel.Listes;
-                    //setUIElements(true);
+                    ListView.ItemsSource = _viewModel.ParcoursFinal;
+                    setUIElements(true);
                 }
                 else
                 {
@@ -51,7 +49,7 @@ namespace ParkHelper.Views
                     System.Diagnostics.Debug.WriteLine("ERROR!");
                     _viewModel.HomeCommand.Execute(null);
                 }
-            }
+
         }
 
         void setUIElements(bool choixAappliquer)
