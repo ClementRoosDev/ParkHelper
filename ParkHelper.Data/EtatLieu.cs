@@ -12,18 +12,18 @@ using System.ComponentModel.DataAnnotations;
 namespace ParkHelper.Data
 {
     using System.Collections.Generic;
-
-    public partial class TypeDeLieu
+    
+    public partial class EtatLieu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TypeDeLieu()
+        public EtatLieu()
         {
             this.Lieux = new HashSet<Lieu>();
         }
 
         [Key]
-        public int Id { get; set; }
-        public string Libelle { get; set; }
+        public int IdEtat { get; set; }
+        public string nomEtat { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lieu> Lieux { get; set; }

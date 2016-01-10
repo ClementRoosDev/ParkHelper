@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EtatLieu.cs">
+      <DependentUpon>ParkHelperModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Indication.cs">
       <DependentUpon>ParkHelperModel.tt</DependentUpon>
     </Compile>
@@ -83,7 +86,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <EntityDeploy Include="ParkHelperModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

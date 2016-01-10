@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ParcHelperModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EtatLieu">
+          <Key>
+            <PropertyRef Name="IdEtat" />
+          </Key>
+          <Property Name="IdEtat" Type="int" Nullable="false" />
+          <Property Name="nomEtat" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Indication">
           <Key>
             <PropertyRef Name="Id" />
@@ -38,6 +45,7 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
           <Property Name="Duree" Type="int" />
           <Property Name="CapaciteWagon" Type="int" />
           <Property Name="IdType" Type="int" />
+          <Property Name="IdEtat" Type="int" />
         </EntityType>
         <EntityType Name="TypeDeLieu">
           <Key>
@@ -46,15 +54,15 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Libelle" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_Attraction_ToTableType">
-          <End Role="TypeDeLieu" Type="Self.TypeDeLieu" Multiplicity="0..1" />
+        <Association Name="FK_ToEtatLieu">
+          <End Role="EtatLieu" Type="Self.EtatLieu" Multiplicity="0..1" />
           <End Role="Lieu" Type="Self.Lieu" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TypeDeLieu">
-              <PropertyRef Name="Id" />
+            <Principal Role="EtatLieu">
+              <PropertyRef Name="IdEtat" />
             </Principal>
             <Dependent Role="Lieu">
-              <PropertyRef Name="IdType" />
+              <PropertyRef Name="IdEtat" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -70,7 +78,7 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ToLieu">
+        <Association Name="FK_ToIndicationLieu">
           <End Role="Lieu" Type="Self.Lieu" Multiplicity="1" />
           <End Role="IndicationParLieu" Type="Self.IndicationParLieu" Multiplicity="*" />
           <ReferentialConstraint>
@@ -82,7 +90,20 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ToType">
+          <End Role="TypeDeLieu" Type="Self.TypeDeLieu" Multiplicity="0..1" />
+          <End Role="Lieu" Type="Self.Lieu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeDeLieu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lieu">
+              <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ParcHelperModelStoreContainer">
+          <EntitySet Name="EtatLieu" EntityType="Self.EtatLieu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Indication" EntityType="Self.Indication" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lieu" EntityType="Self.Lieu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeDeLieu" EntityType="Self.TypeDeLieu" Schema="dbo" store:Type="Tables" />
@@ -92,17 +113,21 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
     [IndicationParLieu].[IdIndication] AS [IdIndication]
     FROM [dbo].[IndicationParLieu] AS [IndicationParLieu]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK_Attraction_ToTableType" Association="Self.FK_Attraction_ToTableType">
-            <End Role="TypeDeLieu" EntitySet="TypeDeLieu" />
+          <AssociationSet Name="FK_ToEtatLieu" Association="Self.FK_ToEtatLieu">
+            <End Role="EtatLieu" EntitySet="EtatLieu" />
             <End Role="Lieu" EntitySet="Lieu" />
           </AssociationSet>
           <AssociationSet Name="FK_ToIndication" Association="Self.FK_ToIndication">
             <End Role="Indication" EntitySet="Indication" />
             <End Role="IndicationParLieu" EntitySet="IndicationParLieu" />
           </AssociationSet>
-          <AssociationSet Name="FK_ToLieu" Association="Self.FK_ToLieu">
+          <AssociationSet Name="FK_ToIndicationLieu" Association="Self.FK_ToIndicationLieu">
             <End Role="Lieu" EntitySet="Lieu" />
             <End Role="IndicationParLieu" EntitySet="IndicationParLieu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToType" Association="Self.FK_ToType">
+            <End Role="TypeDeLieu" EntitySet="TypeDeLieu" />
+            <End Role="Lieu" EntitySet="Lieu" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -119,6 +144,11 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
           </AssociationSet>
           <AssociationSet Name="IndicationParLieu" Association="ParcHelperModel.IndicationParLieu">
             <End Role="Indication" EntitySet="Indications" />
+            <End Role="Lieu" EntitySet="Lieux" />
+          </AssociationSet>
+          <EntitySet Name="EtatLieux" EntityType="ParcHelperModel.EtatLieu" />
+          <AssociationSet Name="FK_ToEtatLieu" Association="ParcHelperModel.FK_ToEtatLieu">
+            <End Role="EtatLieu" EntitySet="EtatLieux" />
             <End Role="Lieu" EntitySet="Lieux" />
           </AssociationSet>
         </EntityContainer>
@@ -148,6 +178,8 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
           <Property Name="IdType" Type="Int32" />
           <NavigationProperty Name="TypeDeLieu" Relationship="ParcHelperModel.FK_Attraction_ToTableType" FromRole="Lieu" ToRole="TypeDeLieu" />
           <NavigationProperty Name="Indications" Relationship="ParcHelperModel.IndicationParLieu" FromRole="Lieu" ToRole="Indication" />
+          <Property Name="IdEtat" Type="Int32" />
+          <NavigationProperty Name="EtatLieu" Relationship="ParcHelperModel.FK_ToEtatLieu" FromRole="Lieu" ToRole="EtatLieu" />
         </EntityType>
         <EntityType Name="TypeDeLieu">
           <Key>
@@ -173,6 +205,26 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
           <End Type="ParcHelperModel.Indication" Role="Indication" Multiplicity="*" />
           <End Type="ParcHelperModel.Lieu" Role="Lieu" Multiplicity="*" />
         </Association>
+        <EntityType Name="EtatLieu">
+          <Key>
+            <PropertyRef Name="IdEtat" />
+          </Key>
+          <Property Name="IdEtat" Type="Int32" Nullable="false" />
+          <Property Name="nomEtat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Lieux" Relationship="ParcHelperModel.FK_ToEtatLieu" FromRole="EtatLieu" ToRole="Lieu" />
+        </EntityType>
+        <Association Name="FK_ToEtatLieu">
+          <End Type="ParcHelperModel.EtatLieu" Role="EtatLieu" Multiplicity="0..1" />
+          <End Type="ParcHelperModel.Lieu" Role="Lieu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EtatLieu">
+              <PropertyRef Name="IdEtat" />
+            </Principal>
+            <Dependent Role="Lieu">
+              <PropertyRef Name="IdEtat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -192,6 +244,7 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
           <EntitySetMapping Name="Lieux">
             <EntityTypeMapping TypeName="ParcHelperModel.Lieu">
               <MappingFragment StoreEntitySet="Lieu">
+                <ScalarProperty Name="IdEtat" ColumnName="IdEtat" />
                 <ScalarProperty Name="IdType" ColumnName="IdType" />
                 <ScalarProperty Name="CapaciteWagon" ColumnName="CapaciteWagon" />
                 <ScalarProperty Name="Duree" ColumnName="Duree" />
@@ -221,6 +274,14 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
               <ScalarProperty Name="Id" ColumnName="IdIndication" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="EtatLieux">
+            <EntityTypeMapping TypeName="ParcHelperModel.EtatLieu">
+              <MappingFragment StoreEntitySet="EtatLieu">
+                <ScalarProperty Name="nomEtat" ColumnName="nomEtat" />
+                <ScalarProperty Name="IdEtat" ColumnName="IdEtat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

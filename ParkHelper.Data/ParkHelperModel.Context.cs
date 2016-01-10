@@ -18,7 +18,6 @@ namespace ParkHelper.Data
         public ParcHelperEntities()
             : base("name=ParcHelperEntities")
         {
-            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -29,5 +28,6 @@ namespace ParkHelper.Data
         public virtual DbSet<Indication> Indications { get; set; }
         public virtual DbSet<Lieu> Lieux { get; set; }
         public virtual DbSet<TypeDeLieu> TypeDeLieux { get; set; }
+        public virtual DbSet<EtatLieu> EtatLieux { get; set; }
     }
 }

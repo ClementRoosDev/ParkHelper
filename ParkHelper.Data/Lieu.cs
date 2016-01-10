@@ -11,8 +11,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ParkHelper.Data
 {
+    using System;
     using System.Collections.Generic;
-
+    
     public partial class Lieu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -29,13 +30,16 @@ namespace ParkHelper.Data
         public double? Longitude { get; set; }
         public int? Attente { get; set; }
         public int? Duree { get; set; }
-        public int? CapaciteWagon { get; set; }
-        public int? IdType { get; set; }
         public int Ordre { get; set; }
         public bool EstDejaDansLeParcours { get; set; }
+        public int? CapaciteWagon { get; set; }
+        public int? IdType { get; set; }
+        public int? IdEtat { get; set; }
         [ForeignKey("IdType")]
         public virtual TypeDeLieu TypeDeLieu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Indication> Indications { get; set; }
+        [ForeignKey("IdEtat")]
+        public virtual EtatLieu EtatLieu { get; set; }
     }
 }

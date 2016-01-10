@@ -10,6 +10,8 @@
         <EntityTypeShape EntityType="ParcHelperModel.TypeDeLieu" Width="1.5" PointX="0.75" PointY="1.875" />
         <AssociationConnector Association="ParcHelperModel.FK_Attraction_ToTableType" />
         <AssociationConnector Association="ParcHelperModel.IndicationParLieu" />
+        <EntityTypeShape EntityType="ParcHelperModel.EtatLieu" Width="1.5" PointX="9.625" PointY="4.125" />
+        <AssociationConnector Association="ParcHelperModel.FK_ToEtatLieu" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

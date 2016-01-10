@@ -2,16 +2,17 @@
 
 F pour Feature
 B pour Bug
+I POUR In Progress
 R pour Refactoring
 ParkHelper : Features list
 
 ------------------------ Application ------------------------
-1 :
+1 : DONE
 - F : NavigationService
 - F : Page Home
 - F : Page ListLieux
 - F : Page LieuDetails
-- F : Page Itineraire
+- I : Page Itineraire
 - F : Page Map
 
 2 :
@@ -25,16 +26,27 @@ ParkHelper : Features list
 4 :
 - F : Création d'un système de partage -> SQL à modifier
 
+------------------------ Model ------------------------
+1 : DONE
+- F : Appel WebService pour ListeLieux
+- F : Appel WebService pour Parcours
+
+2 : DONE
+- B : Améliorer la requete Liste pour ne tenir compte que des attractions avec coord GPS
+
+3 :
+- F : Améliorer la requete Liste pour ne tenir compte que des attractions ouvertes -> Voir pour ajout champs BDD AVANT
+
 ------------------------ API ODATA ------------------------
-1:
+1 : DONE
 - F : LieuxController
 - F : ParcoursController
 
-2:
+2 :
 - F : Amélioration du ParcoursController
 
 ------------------------ SQL / SQL SERVER -----------------
-1:
+1 :
 - Schema basique avec 3 tables :
 Lieux
 TypeDeLieu
@@ -42,10 +54,14 @@ Indications
 Liaison(Indications,Lieux)
 Liaison(Lieux, TypeDeLieu)
 
-2:
+2 : DONE
 - F MAMDATORY : Completer les données de la table Lieux
 
+3 :
+- I : Remplir les indications
 - F : Ajout d'un champs Etat : Ouvert, Fermé => Controller API à UPDATE, ask for help if needed
+
+4 :
 - F : Ajout de la gestion des horaires pour les spectacles et toutes les attractions => Controller API & EDMX à UPDATE, ask for help if needed
 Pour la table horaire, les champs sont :
 IdHoraire
