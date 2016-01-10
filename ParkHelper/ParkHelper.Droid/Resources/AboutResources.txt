@@ -20,9 +20,6 @@ Resources/
     layout/
         main.xml
 
-    values/
-        strings.xml
-
 In order to get the build system to recognize Android resources, set the build action to
 "AndroidResource".  The native Android APIs do not operate directly with filenames, but 
 instead operate on resource IDs.  When you compile an Android application that uses resources, 

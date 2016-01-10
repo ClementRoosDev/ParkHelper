@@ -733,8 +733,8 @@ namespace ParkHelper.Droid
 			global::Xamarin.Forms.Platform.Resource.Layout.select_dialog_multichoice_material = global::ParkHelper.Droid.Resource.Layout.select_dialog_multichoice_material;
 			global::Xamarin.Forms.Platform.Resource.Layout.select_dialog_singlechoice_material = global::ParkHelper.Droid.Resource.Layout.select_dialog_singlechoice_material;
 			global::Xamarin.Forms.Platform.Resource.Layout.support_simple_spinner_dropdown_item = global::ParkHelper.Droid.Resource.Layout.support_simple_spinner_dropdown_item;
-			global::Xamarin.Forms.Platform.Resource.String.ApplicationName = global::ParkHelper.Droid.Resource.String.ApplicationName;
-			global::Xamarin.Forms.Platform.Resource.String.Hello = global::ParkHelper.Droid.Resource.String.Hello;
+	//		global::Xamarin.Forms.Platform.Resource.String.ApplicationName = global::ParkHelper.Droid.Resource.String.ApplicationName;
+//global::Xamarin.Forms.Platform.Resource.String.Hello = global::ParkHelper.Droid.Resource.String.Hello;
 			global::Xamarin.Forms.Platform.Resource.String.abc_action_bar_home_description = global::ParkHelper.Droid.Resource.String.abc_action_bar_home_description;
 			global::Xamarin.Forms.Platform.Resource.String.abc_action_bar_home_description_format = global::ParkHelper.Droid.Resource.String.abc_action_bar_home_description_format;
 			global::Xamarin.Forms.Platform.Resource.String.abc_action_bar_home_subtitle_description_format = global::ParkHelper.Droid.Resource.String.abc_action_bar_home_subtitle_description_format;
@@ -3289,49 +3289,52 @@ namespace ParkHelper.Droid
 			public const int Itineraire = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int MapIcon = 2130837596;
+			public const int logo = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int mr_ic_cast_dark = 2130837597;
+			public const int MapIcon = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int mr_ic_cast_light = 2130837598;
+			public const int mr_ic_cast_dark = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public const int mr_ic_media_route_connecting_mono_dark = 2130837599;
+			public const int mr_ic_cast_light = 2130837599;
 			
 			// aapt resource value: 0x7f020060
-			public const int mr_ic_media_route_connecting_mono_light = 2130837600;
+			public const int mr_ic_media_route_connecting_mono_dark = 2130837600;
 			
 			// aapt resource value: 0x7f020061
-			public const int mr_ic_media_route_mono_dark = 2130837601;
+			public const int mr_ic_media_route_connecting_mono_light = 2130837601;
 			
 			// aapt resource value: 0x7f020062
-			public const int mr_ic_media_route_mono_light = 2130837602;
+			public const int mr_ic_media_route_mono_dark = 2130837602;
 			
 			// aapt resource value: 0x7f020063
-			public const int mr_ic_pause_dark = 2130837603;
+			public const int mr_ic_media_route_mono_light = 2130837603;
 			
 			// aapt resource value: 0x7f020064
-			public const int mr_ic_pause_light = 2130837604;
+			public const int mr_ic_pause_dark = 2130837604;
 			
 			// aapt resource value: 0x7f020065
-			public const int mr_ic_play_dark = 2130837605;
+			public const int mr_ic_pause_light = 2130837605;
 			
 			// aapt resource value: 0x7f020066
-			public const int mr_ic_play_light = 2130837606;
+			public const int mr_ic_play_dark = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int mr_ic_settings_dark = 2130837607;
+			public const int mr_ic_play_light = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int mr_ic_settings_light = 2130837608;
-			
-			// aapt resource value: 0x7f02006a
-			public const int notification_template_icon_bg = 2130837610;
+			public const int mr_ic_settings_dark = 2130837608;
 			
 			// aapt resource value: 0x7f020069
-			public const int PlanParcFinal = 2130837609;
+			public const int mr_ic_settings_light = 2130837609;
+			
+			// aapt resource value: 0x7f02006b
+			public const int notification_template_icon_bg = 2130837611;
+			
+			// aapt resource value: 0x7f02006a
+			public const int PlanParcFinal = 2130837610;
 			
 			static Drawable()
 			{
@@ -3933,12 +3936,6 @@ namespace ParkHelper.Droid
 		
 		public partial class String
 		{
-			
-			// aapt resource value: 0x7f05001f
-			public const int ApplicationName = 2131034143;
-			
-			// aapt resource value: 0x7f05001e
-			public const int Hello = 2131034142;
 			
 			// aapt resource value: 0x7f05000b
 			public const int abc_action_bar_home_description = 2131034123;

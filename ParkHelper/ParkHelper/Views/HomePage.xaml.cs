@@ -5,10 +5,8 @@
         public HomePage()
         {
             InitializeComponent();
-            var viewModel = App.Locator.Main;
+            var viewModel = App.Locator.HomePageView;
             BindingContext = viewModel;
         }
-
-
     }
 }

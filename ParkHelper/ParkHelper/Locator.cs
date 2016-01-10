@@ -14,18 +14,36 @@ namespace ParkHelper
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             // ViewModels
+            SimpleIoc.Default.Register<SplashScreenViewModel>();
             SimpleIoc.Default.Register<HomePageViewModel>();
             SimpleIoc.Default.Register<ListPageViewModel>();
             SimpleIoc.Default.Register<MapPageViewModel>();
             SimpleIoc.Default.Register<AttractionDetailsViewModel>();
             SimpleIoc.Default.Register<ItinerairePageViewModel>();
         }
-
+        public const string SplashScreenPage = "SplashScreenPage";
         public const string HomePage = "HomePage";
         public const string ListPage = "ListPage";
         public const string MapPage = "MapPage";
         public const string AttractionDetailsPage = "AttractionDetailsPage";
-        public const string ItinerairePage = "itinerairePage";
+        public const string ItinerairePage = "ItinerairePage";
+
+        /// <summary>
+        /// Gets the SplashScreen property.
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public SplashScreenViewModel SplashScreenView
+        {
+            get
+            {
+                if (!SimpleIoc.Default.IsRegistered<SplashScreenViewModel>())
+                    SimpleIoc.Default.Register<SplashScreenViewModel>();
+                return ServiceLocator.Current.GetInstance<SplashScreenViewModel>();
+            }
+        }
+
 
         /// <summary>
         /// Gets the Main property.
@@ -33,7 +51,7 @@ namespace ParkHelper
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public HomePageViewModel Main
+        public HomePageViewModel HomePageView
         {
             get
             {
