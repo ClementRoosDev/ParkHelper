@@ -17,7 +17,8 @@ namespace ParkHelper.Common.WebService
             RequeteListe result = new RequeteListe();
             using (var httpClient = CreateClient(Path.ODATA))
             {
-                var response = await httpClient.GetAsync("Lieux?$filter=Latittude%20gt%201&$expand=TypeDeLieu").ConfigureAwait(false);
+                // Latittude greater than 1 & IdEtat equal 1
+                var response = await httpClient.GetAsync("Lieux?$filter=Latittude%20gt%201&$filter=IdEtat%20eq%201&$expand=TypeDeLieu&$expand=EtatLieu").ConfigureAwait(false);
                 if (response.IsSuccessStatusCode)
                 {
                     var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

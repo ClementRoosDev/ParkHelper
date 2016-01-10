@@ -21,31 +21,30 @@ namespace ParkHelper.Apiv2.Controllers
     using System.Web.Http.OData.Extensions;
     using ParkHelper.Data;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<Lieu>("Lieux");
-    builder.EntitySet<TypeDeLieu>("TypeDeLieux"); 
-    builder.EntitySet<Indication>("Indications"); 
+    builder.EntitySet<EtatLieu>("EtatLieux");
+    builder.EntitySet<Lieu>("Lieux"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class LieuxController : ODataController
+    public class EtatLieuxController : ODataController
     {
         private ParcHelperEntities db = new ParcHelperEntities();
 
-        // GET: odata/Lieux
+        // GET: odata/EtatLieux
         [EnableQuery]
-        public IQueryable<Lieu> GetLieux()
+        public IQueryable<EtatLieu> GetEtatLieux()
         {
-            return db.Lieux;
+            return db.EtatLieux;
         }
 
-        // GET: odata/Lieux(5)
+        // GET: odata/EtatLieux(5)
         [EnableQuery]
-        public SingleResult<Lieu> GetLieu([FromODataUri] int key)
+        public SingleResult<EtatLieu> GetEtatLieu([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Lieux.Where(lieu => lieu.Id == key));
+            return SingleResult.Create(db.EtatLieux.Where(etatLieu => etatLieu.IdEtat == key));
         }
 
-        // PUT: odata/Lieux(5)
-        public IHttpActionResult Put([FromODataUri] int key, Delta<Lieu> patch)
+        // PUT: odata/EtatLieux(5)
+        public IHttpActionResult Put([FromODataUri] int key, Delta<EtatLieu> patch)
         {
             Validate(patch.GetEntity());
 
@@ -54,13 +53,13 @@ namespace ParkHelper.Apiv2.Controllers
                 return BadRequest(ModelState);
             }
 
-            Lieu lieu = db.Lieux.Find(key);
-            if (lieu == null)
+            EtatLieu etatLieu = db.EtatLieux.Find(key);
+            if (etatLieu == null)
             {
                 return NotFound();
             }
 
-            patch.Put(lieu);
+            patch.Put(etatLieu);
 
             try
             {
@@ -68,7 +67,7 @@ namespace ParkHelper.Apiv2.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!LieuExists(key))
+                if (!EtatLieuExists(key))
                 {
                     return NotFound();
                 }
@@ -78,26 +77,41 @@ namespace ParkHelper.Apiv2.Controllers
                 }
             }
 
-            return Updated(lieu);
+            return Updated(etatLieu);
         }
 
-        // POST: odata/Lieux
-        public IHttpActionResult Post(Lieu lieu)
+        // POST: odata/EtatLieux
+        public IHttpActionResult Post(EtatLieu etatLieu)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Lieux.Add(lieu);
-            db.SaveChanges();
+            db.EtatLieux.Add(etatLieu);
 
-            return Created(lieu);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (EtatLieuExists(etatLieu.IdEtat))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Created(etatLieu);
         }
 
-        // PATCH: odata/Lieux(5)
+        // PATCH: odata/EtatLieux(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public IHttpActionResult Patch([FromODataUri] int key, Delta<Lieu> patch)
+        public IHttpActionResult Patch([FromODataUri] int key, Delta<EtatLieu> patch)
         {
             Validate(patch.GetEntity());
 
@@ -106,13 +120,13 @@ namespace ParkHelper.Apiv2.Controllers
                 return BadRequest(ModelState);
             }
 
-            Lieu lieu = db.Lieux.Find(key);
-            if (lieu == null)
+            EtatLieu etatLieu = db.EtatLieux.Find(key);
+            if (etatLieu == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(lieu);
+            patch.Patch(etatLieu);
 
             try
             {
@@ -120,7 +134,7 @@ namespace ParkHelper.Apiv2.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!LieuExists(key))
+                if (!EtatLieuExists(key))
                 {
                     return NotFound();
                 }
@@ -130,36 +144,29 @@ namespace ParkHelper.Apiv2.Controllers
                 }
             }
 
-            return Updated(lieu);
+            return Updated(etatLieu);
         }
 
-        // DELETE: odata/Lieux(5)
+        // DELETE: odata/EtatLieux(5)
         public IHttpActionResult Delete([FromODataUri] int key)
         {
-            Lieu lieu = db.Lieux.Find(key);
-            if (lieu == null)
+            EtatLieu etatLieu = db.EtatLieux.Find(key);
+            if (etatLieu == null)
             {
                 return NotFound();
             }
 
-            db.Lieux.Remove(lieu);
+            db.EtatLieux.Remove(etatLieu);
             db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/Lieux(5)/TypeDeLieu
+        // GET: odata/EtatLieux(5)/Lieux
         [EnableQuery]
-        public SingleResult<TypeDeLieu> GetTypeDeLieu([FromODataUri] int key)
+        public IQueryable<Lieu> GetLieux([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Lieux.Where(m => m.Id == key).Select(m => m.TypeDeLieu));
-        }
-
-        // GET: odata/Lieux(5)/Indications
-        [EnableQuery]
-        public IQueryable<Indication> GetIndications([FromODataUri] int key)
-        {
-            return db.Lieux.Where(m => m.Id == key).SelectMany(m => m.Indications);
+            return db.EtatLieux.Where(m => m.IdEtat == key).SelectMany(m => m.Lieux);
         }
 
         protected override void Dispose(bool disposing)
@@ -171,9 +178,9 @@ namespace ParkHelper.Apiv2.Controllers
             base.Dispose(disposing);
         }
 
-        private bool LieuExists(int key)
+        private bool EtatLieuExists(int key)
         {
-            return db.Lieux.Count(e => e.Id == key) > 0;
+            return db.EtatLieux.Count(e => e.IdEtat == key) > 0;
         }
     }
 }

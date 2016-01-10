@@ -34,7 +34,7 @@ ParkHelper : Features list
 2 : DONE
 - B : Améliorer la requete Liste pour ne tenir compte que des attractions avec coord GPS
 
-3 :
+3 : DONE
 - F : Améliorer la requete Liste pour ne tenir compte que des attractions ouvertes -> Voir pour ajout champs BDD AVANT
 
 ------------------------ API ODATA ------------------------
@@ -57,7 +57,7 @@ Liaison(Lieux, TypeDeLieu)
 2 : DONE
 - F MAMDATORY : Completer les données de la table Lieux
 
-3 :
+3 : 
 - I : Remplir les indications
 - F : Ajout d'un champs Etat : Ouvert, Fermé => Controller API à UPDATE, ask for help if needed
 

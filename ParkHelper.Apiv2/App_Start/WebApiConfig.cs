@@ -25,6 +25,7 @@ namespace ParkHelper.Apiv2
 
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
             builder.EntitySet<Lieu>("Lieux");
+            builder.EntitySet<EtatLieu>("EtatLieux");
             builder.EntitySet<TypeDeLieu>("TypeDeLieux");
             builder.EntitySet<Indication>("Indications");
 
