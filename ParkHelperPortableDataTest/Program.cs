@@ -17,7 +17,7 @@ namespace ParkHelperPortableDataTest
             Console.ReadKey();
         }
 
-        static void Affichage(List<Attraction> result)
+        static void Affichage(List<Lieu> result)
         {
             foreach (var item in result)
             {

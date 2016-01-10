@@ -13,14 +13,14 @@ namespace ParkHelperPortableDataTest
         const string Urlattractions = "http://parkhelperapi.azurewebsites.net/api/ptattractions?type=json";
         const string Urlparours = "http://parkhelperapi.azurewebsites.net/api/ptparcours?type=json";
 
-        public List<Attraction> Attractions { get; private set; }
+        public List<Lieu> Attractions { get; private set; }
 
         public Version1()
         {
-            Attractions = new List<Attraction>();
+            Attractions = new List<Lieu>();
         }
 
-        public async Task<List<Attraction>> getAttractions(string urlAttractions)
+        public async Task<List<Lieu>> getAttractions(string urlAttractions)
         {
             MediaTypeWithQualityHeaderValue jsonHeader = new MediaTypeWithQualityHeaderValue("application/json");
 
@@ -37,7 +37,7 @@ namespace ParkHelperPortableDataTest
                 }
                 var result = await apiResponse.Content.ReadAsStringAsync();
 
-                return JsonConvert.DeserializeObject<List<Attraction>>(result);
+                return JsonConvert.DeserializeObject<List<Lieu>>(result);
             }
         }
 

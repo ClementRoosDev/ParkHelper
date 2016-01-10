@@ -2,11 +2,12 @@
 {
     using System;
 
-    public class Attraction
+    public class Lieu
     {
         public event EventHandler<EventArgs> OnToggled = delegate { };
 
         public TypeDeLieu TypeDeLieu { get; set; }
+        public EtatLieu EtatLieu { get; set; }
         public int Id { get; set; }
         public string Libelle { get; set; }
         public string Description { get; set; }
@@ -17,6 +18,7 @@
         public int Duree { get; set; }
         public int CapaciteWagon { get; set; }
         public int IdType { get; set; }
+        public int IdEtat { get; set; }
         public bool EstDejaDansLeParcours
         {
             get { return estDejaDansLeParcours.Value; }

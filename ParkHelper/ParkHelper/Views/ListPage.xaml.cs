@@ -24,7 +24,7 @@ namespace ParkHelper.Views
         {
             ListView.ItemSelected += (sender, e) =>
             {
-                var attraction = (Attraction)ListView.SelectedItem;
+                var attraction = (Lieu)ListView.SelectedItem;
                 _viewModel.Parameter = attraction;
                 _viewModel.ItemDetailsCommand.Execute(_viewModel.Parameter);
             };

@@ -7,9 +7,9 @@ namespace ParkHelperPortableDataTest
 
     public interface ITest
     {
-        List<Attraction> Attractions { get; }
+        List<Lieu> Attractions { get; }
 
-        Task<List<Attraction>> getAttractions(string urlAttractions);
+        Task<List<Lieu>> getAttractions(string urlAttractions);
 
         void getParcours(string parcours);
 

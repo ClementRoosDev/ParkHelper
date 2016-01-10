@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Objets\Attraction.cs" />
+    <Compile Include="Objets\EtatLieu.cs" />
     <Compile Include="Objets\RequeteListe.cs" />
     <Compile Include="Objets\RequeteListeParcours.cs" />
     <Compile Include="Objets\TypeDeLieu.cs" />

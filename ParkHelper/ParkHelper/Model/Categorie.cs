@@ -3,7 +3,7 @@ using ParkHelper.Common.Objets;
 
 namespace ParkHelper.Model
 {
-    public class Categorie : ObservableCollection<Attraction>
+    public class Categorie : ObservableCollection<Lieu>
     {
         public Categorie(string name)
         {

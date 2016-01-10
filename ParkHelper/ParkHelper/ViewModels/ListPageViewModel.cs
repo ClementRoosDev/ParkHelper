@@ -5,9 +5,9 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using System.Collections.Generic;
 using System.Linq;
-using Attraction = ParkHelper.Common.Objets.Attraction;
 using ParkHelper.Model;
 using ParkHelper.Commands;
+using ParkHelper.Common.Objets;
 
 namespace ParkHelper.ViewModels
 {
@@ -122,7 +122,7 @@ namespace ParkHelper.ViewModels
 
         private void ToggleSelection(object sender, EventArgs e)
         {
-            var attraction = (Attraction)sender;
+            var attraction = (Lieu)sender;
             if (attraction.EstDejaDansLeParcours)
             {
                 ListeAppliSelectionnees.Add(attraction.Id);
@@ -134,10 +134,10 @@ namespace ParkHelper.ViewModels
             
             ItineraireCanBeGenerated = CreateItineraire.CanExecute(ListeAppliSelectionnees);
             //TODO : Verifier possibilité d'ajout à l'itinéraire
-            //System.Console.WriteLine("{0} has been toggled to {1}", attraction.Libelle, attraction.EstDejaDansLeParcours);
+            //System.Console.WriteLine("{0} has been toggled to {1}", Lieu.Libelle, Lieu.EstDejaDansLeParcours);
         }
 
-        internal void ConvertFrom(List<Attraction> attractions)
+        internal void ConvertFrom(List<Lieu> attractions)
         {
             var extractSubList = attractions.GroupBy(i => i.TypeDeLieu.Libelle);
             foreach (var subList in extractSubList)

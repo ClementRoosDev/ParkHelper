@@ -29,7 +29,7 @@ namespace ParkHelper.ViewModels
 
         #region Properties
         public ICommand ItineraireCommand { get; set; }
-        public Attraction Attraction { get; set; }
+        public Lieu Lieu { get; set; }
         #endregion
 
         #region Methods
