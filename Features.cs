@@ -15,8 +15,15 @@ ParkHelper : Features list
 - F : Page Map
 
 2 :
+- F : Autocompletion et amélioration de la vue ListLieux
 - B/R : Suppression du cache des données qui fait buger l'appli
 - F : Améloriation de la GUI avec du style
+
+3 :
+- F : Création d'un objet présence qui contient les infos de visite de l'utilisateur (datetime picker and so on)
+
+4 :
+- F : Création d'un système de partage -> SQL à modifier
 
 ------------------------ API ODATA ------------------------
 1:

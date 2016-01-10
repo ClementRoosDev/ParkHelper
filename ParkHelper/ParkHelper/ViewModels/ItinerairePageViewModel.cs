@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json.Linq;
 using ParkHelper.Common.Objets;
 using ParkHelper.Model;
 
@@ -30,9 +31,11 @@ namespace ParkHelper.ViewModels
                     Locator.HomePage);
             });
             Listes = new List<ListeParcour>();
+            ListesBis = new List<ListeParcour>();
             IsBusy = true;
 
             ListeIdAttractions = new List<int>();
+            ParcoursFinal = new List<Parcours>();
         }
 
 
@@ -48,17 +51,58 @@ namespace ParkHelper.ViewModels
         
         #region Local
         public List<ListeParcour> Listes { get; set; }
+        public List<ListeParcour> ListesBis { get; set; }
         public bool IsBusy { get; set; }
         public List<int> ListeIdAttractions { get; set; }
-
+        public List<Parcours> ParcoursFinal { get; set; }
         #endregion
         #endregion
 
         #region Methods
 
-        public void ConvertFrom(List<ListeParcour> ListeParcours)
+        public void OrderListeParcours()
         {
-            Listes = ListeParcours.OrderBy(i => i.Ordre).ToList();
+            int j = 1;
+            for (int i = 0; i < Listes.Count; i++)
+            {
+                //if (Listes.ElementAt(i + 1).Ordre == (Listes.ElementAt(i).Ordre + 1) && (i+1) < (Listes.Count-1)) continue;
+                if (Listes.ElementAt(i).Description == null)
+                {
+                    if(((i + 1) != (Listes.Count - 1)) && ((Listes.ElementAt(i + 1).Ordre == (Listes.ElementAt(i).Ordre + 1))))
+                    {
+                        Listes.ElementAt(i).Ordre = Listes.ElementAt(i - 1).Ordre;
+                    }
+
+                }
+                else
+                {
+                    Listes.ElementAt(i).Ordre = j;
+                    j++;
+                }
+            }
+        }
+        public void CreateParcours()
+        {
+            var extractSubList = Listes.GroupBy(i => i.Ordre);
+            foreach (var subList in extractSubList)
+            {
+                var etapeParcours = Listes.Where(i => i.Ordre == subList.Key).ToList().First();
+                var parcours = new Parcours(subList.Key.ToString(),
+                    new EtapeParcours(etapeParcours));
+                for(var j = 1;j <subList.Count();j++)
+                {
+                    parcours.Add(subList.ElementAt(j));
+                }
+                ParcoursFinal.Add(parcours);
+            }
+        }
+
+        public void ConvertFrom(List<ListeParcour> listeParcours)
+        {
+            ListesBis = listeParcours.OrderBy(i => i.Ordre).ToList();
+            Listes = ListesBis;
+            OrderListeParcours();
+            CreateParcours();
         }
         #endregion
     }

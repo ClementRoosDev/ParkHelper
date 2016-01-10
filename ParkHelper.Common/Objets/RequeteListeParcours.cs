@@ -32,6 +32,11 @@ namespace ParkHelper.Common.Objets
         public object TypeDeLieu { get; set; }
         public List<object> Indications { get; set; }
         public string type { get; set; }
+
+        public override string ToString()
+        {
+            return Duree.ToString();
+        }
     }
 
 }

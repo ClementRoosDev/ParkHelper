@@ -4,19 +4,16 @@ namespace ParkHelper.Model
 {
     public class EtapeParcours
     {
-        public EtapeParcours(string heure, Attraction attractionAFaire)
+        public EtapeParcours(ListeParcour attractionAFaire)
         {
-            Heure = heure;
             AttractionAFaire = attractionAFaire;
         }
 
-        string Heure { get; set; }
+        public ListeParcour AttractionAFaire { get; set; }
 
-        Attraction AttractionAFaire { get; set; }
-
-        public override string ToString()
+        /**public override string ToString()
         {
-            return AttractionAFaire.Libelle;
-        }
+            return AttractionAFaire.Duree.ToString();
+        }*/
     }
 }
