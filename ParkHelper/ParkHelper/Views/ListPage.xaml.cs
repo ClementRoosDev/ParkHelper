@@ -10,12 +10,13 @@ namespace ParkHelper.Views
     {
         readonly ListPageViewModel _viewModel;
 
-        public ListPage()
+        public ListPage(ParkHelper context)
         {
             InitializeComponent();
             setUIElements(false);
             this.ActivityIndicator.IsRunning = true;
             _viewModel = App.Locator.ListPageView;
+            _viewModel.Context = context;
             BindingContext = _viewModel;
             InitializeTemplate();
         }
@@ -33,6 +34,7 @@ namespace ParkHelper.Views
         async void ListPage_OnAppearing(object sender, EventArgs e)
         {
             OnAppearing();
+            _viewModel.TryToRestore();
             if(_viewModel.Listes.Count == 0)
             {
                 ParkHelperWebservice Ws = new ParkHelperWebservice();

@@ -21,7 +21,9 @@ ParkHelper : Features list
 - F : Améloriation de la GUI avec du style
 
 3 :
-- F : Création d'un objet présence qui contient les infos de visite de l'utilisateur (datetime picker and so on)
+- I : Création d'un objet présence qui contient les infos de visite de l'utilisateur (datetime picker and so on)
+- F : Service d'écoute pour api
+- F : Recevoir des notifications
 
 4 :
 - F : Création d'un système de partage -> SQL à modifier
@@ -46,7 +48,7 @@ ParkHelper : Features list
 - F : Amélioration du ParcoursController
 
 ------------------------ SQL / SQL SERVER -----------------
-1 :
+1 : DONE
 - Schema basique avec 3 tables :
 Lieux
 TypeDeLieu
@@ -72,6 +74,12 @@ IdJour
 NomJour
 La ternaire avec IdJour, IdHoraire, IdLieu
 Horaire ouverture et fermeture pour 8h-17 ou 15h-15h30 pour les spectacles
+
+------------------------ Simulation -----------------
+
+1 :
+- F MANDATORY : Remplir un planning sur une semaine
+- F : Coder la vie d'un parc en modifiant les infos d'attente et d'annulation des spectacles
 
 TO BE CONTINUED....
 Copyright Infolution 2015

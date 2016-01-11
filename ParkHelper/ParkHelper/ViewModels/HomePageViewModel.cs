@@ -34,6 +34,7 @@ namespace ParkHelper.ViewModels
         public string TextTest { get; set; }
         public ICommand ItineraireCommand { get; set; }
         public ICommand MapCommand { get; set; }
+        public ParkHelper Context { get; set; }
 
         #endregion
 
@@ -46,10 +47,10 @@ namespace ParkHelper.ViewModels
             ItineraireCommand = new RelayCommand(() =>
             {
                 _navigationService.NavigateTo(
-                    Locator.ListPage);
+                    Locator.ListPage,Context);
             });
             /**}else{
-            ItineraireCommand = new RelayCommand(() =>
+            ListPageCommand = new RelayCommand(() =>
             {
                 _navigationService.NavigateTo(
                     Locator.ItinerairePage, fileName);

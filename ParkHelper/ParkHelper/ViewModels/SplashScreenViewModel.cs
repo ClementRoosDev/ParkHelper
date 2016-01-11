@@ -1,14 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
-using ParkHelper.Helper;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Forms;
 
 namespace ParkHelper.ViewModels
 {
@@ -17,6 +12,7 @@ namespace ParkHelper.ViewModels
         #region Fields
 
         readonly INavigationService _navigationService;
+        private ParkHelper _applicationContext;
 
         #endregion
 
@@ -29,10 +25,8 @@ namespace ParkHelper.ViewModels
             
             HomeCommand = new RelayCommand(() =>
             {
-                _navigationService.NavigateTo(Locator.HomePage);
+                _navigationService.NavigateTo(Locator.HomePage, _applicationContext);
             });
-            
-            
         }
 
         public ICommand HomeCommand { get; set; }
@@ -40,7 +34,8 @@ namespace ParkHelper.ViewModels
         public async Task DelayExecution()
         {
             await Task.Delay(3000);
-            HomeCommand.Execute(null);
+            _applicationContext = new ParkHelper();
+            HomeCommand.Execute(_applicationContext);
         }
     }
 }

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
-using Newtonsoft.Json.Linq;
 using ParkHelper.Common.Objets;
 using ParkHelper.Model;
 
@@ -28,7 +27,12 @@ namespace ParkHelper.ViewModels
             HomeCommand = new RelayCommand(() =>
             {
                 _navigationService.NavigateTo(
-                    Locator.HomePage);
+                    Locator.HomePage, Context);
+            });
+            ListPageCommand = new RelayCommand(() =>
+            {
+                _navigationService.NavigateTo(
+                    Locator.ListPage, Context);
             });
             Listes = new List<ListeParcour>();
             ListesBis = new List<ListeParcour>();
@@ -47,14 +51,18 @@ namespace ParkHelper.ViewModels
 
         public ICommand HomeCommand { get; set; }
 
+        public ICommand ListPageCommand { get; set; }
+
+        public ParkHelper Context { get; set; }
         #endregion
-        
+
         #region Local
         public List<ListeParcour> Listes { get; set; }
         public List<ListeParcour> ListesBis { get; set; }
         public bool IsBusy { get; set; }
         public List<int> ListeIdAttractions { get; set; }
         public List<Parcours> ParcoursFinal { get; set; }
+
         #endregion
         #endregion
 
@@ -99,11 +107,19 @@ namespace ParkHelper.ViewModels
 
         public void ConvertFrom(List<ListeParcour> listeParcours)
         {
+            if (listeParcours == null) return;
             ListesBis = listeParcours.OrderBy(i => i.Ordre).ToList();
             Listes = ListesBis;
             OrderListeParcours();
             CreateParcours();
         }
+
         #endregion
+
+        public void SetContext(ParkHelper context)
+        {
+            Context = context;
+            ListeIdAttractions = Context.ListeAppliSelectionnees;
+        }
     }
 }

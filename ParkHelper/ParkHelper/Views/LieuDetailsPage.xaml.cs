@@ -2,12 +2,12 @@
 
 namespace ParkHelper.Views
 {
-    public partial class AttractionDetailsPage
+    public partial class LieuDetailsPage
     {
-        public AttractionDetailsPage(Lieu lieu)
+        public LieuDetailsPage(Lieu lieu)
         {
             InitializeComponent();
-            var viewModel = App.Locator.AttractionDetailsView;
+            var viewModel = App.Locator.LieuDetailsView;
             viewModel.Lieu = lieu;
             BindingContext = viewModel;
         }

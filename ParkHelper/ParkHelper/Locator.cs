@@ -18,14 +18,14 @@ namespace ParkHelper
             SimpleIoc.Default.Register<HomePageViewModel>();
             SimpleIoc.Default.Register<ListPageViewModel>();
             SimpleIoc.Default.Register<MapPageViewModel>();
-            SimpleIoc.Default.Register<AttractionDetailsViewModel>();
+            SimpleIoc.Default.Register<LieuDetailsViewModel>();
             SimpleIoc.Default.Register<ItinerairePageViewModel>();
         }
         public const string SplashScreenPage = "SplashScreenPage";
         public const string HomePage = "HomePage";
         public const string ListPage = "ListPage";
         public const string MapPage = "MapPage";
-        public const string AttractionDetailsPage = "AttractionDetailsPage";
+        public const string LieuDetailsPage = "LieuDetailsPage";
         public const string ItinerairePage = "ItinerairePage";
 
         /// <summary>
@@ -99,13 +99,13 @@ namespace ParkHelper
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public AttractionDetailsViewModel AttractionDetailsView
+        public LieuDetailsViewModel LieuDetailsView
         {
             get
             {
-                if (!SimpleIoc.Default.IsRegistered<AttractionDetailsViewModel>())
-                    SimpleIoc.Default.Register<AttractionDetailsViewModel>();
-                return ServiceLocator.Current.GetInstance<AttractionDetailsViewModel>();
+                if (!SimpleIoc.Default.IsRegistered<LieuDetailsViewModel>())
+                    SimpleIoc.Default.Register<LieuDetailsViewModel>();
+                return ServiceLocator.Current.GetInstance<LieuDetailsViewModel>();
             }
         }
 

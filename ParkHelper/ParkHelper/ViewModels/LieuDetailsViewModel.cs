@@ -7,14 +7,14 @@ using ParkHelper.Common.Objets;
 
 namespace ParkHelper.ViewModels
 {
-    public class AttractionDetailsViewModel : ViewModelBase
+    public class LieuDetailsViewModel : ViewModelBase
     {
         #region Fields
         readonly INavigationService _navigationService;
         #endregion
 
         #region Constructor
-        public AttractionDetailsViewModel(INavigationService navigationService)
+        public LieuDetailsViewModel(INavigationService navigationService)
         {
             if (navigationService == null) throw new ArgumentNullException("navigationService");
             _navigationService = navigationService;
