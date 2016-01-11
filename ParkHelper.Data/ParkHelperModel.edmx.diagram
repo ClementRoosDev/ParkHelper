@@ -5,13 +5,19 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="3a309d4644d24073b13aee73c61a3718" Name="Diagram1">
-        <EntityTypeShape EntityType="ParcHelperModel.Indication" Width="1.5" PointX="0.75" PointY="5.625" />
-        <EntityTypeShape EntityType="ParcHelperModel.Lieu" Width="4.25" PointX="3.625" PointY="0.5" />
-        <EntityTypeShape EntityType="ParcHelperModel.TypeDeLieu" Width="1.5" PointX="0.75" PointY="1.875" />
-        <AssociationConnector Association="ParcHelperModel.FK_Attraction_ToTableType" />
+        <EntityTypeShape EntityType="ParcHelperModel.EtatLieu" Width="1.5" PointX="8.75" PointY="0.625" />
+        <EntityTypeShape EntityType="ParcHelperModel.Horaire" Width="1.5" PointX="9.75" PointY="3.125" />
+        <EntityTypeShape EntityType="ParcHelperModel.Indication" Width="1.5" PointX="3.75" PointY="1.75" />
+        <EntityTypeShape EntityType="ParcHelperModel.Jour" Width="1.5" PointX="7.75" PointY="5.125" />
+        <EntityTypeShape EntityType="ParcHelperModel.Lieu" Width="1.5" PointX="6" PointY="1" />
+        <EntityTypeShape EntityType="ParcHelperModel.TypeDeLieu" Width="1.5" PointX="3.75" PointY="4.75" />
+        <AssociationConnector Association="ParcHelperModel.FK_ToType" />
         <AssociationConnector Association="ParcHelperModel.IndicationParLieu" />
-        <EntityTypeShape EntityType="ParcHelperModel.EtatLieu" Width="1.5" PointX="9.625" PointY="4.125" />
-        <AssociationConnector Association="ParcHelperModel.FK_ToEtatLieu" />
+        <EntityTypeShape EntityType="ParcHelperModel.Planning" Width="1.5" PointX="12.375" PointY="1.875" />
+        <AssociationConnector Association="ParcHelperModel.FK_ToEtat" />
+        <AssociationConnector Association="ParcHelperModel.FK_ToHoraire" />
+        <AssociationConnector Association="ParcHelperModel.FK_ToJour" />
+        <AssociationConnector Association="ParcHelperModel.FK_ToLieu" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

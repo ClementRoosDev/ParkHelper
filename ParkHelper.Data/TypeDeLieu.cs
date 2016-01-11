@@ -12,15 +12,15 @@ using System.ComponentModel.DataAnnotations;
 namespace ParkHelper.Data
 {
     using System.Collections.Generic;
-
+    
     public partial class TypeDeLieu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TypeDeLieu()
         {
-            this.Lieux = new HashSet<Lieu>();
+            Lieux = new HashSet<Lieu>();
         }
-
+    
         [Key]
         public int Id { get; set; }
         public string Libelle { get; set; }

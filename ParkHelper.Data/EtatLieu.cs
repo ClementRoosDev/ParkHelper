@@ -18,7 +18,7 @@ namespace ParkHelper.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EtatLieu()
         {
-            this.Lieux = new HashSet<Lieu>();
+            Plannings = new HashSet<Planning>();
         }
 
         [Key]
@@ -26,6 +26,6 @@ namespace ParkHelper.Data
         public string nomEtat { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Lieu> Lieux { get; set; }
+        public virtual ICollection<Planning> Plannings { get; set; }
     }
 }

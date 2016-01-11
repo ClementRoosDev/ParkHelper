@@ -21,30 +21,30 @@ namespace ParkHelper.Apiv2.Controllers
     using System.Web.Http.OData.Extensions;
     using ParkHelper.Data;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<EtatLieu>("EtatLieux");
+    builder.EntitySet<Horaire>("Horaires");
     builder.EntitySet<Planning>("Plannings"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class EtatLieuxController : ODataController
+    public class HorairesController : ODataController
     {
         private ParcHelperEntities db = new ParcHelperEntities();
 
-        // GET: odata/EtatLieux
+        // GET: odata/Horaires
         [EnableQuery]
-        public IQueryable<EtatLieu> GetEtatLieux()
+        public IQueryable<Horaire> GetHoraires()
         {
-            return db.EtatLieux;
+            return db.Horaires;
         }
 
-        // GET: odata/EtatLieux(5)
+        // GET: odata/Horaires(5)
         [EnableQuery]
-        public SingleResult<EtatLieu> GetEtatLieu([FromODataUri] int key)
+        public SingleResult<Horaire> GetHoraire([FromODataUri] int key)
         {
-            return SingleResult.Create(db.EtatLieux.Where(etatLieu => etatLieu.IdEtat == key));
+            return SingleResult.Create(db.Horaires.Where(horaire => horaire.Id == key));
         }
 
-        // PUT: odata/EtatLieux(5)
-        public IHttpActionResult Put([FromODataUri] int key, Delta<EtatLieu> patch)
+        // PUT: odata/Horaires(5)
+        public IHttpActionResult Put([FromODataUri] int key, Delta<Horaire> patch)
         {
             Validate(patch.GetEntity());
 
@@ -53,13 +53,13 @@ namespace ParkHelper.Apiv2.Controllers
                 return BadRequest(ModelState);
             }
 
-            EtatLieu etatLieu = db.EtatLieux.Find(key);
-            if (etatLieu == null)
+            Horaire horaire = db.Horaires.Find(key);
+            if (horaire == null)
             {
                 return NotFound();
             }
 
-            patch.Put(etatLieu);
+            patch.Put(horaire);
 
             try
             {
@@ -67,7 +67,7 @@ namespace ParkHelper.Apiv2.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EtatLieuExists(key))
+                if (!HoraireExists(key))
                 {
                     return NotFound();
                 }
@@ -77,18 +77,18 @@ namespace ParkHelper.Apiv2.Controllers
                 }
             }
 
-            return Updated(etatLieu);
+            return Updated(horaire);
         }
 
-        // POST: odata/EtatLieux
-        public IHttpActionResult Post(EtatLieu etatLieu)
+        // POST: odata/Horaires
+        public IHttpActionResult Post(Horaire horaire)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.EtatLieux.Add(etatLieu);
+            db.Horaires.Add(horaire);
 
             try
             {
@@ -96,7 +96,7 @@ namespace ParkHelper.Apiv2.Controllers
             }
             catch (DbUpdateException)
             {
-                if (EtatLieuExists(etatLieu.IdEtat))
+                if (HoraireExists(horaire.Id))
                 {
                     return Conflict();
                 }
@@ -106,12 +106,12 @@ namespace ParkHelper.Apiv2.Controllers
                 }
             }
 
-            return Created(etatLieu);
+            return Created(horaire);
         }
 
-        // PATCH: odata/EtatLieux(5)
+        // PATCH: odata/Horaires(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public IHttpActionResult Patch([FromODataUri] int key, Delta<EtatLieu> patch)
+        public IHttpActionResult Patch([FromODataUri] int key, Delta<Horaire> patch)
         {
             Validate(patch.GetEntity());
 
@@ -120,13 +120,13 @@ namespace ParkHelper.Apiv2.Controllers
                 return BadRequest(ModelState);
             }
 
-            EtatLieu etatLieu = db.EtatLieux.Find(key);
-            if (etatLieu == null)
+            Horaire horaire = db.Horaires.Find(key);
+            if (horaire == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(etatLieu);
+            patch.Patch(horaire);
 
             try
             {
@@ -134,7 +134,7 @@ namespace ParkHelper.Apiv2.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EtatLieuExists(key))
+                if (!HoraireExists(key))
                 {
                     return NotFound();
                 }
@@ -144,29 +144,29 @@ namespace ParkHelper.Apiv2.Controllers
                 }
             }
 
-            return Updated(etatLieu);
+            return Updated(horaire);
         }
 
-        // DELETE: odata/EtatLieux(5)
+        // DELETE: odata/Horaires(5)
         public IHttpActionResult Delete([FromODataUri] int key)
         {
-            EtatLieu etatLieu = db.EtatLieux.Find(key);
-            if (etatLieu == null)
+            Horaire horaire = db.Horaires.Find(key);
+            if (horaire == null)
             {
                 return NotFound();
             }
 
-            db.EtatLieux.Remove(etatLieu);
+            db.Horaires.Remove(horaire);
             db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/EtatLieux(5)/Plannings
+        // GET: odata/Horaires(5)/Plannings
         [EnableQuery]
         public IQueryable<Planning> GetPlannings([FromODataUri] int key)
         {
-            return db.EtatLieux.Where(m => m.IdEtat == key).SelectMany(m => m.Plannings);
+            return db.Horaires.Where(m => m.Id == key).SelectMany(m => m.Plannings);
         }
 
         protected override void Dispose(bool disposing)
@@ -178,9 +178,9 @@ namespace ParkHelper.Apiv2.Controllers
             base.Dispose(disposing);
         }
 
-        private bool EtatLieuExists(int key)
+        private bool HoraireExists(int key)
         {
-            return db.EtatLieux.Count(e => e.IdEtat == key) > 0;
+            return db.Horaires.Count(e => e.Id == key) > 0;
         }
     }
 }

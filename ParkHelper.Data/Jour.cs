@@ -7,26 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-
 namespace ParkHelper.Data
 {
+    using System;
     using System.Collections.Generic;
     
-    public partial class Indication
+    public partial class Jour
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Indication()
+        public Jour()
         {
-            Lieux = new HashSet<Lieu>();
+            this.Plannings = new HashSet<Planning>();
         }
-
-        [Key]
+    
         public int Id { get; set; }
-        public string Libelle { get; set; }
-        public string LienLogo { get; set; }
+        public string nomJour { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Lieu> Lieux { get; set; }
+        public virtual ICollection<Planning> Plannings { get; set; }
     }
 }

@@ -40,7 +40,8 @@
     <Folder Include="App_Start\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Objets\Attraction.cs" />
+    <Compile Include="Objets\Indication.cs" />
+    <Compile Include="Objets\Lieu.cs" />
     <Compile Include="Objets\EtatLieu.cs" />
     <Compile Include="Objets\RequeteListe.cs" />
     <Compile Include="Objets\RequeteListeParcours.cs" />
