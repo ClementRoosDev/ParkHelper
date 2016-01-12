@@ -50,12 +50,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\EditHotelPageViewModel.cs" />
     <Compile Include="ViewModels\LieuDetailsViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\ItinerairePageViewModel.cs" />
     <Compile Include="ViewModels\ListPageViewModel.cs" />
     <Compile Include="ViewModels\MapPageViewModel.cs" />
     <Compile Include="ViewModels\SplashScreenViewModel.cs" />
+    <Compile Include="ViewModels\VisiteDetailsViewModel.cs" />
+    <Compile Include="Views\EditHotelDetailsPage.xaml.cs">
+      <DependentUpon>EditHotelDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VisiteDetailsPage.xaml.cs">
+      <DependentUpon>VisiteDetailsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LieuDetailsPage.xaml.cs">
       <DependentUpon>LieuDetailsPage.xaml</DependentUpon>
     </Compile>
@@ -212,16 +220,28 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ParkHelper.Common\ParkHelper.Common.csproj">
+      <Project>{38637184-2637-429d-9f7c-8ae2488d4cb2}</Project>
+      <Name>ParkHelper.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Views\ItinerairePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ParkHelper.Common\ParkHelper.Common.csproj">
-      <Project>{38637184-2637-429d-9f7c-8ae2488d4cb2}</Project>
-      <Name>ParkHelper.Common</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="Views\VisiteDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\EditHotelDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

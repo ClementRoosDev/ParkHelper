@@ -16,7 +16,7 @@ namespace ParkHelper.Views
         {
             InitializeComponent();
             setUIElements(false);
-            this.ActivityIndicator.IsRunning = true;
+            ActivityIndicator.IsRunning = true;
             _viewModel = App.Locator.ListPageView;
             _viewModel.Context = context;
             BindingContext = _viewModel;
