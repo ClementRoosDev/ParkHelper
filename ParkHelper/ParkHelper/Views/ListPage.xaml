@@ -16,7 +16,7 @@
       <SearchBar Grid.Row ="0" x:Name="SearchBar"
                  VerticalOptions="Center"
                  HorizontalOptions="Center"
-                 Text="{Binding TexteATrouver}" 
+                 Placeholder="Rechercher..."
                  PropertyChanged="SearchBar_OnPropertyChanged"
                  TextChanged="SearchBar_OnTextChanged">
       </SearchBar>

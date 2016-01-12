@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using ParkHelper.ViewModels;
 using ParkHelper.Common.Objets;
 using ParkHelper.Common.WebService;
+using Xamarin.Forms;
 
 namespace ParkHelper.Views
 {
@@ -76,13 +78,26 @@ namespace ParkHelper.Views
             }*/
         }
 
-        void SearchBar_OnTextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e)
+        /*void SearchBar_OnTextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e)
         {
             if (!SearchBar.Text.Equals("Rechercher") &&
                 _viewModel.Listes.Count < _viewModel.ListesCount && _viewModel.Listes.Count > 0)
             {
                 ListView.ItemsSource = _viewModel.Listes;
             }
+        }*/
+
+        void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListView.BeginRefresh();
+
+            if (string.IsNullOrWhiteSpace(e.NewTextValue))
+                ListView.ItemsSource = _viewModel.Listes;
+            else
+            /*ListView.ItemsSource = _viewModel.Listes.Where(i => i.Any(a =>a.Libelle.Contains(e.NewTextValue)));*/
+                ListView.ItemsSource = _viewModel.Listes.Select(i => i.Where(a => a.Libelle.ToLower().Contains(e.NewTextValue.ToLower())));
+
+            ListView.EndRefresh();
         }
     }
 }
