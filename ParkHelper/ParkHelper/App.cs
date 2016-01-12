@@ -18,6 +18,8 @@ namespace ParkHelper
             nav = new NavigationService();
             nav.Configure(Locator.SplashScreenPage, typeof(SplashScreenPage));
             nav.Configure(Locator.HomePage, typeof(HomePage));
+            nav.Configure(Locator.VisiteDetailsPage, typeof(VisiteDetailsPage));
+            nav.Configure(Locator.EditHotelDetailsPage, typeof(EditHotelDetailsPage));
             nav.Configure(Locator.ListPage, typeof(ListPage));
             nav.Configure(Locator.MapPage, typeof(MapPage));
             nav.Configure(Locator.LieuDetailsPage, typeof(LieuDetailsPage));
