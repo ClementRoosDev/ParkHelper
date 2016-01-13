@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
-using ParkHelper.Common.Objets;
 
-namespace ParkHelper.Model
+namespace ParkHelper.Common.Models.Parcours
 {
     public class Parcours : ObservableCollection<ListeParcour>
     {

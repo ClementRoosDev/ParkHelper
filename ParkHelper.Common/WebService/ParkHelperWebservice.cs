@@ -1,12 +1,11 @@
 ﻿using Newtonsoft.Json;
-using ParkHelper.Common.Objets;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
+using ParkHelper.Common.Models;
+using ParkHelper.Common.Models.RequeteListeLieux;
 
 namespace ParkHelper.Common.WebService
 {

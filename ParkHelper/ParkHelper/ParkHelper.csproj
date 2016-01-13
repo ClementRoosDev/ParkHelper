@@ -40,9 +40,6 @@
     <Compile Include="Commands\GetItineraireCommand.cs" />
     <Compile Include="Helper\NavigationService.cs" />
     <Compile Include="Locator.cs" />
-    <Compile Include="Model\Categorie.cs" />
-    <Compile Include="Model\EtapeParcours.cs" />
-    <Compile Include="Model\Parcours.cs" />
     <Compile Include="ParkHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

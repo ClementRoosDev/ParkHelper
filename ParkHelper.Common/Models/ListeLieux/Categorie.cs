@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
-using ParkHelper.Common.Objets;
+using ParkHelper.Common.Models.RequeteListeLieux;
 
-namespace ParkHelper.Model
+namespace ParkHelper.Common.Models.ListeLieux
 {
     public class Categorie : ObservableCollection<Lieu>
     {

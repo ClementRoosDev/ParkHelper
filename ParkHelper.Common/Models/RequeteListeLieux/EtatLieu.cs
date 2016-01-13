@@ -1,4 +1,4 @@
-﻿namespace ParkHelper.Common.Objets
+﻿namespace ParkHelper.Common.Models.RequeteListeLieux
 {
     public class EtatLieu
     {

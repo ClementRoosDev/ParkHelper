@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-namespace ParkHelper.Common.Objets
+namespace ParkHelper.Common.Models.RequeteListeLieux
 {
-    using System;
-
     public class Lieu
     {
         public event EventHandler<EventArgs> OnToggled = delegate { };

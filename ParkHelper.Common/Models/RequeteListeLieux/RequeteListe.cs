@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ParkHelper.Common.Objets
+namespace ParkHelper.Common.Models.RequeteListeLieux
 {
     public class RequeteListe
     {
