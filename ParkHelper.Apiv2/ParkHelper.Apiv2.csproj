@@ -194,6 +194,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\EtatLieuxController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IndicationsController.cs" />
     <Compile Include="Controllers\LieuxController.cs" />
     <Compile Include="Controllers\TypeDeLieuxController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

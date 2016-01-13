@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
-using System.Web.Http.OData.Routing;
 using ParkHelper.Data;
 
 namespace ParkHelper.Apiv2.Controllers
@@ -44,110 +35,6 @@ namespace ParkHelper.Apiv2.Controllers
             return SingleResult.Create(db.Lieux.Where(lieu => lieu.Id == key));
         }
 
-        // PUT: odata/Lieux(5)
-        public IHttpActionResult Put([FromODataUri] int key, Delta<Lieu> patch)
-        {
-            Validate(patch.GetEntity());
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            Lieu lieu = db.Lieux.Find(key);
-            if (lieu == null)
-            {
-                return NotFound();
-            }
-
-            patch.Put(lieu);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!LieuExists(key))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return Updated(lieu);
-        }
-
-        // POST: odata/Lieux
-        public IHttpActionResult Post(Lieu lieu)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Lieux.Add(lieu);
-            db.SaveChanges();
-
-            return Created(lieu);
-        }
-
-        // PATCH: odata/Lieux(5)
-        [AcceptVerbs("PATCH", "MERGE")]
-        public IHttpActionResult Patch([FromODataUri] int key, Delta<Lieu> patch)
-        {
-            Validate(patch.GetEntity());
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            Lieu lieu = db.Lieux.Find(key);
-            if (lieu == null)
-            {
-                return NotFound();
-            }
-
-            patch.Patch(lieu);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!LieuExists(key))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return Updated(lieu);
-        }
-
-        // DELETE: odata/Lieux(5)
-        public IHttpActionResult Delete([FromODataUri] int key)
-        {
-            Lieu lieu = db.Lieux.Find(key);
-            if (lieu == null)
-            {
-                return NotFound();
-            }
-
-            db.Lieux.Remove(lieu);
-            db.SaveChanges();
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
         // GET: odata/Lieux(5)/TypeDeLieu
         [EnableQuery]
         public SingleResult<TypeDeLieu> GetTypeDeLieu([FromODataUri] int key)
@@ -169,11 +56,6 @@ namespace ParkHelper.Apiv2.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool LieuExists(int key)
-        {
-            return db.Lieux.Count(e => e.Id == key) > 0;
         }
     }
 }

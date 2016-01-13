@@ -57,12 +57,12 @@ Liaison(Lieux, TypeDeLieu)
 2 : DONE
 - F MAMDATORY : Completer les données de la table Lieux
 
-3 : 
+3 : DONE
 - I : Remplir les indications
 - F : Ajout d'un champs Etat : Ouvert, Fermé => Controller API à UPDATE, ask for help if needed
 
 4 :
-- F : Ajout de la gestion des horaires pour les spectacles et toutes les attractions => Controller API & EDMX à UPDATE, ask for help if needed
+- I : Ajout de la gestion des horaires pour les spectacles et toutes les attractions => Controller API & EDMX à UPDATE, ask for help if needed
 Pour la table horaire, les champs sont :
 IdHoraire
 Ouverture

@@ -12,33 +12,33 @@ namespace ParkHelper.Apiv2.Controllers
     using System.Web.Http.OData.Extensions;
     using ParkHelper.Data;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<TypeDeLieu>("TypeDeLieux");
+    builder.EntitySet<Indication>("Indications");
     builder.EntitySet<Lieu>("Lieux"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class TypeDeLieuxController : ODataController
+    public class IndicationsController : ODataController
     {
         private ParcHelperEntities db = new ParcHelperEntities();
 
-        // GET: odata/TypeDeLieux
+        // GET: odata/Indications
         [EnableQuery]
-        public IQueryable<TypeDeLieu> GetTypeDeLieux()
+        public IQueryable<Indication> GetIndications()
         {
-            return db.TypeDeLieux;
+            return db.Indications;
         }
 
-        // GET: odata/TypeDeLieux(5)
+        // GET: odata/Indications(5)
         [EnableQuery]
-        public SingleResult<TypeDeLieu> GetTypeDeLieu([FromODataUri] int key)
+        public SingleResult<Indication> GetIndication([FromODataUri] int key)
         {
-            return SingleResult.Create(db.TypeDeLieux.Where(typeDeLieu => typeDeLieu.Id == key));
+            return SingleResult.Create(db.Indications.Where(indication => indication.Id == key));
         }
 
-        // GET: odata/TypeDeLieux(5)/Lieux
+        // GET: odata/Indications(5)/Lieux
         [EnableQuery]
         public IQueryable<Lieu> GetLieux([FromODataUri] int key)
         {
-            return db.TypeDeLieux.Where(m => m.Id == key).SelectMany(m => m.Lieux);
+            return db.Indications.Where(m => m.Id == key).SelectMany(m => m.Lieux);
         }
 
         protected override void Dispose(bool disposing)
