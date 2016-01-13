@@ -57,19 +57,14 @@ namespace ParkHelper.Views
                     else
                     {
                         await DisplayAlert("Error", "Connection Error", "OK", "Cancel");
-                        System.Diagnostics.Debug.WriteLine("ERROR!");
                         _viewModel.HomeCommand.Execute(null);
                     }
                 }
                 catch (Exception ex)
                 {
-
                     await DisplayAlert("Error", "Connection Error", "OK", "Cancel");
-                    System.Diagnostics.Debug.WriteLine(ex.Message);
                     _viewModel.HomeCommand.Execute(null);
                 }
-
-
             }
             else
             {

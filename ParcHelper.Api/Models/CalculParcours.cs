@@ -2,7 +2,7 @@
 using System.Linq;
 using ParkHelper.Api.Properties;
 using ParkHelper.Api.Repository;
-using ParkHelper.Data.Parcours;
+using ParkHelper.Data;
 
 namespace ParkHelper.Api.Models
 {
@@ -15,7 +15,7 @@ namespace ParkHelper.Api.Models
         #region Properties
 
         public Parcours Parcours { get; set; }
-        List<Data.Parcours.Lieu> ListeAttraction { get; set; }
+        List<Lieu> ListeAttraction { get; set; }
 
         #endregion
 
@@ -38,7 +38,7 @@ namespace ParkHelper.Api.Models
             AjoutDeplacements();
         }
 
-        List<Data.Parcours.Lieu> ConvertIdToAttraction(int[] listeIdAttractions)
+        List<Lieu> ConvertIdToAttraction(int[] listeIdAttractions)
         {
             /*using (var db = new ParcHelperEntities())
             {
@@ -69,7 +69,7 @@ namespace ParkHelper.Api.Models
 
         void DetermineOrdreAttractions()
         {
-            Data.Parcours.Lieu attractionTemp = ListeAttraction.First(a => a.Ordre == 1);
+            Lieu attractionTemp = ListeAttraction.First(a => a.Ordre == 1);
             for (int i = 3; i <= ListeAttraction.Count()*2; i+=2)
             {
                 Localisation l = new Localisation(attractionTemp,ListeAttraction);

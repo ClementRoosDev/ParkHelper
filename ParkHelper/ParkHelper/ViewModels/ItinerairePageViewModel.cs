@@ -16,6 +16,8 @@ namespace ParkHelper.ViewModels
 
         readonly INavigationService _navigationService;
 
+        private bool _isLoading;
+
         #endregion
 
         #region Contructor
@@ -36,7 +38,6 @@ namespace ParkHelper.ViewModels
             });
             Listes = new List<ListeParcour>();
             ListesBis = new List<ListeParcour>();
-            IsBusy = true;
 
             ListeIdAttractions = new List<int>();
             ParcoursFinal = new List<Parcours>();
@@ -46,24 +47,41 @@ namespace ParkHelper.ViewModels
         #endregion
 
         #region Properties
-        
-        #region General
 
         public ICommand HomeCommand { get; set; }
 
         public ICommand ListPageCommand { get; set; }
 
         public ParkHelper Context { get; set; }
-        #endregion
 
-        #region Local
         public List<ListeParcour> Listes { get; set; }
         public List<ListeParcour> ListesBis { get; set; }
-        public bool IsBusy { get; set; }
+
+        public bool IsLoading
+        {
+            get
+            {
+                return _isLoading;
+            }
+            set
+            {
+                _isLoading = value;
+                RaisePropertyChanged(() => IsLoading);
+                RaisePropertyChanged(() => IsLoadingCompleted);
+            }
+        }
+
+        public bool IsLoadingCompleted
+        {
+            get
+            {
+                return !_isLoading;
+            }
+        }
+
         public List<int> ListeIdAttractions { get; set; }
         public List<Parcours> ParcoursFinal { get; set; }
 
-        #endregion
         #endregion
 
         #region Methods
@@ -76,7 +94,7 @@ namespace ParkHelper.ViewModels
                 //if (Listes.ElementAt(i + 1).Ordre == (Listes.ElementAt(i).Ordre + 1) && (i+1) < (Listes.Count-1)) continue;
                 if (Listes.ElementAt(i).Description == null)
                 {
-                    if(((i + 1) != (Listes.Count - 1)) && ((Listes.ElementAt(i + 1).Ordre == (Listes.ElementAt(i).Ordre + 1))))
+                    if (((i + 1) != (Listes.Count - 1)) && ((Listes.ElementAt(i + 1).Ordre == (Listes.ElementAt(i).Ordre + 1))))
                     {
                         Listes.ElementAt(i).Ordre = Listes.ElementAt(i - 1).Ordre;
                     }
@@ -97,7 +115,7 @@ namespace ParkHelper.ViewModels
                 var etapeParcours = Listes.Where(i => i.Ordre == subList.Key).ToList().First();
                 var parcours = new Parcours(subList.Key.ToString(),
                     new EtapeParcours(etapeParcours));
-                for(var j = 1;j <subList.Count();j++)
+                for (var j = 1; j < subList.Count(); j++)
                 {
                     parcours.Add(subList.ElementAt(j));
                 }

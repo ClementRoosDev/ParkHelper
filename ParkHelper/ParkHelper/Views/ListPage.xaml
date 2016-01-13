@@ -37,7 +37,8 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    <ActivityIndicator x:Name="ActivityIndicator" Grid.Row="2"
+    <ActivityIndicator x:Name="ActivityIndicator" Grid.Row="1"
+                       VerticalOptions="Center" HorizontalOptions="Center"
                          IsVisible="{Binding IsLoading}"
                          IsRunning="{Binding IsLoading}"
                          Color="Black" />

@@ -47,7 +47,7 @@ namespace ParkHelper.Api.Controllers
 
         #region Attractions POST
         [Route("api/ptattractions")]
-        public HttpResponseMessage Post(Data.Parcours.Lieu e)
+        public HttpResponseMessage Post(Lieu e)
         {
 //            var attractions = _repository.InsertAttraction(e);
             _repository.Add(e);
@@ -59,7 +59,7 @@ namespace ParkHelper.Api.Controllers
 
         #region Attractions PUT
         [Route("api/ptatttractions")]
-        public HttpResponseMessage Put(Data.Parcours.Lieu e)
+        public HttpResponseMessage Put(Lieu e)
         {
 //            var attractions = _repository.UpdateAttraction(e);
             _repository.Update(e);
@@ -71,7 +71,7 @@ namespace ParkHelper.Api.Controllers
 
         #region Attractions POST
         [Route("api/ptattractions")]
-        public HttpResponseMessage Delete(Data.Parcours.Lieu e)
+        public HttpResponseMessage Delete(Lieu e)
         {
 //            var attractions = _repository.DeleteAttraction(e);
             _repository.Delete(e);

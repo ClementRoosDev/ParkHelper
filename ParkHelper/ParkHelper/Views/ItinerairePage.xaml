@@ -10,10 +10,16 @@
         <RowDefinition Height="Auto"/>
       </Grid.RowDefinitions>
       <ListView Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center"
-                x:Name="ListView" IsVisible="True"
+                x:Name="ListView"
                 IsGroupingEnabled="True"
                 GroupDisplayBinding="{Binding Heure}"
+                IsVisible="{Binding IsLoadingCompleted}"
                 GroupShortNameBinding="{Binding}">
+        <ActivityIndicator x:Name="ActivityIndicator" Grid.Row="0" 
+                           VerticalOptions="Center" HorizontalOptions="Center"
+                        IsVisible="{Binding IsLoading}"
+                        IsRunning="{Binding IsLoading}"
+                        Color="Black" />
       </ListView>
     </Grid>
 </ContentPage>

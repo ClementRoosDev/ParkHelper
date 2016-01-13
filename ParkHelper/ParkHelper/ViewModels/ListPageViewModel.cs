@@ -76,9 +76,7 @@ namespace ParkHelper.ViewModels
                 return !_isLoading;
             }
         }
-
-
-
+        
         public ParkHelper Context { get; set; }
         public object Parameter { get; set; }
 
