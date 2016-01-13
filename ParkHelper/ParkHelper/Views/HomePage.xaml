@@ -36,7 +36,7 @@
       <Image Source="Itineraire.png" WidthRequest="50" VerticalOptions="Center" Grid.Column="0" Grid.Row="0" HorizontalOptions="Center">
       </Image>
       <Button Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" HorizontalOptions="Center" VerticalOptions="FillAndExpand"
-          x:Name="button1"
+          x:Name="Button1"
           BackgroundColor="Transparent"
           Command="{Binding VisiteCommand}"
           
@@ -59,7 +59,7 @@
       </Image>
       <Button Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" HorizontalOptions="Center"
        BorderRadius="15"
-       x:Name="button2"
+       x:Name="Button2"
        BackgroundColor="Transparent"
        Command="{Binding MapCommand}"
        HeightRequest="50"          

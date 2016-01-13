@@ -21,11 +21,15 @@ ParkHelper : Features list
 - F : Améloriation de la GUI avec du style
 
 3 :
-- I : Création d'un objet présence qui contient les infos de visite de l'utilisateur (datetime picker and so on)
+- F : Création d'un objet présence qui contient les infos de visite de l'utilisateur (datetime picker and so on)
+- F : Vue Resa Hotel
+- F : Vue Infos Visite
+
+4 :
 - F : Service d'écoute pour api
 - F : Recevoir des notifications
 
-4 :
+5 :
 - F : Création d'un système de partage -> SQL à modifier
 
 ------------------------ Model ------------------------
