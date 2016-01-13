@@ -35,8 +35,9 @@ namespace ParkHelper.Commands
 
         public void Execute(object parameter)
         {
-            var viewModel= (ListPageViewModel) parameter;
-            _command.Execute(viewModel.ListeAppliSelectionnees);
+            var viewModel = (ListPageViewModel) parameter;
+            viewModel.Context.ListeAppliSelectionnees = viewModel.ListeAppliSelectionnees;
+            _command.Execute(viewModel.Context);
         }
 
         public event EventHandler CanExecuteChanged;

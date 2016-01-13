@@ -1,11 +1,11 @@
 ﻿namespace ParkHelper.Views
 {
-    public partial class HomePage
+    public partial class VisiteDetailsPage
     {
-        public HomePage(ParkHelper context)
+        public VisiteDetailsPage(ParkHelper context)
         {
             InitializeComponent();
-            var viewModel = App.Locator.HomePageView;
+            var viewModel = App.Locator.VisiteDetailsPageView;
             viewModel.Context = context;
             BindingContext = viewModel;
         }

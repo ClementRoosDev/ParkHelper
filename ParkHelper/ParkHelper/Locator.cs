@@ -16,16 +16,20 @@ namespace ParkHelper
             // ViewModels
             SimpleIoc.Default.Register<SplashScreenViewModel>();
             SimpleIoc.Default.Register<HomePageViewModel>();
+            SimpleIoc.Default.Register<VisiteDetailsViewModel>();
+            SimpleIoc.Default.Register<EditHotelPageViewModel>();
             SimpleIoc.Default.Register<ListPageViewModel>();
             SimpleIoc.Default.Register<MapPageViewModel>();
-            SimpleIoc.Default.Register<AttractionDetailsViewModel>();
+            SimpleIoc.Default.Register<LieuDetailsViewModel>();
             SimpleIoc.Default.Register<ItinerairePageViewModel>();
         }
         public const string SplashScreenPage = "SplashScreenPage";
         public const string HomePage = "HomePage";
+        public const string VisiteDetailsPage = "VisiteDetailsPage";
+        public const string EditHotelDetailsPage = "EditHotelDetailsPage";
         public const string ListPage = "ListPage";
         public const string MapPage = "MapPage";
-        public const string AttractionDetailsPage = "AttractionDetailsPage";
+        public const string LieuDetailsPage = "LieuDetailsPage";
         public const string ItinerairePage = "ItinerairePage";
 
         /// <summary>
@@ -62,7 +66,39 @@ namespace ParkHelper
         }
 
         /// <summary>
-        /// Gets the Second property.
+        /// Gets the VsiteDetails property.
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public VisiteDetailsViewModel VisiteDetailsPageView
+        {
+            get
+            {
+                if (!SimpleIoc.Default.IsRegistered<VisiteDetailsViewModel>())
+                    SimpleIoc.Default.Register<VisiteDetailsViewModel>();
+                return ServiceLocator.Current.GetInstance<VisiteDetailsViewModel>();
+            }
+        }
+
+        /// <summary>
+        /// Gets the VsiteDetails property.
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public EditHotelPageViewModel EditHotelDetailsPageView
+        {
+            get
+            {
+                if (!SimpleIoc.Default.IsRegistered<EditHotelPageViewModel>())
+                    SimpleIoc.Default.Register<EditHotelPageViewModel>();
+                return ServiceLocator.Current.GetInstance<EditHotelPageViewModel>();
+            }
+        }
+
+        /// <summary>
+        /// Gets the ListPage property.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
@@ -78,7 +114,7 @@ namespace ParkHelper
         }
 
         /// <summary>
-        /// Gets the third property.
+        /// Gets the MapPage property.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
@@ -99,13 +135,13 @@ namespace ParkHelper
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public AttractionDetailsViewModel AttractionDetailsView
+        public LieuDetailsViewModel LieuDetailsView
         {
             get
             {
-                if (!SimpleIoc.Default.IsRegistered<AttractionDetailsViewModel>())
-                    SimpleIoc.Default.Register<AttractionDetailsViewModel>();
-                return ServiceLocator.Current.GetInstance<AttractionDetailsViewModel>();
+                if (!SimpleIoc.Default.IsRegistered<LieuDetailsViewModel>())
+                    SimpleIoc.Default.Register<LieuDetailsViewModel>();
+                return ServiceLocator.Current.GetInstance<LieuDetailsViewModel>();
             }
         }
 

@@ -32,8 +32,9 @@ namespace ParkHelper.ViewModels
         #region Properties
 
         public string TextTest { get; set; }
-        public ICommand ItineraireCommand { get; set; }
+        public ICommand VisiteCommand { get; set; }
         public ICommand MapCommand { get; set; }
+        public ParkHelper Context { get; set; }
 
         #endregion
 
@@ -43,13 +44,13 @@ namespace ParkHelper.ViewModels
         {
             //fileName = "";
             //if()
-            ItineraireCommand = new RelayCommand(() =>
+            VisiteCommand = new RelayCommand(() =>
             {
                 _navigationService.NavigateTo(
-                    Locator.ListPage);
+                    Locator.VisiteDetailsPage,Context);
             });
             /**}else{
-            ItineraireCommand = new RelayCommand(() =>
+            ListPageCommand = new RelayCommand(() =>
             {
                 _navigationService.NavigateTo(
                     Locator.ItinerairePage, fileName);

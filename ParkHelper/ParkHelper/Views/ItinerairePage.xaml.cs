@@ -1,6 +1,4 @@
 ﻿using System;
-using Xamarin.Forms;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using ParkHelper.Common.WebService;
 using ParkHelper.ViewModels;
@@ -9,14 +7,14 @@ namespace ParkHelper.Views
 {
     public partial class ItinerairePage
     {
-        private ItinerairePageViewModel _viewModel;
+        private readonly ItinerairePageViewModel _viewModel;
 
-        public ItinerairePage(List<int> listeIdAttractions)
+        public ItinerairePage(ParkHelper context)
         {
             InitializeComponent();
             setUIElements(false);
             _viewModel = App.Locator.ItineraireView;
-            _viewModel.ListeIdAttractions = listeIdAttractions;
+            _viewModel.SetContext(context);
             _viewModel.IsBusy = true;
             BindingContext = _viewModel;
             _viewModel.IsBusy = false;
@@ -37,6 +35,8 @@ namespace ParkHelper.Views
                     _viewModel.ConvertFrom(objectWithFormat.ListeParcours)
                 );
 
+            if (objectWithFormat.ListeParcours != null)
+            {
                 if (_viewModel.Listes.Count > 0)
                 {
                     ListView.ItemsSource = _viewModel.ParcoursFinal;
@@ -44,11 +44,18 @@ namespace ParkHelper.Views
                 }
                 else
                 {
-                    //ActivityIndicator.IsRunning = false;
-                    await DisplayAlert("Error", "Connection Error", "OK", "Cancel");
+                    await DisplayAlert("Erreur", "Retour à la page des attractions", "OK");
                     System.Diagnostics.Debug.WriteLine("ERROR!");
-                    _viewModel.HomeCommand.Execute(null);
+                    _viewModel.ListPageCommand.Execute(_viewModel.Context);
                 }
+            }
+            else
+            {
+                //ActivityIndicator.IsRunning = false;
+                await DisplayAlert("Erreur", "Connection Error", "OK");
+                System.Diagnostics.Debug.WriteLine("ERROR!");
+                _viewModel.HomeCommand.Execute(null);
+            }
 
         }
 

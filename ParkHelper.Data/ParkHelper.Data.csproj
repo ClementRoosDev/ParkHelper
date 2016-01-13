@@ -54,7 +54,13 @@
     <Compile Include="EtatLieu.cs">
       <DependentUpon>ParkHelperModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Horaire.cs">
+      <DependentUpon>ParkHelperModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Indication.cs">
+      <DependentUpon>ParkHelperModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Jour.cs">
       <DependentUpon>ParkHelperModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Lieu.cs">
@@ -79,6 +85,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ParkHelperModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Planning.cs">
+      <DependentUpon>ParkHelperModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeDeLieu.cs">

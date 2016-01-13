@@ -23,17 +23,23 @@ namespace ParkHelper.Apiv2
 
 
 
-            ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+            var builder = new ODataConventionModelBuilder();
             builder.EntitySet<Lieu>("Lieux");
-            builder.EntitySet<EtatLieu>("EtatLieux");
             builder.EntitySet<TypeDeLieu>("TypeDeLieux");
             builder.EntitySet<Indication>("Indications");
+            builder.EntitySet<Planning>("Plannings");
+            builder.EntitySet<EtatLieu>("EtatLieux");
+            builder.EntitySet<Horaire>("Horaires");
+            builder.EntitySet<Jour>("Jours");
 
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 
 
             var json = config.Formatters.JsonFormatter;
-            json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+            json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All;
+            json.UseDataContractJsonSerializer = true;
+            json.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+
             config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
     }

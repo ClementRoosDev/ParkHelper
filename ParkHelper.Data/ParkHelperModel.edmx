@@ -12,13 +12,20 @@
           <Property Name="IdEtat" Type="int" Nullable="false" />
           <Property Name="nomEtat" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Horaire">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Ouverture" Type="int" />
+          <Property Name="Fermeture" Type="int" />
+        </EntityType>
         <EntityType Name="Indication">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Libelle" Type="varchar" MaxLength="256" />
-          <Property Name="Description" Type="varchar" MaxLength="5000" />
           <Property Name="LienLogo" Type="varchar" MaxLength="256" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -30,6 +37,13 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
           </Key>
           <Property Name="IdLieu" Type="int" Nullable="false" />
           <Property Name="IdIndication" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Jour">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="nomJour" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Lieu">
           <Key>
@@ -45,7 +59,20 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
           <Property Name="Duree" Type="int" />
           <Property Name="CapaciteWagon" Type="int" />
           <Property Name="IdType" Type="int" />
-          <Property Name="IdEtat" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ParcHelper.dbo.Planning' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Planning">
+          <Key>
+            <PropertyRef Name="IdLieu" />
+            <PropertyRef Name="IdJour" />
+            <PropertyRef Name="IdHoraire" />
+            <PropertyRef Name="IdEtat" />
+          </Key>
+          <Property Name="IdLieu" Type="int" Nullable="false" />
+          <Property Name="IdJour" Type="int" Nullable="false" />
+          <Property Name="IdHoraire" Type="int" Nullable="false" />
+          <Property Name="IdEtat" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TypeDeLieu">
           <Key>
@@ -54,15 +81,27 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Libelle" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_ToEtatLieu">
-          <End Role="EtatLieu" Type="Self.EtatLieu" Multiplicity="0..1" />
-          <End Role="Lieu" Type="Self.Lieu" Multiplicity="*" />
+        <Association Name="FK_ToEtat">
+          <End Role="EtatLieu" Type="Self.EtatLieu" Multiplicity="1" />
+          <End Role="Planning" Type="Self.Planning" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EtatLieu">
               <PropertyRef Name="IdEtat" />
             </Principal>
-            <Dependent Role="Lieu">
+            <Dependent Role="Planning">
               <PropertyRef Name="IdEtat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToHoraire">
+          <End Role="Horaire" Type="Self.Horaire" Multiplicity="1" />
+          <End Role="Planning" Type="Self.Planning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Horaire">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Planning">
+              <PropertyRef Name="IdHoraire" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -90,6 +129,30 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ToJour">
+          <End Role="Jour" Type="Self.Jour" Multiplicity="1" />
+          <End Role="Planning" Type="Self.Planning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jour">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Planning">
+              <PropertyRef Name="IdJour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToLieu">
+          <End Role="Lieu" Type="Self.Lieu" Multiplicity="1" />
+          <End Role="Planning" Type="Self.Planning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lieu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Planning">
+              <PropertyRef Name="IdLieu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ToType">
           <End Role="TypeDeLieu" Type="Self.TypeDeLieu" Multiplicity="0..1" />
           <End Role="Lieu" Type="Self.Lieu" Multiplicity="*" />
@@ -104,7 +167,9 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
         </Association>
         <EntityContainer Name="ParcHelperModelStoreContainer">
           <EntitySet Name="EtatLieu" EntityType="Self.EtatLieu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Horaire" EntityType="Self.Horaire" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Indication" EntityType="Self.Indication" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jour" EntityType="Self.Jour" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lieu" EntityType="Self.Lieu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeDeLieu" EntityType="Self.TypeDeLieu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IndicationParLieu" EntityType="Self.IndicationParLieu" store:Type="Tables" store:Schema="dbo">
@@ -113,9 +178,21 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
     [IndicationParLieu].[IdIndication] AS [IdIndication]
     FROM [dbo].[IndicationParLieu] AS [IndicationParLieu]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK_ToEtatLieu" Association="Self.FK_ToEtatLieu">
+          <EntitySet Name="Planning" EntityType="Self.Planning" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Planning].[IdLieu] AS [IdLieu], 
+    [Planning].[IdJour] AS [IdJour], 
+    [Planning].[IdHoraire] AS [IdHoraire], 
+    [Planning].[IdEtat] AS [IdEtat]
+    FROM [dbo].[Planning] AS [Planning]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ToEtat" Association="Self.FK_ToEtat">
             <End Role="EtatLieu" EntitySet="EtatLieu" />
-            <End Role="Lieu" EntitySet="Lieu" />
+            <End Role="Planning" EntitySet="Planning" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToHoraire" Association="Self.FK_ToHoraire">
+            <End Role="Horaire" EntitySet="Horaire" />
+            <End Role="Planning" EntitySet="Planning" />
           </AssociationSet>
           <AssociationSet Name="FK_ToIndication" Association="Self.FK_ToIndication">
             <End Role="Indication" EntitySet="Indication" />
@@ -124,6 +201,14 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
           <AssociationSet Name="FK_ToIndicationLieu" Association="Self.FK_ToIndicationLieu">
             <End Role="Lieu" EntitySet="Lieu" />
             <End Role="IndicationParLieu" EntitySet="IndicationParLieu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToJour" Association="Self.FK_ToJour">
+            <End Role="Jour" EntitySet="Jour" />
+            <End Role="Planning" EntitySet="Planning" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToLieu" Association="Self.FK_ToLieu">
+            <End Role="Lieu" EntitySet="Lieu" />
+            <End Role="Planning" EntitySet="Planning" />
           </AssociationSet>
           <AssociationSet Name="FK_ToType" Association="Self.FK_ToType">
             <End Role="TypeDeLieu" EntitySet="TypeDeLieu" />
@@ -135,10 +220,13 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
     <edmx:ConceptualModels>
       <Schema Namespace="ParcHelperModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ParcHelperEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EtatLieux" EntityType="ParcHelperModel.EtatLieu" />
+          <EntitySet Name="Horaires" EntityType="ParcHelperModel.Horaire" />
           <EntitySet Name="Indications" EntityType="ParcHelperModel.Indication" />
+          <EntitySet Name="Jours" EntityType="ParcHelperModel.Jour" />
           <EntitySet Name="Lieux" EntityType="ParcHelperModel.Lieu" />
           <EntitySet Name="TypeDeLieux" EntityType="ParcHelperModel.TypeDeLieu" />
-          <AssociationSet Name="FK_Attraction_ToTableType" Association="ParcHelperModel.FK_Attraction_ToTableType">
+          <AssociationSet Name="FK_ToType" Association="ParcHelperModel.FK_ToType">
             <End Role="TypeDeLieu" EntitySet="TypeDeLieux" />
             <End Role="Lieu" EntitySet="Lieux" />
           </AssociationSet>
@@ -146,21 +234,57 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
             <End Role="Indication" EntitySet="Indications" />
             <End Role="Lieu" EntitySet="Lieux" />
           </AssociationSet>
-          <EntitySet Name="EtatLieux" EntityType="ParcHelperModel.EtatLieu" />
-          <AssociationSet Name="FK_ToEtatLieu" Association="ParcHelperModel.FK_ToEtatLieu">
+          <EntitySet Name="Plannings" EntityType="ParcHelperModel.Planning" />
+          <AssociationSet Name="FK_ToEtat" Association="ParcHelperModel.FK_ToEtat">
             <End Role="EtatLieu" EntitySet="EtatLieux" />
+            <End Role="Planning" EntitySet="Plannings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToHoraire" Association="ParcHelperModel.FK_ToHoraire">
+            <End Role="Horaire" EntitySet="Horaires" />
+            <End Role="Planning" EntitySet="Plannings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToJour" Association="ParcHelperModel.FK_ToJour">
+            <End Role="Jour" EntitySet="Jours" />
+            <End Role="Planning" EntitySet="Plannings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToLieu" Association="ParcHelperModel.FK_ToLieu">
             <End Role="Lieu" EntitySet="Lieux" />
+            <End Role="Planning" EntitySet="Plannings" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="EtatLieu">
+          <Key>
+            <PropertyRef Name="IdEtat" />
+          </Key>
+          <Property Name="IdEtat" Type="Int32" Nullable="false" />
+          <Property Name="nomEtat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Plannings" Relationship="ParcHelperModel.FK_ToEtat" FromRole="EtatLieu" ToRole="Planning" />
+        </EntityType>
+        <EntityType Name="Horaire">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Ouverture" Type="Int32" />
+          <Property Name="Fermeture" Type="Int32" />
+          <NavigationProperty Name="Plannings" Relationship="ParcHelperModel.FK_ToHoraire" FromRole="Horaire" ToRole="Planning" />
+        </EntityType>
         <EntityType Name="Indication">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Libelle" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
           <Property Name="LienLogo" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Lieux" Relationship="ParcHelperModel.IndicationParLieu" FromRole="Indication" ToRole="Lieu" />
+        </EntityType>
+        <EntityType Name="Jour">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="nomJour" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Plannings" Relationship="ParcHelperModel.FK_ToJour" FromRole="Jour" ToRole="Planning" />
         </EntityType>
         <EntityType Name="Lieu">
           <Key>
@@ -176,10 +300,9 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
           <Property Name="Duree" Type="Int32" />
           <Property Name="CapaciteWagon" Type="Int32" />
           <Property Name="IdType" Type="Int32" />
-          <NavigationProperty Name="TypeDeLieu" Relationship="ParcHelperModel.FK_Attraction_ToTableType" FromRole="Lieu" ToRole="TypeDeLieu" />
+          <NavigationProperty Name="TypeDeLieu" Relationship="ParcHelperModel.FK_ToType" FromRole="Lieu" ToRole="TypeDeLieu" />
           <NavigationProperty Name="Indications" Relationship="ParcHelperModel.IndicationParLieu" FromRole="Lieu" ToRole="Indication" />
-          <Property Name="IdEtat" Type="Int32" />
-          <NavigationProperty Name="EtatLieu" Relationship="ParcHelperModel.FK_ToEtatLieu" FromRole="Lieu" ToRole="EtatLieu" />
+          <NavigationProperty Name="Plannings" Relationship="ParcHelperModel.FK_ToLieu" FromRole="Lieu" ToRole="Planning" />
         </EntityType>
         <EntityType Name="TypeDeLieu">
           <Key>
@@ -187,9 +310,9 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Lieux" Relationship="ParcHelperModel.FK_Attraction_ToTableType" FromRole="TypeDeLieu" ToRole="Lieu" />
+          <NavigationProperty Name="Lieux" Relationship="ParcHelperModel.FK_ToType" FromRole="TypeDeLieu" ToRole="Lieu" />
         </EntityType>
-        <Association Name="FK_Attraction_ToTableType">
+        <Association Name="FK_ToType">
           <End Type="ParcHelperModel.TypeDeLieu" Role="TypeDeLieu" Multiplicity="0..1" />
           <End Type="ParcHelperModel.Lieu" Role="Lieu" Multiplicity="*" />
           <ReferentialConstraint>
@@ -205,23 +328,67 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
           <End Type="ParcHelperModel.Indication" Role="Indication" Multiplicity="*" />
           <End Type="ParcHelperModel.Lieu" Role="Lieu" Multiplicity="*" />
         </Association>
-        <EntityType Name="EtatLieu">
+        <EntityType Name="Planning">
           <Key>
+            <PropertyRef Name="IdLieu" />
+            <PropertyRef Name="IdJour" />
+            <PropertyRef Name="IdHoraire" />
             <PropertyRef Name="IdEtat" />
           </Key>
+          <Property Name="IdLieu" Type="Int32" Nullable="false" />
+          <Property Name="IdJour" Type="Int32" Nullable="false" />
+          <Property Name="IdHoraire" Type="Int32" Nullable="false" />
           <Property Name="IdEtat" Type="Int32" Nullable="false" />
-          <Property Name="nomEtat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Lieux" Relationship="ParcHelperModel.FK_ToEtatLieu" FromRole="EtatLieu" ToRole="Lieu" />
+          <NavigationProperty Name="EtatLieu" Relationship="ParcHelperModel.FK_ToEtat" FromRole="Planning" ToRole="EtatLieu" />
+          <NavigationProperty Name="Horaire" Relationship="ParcHelperModel.FK_ToHoraire" FromRole="Planning" ToRole="Horaire" />
+          <NavigationProperty Name="Jour" Relationship="ParcHelperModel.FK_ToJour" FromRole="Planning" ToRole="Jour" />
+          <NavigationProperty Name="Lieu" Relationship="ParcHelperModel.FK_ToLieu" FromRole="Planning" ToRole="Lieu" />
         </EntityType>
-        <Association Name="FK_ToEtatLieu">
-          <End Type="ParcHelperModel.EtatLieu" Role="EtatLieu" Multiplicity="0..1" />
-          <End Type="ParcHelperModel.Lieu" Role="Lieu" Multiplicity="*" />
+        <Association Name="FK_ToEtat">
+          <End Type="ParcHelperModel.EtatLieu" Role="EtatLieu" Multiplicity="1" />
+          <End Type="ParcHelperModel.Planning" Role="Planning" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EtatLieu">
               <PropertyRef Name="IdEtat" />
             </Principal>
-            <Dependent Role="Lieu">
+            <Dependent Role="Planning">
               <PropertyRef Name="IdEtat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToHoraire">
+          <End Type="ParcHelperModel.Horaire" Role="Horaire" Multiplicity="1" />
+          <End Type="ParcHelperModel.Planning" Role="Planning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Horaire">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Planning">
+              <PropertyRef Name="IdHoraire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToJour">
+          <End Type="ParcHelperModel.Jour" Role="Jour" Multiplicity="1" />
+          <End Type="ParcHelperModel.Planning" Role="Planning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jour">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Planning">
+              <PropertyRef Name="IdJour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToLieu">
+          <End Type="ParcHelperModel.Lieu" Role="Lieu" Multiplicity="1" />
+          <End Type="ParcHelperModel.Planning" Role="Planning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lieu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Planning">
+              <PropertyRef Name="IdLieu" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -231,12 +398,36 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ParcHelperModelStoreContainer" CdmEntityContainer="ParcHelperEntities">
+          <EntitySetMapping Name="EtatLieux">
+            <EntityTypeMapping TypeName="ParcHelperModel.EtatLieu">
+              <MappingFragment StoreEntitySet="EtatLieu">
+                <ScalarProperty Name="nomEtat" ColumnName="nomEtat" />
+                <ScalarProperty Name="IdEtat" ColumnName="IdEtat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Horaires">
+            <EntityTypeMapping TypeName="ParcHelperModel.Horaire">
+              <MappingFragment StoreEntitySet="Horaire">
+                <ScalarProperty Name="Fermeture" ColumnName="Fermeture" />
+                <ScalarProperty Name="Ouverture" ColumnName="Ouverture" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Indications">
             <EntityTypeMapping TypeName="ParcHelperModel.Indication">
               <MappingFragment StoreEntitySet="Indication">
                 <ScalarProperty Name="LienLogo" ColumnName="LienLogo" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jours">
+            <EntityTypeMapping TypeName="ParcHelperModel.Jour">
+              <MappingFragment StoreEntitySet="Jour">
+                <ScalarProperty Name="nomJour" ColumnName="nomJour" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -244,7 +435,6 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
           <EntitySetMapping Name="Lieux">
             <EntityTypeMapping TypeName="ParcHelperModel.Lieu">
               <MappingFragment StoreEntitySet="Lieu">
-                <ScalarProperty Name="IdEtat" ColumnName="IdEtat" />
                 <ScalarProperty Name="IdType" ColumnName="IdType" />
                 <ScalarProperty Name="CapaciteWagon" ColumnName="CapaciteWagon" />
                 <ScalarProperty Name="Duree" ColumnName="Duree" />
@@ -274,11 +464,13 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
               <ScalarProperty Name="Id" ColumnName="IdIndication" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="EtatLieux">
-            <EntityTypeMapping TypeName="ParcHelperModel.EtatLieu">
-              <MappingFragment StoreEntitySet="EtatLieu">
-                <ScalarProperty Name="nomEtat" ColumnName="nomEtat" />
+          <EntitySetMapping Name="Plannings">
+            <EntityTypeMapping TypeName="ParcHelperModel.Planning">
+              <MappingFragment StoreEntitySet="Planning">
                 <ScalarProperty Name="IdEtat" ColumnName="IdEtat" />
+                <ScalarProperty Name="IdHoraire" ColumnName="IdHoraire" />
+                <ScalarProperty Name="IdJour" ColumnName="IdJour" />
+                <ScalarProperty Name="IdLieu" ColumnName="IdLieu" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -296,7 +488,7 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

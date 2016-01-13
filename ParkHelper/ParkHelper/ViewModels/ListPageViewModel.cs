@@ -32,12 +32,12 @@ namespace ParkHelper.ViewModels
             ItemDetailsCommand =
                 new RelayCommand(() =>
                 {
-                    _navigationService.NavigateTo(Locator.AttractionDetailsPage, Parameter);
+                    _navigationService.NavigateTo(Locator.LieuDetailsPage, Parameter);
                 });
 
             ItineraireCommand = new RelayCommand(() =>
             {
-                    _navigationService.NavigateTo(Locator.ItinerairePage, ListeAppliSelectionnees);
+                    _navigationService.NavigateTo(Locator.ItinerairePage, Context);
             });
 
             Listes = new List<Categorie>();
@@ -56,20 +56,7 @@ namespace ParkHelper.ViewModels
         #region Properties
 
         public bool IsBusy { get; set; }
-
-        private bool _itineraireCanBeGenerated;
-
-        public bool ItineraireCanBeGenerated
-        {
-            get {
-                return _itineraireCanBeGenerated;
-            }
-            set
-            {
-                _itineraireCanBeGenerated = value;
-                RaisePropertyChanged(() => ItineraireCanBeGenerated);
-            }    
-        }
+        public ParkHelper Context { get; set; }
         public object Parameter { get; set; }
 
         #region Liste
@@ -90,6 +77,20 @@ namespace ParkHelper.ViewModels
         #region Itineraire
         public ICommand ItineraireCommand { get; set; }
         public CreateItineraireCommand CreateItineraire { get; set; }
+
+        private bool _itineraireCanBeGenerated;
+        public bool ItineraireCanBeGenerated
+        {
+            get
+            {
+                return _itineraireCanBeGenerated;
+            }
+            set
+            {
+                _itineraireCanBeGenerated = value;
+                RaisePropertyChanged(() => ItineraireCanBeGenerated);
+            }
+        }
         #endregion
 
         #region SearchBar
@@ -111,6 +112,13 @@ namespace ParkHelper.ViewModels
         #endregion
 
         #region Methods
+        public void TryToRestore()
+        {
+            if (Context.ListeAppliSelectionnees != null && Context.ListeAppliSelectionnees.Count > 0)
+            {
+
+            }
+        }
 
         private void AddingEventToList()
         {

@@ -25,9 +25,12 @@ namespace ParkHelper.Data
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<EtatLieu> EtatLieux { get; set; }
+        public virtual DbSet<Horaire> Horaires { get; set; }
         public virtual DbSet<Indication> Indications { get; set; }
+        public virtual DbSet<Jour> Jours { get; set; }
         public virtual DbSet<Lieu> Lieux { get; set; }
         public virtual DbSet<TypeDeLieu> TypeDeLieux { get; set; }
-        public virtual DbSet<EtatLieu> EtatLieux { get; set; }
+        public virtual DbSet<Planning> Plannings { get; set; }
     }
 }
