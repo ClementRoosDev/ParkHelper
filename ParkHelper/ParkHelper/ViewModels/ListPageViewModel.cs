@@ -5,9 +5,9 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using System.Collections.Generic;
 using System.Linq;
-using ParkHelper.Model;
 using ParkHelper.Commands;
-using ParkHelper.Common.Objets;
+using ParkHelper.Common.Models.ListeLieux;
+using ParkHelper.Common.Models.RequeteListeLieux;
 
 namespace ParkHelper.ViewModels
 {

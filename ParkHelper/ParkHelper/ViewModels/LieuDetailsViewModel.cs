@@ -3,7 +3,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
-using ParkHelper.Common.Objets;
+using ParkHelper.Common.Models.RequeteListeLieux;
 
 namespace ParkHelper.ViewModels
 {

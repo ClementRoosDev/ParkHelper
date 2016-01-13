@@ -38,7 +38,6 @@
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
     <Folder Include="App_Start\" />
-    <Folder Include="Models\Visite\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\ListeLieux\Categorie.cs" />
@@ -50,6 +49,7 @@
     <Compile Include="Models\RequeteListeLieux\RequeteListe.cs" />
     <Compile Include="Models\RequeteListeParcours.cs" />
     <Compile Include="Models\RequeteListeLieux\TypeDeLieu.cs" />
+    <Compile Include="Models\Visite\Informations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebService\ParkHelperWebservice.cs" />
   </ItemGroup>

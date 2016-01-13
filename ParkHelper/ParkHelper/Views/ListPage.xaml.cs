@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using ParkHelper.Common.Models.RequeteListeLieux;
 using ParkHelper.ViewModels;
-using ParkHelper.Common.Objets;
 using ParkHelper.Common.WebService;
 using Xamarin.Forms;
 
