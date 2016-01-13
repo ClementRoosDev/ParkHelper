@@ -9,7 +9,7 @@ namespace ParkHelper.Commands
     public class CreateItineraireCommand : ICommand
     {
         readonly ICommand _command;
-        public List<Categorie> Lieux { get; private set; }
+        private List<Categorie> Lieux { get; set; }
 
         public CreateItineraireCommand(ICommand command)
         {

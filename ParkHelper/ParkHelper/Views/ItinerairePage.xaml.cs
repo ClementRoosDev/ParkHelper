@@ -60,7 +60,8 @@ namespace ParkHelper.Views
             {
                 await DisplayAlert("Error", "Connection Error", "OK", "Cancel");
                 _viewModel.IsLoading = true;
-                _viewModel.HomeCommand.Execute(null);               
+                _viewModel.HomeCommand.Execute(null);
+                System.Diagnostics.Debug.WriteLine(ex.Message);
             }
 
 
