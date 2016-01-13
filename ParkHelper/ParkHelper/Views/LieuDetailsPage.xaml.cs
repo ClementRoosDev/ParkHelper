@@ -1,4 +1,4 @@
-﻿using ParkHelper.Common.Objets;
+﻿using ParkHelper.Common.Models.RequeteListeLieux;
 
 namespace ParkHelper.Views
 {

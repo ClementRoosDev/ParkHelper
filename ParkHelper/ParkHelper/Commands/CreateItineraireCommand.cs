@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using ParkHelper.Model;
+using ParkHelper.Common.Models.ListeLieux;
 using ParkHelper.ViewModels;
 
 namespace ParkHelper.Commands
