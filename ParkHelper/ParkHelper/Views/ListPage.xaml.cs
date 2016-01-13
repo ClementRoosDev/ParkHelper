@@ -64,6 +64,7 @@ namespace ParkHelper.Views
                 {
                     await DisplayAlert("Error", "Connection Error", "OK", "Cancel");
                     _viewModel.HomeCommand.Execute(null);
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
                 }
             }
             else
