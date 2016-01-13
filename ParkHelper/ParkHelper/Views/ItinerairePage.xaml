@@ -15,7 +15,7 @@
                 GroupDisplayBinding="{Binding Heure}"
                 IsVisible="{Binding IsLoadingCompleted}"
                 GroupShortNameBinding="{Binding}">
-        <ActivityIndicator x:Name="ActivityIndicator" Grid.Row="0" 
+        <ActivityIndicator x:Name="ActivityIndicator"
                            VerticalOptions="Center" HorizontalOptions="Center"
                         IsVisible="{Binding IsLoading}"
                         IsRunning="{Binding IsLoading}"

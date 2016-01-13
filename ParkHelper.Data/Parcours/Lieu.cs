@@ -1,29 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
+// ReSharper disable once CheckNamespace
 namespace ParkHelper.Data
 {
+    public interface ILieuMetadata
+    {
+        [ForeignKey("IdType")]
+        TypeDeLieu TypeDeLieu { get; set; }
+
+        [Key]
+        int Id { get; set; }
+    }
+
     [KnownType(typeof(Lieu))]
-    [MetadataType(typeof(LieuMetadata))]
+    [MetadataType(typeof(ILieuMetadata))]
     public partial class Lieu : IElementDeParcours
     {
         public bool EstDejaDansLeParcours { get; set; }
 
         public int Ordre { get; set; }
 
-        public Type type
-        {
-            get
-            {
-                return this.GetType();
-            }
-        }
+        public Type type => GetType();
 
         int IElementDeParcours.Duree
         {
@@ -36,16 +36,6 @@ namespace ParkHelper.Data
             {
                 throw new NotImplementedException();
             }
-        }
-        
-        
-        internal sealed class LieuMetadata
-        {
-            [ForeignKey("IdType")]
-            public TypeDeLieu TypeDeLieu { get; set; }
-
-            [Key]
-            public int Id { get; set; }
         }
 
     }

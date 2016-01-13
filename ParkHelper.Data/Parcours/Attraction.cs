@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
+// ReSharper disable once CheckNamespace
 namespace ParkHelper.Data
 {
-    partial class Attraction : IElementDeParcours
+    class Attraction : IElementDeParcours
     {
         public int Duree { get; set; }
 
