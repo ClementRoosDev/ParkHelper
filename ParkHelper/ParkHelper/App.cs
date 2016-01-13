@@ -14,7 +14,6 @@ namespace ParkHelper
 
         public App()
         {
-
             nav = new NavigationService();
             nav.Configure(Locator.SplashScreenPage, typeof(SplashScreenPage));
             nav.Configure(Locator.HomePage, typeof(HomePage));

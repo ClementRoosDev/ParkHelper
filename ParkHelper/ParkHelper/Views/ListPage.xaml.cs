@@ -34,7 +34,6 @@ namespace ParkHelper.Views
         async void ListPage_OnAppearing(object sender, EventArgs e)
         {
             OnAppearing();
-            setUIElements(false);
             _viewModel.TryToRestore();
             if(_viewModel.Listes.Count == 0)
             {
@@ -49,23 +48,14 @@ namespace ParkHelper.Views
                 {
                     ListView.ItemsSource = _viewModel.Listes;
                     _viewModel.ItineraireCommand.CanExecute(_viewModel.Listes);
-                    setUIElements(true);
                 }
                 else
                 {
-                    ActivityIndicator.IsRunning = false;
                     await DisplayAlert("Error", "Connection Error", "OK", "Cancel");
                     System.Diagnostics.Debug.WriteLine("ERROR!");
                     _viewModel.HomeCommand.Execute(null);
                 }
             }
-        }
-                          
-        void setUIElements(bool choixAappliquer)
-        {
-            ListView.IsVisible = choixAappliquer;
-            SearchBar.IsVisible = choixAappliquer;
-            ItineraireCommand.IsVisible = choixAappliquer;
         }
 
         void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)

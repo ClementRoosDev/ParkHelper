@@ -4,8 +4,8 @@
              x:Class="ParkHelper.Views.ListPage"
              Title="Attractions" Appearing="ListPage_OnAppearing">
 <ActivityIndicator x:Name="ActivityIndicator"
-                      IsVisible="{Binding IsBusy}"
-                      IsRunning="{Binding IsBusy}"
+                      IsVisible="{Binding IsLoading}"
+                      IsRunning="{Binding IsLoading}"
                       Color="Black" />
   <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
     <Grid.RowDefinitions>
@@ -17,13 +17,16 @@
                  VerticalOptions="Center"
                  HorizontalOptions="Center"
                  Placeholder="Rechercher..."
-                 TextChanged="SearchBar_OnTextChanged">
+                 TextChanged="SearchBar_OnTextChanged"
+                 IsVisible="{Binding LoadingComplete}"
+      >
       </SearchBar>
       <ListView Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center"
                 x:Name="ListView"
                 IsGroupingEnabled="True"
                 GroupDisplayBinding="{Binding Name}"
-                GroupShortNameBinding="{Binding Name}">
+                GroupShortNameBinding="{Binding Name}"
+                IsVisible="{Binding LoadingComplete}">
                 <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -40,6 +43,7 @@
   <Button Grid.Row="2" x:Name="ItineraireCommand"
           Text="Créer itinéraire"
           Command="{Binding CreateItineraire}"
-          CommandParameter="{Binding}" IsEnabled="{Binding ItineraireCanBeGenerated}"/>
+          CommandParameter="{Binding}" IsEnabled="{Binding ItineraireCanBeGenerated}"
+          IsVisible="{Binding LoadingComplete}"/>
   </Grid>
 </ContentPage>

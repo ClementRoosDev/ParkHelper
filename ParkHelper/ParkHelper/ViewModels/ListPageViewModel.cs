@@ -16,7 +16,7 @@ namespace ParkHelper.ViewModels
         #region Fields
 
         readonly INavigationService _navigationService;
-        private bool _isBusy;
+        private bool _isLoading;
         private bool _itineraireCanBeGenerated;
 
         #endregion
@@ -43,7 +43,7 @@ namespace ParkHelper.ViewModels
 
             Listes = new List<Categorie>();
             ListeAppliSelectionnees = new List<int>();
-            IsBusy = true;
+            IsLoading = true;
 
             CreateItineraire = new CreateItineraireCommand(ItineraireCommand);
             CreateItineraire.SetSourceLieux(Listes);
@@ -54,18 +54,30 @@ namespace ParkHelper.ViewModels
 
         #region Properties
 
-        public bool IsBusy
+        public bool IsLoading
         {
             get
             {
-                return _isBusy;
+                return _isLoading;
             }
             set
             {
-                _isBusy = value;
-                RaisePropertyChanged(() => IsBusy);
+                _isLoading = value;
+                RaisePropertyChanged(() => IsLoading);
+                RaisePropertyChanged(() => LoadingComplete);
             }
         }
+
+        public bool LoadingComplete
+        {
+            get
+            {
+                return !_isLoading;
+            }
+        }
+
+
+
         public ParkHelper Context { get; set; }
         public object Parameter { get; set; }
 
@@ -152,7 +164,7 @@ namespace ParkHelper.ViewModels
             }
             AddingEventToList();
             CreateItineraire.SetSourceLieux(Listes);
-            IsBusy = false;
+            IsLoading = false;
         }
         #endregion
     }
