@@ -79,9 +79,9 @@ namespace ParkHelper.Common.WebService
             {
                 result += "values=" + item+"&";
             }
-            result.Remove(result.Length - 1);
-
-            return result;
+            var resultClean = result.Remove(result.Length - 1);
+            
+            return resultClean;
         }
     }
 
