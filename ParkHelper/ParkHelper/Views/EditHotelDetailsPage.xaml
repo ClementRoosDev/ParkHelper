@@ -10,6 +10,7 @@
       <RowDefinition Height="*"/>
       <RowDefinition Height="*"/>
       <RowDefinition Height="*"/>
+      <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="*"/>
@@ -17,20 +18,38 @@
       <ColumnDefinition Width="*"/>
     </Grid.ColumnDefinitions>
   
-    <Label Grid.Row="0" Grid.Column="0" Text="Date Entrée :"/>
-    <DatePicker Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
-
-    <Label Grid.Row="1" Grid.Column="0" Text="Date Sortie :"/>
-    <DatePicker Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
-
-    <Label Grid.Row="2" Grid.Column="0" Text="Pause repas :"/>
-    <TimePicker Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
-
-    <Label Grid.Row="3" Grid.Column="0" Text="Nocturne :"/>
-    <BoxView Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
+    <Label Grid.Row="0" Grid.Column="0"
+           HorizontalOptions="Center" VerticalOptions="Center"
+           Text="Numéro de réservation :"/>
+    <BoxView Grid.Row="0" Grid.Column="1" 
+             HorizontalOptions="Center" VerticalOptions="Center"/>
+    <ActivityIndicator Grid.Row="0" Grid.Column="2" 
+                       HorizontalOptions="Center" VerticalOptions="Center"/>
     
-    <Label Grid.Row="4" Grid.Column="0" Text="Sejour Hotel :"/>
-    <BoxView Grid.Row="4" Grid.Column="1"/>
+    <Label Grid.Row="1" Grid.Column="0" 
+           HorizontalOptions="Center" VerticalOptions="Center"
+           Text="Hotel :"/>
+    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+           HorizontalOptions="Center" VerticalOptions="Center"
+           />
+
+    <Label Grid.Row="2" Grid.Column="0"
+           HorizontalOptions="Center" VerticalOptions="Center"
+           Text="Chambre :"/>
+    <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                HorizontalOptions="Center" VerticalOptions="Center"/>
+
+    <Label Grid.Row="3" Grid.Column="0" 
+           HorizontalOptions="Center" VerticalOptions="Center"
+           Text="Personnes :"/>
+    <BoxView Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+             HorizontalOptions="Center" VerticalOptions="Center"/>
+    
+    <Label Grid.Row="4" Grid.Column="0" 
+           HorizontalOptions="Center" VerticalOptions="Center"
+           Text="Options :"/>
+    
+    <ListView Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
   </Grid>
 
 </ContentPage>

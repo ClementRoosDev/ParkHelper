@@ -5,12 +5,16 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 
+// ReSharper disable SwitchStatementMissingSomeCases
+
 namespace ParkHelper.ViewModels
 {
     public class VisiteDetailsViewModel : ViewModelBase
     {
         #region Fields
         readonly INavigationService _navigationService;
+        private int _choixPauseDej;
+        private bool _hotel;
 
         #endregion
 
@@ -36,24 +40,74 @@ namespace ParkHelper.ViewModels
                 _navigationService.NavigateTo(
                     Locator.EditHotelDetailsPage, Context);
             });
-            Durees = new List<int>
+
+            TempsEstime = new List<string>
             {
-                1,5,10,15,20,25,30,35,40,45,50,55,60
+                "0","5","10","15","20","25","30","35","40","45","50","55","1h","1h15","1h30","1h45","2h"
             };
         }
         #endregion
 
         #region Properties
-        public ParkHelper Context { get; set; }
+        #region Visite
+        
+        #endregion
+
+        #region Commands
         public ICommand HomeCommand { get; set; }
         public ICommand ListPageCommand { get; set; }
         public ICommand EditHotelCommand { get; set; }
-        public bool Nocturne { get; set; }
-        public bool Hotel { get; set; }
-        public List<int> Durees { get; set; } 
+        #endregion
+
+        #region Hotel
+
+        public bool Hotel
+        {
+            get
+            {
+                return _hotel;
+            }
+            set
+            {
+                _hotel = value;
+                RaisePropertyChanged(() => Hotel);
+            }
+        }
+        #endregion
+        public ParkHelper Context { get; set; }
+        public List<string> TempsEstime { get; set; } 
+        public int ChoixPauseDej
+        {
+            get
+            {
+                return _choixPauseDej;
+            }
+            set
+            {
+                _choixPauseDej = value;
+                Context.VisitePark.DureePauseDej = ConvertToValue(_choixPauseDej);
+            }
+        }
         #endregion
 
         #region Methods
+        private static int ConvertToValue(int s)
+        {
+            switch (s)
+            {
+                case 16:
+                    return 120;
+                case 15:
+                    return 105;
+                case 14:
+                    return 90;
+                case 13:
+                    return 75;
+                case 12:
+                    return 60;
+            }
+            return s;
+        }
         #endregion
     }
 }

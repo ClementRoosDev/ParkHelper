@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ParkHelper.Common.Models.Visite
 {
@@ -16,5 +11,7 @@ namespace ParkHelper.Common.Models.Visite
         public int DureePauseDej { get; set; }
 
         public bool Nocturne { get; set; }
+
+        public Sejour Reservation { get; set; }
     }
 }
