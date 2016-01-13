@@ -9,6 +9,9 @@
 
 namespace ParkHelper.Data
 {
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Planning
     {
         public int IdLieu { get; set; }

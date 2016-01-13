@@ -7,11 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace ParkHelper.Data
 {
+    using System;
     using System.Collections.Generic;
     
     public partial class Lieu
@@ -19,24 +17,21 @@ namespace ParkHelper.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Lieu()
         {
-            Indications = new HashSet<Indication>();
-            Plannings = new HashSet<Planning>();
+            this.Indications = new HashSet<Indication>();
+            this.Plannings = new HashSet<Planning>();
         }
-
-        [Key]
+    
         public int Id { get; set; }
         public string Libelle { get; set; }
         public string Description { get; set; }
         public string LienGif { get; set; }
-        public double? Latittude { get; set; }
-        public double? Longitude { get; set; }
-        public int? Attente { get; set; }
-        public int? Duree { get; set; }
-        public int Ordre { get; set; }
-        public bool EstDejaDansLeParcours { get; set; }
-        public int? CapaciteWagon { get; set; }
-        public int? IdType { get; set; }
-        [ForeignKey("IdType")]
+        public Nullable<double> Latittude { get; set; }
+        public Nullable<double> Longitude { get; set; }
+        public Nullable<int> Attente { get; set; }
+        public Nullable<int> Duree { get; set; }
+        public Nullable<int> CapaciteWagon { get; set; }
+        public Nullable<int> IdType { get; set; }
+    
         public virtual TypeDeLieu TypeDeLieu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Indication> Indications { get; set; }

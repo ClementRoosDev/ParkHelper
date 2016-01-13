@@ -71,6 +71,7 @@
     <Compile Include="Parcours\ElementDeParcours.cs" />
     <Compile Include="Parcours\Lieu.cs" />
     <Compile Include="Parcours\Parcours.cs" />
+    <Compile Include="Parcours\TypeDeLieu.cs" />
     <Compile Include="ParkHelperModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

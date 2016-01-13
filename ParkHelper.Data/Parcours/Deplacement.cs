@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ParkHelper.Data
 {
+    [DataContract]
+    [KnownType(typeof(Deplacement))]
     public class Deplacement : IElementDeParcours
     {
         #region Fields

@@ -7,10 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-
 namespace ParkHelper.Data
 {
+    using System;
     using System.Collections.Generic;
     
     public partial class Horaire
@@ -18,12 +17,12 @@ namespace ParkHelper.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Horaire()
         {
-            Plannings = new HashSet<Planning>();
+            this.Plannings = new HashSet<Planning>();
         }
-        [Key]
+    
         public int Id { get; set; }
-        public int? Ouverture { get; set; }
-        public int? Fermeture { get; set; }
+        public Nullable<int> Ouverture { get; set; }
+        public Nullable<int> Fermeture { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Planning> Plannings { get; set; }

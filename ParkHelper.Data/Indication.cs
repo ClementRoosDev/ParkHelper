@@ -7,10 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-
 namespace ParkHelper.Data
 {
+    using System;
     using System.Collections.Generic;
     
     public partial class Indication
@@ -18,10 +17,9 @@ namespace ParkHelper.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Indication()
         {
-            Lieux = new HashSet<Lieu>();
+            this.Lieux = new HashSet<Lieu>();
         }
-
-        [Key]
+    
         public int Id { get; set; }
         public string Libelle { get; set; }
         public string LienLogo { get; set; }
