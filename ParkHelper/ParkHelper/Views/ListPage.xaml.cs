@@ -23,9 +23,9 @@ namespace ParkHelper.Views
 
         void InitializeTemplate()
         {
-            ListView.ItemSelected += (sender, e) =>
+            ListViewCategories.ItemSelected += (sender, e) =>
             {
-                var attraction = (Lieu)ListView.SelectedItem;
+                var attraction = (Lieu)ListViewCategories.SelectedItem;
                 _viewModel.Parameter = attraction;
                 _viewModel.ItemDetailsCommand.Execute(_viewModel.Parameter);
             };
@@ -34,38 +34,58 @@ namespace ParkHelper.Views
         async void ListPage_OnAppearing(object sender, EventArgs e)
         {
             OnAppearing();
+
+            _viewModel.IsLoading = true;
+
             _viewModel.TryToRestore();
-            if(_viewModel.Listes.Count == 0)
+
+
+            if (_viewModel.Listes.Count == 0)
             {
-                ParkHelperWebservice Ws = new ParkHelperWebservice();
-                 var objectWithFormat = await Ws.GetAttractions();
-
-                await Task.Run(() =>
-                    _viewModel.ConvertFrom(objectWithFormat.value)
-                );
-
-                if (_viewModel.Listes.Count > 0)
+                try
                 {
-                    ListView.ItemsSource = _viewModel.Listes;
-                    _viewModel.ItineraireCommand.CanExecute(_viewModel.Listes);
+                    ParkHelperWebservice Ws = new ParkHelperWebservice();
+                    RequeteListe requeteLieux = await Ws.GetAttractions();
+
+                    _viewModel.ConvertFrom(requeteLieux.value);
+
+                    if (_viewModel.Listes.Count > 0)
+                    {
+                        ListViewCategories.ItemsSource = _viewModel.Listes;
+                        _viewModel.ItineraireCommand.CanExecute(_viewModel.Listes);
+                    }
+                    else
+                    {
+                        await DisplayAlert("Error", "Connection Error", "OK", "Cancel");
+                        System.Diagnostics.Debug.WriteLine("ERROR!");
+                        _viewModel.HomeCommand.Execute(null);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
+
                     await DisplayAlert("Error", "Connection Error", "OK", "Cancel");
-                    System.Diagnostics.Debug.WriteLine("ERROR!");
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
                     _viewModel.HomeCommand.Execute(null);
                 }
+
+
             }
+            else
+            {
+                ListViewCategories.ItemsSource = _viewModel.Listes;
+            }
+            _viewModel.IsLoading = false;
         }
 
         void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            ListView.BeginRefresh();
+            ListViewCategories.BeginRefresh();
 
-            ListView.ItemsSource = string.IsNullOrWhiteSpace(e.NewTextValue) ? _viewModel.Listes
+            ListViewCategories.ItemsSource = string.IsNullOrWhiteSpace(e.NewTextValue) ? _viewModel.Listes
                 : _viewModel.Listes.Select(i => i.Where(a => a.Libelle.ToLower().Contains(e.NewTextValue.ToLower())));
 
-            ListView.EndRefresh();
+            ListViewCategories.EndRefresh();
         }
     }
 }

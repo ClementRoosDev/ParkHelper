@@ -3,10 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ParkHelper.Views.ListPage"
              Title="Attractions" Appearing="ListPage_OnAppearing">
-<ActivityIndicator x:Name="ActivityIndicator"
-                      IsVisible="{Binding IsLoading}"
-                      IsRunning="{Binding IsLoading}"
-                      Color="Black" />
+
   <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
     <Grid.RowDefinitions>
       <RowDefinition Height="50"/>
@@ -18,15 +15,15 @@
                  HorizontalOptions="Center"
                  Placeholder="Rechercher..."
                  TextChanged="SearchBar_OnTextChanged"
-                 IsVisible="{Binding LoadingComplete}"
+                 IsVisible="{Binding IsLoadingComplete}"
       >
       </SearchBar>
       <ListView Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center"
-                x:Name="ListView"
+                x:Name="ListViewCategories"
                 IsGroupingEnabled="True"
                 GroupDisplayBinding="{Binding Name}"
                 GroupShortNameBinding="{Binding Name}"
-                IsVisible="{Binding LoadingComplete}">
+                IsVisible="{Binding IsLoadingComplete}">
                 <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -40,10 +37,14 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-  <Button Grid.Row="2" x:Name="ItineraireCommand"
+    <ActivityIndicator x:Name="ActivityIndicator" Grid.Row="2"
+                         IsVisible="{Binding IsLoading}"
+                         IsRunning="{Binding IsLoading}"
+                         Color="Black" />
+    <Button Grid.Row="2" x:Name="ItineraireCommand"
           Text="Créer itinéraire"
           Command="{Binding CreateItineraire}"
           CommandParameter="{Binding}" IsEnabled="{Binding ItineraireCanBeGenerated}"
-          IsVisible="{Binding LoadingComplete}"/>
+          IsVisible="{Binding IsLoadingComplete}"/>
   </Grid>
 </ContentPage>

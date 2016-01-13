@@ -8,6 +8,7 @@ using System.Linq;
 using ParkHelper.Commands;
 using ParkHelper.Common.Models.ListeLieux;
 using ParkHelper.Common.Models.RequeteListeLieux;
+using System.Threading.Tasks;
 
 namespace ParkHelper.ViewModels
 {
@@ -64,11 +65,11 @@ namespace ParkHelper.ViewModels
             {
                 _isLoading = value;
                 RaisePropertyChanged(() => IsLoading);
-                RaisePropertyChanged(() => LoadingComplete);
+                RaisePropertyChanged(() => IsLoadingComplete);
             }
         }
 
-        public bool LoadingComplete
+        public bool IsLoadingComplete
         {
             get
             {
@@ -164,7 +165,6 @@ namespace ParkHelper.ViewModels
             }
             AddingEventToList();
             CreateItineraire.SetSourceLieux(Listes);
-            IsLoading = false;
         }
         #endregion
     }
