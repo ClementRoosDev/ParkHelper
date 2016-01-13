@@ -15,8 +15,6 @@ namespace ParkHelper.Views
         public ListPage(ParkHelper context)
         {
             InitializeComponent();
-            setUIElements(false);
-            ActivityIndicator.IsRunning = true;
             _viewModel = App.Locator.ListPageView;
             _viewModel.Context = context;
             BindingContext = _viewModel;
@@ -36,6 +34,7 @@ namespace ParkHelper.Views
         async void ListPage_OnAppearing(object sender, EventArgs e)
         {
             OnAppearing();
+            setUIElements(false);
             _viewModel.TryToRestore();
             if(_viewModel.Listes.Count == 0)
             {
@@ -69,33 +68,12 @@ namespace ParkHelper.Views
             ItineraireCommand.IsVisible = choixAappliquer;
         }
 
-        void SearchBar_OnPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            /**if (SearchBar != null && _viewModel!=null && !SearchBar.Text.Equals("Rechercher") &&
-            _viewModel.Listes.Count < _viewModel.ListesCount && _viewModel.Listes.Count > 0)
-            {
-                ListView.ItemsSource = _viewModel.Listes;
-            }*/
-        }
-
-        /*void SearchBar_OnTextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e)
-        {
-            if (!SearchBar.Text.Equals("Rechercher") &&
-                _viewModel.Listes.Count < _viewModel.ListesCount && _viewModel.Listes.Count > 0)
-            {
-                ListView.ItemsSource = _viewModel.Listes;
-            }
-        }*/
-
         void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             ListView.BeginRefresh();
 
-            if (string.IsNullOrWhiteSpace(e.NewTextValue))
-                ListView.ItemsSource = _viewModel.Listes;
-            else
-            /*ListView.ItemsSource = _viewModel.Listes.Where(i => i.Any(a =>a.Libelle.Contains(e.NewTextValue)));*/
-                ListView.ItemsSource = _viewModel.Listes.Select(i => i.Where(a => a.Libelle.ToLower().Contains(e.NewTextValue.ToLower())));
+            ListView.ItemsSource = string.IsNullOrWhiteSpace(e.NewTextValue) ? _viewModel.Listes
+                : _viewModel.Listes.Select(i => i.Where(a => a.Libelle.ToLower().Contains(e.NewTextValue.ToLower())));
 
             ListView.EndRefresh();
         }

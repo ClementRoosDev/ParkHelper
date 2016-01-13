@@ -17,7 +17,6 @@
                  VerticalOptions="Center"
                  HorizontalOptions="Center"
                  Placeholder="Rechercher..."
-                 PropertyChanged="SearchBar_OnPropertyChanged"
                  TextChanged="SearchBar_OnTextChanged">
       </SearchBar>
       <ListView Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center"
@@ -29,7 +28,9 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" Spacing="0" Padding="10, 5, 10, 5">
+                            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                                 <Label Text="{Binding Libelle}" HorizontalOptions="FillAndExpand"/>
+                            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                                 <Switch HorizontalOptions="End" IsToggled="{Binding EstDejaDansLeParcours}" />
                         </StackLayout>
                     </ViewCell>

@@ -18,25 +18,38 @@
       <ColumnDefinition Width="*"/>
     </Grid.ColumnDefinitions>
   
-    <Label Grid.Row="0" Grid.Column="0" Text="Date Entrée :"/>
-    <DatePicker Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+    <Label Grid.Row="0" Grid.Column="0" Text="Date Entrée :"
+           HorizontalOptions="Center" VerticalOptions="Center"/>
+    <DatePicker Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                HorizontalOptions="Center" VerticalOptions="Center"/>
 
-    <Label Grid.Row="1" Grid.Column="0" Text="Date Sortie :"/>
-    <DatePicker Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
+    <Label Grid.Row="1" Grid.Column="0" Text="Date Sortie :"
+           HorizontalOptions="Center" VerticalOptions="Center"/>
+    <DatePicker Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                HorizontalOptions="Center" VerticalOptions="Center"/>
 
-    <Label Grid.Row="2" Grid.Column="0" Text="Pause repas :"/>
-    <Picker Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Title="Quelle est la durée de la pause repas ?"/>
+    <Label Grid.Row="2" Grid.Column="0" Text="Pause repas :"
+           HorizontalOptions="Center" VerticalOptions="Center"/>
+    <Picker Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+            Title="Quelle est la durée de la pause repas ?"/>
 
-    <Label Grid.Row="3" Grid.Column="0" Text="Nocturne :"/>
-    <Switch Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" 
-            x:Name="SwitchNocturne" IsToggled="{Binding Nocturne}"/>
+    <Label Grid.Row="3" Grid.Column="0" Text="Nocturne :"
+           HorizontalOptions="Center" VerticalOptions="Center"/>
+    <Switch Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+            x:Name="SwitchNocturne" IsToggled="{Binding Nocturne}"
+            HorizontalOptions="Center" VerticalOptions="Center"/>
     
-    <Label Grid.Row="4" Grid.Column="0" Text="Sejour Hotel :"/>
+    <Label Grid.Row="4" Grid.Column="0" Text="Sejour Hotel :"
+           HorizontalOptions="Center" VerticalOptions="Center"/>
     <Switch Grid.Row="4" Grid.Column="1"
-            x:Name="SwitchHotel" IsToggled="{Binding Hotel}"/>
-    <Button Grid.Row="4" Grid.Column="2" Text="Editer" x:Name="ButtonEditHotel" Command="{Binding EditHotelCommand}"/>
+            x:Name="SwitchHotel" IsToggled="{Binding Hotel}"
+            HorizontalOptions="Center" VerticalOptions="Center"/>
+    <Button Grid.Row="4" Grid.Column="2" Text="Editer" x:Name="ButtonEditHotel"
+            Command="{Binding EditHotelCommand}" HorizontalOptions="Center"
+            VerticalOptions="Center"/>
     
-    <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Text="Continuer" Command="{Binding ListPageCommand}"/>
+    <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"
+            Text="Continuer" Command="{Binding ListPageCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
   </Grid>
 
 </ContentPage>

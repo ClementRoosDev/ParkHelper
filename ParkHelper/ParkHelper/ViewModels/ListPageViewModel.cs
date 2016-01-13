@@ -16,7 +16,8 @@ namespace ParkHelper.ViewModels
         #region Fields
 
         readonly INavigationService _navigationService;
-        string _texteATrouver;
+        private bool _isBusy;
+        private bool _itineraireCanBeGenerated;
 
         #endregion
 
@@ -41,27 +42,35 @@ namespace ParkHelper.ViewModels
             });
 
             Listes = new List<Categorie>();
-            ListesBackup = new List<Categorie>();
             ListeAppliSelectionnees = new List<int>();
             IsBusy = true;
 
             CreateItineraire = new CreateItineraireCommand(ItineraireCommand);
             CreateItineraire.SetSourceLieux(Listes);
             CreateItineraire.CanExecute(null);
-            TexteATrouver = "Rechercher";
         }
 
         #endregion
 
         #region Properties
 
-        public bool IsBusy { get; set; }
+        public bool IsBusy
+        {
+            get
+            {
+                return _isBusy;
+            }
+            set
+            {
+                _isBusy = value;
+                RaisePropertyChanged(() => IsBusy);
+            }
+        }
         public ParkHelper Context { get; set; }
         public object Parameter { get; set; }
 
         #region Liste
         public List<Categorie> Listes { get; set; }
-        public List<Categorie> ListesBackup { get; set; }
         public int ListesCount { get; set; }
         public List<int> ListeAppliSelectionnees { get; set; }
         #endregion
@@ -78,7 +87,6 @@ namespace ParkHelper.ViewModels
         public ICommand ItineraireCommand { get; set; }
         public CreateItineraireCommand CreateItineraire { get; set; }
 
-        private bool _itineraireCanBeGenerated;
         public bool ItineraireCanBeGenerated
         {
             get
@@ -89,22 +97,6 @@ namespace ParkHelper.ViewModels
             {
                 _itineraireCanBeGenerated = value;
                 RaisePropertyChanged(() => ItineraireCanBeGenerated);
-            }
-        }
-        #endregion
-
-        #region SearchBar
-
-        public string TexteATrouver
-        {
-            get { return _texteATrouver; }
-            set
-            {
-                _texteATrouver = value;
-                if (!_texteATrouver.Equals("Rechercher"))
-                {
-                    FilterListes();
-                }
             }
         }
         #endregion
@@ -160,24 +152,7 @@ namespace ParkHelper.ViewModels
             }
             AddingEventToList();
             CreateItineraire.SetSourceLieux(Listes);
-        }
-
-        void FilterListes()
-        {
-            ListesCount = Listes.Count;
-            if (TexteATrouver.Length <= 3) return;
-            if (Listes != null && !TexteATrouver.Equals("") && !TexteATrouver.Equals("Rechercher"))
-            {
-                ListesBackup = Listes;
-                Listes = Listes.Where(x => x.Any(a => a.Libelle.Contains(_texteATrouver))).ToList();
-                ListesCount = Listes.Count;
-            }
-            else
-            {
-                Listes = ListesBackup;
-                ListesCount = Listes.Count;
-            }
-            CreateItineraire.SetSourceLieux(Listes);
+            IsBusy = false;
         }
         #endregion
     }
