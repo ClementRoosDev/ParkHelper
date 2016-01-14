@@ -76,8 +76,13 @@
     <Compile Include="Parcours\Date.cs" />
     <Compile Include="Parcours\Deplacement.cs" />
     <Compile Include="Parcours\ElementDeParcours.cs" />
+    <Compile Include="Parcours\EtatLieu.cs" />
+    <Compile Include="Parcours\Horaire.cs" />
+    <Compile Include="Parcours\Indication.cs" />
+    <Compile Include="Parcours\Jour.cs" />
     <Compile Include="Parcours\Lieu.cs" />
     <Compile Include="Parcours\Mois.cs" />
+    <Compile Include="Parcours\NumeroJour.cs" />
     <Compile Include="Parcours\Parcours.cs" />
     <Compile Include="Parcours\Planning.cs" />
     <Compile Include="Parcours\TypeDeLieu.cs" />

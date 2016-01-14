@@ -200,7 +200,6 @@
     <Compile Include="Controllers\LieuxController.cs" />
     <Compile Include="Controllers\MoisController.cs" />
     <Compile Include="Controllers\NumeroJoursController.cs" />
-    <Compile Include="Controllers\PlanningsController.cs" />
     <Compile Include="Controllers\TypeDeLieuxController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">

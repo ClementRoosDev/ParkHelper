@@ -4,14 +4,16 @@ using System.Runtime.Serialization;
 // ReSharper disable once CheckNamespace
 namespace ParkHelper.Data
 {
+    public interface ITypeDeLieuMetadata
+    {
+        [Key]
+        int Id { get; set; }
+    }
+
     [KnownType(typeof(TypeDeLieu))]
-    [MetadataType(typeof(TypeDeLieuMetadata))]
+    [MetadataType(typeof(ITypeDeLieuMetadata))]
     public partial class TypeDeLieu
     {
-        private sealed class TypeDeLieuMetadata
-        {
-            [Key]
-            public int Id { get; set; }
-        }
+
     }
 }

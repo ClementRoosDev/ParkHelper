@@ -24,15 +24,15 @@ namespace ParkHelper.Apiv2
 
 
             var builder = new ODataConventionModelBuilder();
-            builder.EntitySet<Lieu>("Lieux");
-            builder.EntitySet<TypeDeLieu>("TypeDeLieux");
-            builder.EntitySet<Indication>("Indications");
-            builder.EntitySet<Planning>("Plannings");
-            builder.EntitySet<EtatLieu>("EtatLieux");
-            builder.EntitySet<Horaire>("Horaires");
-            builder.EntitySet<Jour>("Jours");
-            builder.EntitySet<Mois>("Mois");
-            builder.EntitySet<NumeroJour>("NumeroJours");
+            builder.EntitySet<Lieu>("Lieux").EntityType.HasKey(p => p.Id);
+            builder.EntitySet<TypeDeLieu>("TypeDeLieux").EntityType.HasKey(p => p.Id);
+            builder.EntitySet<Indication>("Indications").EntityType.HasKey(p => p.Id);
+            builder.EntitySet<Planning>("Plannings").EntityType.HasKey(p => p.id);
+            builder.EntitySet<EtatLieu>("EtatLieux").EntityType.HasKey(p => p.IdEtat);
+            builder.EntitySet<Horaire>("Horaires").EntityType.HasKey(p => p.Id);
+            builder.EntitySet<Jour>("Jours").EntityType.HasKey(p => p.Id);
+            builder.EntitySet<Mois>("Mois").EntityType.HasKey(p => p.Id); ;
+            builder.EntitySet<NumeroJour>("NumeroJours").EntityType.HasKey(p => p.Id);
 
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 

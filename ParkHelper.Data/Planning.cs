@@ -14,6 +14,23 @@ namespace ParkHelper.Data
     
     public partial class Planning
     {
+        private int j;
+        private int jourdebutMois;
+        private int i;
+        private int mois;
+        private int v;
+
+        public Planning(int id, int lieu, int jourdebutMois, int numeroJour, int mois, int horaire, int etat)
+        {
+            this.id = id;
+            this.idLieu = lieu;
+            this.idJour= jourdebutMois;
+            this.idNumeroJour = numeroJour;
+            this.idMois = mois;
+            this.idHoraire = horaire;
+            this.idEtat = etat;
+        }
+
         public int id { get; set; }
         public Nullable<int> idLieu { get; set; }
         public Nullable<int> idJour { get; set; }
