@@ -22,11 +22,11 @@ namespace ParkHelper.Data
         public Nullable<int> idHoraire { get; set; }
         public Nullable<int> idEtat { get; set; }
     
-        public virtual Date Date { get; set; }
         public virtual EtatLieu EtatLieu { get; set; }
         public virtual Horaire Horaire { get; set; }
         public virtual Jour Jour { get; set; }
         public virtual Lieu Lieu { get; set; }
         public virtual Mois Mois { get; set; }
+        public virtual NumeroJour NumeroJour { get; set; }
     }
 }

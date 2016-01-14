@@ -31,6 +31,8 @@ namespace ParkHelper.Apiv2
             builder.EntitySet<EtatLieu>("EtatLieux");
             builder.EntitySet<Horaire>("Horaires");
             builder.EntitySet<Jour>("Jours");
+            builder.EntitySet<Mois>("Mois");
+            builder.EntitySet<NumeroJour>("NumeroJours");
 
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 

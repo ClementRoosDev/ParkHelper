@@ -12,10 +12,10 @@ namespace ParkHelper.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Date
+    public partial class NumeroJour
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Date()
+        public NumeroJour()
         {
             this.Plannings = new HashSet<Planning>();
         }

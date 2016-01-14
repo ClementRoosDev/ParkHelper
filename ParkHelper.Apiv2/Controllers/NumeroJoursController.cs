@@ -5,29 +5,29 @@ using ParkHelper.Data;
 
 namespace ParkHelper.Apiv2.Controllers
 {
-    public class JoursController : ODataController
+    public class NumeroJoursController : ODataController
     {
         private readonly ParcHelperEntities _db = new ParcHelperEntities();
 
-        // GET: odata/Jours
+        // GET: odata/NumeroJours
         [EnableQuery]
-        public IQueryable<Jour> GetJours()
+        public IQueryable<NumeroJour> GetNumeroJours()
         {
-            return _db.Jours;
+            return _db.NumeroJours;
         }
 
-        // GET: odata/Jours(5)
+        // GET: odata/NumeroJours(5)
         [EnableQuery]
-        public SingleResult<Jour> GetJour([FromODataUri] int key)
+        public SingleResult<NumeroJour> GetNumeroJour([FromODataUri] int key)
         {
-            return SingleResult.Create(_db.Jours.Where(jour => jour.Id == key));
+            return SingleResult.Create(_db.NumeroJours.Where(numeroJour => numeroJour.Id == key));
         }
- 
-        // GET: odata/Jours(5)/Plannings
+
+        // GET: odata/NumeroJours(5)/Plannings
         [EnableQuery]
         public IQueryable<Planning> GetPlannings([FromODataUri] int key)
         {
-            return _db.Jours.Where(m => m.Id == key).SelectMany(m => m.Plannings);
+            return _db.NumeroJours.Where(m => m.Id == key).SelectMany(m => m.Plannings);
         }
 
         protected override void Dispose(bool disposing)

@@ -6,23 +6,23 @@
     <edmx:Diagrams>
       <Diagram DiagramId="3a309d4644d24073b13aee73c61a3718" Name="Diagram1">
         <EntityTypeShape EntityType="ParcHelperModel.EtatLieu" Width="1.5" PointX="8.75" PointY="0.625" />
-        <EntityTypeShape EntityType="ParcHelperModel.Horaire" Width="1.5" PointX="9.75" PointY="3.125" />
         <EntityTypeShape EntityType="ParcHelperModel.Indication" Width="1.5" PointX="3.75" PointY="1.75" />
         <EntityTypeShape EntityType="ParcHelperModel.Jour" Width="1.5" PointX="7.75" PointY="5.125" />
         <EntityTypeShape EntityType="ParcHelperModel.Lieu" Width="1.5" PointX="6" PointY="1" />
         <EntityTypeShape EntityType="ParcHelperModel.TypeDeLieu" Width="1.5" PointX="3.75" PointY="4.75" />
         <AssociationConnector Association="ParcHelperModel.FK_ToType" />
         <AssociationConnector Association="ParcHelperModel.IndicationParLieu" />
-        <EntityTypeShape EntityType="ParcHelperModel.Date" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="ParcHelperModel.Mois" Width="1.5" PointX="0.75" PointY="2.75" />
-        <EntityTypeShape EntityType="ParcHelperModel.Planning" Width="1.5" PointX="12" PointY="1.875" />
-        <AssociationConnector Association="ParcHelperModel.FK_ToNumeroJour" />
+        <EntityTypeShape EntityType="ParcHelperModel.Horaire" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="ParcHelperModel.NumeroJour" Width="1.5" PointX="8.75" PointY="9.375" />
+        <EntityTypeShape EntityType="ParcHelperModel.Planning" Width="1.5" PointX="11" PointY="2.375" />
         <AssociationConnector Association="ParcHelperModel.FK_ToEtatLieu" />
         <AssociationConnector Association="ParcHelperModel.FK_ToHoraire" />
         <AssociationConnector Association="ParcHelperModel.FK_ToJour" />
         <AssociationConnector Association="ParcHelperModel.FK_ToLieu" />
         <AssociationConnector Association="ParcHelperModel.FK_ToMois" />
-      </Diagram>
+        <AssociationConnector Association="ParcHelperModel.FK_ToNumeroJour" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

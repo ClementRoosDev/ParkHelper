@@ -21,8 +21,8 @@ namespace ParkHelper.Data
         }
     
         public int Id { get; set; }
-        public Nullable<int> Ouverture { get; set; }
-        public Nullable<int> Fermeture { get; set; }
+        public Nullable<System.TimeSpan> Ouverture { get; set; }
+        public Nullable<System.TimeSpan> Fermeture { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Planning> Plannings { get; set; }

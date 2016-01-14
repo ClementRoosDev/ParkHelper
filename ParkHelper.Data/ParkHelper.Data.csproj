@@ -51,9 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Date.cs">
-      <DependentUpon>ParkHelperModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="EtatLieu.cs">
       <DependentUpon>ParkHelperModel.tt</DependentUpon>
     </Compile>
@@ -72,11 +69,17 @@
     <Compile Include="Mois.cs">
       <DependentUpon>ParkHelperModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="NumeroJour.cs">
+      <DependentUpon>ParkHelperModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Parcours\Attraction.cs" />
+    <Compile Include="Parcours\Date.cs" />
     <Compile Include="Parcours\Deplacement.cs" />
     <Compile Include="Parcours\ElementDeParcours.cs" />
     <Compile Include="Parcours\Lieu.cs" />
+    <Compile Include="Parcours\Mois.cs" />
     <Compile Include="Parcours\Parcours.cs" />
+    <Compile Include="Parcours\Planning.cs" />
     <Compile Include="Parcours\TypeDeLieu.cs" />
     <Compile Include="ParkHelperModel.Context.cs">
       <AutoGen>True</AutoGen>
