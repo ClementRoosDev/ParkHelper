@@ -45,7 +45,7 @@ namespace ParkHelper.Views
                 try
                 {
                     ParkHelperWebservice Ws = new ParkHelperWebservice();
-                    RequeteListe requeteLieux = await Ws.GetAttractions();
+                    RequeteListe requeteLieux = await Ws.GetAttractions(_viewModel.Context.VisitePark);
 
                     _viewModel.ConvertFrom(requeteLieux.value);
 

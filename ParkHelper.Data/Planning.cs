@@ -14,14 +14,19 @@ namespace ParkHelper.Data
     
     public partial class Planning
     {
-        public int IdLieu { get; set; }
-        public int IdJour { get; set; }
-        public int IdHoraire { get; set; }
-        public int IdEtat { get; set; }
+        public int id { get; set; }
+        public Nullable<int> idLieu { get; set; }
+        public Nullable<int> idJour { get; set; }
+        public Nullable<int> idNumeroJour { get; set; }
+        public Nullable<int> idMois { get; set; }
+        public Nullable<int> idHoraire { get; set; }
+        public Nullable<int> idEtat { get; set; }
     
+        public virtual Date Date { get; set; }
         public virtual EtatLieu EtatLieu { get; set; }
         public virtual Horaire Horaire { get; set; }
         public virtual Jour Jour { get; set; }
         public virtual Lieu Lieu { get; set; }
+        public virtual Mois Mois { get; set; }
     }
 }

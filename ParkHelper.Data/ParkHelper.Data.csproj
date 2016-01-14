@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Date.cs">
+      <DependentUpon>ParkHelperModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EtatLieu.cs">
       <DependentUpon>ParkHelperModel.tt</DependentUpon>
     </Compile>
@@ -64,6 +67,9 @@
       <DependentUpon>ParkHelperModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Lieu.cs">
+      <DependentUpon>ParkHelperModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mois.cs">
       <DependentUpon>ParkHelperModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Parcours\Attraction.cs" />

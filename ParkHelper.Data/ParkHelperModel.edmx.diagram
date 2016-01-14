@@ -13,11 +13,15 @@
         <EntityTypeShape EntityType="ParcHelperModel.TypeDeLieu" Width="1.5" PointX="3.75" PointY="4.75" />
         <AssociationConnector Association="ParcHelperModel.FK_ToType" />
         <AssociationConnector Association="ParcHelperModel.IndicationParLieu" />
-        <EntityTypeShape EntityType="ParcHelperModel.Planning" Width="1.5" PointX="12.375" PointY="1.875" />
-        <AssociationConnector Association="ParcHelperModel.FK_ToEtat" />
+        <EntityTypeShape EntityType="ParcHelperModel.Date" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ParcHelperModel.Mois" Width="1.5" PointX="0.75" PointY="2.75" />
+        <EntityTypeShape EntityType="ParcHelperModel.Planning" Width="1.5" PointX="12" PointY="1.875" />
+        <AssociationConnector Association="ParcHelperModel.FK_ToNumeroJour" />
+        <AssociationConnector Association="ParcHelperModel.FK_ToEtatLieu" />
         <AssociationConnector Association="ParcHelperModel.FK_ToHoraire" />
         <AssociationConnector Association="ParcHelperModel.FK_ToJour" />
         <AssociationConnector Association="ParcHelperModel.FK_ToLieu" />
+        <AssociationConnector Association="ParcHelperModel.FK_ToMois" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

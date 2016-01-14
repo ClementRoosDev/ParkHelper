@@ -5,6 +5,12 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ParcHelperModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Date">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="EtatLieu">
           <Key>
             <PropertyRef Name="IdEtat" />
@@ -17,8 +23,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Ouverture" Type="int" />
-          <Property Name="Fermeture" Type="int" />
+          <Property Name="Ouverture" Type="time" Precision="7" />
+          <Property Name="Fermeture" Type="time" Precision="7" />
         </EntityType>
         <EntityType Name="Indication">
           <Key>
@@ -60,19 +66,24 @@ warning 6002: The table/view 'ParcHelper.dbo.IndicationParLieu' does not have a 
           <Property Name="CapaciteWagon" Type="int" />
           <Property Name="IdType" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ParcHelper.dbo.Planning' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Mois">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="nomMois" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Planning">
           <Key>
-            <PropertyRef Name="IdLieu" />
-            <PropertyRef Name="IdJour" />
-            <PropertyRef Name="IdHoraire" />
-            <PropertyRef Name="IdEtat" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="IdLieu" Type="int" Nullable="false" />
-          <Property Name="IdJour" Type="int" Nullable="false" />
-          <Property Name="IdHoraire" Type="int" Nullable="false" />
-          <Property Name="IdEtat" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="idLieu" Type="int" />
+          <Property Name="idJour" Type="int" />
+          <Property Name="idNumeroJour" Type="int" />
+          <Property Name="idMois" Type="int" />
+          <Property Name="idHoraire" Type="int" />
+          <Property Name="idEtat" Type="int" />
         </EntityType>
         <EntityType Name="TypeDeLieu">
           <Key>
@@ -81,27 +92,27 @@ warning 6002: The table/view 'ParcHelper.dbo.Planning' does not have a primary k
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Libelle" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_ToEtat">
-          <End Role="EtatLieu" Type="Self.EtatLieu" Multiplicity="1" />
+        <Association Name="FK_ToEtatLieu">
+          <End Role="EtatLieu" Type="Self.EtatLieu" Multiplicity="0..1" />
           <End Role="Planning" Type="Self.Planning" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EtatLieu">
               <PropertyRef Name="IdEtat" />
             </Principal>
             <Dependent Role="Planning">
-              <PropertyRef Name="IdEtat" />
+              <PropertyRef Name="idEtat" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ToHoraire">
-          <End Role="Horaire" Type="Self.Horaire" Multiplicity="1" />
+          <End Role="Horaire" Type="Self.Horaire" Multiplicity="0..1" />
           <End Role="Planning" Type="Self.Planning" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Horaire">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Planning">
-              <PropertyRef Name="IdHoraire" />
+              <PropertyRef Name="idHoraire" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -130,26 +141,50 @@ warning 6002: The table/view 'ParcHelper.dbo.Planning' does not have a primary k
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ToJour">
-          <End Role="Jour" Type="Self.Jour" Multiplicity="1" />
+          <End Role="Jour" Type="Self.Jour" Multiplicity="0..1" />
           <End Role="Planning" Type="Self.Planning" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Jour">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Planning">
-              <PropertyRef Name="IdJour" />
+              <PropertyRef Name="idJour" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ToLieu">
-          <End Role="Lieu" Type="Self.Lieu" Multiplicity="1" />
+          <End Role="Lieu" Type="Self.Lieu" Multiplicity="0..1" />
           <End Role="Planning" Type="Self.Planning" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Lieu">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Planning">
-              <PropertyRef Name="IdLieu" />
+              <PropertyRef Name="idLieu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToMois">
+          <End Role="Mois" Type="Self.Mois" Multiplicity="0..1" />
+          <End Role="Planning" Type="Self.Planning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mois">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Planning">
+              <PropertyRef Name="idMois" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToNumeroJour">
+          <End Role="Date" Type="Self.Date" Multiplicity="0..1" />
+          <End Role="Planning" Type="Self.Planning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Date">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Planning">
+              <PropertyRef Name="idNumeroJour" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -166,11 +201,14 @@ warning 6002: The table/view 'ParcHelper.dbo.Planning' does not have a primary k
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ParcHelperModelStoreContainer">
+          <EntitySet Name="Date" EntityType="Self.Date" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EtatLieu" EntityType="Self.EtatLieu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Horaire" EntityType="Self.Horaire" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Indication" EntityType="Self.Indication" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Jour" EntityType="Self.Jour" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lieu" EntityType="Self.Lieu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mois" EntityType="Self.Mois" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Planning" EntityType="Self.Planning" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeDeLieu" EntityType="Self.TypeDeLieu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IndicationParLieu" EntityType="Self.IndicationParLieu" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -178,15 +216,7 @@ warning 6002: The table/view 'ParcHelper.dbo.Planning' does not have a primary k
     [IndicationParLieu].[IdIndication] AS [IdIndication]
     FROM [dbo].[IndicationParLieu] AS [IndicationParLieu]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Planning" EntityType="Self.Planning" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Planning].[IdLieu] AS [IdLieu], 
-    [Planning].[IdJour] AS [IdJour], 
-    [Planning].[IdHoraire] AS [IdHoraire], 
-    [Planning].[IdEtat] AS [IdEtat]
-    FROM [dbo].[Planning] AS [Planning]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK_ToEtat" Association="Self.FK_ToEtat">
+          <AssociationSet Name="FK_ToEtatLieu" Association="Self.FK_ToEtatLieu">
             <End Role="EtatLieu" EntitySet="EtatLieu" />
             <End Role="Planning" EntitySet="Planning" />
           </AssociationSet>
@@ -208,6 +238,14 @@ warning 6002: The table/view 'ParcHelper.dbo.Planning' does not have a primary k
           </AssociationSet>
           <AssociationSet Name="FK_ToLieu" Association="Self.FK_ToLieu">
             <End Role="Lieu" EntitySet="Lieu" />
+            <End Role="Planning" EntitySet="Planning" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToMois" Association="Self.FK_ToMois">
+            <End Role="Mois" EntitySet="Mois" />
+            <End Role="Planning" EntitySet="Planning" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToNumeroJour" Association="Self.FK_ToNumeroJour">
+            <End Role="Date" EntitySet="Date" />
             <End Role="Planning" EntitySet="Planning" />
           </AssociationSet>
           <AssociationSet Name="FK_ToType" Association="Self.FK_ToType">
@@ -234,8 +272,14 @@ warning 6002: The table/view 'ParcHelper.dbo.Planning' does not have a primary k
             <End Role="Indication" EntitySet="Indications" />
             <End Role="Lieu" EntitySet="Lieux" />
           </AssociationSet>
+          <EntitySet Name="Dates" EntityType="ParcHelperModel.Date" />
+          <EntitySet Name="Mois" EntityType="ParcHelperModel.Mois" />
           <EntitySet Name="Plannings" EntityType="ParcHelperModel.Planning" />
-          <AssociationSet Name="FK_ToEtat" Association="ParcHelperModel.FK_ToEtat">
+          <AssociationSet Name="FK_ToNumeroJour" Association="ParcHelperModel.FK_ToNumeroJour">
+            <End Role="Date" EntitySet="Dates" />
+            <End Role="Planning" EntitySet="Plannings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToEtatLieu" Association="ParcHelperModel.FK_ToEtatLieu">
             <End Role="EtatLieu" EntitySet="EtatLieux" />
             <End Role="Planning" EntitySet="Plannings" />
           </AssociationSet>
@@ -251,6 +295,10 @@ warning 6002: The table/view 'ParcHelper.dbo.Planning' does not have a primary k
             <End Role="Lieu" EntitySet="Lieux" />
             <End Role="Planning" EntitySet="Plannings" />
           </AssociationSet>
+          <AssociationSet Name="FK_ToMois" Association="ParcHelperModel.FK_ToMois">
+            <End Role="Mois" EntitySet="Mois" />
+            <End Role="Planning" EntitySet="Plannings" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="EtatLieu">
           <Key>
@@ -258,7 +306,7 @@ warning 6002: The table/view 'ParcHelper.dbo.Planning' does not have a primary k
           </Key>
           <Property Name="IdEtat" Type="Int32" Nullable="false" />
           <Property Name="nomEtat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Plannings" Relationship="ParcHelperModel.FK_ToEtat" FromRole="EtatLieu" ToRole="Planning" />
+          <NavigationProperty Name="Plannings" Relationship="ParcHelperModel.FK_ToEtatLieu" FromRole="EtatLieu" ToRole="Planning" />
         </EntityType>
         <EntityType Name="Horaire">
           <Key>
@@ -328,67 +376,108 @@ warning 6002: The table/view 'ParcHelper.dbo.Planning' does not have a primary k
           <End Type="ParcHelperModel.Indication" Role="Indication" Multiplicity="*" />
           <End Type="ParcHelperModel.Lieu" Role="Lieu" Multiplicity="*" />
         </Association>
+        <EntityType Name="Date">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Plannings" Relationship="ParcHelperModel.FK_ToNumeroJour" FromRole="Date" ToRole="Planning" />
+        </EntityType>
+        <EntityType Name="Mois">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="nomMois" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Plannings" Relationship="ParcHelperModel.FK_ToMois" FromRole="Mois" ToRole="Planning" />
+        </EntityType>
         <EntityType Name="Planning">
           <Key>
-            <PropertyRef Name="IdLieu" />
-            <PropertyRef Name="IdJour" />
-            <PropertyRef Name="IdHoraire" />
-            <PropertyRef Name="IdEtat" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="IdLieu" Type="Int32" Nullable="false" />
-          <Property Name="IdJour" Type="Int32" Nullable="false" />
-          <Property Name="IdHoraire" Type="Int32" Nullable="false" />
-          <Property Name="IdEtat" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="EtatLieu" Relationship="ParcHelperModel.FK_ToEtat" FromRole="Planning" ToRole="EtatLieu" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="idLieu" Type="Int32" />
+          <Property Name="idJour" Type="Int32" />
+          <Property Name="idNumeroJour" Type="Int32" />
+          <Property Name="idMois" Type="Int32" />
+          <Property Name="idHoraire" Type="Int32" />
+          <Property Name="idEtat" Type="Int32" />
+          <NavigationProperty Name="Date" Relationship="ParcHelperModel.FK_ToNumeroJour" FromRole="Planning" ToRole="Date" />
+          <NavigationProperty Name="EtatLieu" Relationship="ParcHelperModel.FK_ToEtatLieu" FromRole="Planning" ToRole="EtatLieu" />
           <NavigationProperty Name="Horaire" Relationship="ParcHelperModel.FK_ToHoraire" FromRole="Planning" ToRole="Horaire" />
           <NavigationProperty Name="Jour" Relationship="ParcHelperModel.FK_ToJour" FromRole="Planning" ToRole="Jour" />
           <NavigationProperty Name="Lieu" Relationship="ParcHelperModel.FK_ToLieu" FromRole="Planning" ToRole="Lieu" />
+          <NavigationProperty Name="Mois" Relationship="ParcHelperModel.FK_ToMois" FromRole="Planning" ToRole="Mois" />
         </EntityType>
-        <Association Name="FK_ToEtat">
-          <End Type="ParcHelperModel.EtatLieu" Role="EtatLieu" Multiplicity="1" />
+        <Association Name="FK_ToNumeroJour">
+          <End Type="ParcHelperModel.Date" Role="Date" Multiplicity="0..1" />
+          <End Type="ParcHelperModel.Planning" Role="Planning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Date">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Planning">
+              <PropertyRef Name="idNumeroJour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToEtatLieu">
+          <End Type="ParcHelperModel.EtatLieu" Role="EtatLieu" Multiplicity="0..1" />
           <End Type="ParcHelperModel.Planning" Role="Planning" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EtatLieu">
               <PropertyRef Name="IdEtat" />
             </Principal>
             <Dependent Role="Planning">
-              <PropertyRef Name="IdEtat" />
+              <PropertyRef Name="idEtat" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ToHoraire">
-          <End Type="ParcHelperModel.Horaire" Role="Horaire" Multiplicity="1" />
+          <End Type="ParcHelperModel.Horaire" Role="Horaire" Multiplicity="0..1" />
           <End Type="ParcHelperModel.Planning" Role="Planning" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Horaire">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Planning">
-              <PropertyRef Name="IdHoraire" />
+              <PropertyRef Name="idHoraire" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ToJour">
-          <End Type="ParcHelperModel.Jour" Role="Jour" Multiplicity="1" />
+          <End Type="ParcHelperModel.Jour" Role="Jour" Multiplicity="0..1" />
           <End Type="ParcHelperModel.Planning" Role="Planning" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Jour">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Planning">
-              <PropertyRef Name="IdJour" />
+              <PropertyRef Name="idJour" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ToLieu">
-          <End Type="ParcHelperModel.Lieu" Role="Lieu" Multiplicity="1" />
+          <End Type="ParcHelperModel.Lieu" Role="Lieu" Multiplicity="0..1" />
           <End Type="ParcHelperModel.Planning" Role="Planning" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Lieu">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Planning">
-              <PropertyRef Name="IdLieu" />
+              <PropertyRef Name="idLieu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToMois">
+          <End Type="ParcHelperModel.Mois" Role="Mois" Multiplicity="0..1" />
+          <End Type="ParcHelperModel.Planning" Role="Planning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mois">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Planning">
+              <PropertyRef Name="idMois" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -464,13 +553,31 @@ warning 6002: The table/view 'ParcHelper.dbo.Planning' does not have a primary k
               <ScalarProperty Name="Id" ColumnName="IdIndication" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Dates">
+            <EntityTypeMapping TypeName="ParcHelperModel.Date">
+              <MappingFragment StoreEntitySet="Date">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mois">
+            <EntityTypeMapping TypeName="ParcHelperModel.Mois">
+              <MappingFragment StoreEntitySet="Mois">
+                <ScalarProperty Name="nomMois" ColumnName="nomMois" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Plannings">
             <EntityTypeMapping TypeName="ParcHelperModel.Planning">
               <MappingFragment StoreEntitySet="Planning">
-                <ScalarProperty Name="IdEtat" ColumnName="IdEtat" />
-                <ScalarProperty Name="IdHoraire" ColumnName="IdHoraire" />
-                <ScalarProperty Name="IdJour" ColumnName="IdJour" />
-                <ScalarProperty Name="IdLieu" ColumnName="IdLieu" />
+                <ScalarProperty Name="idEtat" ColumnName="idEtat" />
+                <ScalarProperty Name="idHoraire" ColumnName="idHoraire" />
+                <ScalarProperty Name="idMois" ColumnName="idMois" />
+                <ScalarProperty Name="idNumeroJour" ColumnName="idNumeroJour" />
+                <ScalarProperty Name="idJour" ColumnName="idJour" />
+                <ScalarProperty Name="idLieu" ColumnName="idLieu" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

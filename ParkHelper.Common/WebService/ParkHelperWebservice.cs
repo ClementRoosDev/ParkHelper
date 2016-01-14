@@ -6,12 +6,13 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using ParkHelper.Common.Models;
 using ParkHelper.Common.Models.RequeteListeLieux;
+using ParkHelper.Common.Models.Visite;
 
 namespace ParkHelper.Common.WebService
 {
     public class ParkHelperWebservice
     {
-        public async Task<RequeteListe> GetAttractions()
+        public async Task<RequeteListe> GetAttractions(Informations context)
         {
             RequeteListe result = new RequeteListe();
             using (var httpClient = CreateClient(Path.ODATA))
