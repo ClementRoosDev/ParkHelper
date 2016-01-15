@@ -16,7 +16,6 @@ namespace ParkHelper
             // ViewModels
             SimpleIoc.Default.Register<SplashScreenViewModel>();
             SimpleIoc.Default.Register<HomePageViewModel>();
-            SimpleIoc.Default.Register<VisiteDetailsViewModel>();
             SimpleIoc.Default.Register<EditHotelPageViewModel>();
             SimpleIoc.Default.Register<ListPageViewModel>();
             SimpleIoc.Default.Register<MapPageViewModel>();
@@ -62,22 +61,6 @@ namespace ParkHelper
                 if (!SimpleIoc.Default.IsRegistered<HomePageViewModel>())
                     SimpleIoc.Default.Register<HomePageViewModel>();
                 return ServiceLocator.Current.GetInstance<HomePageViewModel>();
-            }
-        }
-
-        /// <summary>
-        /// Gets the VsiteDetails property.
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-            "CA1822:MarkMembersAsStatic",
-            Justification = "This non-static member is needed for data binding purposes.")]
-        public VisiteDetailsViewModel VisiteDetailsPageView
-        {
-            get
-            {
-                if (!SimpleIoc.Default.IsRegistered<VisiteDetailsViewModel>())
-                    SimpleIoc.Default.Register<VisiteDetailsViewModel>();
-                return ServiceLocator.Current.GetInstance<VisiteDetailsViewModel>();
             }
         }
 

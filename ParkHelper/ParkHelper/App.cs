@@ -17,7 +17,6 @@ namespace ParkHelper
             nav = new NavigationService();
             nav.Configure(Locator.SplashScreenPage, typeof(SplashScreenPage));
             nav.Configure(Locator.HomePage, typeof(HomePage));
-            //nav.Configure(Locator.VisiteDetailsPage, typeof(VisiteDetailsPage));
             nav.Configure(Locator.EditHotelDetailsPage, typeof(EditHotelDetailsPage));
             nav.Configure(Locator.ListPage, typeof(ListPage));
             nav.Configure(Locator.MapPage, typeof(MapPage));
@@ -30,8 +29,6 @@ namespace ParkHelper
             var firstPage = new NavigationPage(new SplashScreenPage());
 
             nav.Initialize(firstPage);
-            
-            //SimpleIoc.Default.Register<INavigationService>(() => nav);
 
             MainPage = firstPage;
 
