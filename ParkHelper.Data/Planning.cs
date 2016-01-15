@@ -14,12 +14,6 @@ namespace ParkHelper.Data
     
     public partial class Planning
     {
-        private int j;
-        private int jourdebutMois;
-        private int i;
-        private int mois;
-        private int v;
-
         public Planning()
         {
             

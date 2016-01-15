@@ -1,26 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
-using System.Collections.Generic;
-using System.Linq;
 using ParkHelper.Commands;
 using ParkHelper.Common.Models.ListeLieux;
 using ParkHelper.Common.Models.RequeteListeLieux;
-using System.Threading.Tasks;
 
 namespace ParkHelper.ViewModels
 {
     public class ListPageViewModel : ViewModelBase
     {
-        #region Fields
-
-        readonly INavigationService _navigationService;
+        private int _choixPauseDej;
+        private ParkHelper _context;
+        private bool _hotel;
         private bool _isLoading;
         private bool _itineraireCanBeGenerated;
 
-        #endregion
+
+        public INavigationService _navigationService;
+
+        private bool _nocturne;
 
         #region Constuctor
 
@@ -29,23 +31,45 @@ namespace ParkHelper.ViewModels
             if (navigationService == null) throw new ArgumentNullException("navigationService");
             _navigationService = navigationService;
 
-            HomeCommand = new RelayCommand(() => { _navigationService.GoBack(); });
+            HomeCommand = new RelayCommand(() => { _navigationService.NavigateTo(Locator.HomePage, Context); });
 
             ItemDetailsCommand =
-                new RelayCommand(() =>
-                {
-                    _navigationService.NavigateTo(Locator.LieuDetailsPage, Parameter);
-                });
+                new RelayCommand(() => { _navigationService.NavigateTo(Locator.LieuDetailsPage, Parameter); });
 
-            ItineraireCommand = new RelayCommand(() =>
+            ItineraireCommand =
+                new RelayCommand(() => { _navigationService.NavigateTo(Locator.ItinerairePage, Context); });
+
+            VisiteDetailsCommand =
+                new RelayCommand(() => { _navigationService.NavigateTo(Locator.VisiteDetailsPage, Context); });
+
+
+            EditHotelCommand = new RelayCommand(() =>
             {
-                    _navigationService.NavigateTo(Locator.ItinerairePage, Context);
+                _navigationService.NavigateTo(
+                    Locator.EditHotelDetailsPage, Context);
             });
 
-            VisiteDetailsCommand = new RelayCommand(() =>
+            TempsEstime = new List<string>
             {
-                _navigationService.NavigateTo(Locator.VisiteDetailsPage, Context);
-            });
+                "0",
+                "5",
+                "10",
+                "15",
+                "20",
+                "25",
+                "30",
+                "35",
+                "40",
+                "45",
+                "50",
+                "55",
+                "1h",
+                "1h15",
+                "1h30",
+                "1h45",
+                "2h"
+            };
+
 
             Listes = new List<Categorie>();
             ListeAppliSelectionnees = new List<int>();
@@ -58,14 +82,48 @@ namespace ParkHelper.ViewModels
 
         #endregion
 
-        #region Properties
+        public ICommand HomeCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
+        public ICommand EditHotelCommand { get; set; }
+
+        public bool Hotel
+        {
+            get { return _hotel; }
+            set
+            {
+                _hotel = value;
+                RaisePropertyChanged(() => Hotel);
+            }
+        }
+
+        public bool Nocturne
+        {
+            get { return _nocturne; }
+            set
+            {
+                _nocturne = value;
+                Context.VisitePark.Nocturne = _nocturne;
+                RaisePropertyChanged(() => Nocturne);
+            }
+        }
+
+        public List<string> TempsEstime { get; set; }
+
+        public int ChoixPauseDej
+        {
+            get { return _choixPauseDej; }
+            set
+            {
+                _choixPauseDej = value;
+                Context.VisitePark.DureePauseDej = ConvertToValue(_choixPauseDej);
+                RaisePropertyChanged(() => ChoixPauseDej);
+            }
+        }
+
 
         public bool IsLoading
         {
-            get
-            {
-                return _isLoading;
-            }
+            get { return _isLoading; }
             set
             {
                 _isLoading = value;
@@ -76,57 +134,52 @@ namespace ParkHelper.ViewModels
 
         public bool IsLoadingComplete
         {
-            get
+            get { return !_isLoading; }
+        }
+
+        public ParkHelper Context
+        {
+            get { return _context; }
+            set
             {
-                return !_isLoading;
+                _context = value;
+                RaisePropertyChanged(() => Context);
             }
         }
-        
-        public ParkHelper Context { get; set; }
+
         public object Parameter { get; set; }
 
-        #region Liste
+
         public List<Categorie> Listes { get; set; }
         public int ListesCount { get; set; }
         public List<int> ListeAppliSelectionnees { get; set; }
-        #endregion
 
-        #region Home
-        public ICommand HomeCommand { get; set; }
-        #endregion
 
-        #region ItemDetails
         public ICommand ItemDetailsCommand { get; set; }
-        #endregion
+
 
         public ICommand VisiteDetailsCommand { get; set; }
 
-        #region Itineraire
+
         public ICommand ItineraireCommand { get; set; }
         public CreateItineraireCommand CreateItineraire { get; set; }
 
         public bool ItineraireCanBeGenerated
         {
-            get
-            {
-                return _itineraireCanBeGenerated;
-            }
+            get { return _itineraireCanBeGenerated; }
             set
             {
                 _itineraireCanBeGenerated = value;
                 RaisePropertyChanged(() => ItineraireCanBeGenerated);
             }
         }
-        #endregion
-
-        #endregion
 
         #region Methods
+
         public void TryToRestore()
         {
             if (Context.ListeAppliSelectionnees != null && Context.ListeAppliSelectionnees.Count > 0)
             {
-
             }
         }
 
@@ -140,7 +193,7 @@ namespace ParkHelper.ViewModels
 
         private void ToggleSelection(object sender, EventArgs e)
         {
-            var attraction = (Lieu)sender;
+            var attraction = (Lieu) sender;
             if (attraction.EstDejaDansLeParcours)
             {
                 ListeAppliSelectionnees.Add(attraction.Id);
@@ -149,7 +202,7 @@ namespace ParkHelper.ViewModels
             {
                 ListeAppliSelectionnees.Remove(attraction.Id);
             }
-            
+
             ItineraireCanBeGenerated = CreateItineraire.CanExecute(ListeAppliSelectionnees);
             Context.ListeAppliSelectionnees = ListeAppliSelectionnees;
             //TODO : Verifier possibilité d'ajout à l'itinéraire
@@ -172,6 +225,25 @@ namespace ParkHelper.ViewModels
             AddingEventToList();
             CreateItineraire.SetSourceLieux(Listes);
         }
+
+        private static int ConvertToValue(int s)
+        {
+            switch (s)
+            {
+                case 16:
+                    return 120;
+                case 15:
+                    return 105;
+                case 14:
+                    return 90;
+                case 13:
+                    return 75;
+                case 12:
+                    return 60;
+            }
+            return s;
+        }
+
         #endregion
     }
 }

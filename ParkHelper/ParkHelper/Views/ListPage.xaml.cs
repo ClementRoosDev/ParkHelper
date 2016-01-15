@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using GalaSoft.MvvmLight.Views;
+using Microsoft.Practices.ServiceLocation;
 using ParkHelper.Common.Models.RequeteListeLieux;
+using ParkHelper.Common.Models.Visite;
 using ParkHelper.ViewModels;
 using ParkHelper.Common.WebService;
 using Xamarin.Forms;
@@ -21,6 +25,21 @@ namespace ParkHelper.Views
             InitializeTemplate();
         }
 
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+
+            var vm = BindingContext as ListPageViewModel;
+
+            if (vm == null) return;
+            UiPicker.Items.Clear();
+            foreach (var it in vm.TempsEstime)
+            {
+                UiPicker.Items.Add(it);
+            }
+        }
+
         void InitializeTemplate()
         {
             ListViewCategories.ItemSelected += (sender, e) =>
@@ -34,6 +53,27 @@ namespace ParkHelper.Views
         async void ListPage_OnAppearing(object sender, EventArgs e)
         {
             OnAppearing();
+            var currentPageKeyString = ServiceLocator.Current
+            .GetInstance<INavigationService>()
+            .CurrentPageKey;
+            Debug.WriteLine("Current page key: " + currentPageKeyString);
+
+            if (_viewModel.Context.VisitePark == null)
+            {
+                _viewModel.Context.VisitePark = new Informations
+                {
+                    Entree = DateTime.Now,
+                    Sortie = DateTime.Now,
+                    Nocturne = false,
+                    Reservation = new Sejour
+                    {
+                        NumeroResa = 0,
+                        Hotel = new Lieu(),
+                        Chambre = 0,
+                        NbPeople = 0
+                    }
+                };
+            }
 
             _viewModel.IsLoading = true;
 

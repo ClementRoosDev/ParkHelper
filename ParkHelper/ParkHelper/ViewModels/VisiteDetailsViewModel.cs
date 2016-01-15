@@ -25,8 +25,9 @@ namespace ParkHelper.ViewModels
             if (navigationService == null) throw new ArgumentNullException("navigationService");
             _navigationService = navigationService;
 
-            HomeCommand = new RelayCommand(() => {
-                _navigationService.GoBack();
+            HomeCommand = new RelayCommand(() =>
+            {
+                _navigationService.NavigateTo("ListPageView");
             });
 
             ListPageCommand = new RelayCommand(() =>

@@ -2,59 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ParkHelper.Views.VisiteDetailsPage"
-             Title="Visite">
-  <Grid>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="*"/>
-      <RowDefinition Height="*"/>
-      <RowDefinition Height="*"/>
-      <RowDefinition Height="*"/>
-      <RowDefinition Height="*"/>
-      <RowDefinition Height="*"/>
-    </Grid.RowDefinitions>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="*"/>
-      <ColumnDefinition Width="*"/>
-      <ColumnDefinition Width="*"/>
-    </Grid.ColumnDefinitions>
+             Title="Visite" Appearing="VisiteDetailsPage_OnAppearing">
   
-    <Label Grid.Row="0" Grid.Column="0" Text="Date Entrée :"
-           HorizontalOptions="Center" VerticalOptions="Center"/>
-    <DatePicker Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
-                HorizontalOptions="Center" VerticalOptions="Center"
-                Date="{Binding Context.VisitePark.Entree}"/>
-
-    <Label Grid.Row="1" Grid.Column="0" Text="Date Sortie :"
-           HorizontalOptions="Center" VerticalOptions="Center"/>
-    <DatePicker Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
-                HorizontalOptions="Center" VerticalOptions="Center"
-                Date="{Binding Context.VisitePark.Sortie}"/>
-
-    <Label Grid.Row="2" Grid.Column="0" Text="Pause repas :"
-           HorizontalOptions="Center" VerticalOptions="Center"/>
-    <Picker Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
-            x:Name="UiPicker" SelectedIndex="{Binding ChoixPauseDej}"
-            Title="Quelle est la durée estimée de la pause repas ?"/>
-
-    <Label Grid.Row="3" Grid.Column="0" Text="Nocturne :"
-           HorizontalOptions="Center" VerticalOptions="Center"/>
-    <Switch Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
-            x:Name="SwitchNocturne" IsToggled="{Binding Context.VisitePark.Nocturne}"
-            HorizontalOptions="Center" VerticalOptions="Center"/>
-    
-    <Label Grid.Row="4" Grid.Column="0" Text="Sejour Hotel :"
-           HorizontalOptions="Center" VerticalOptions="Center"/>
-    <Switch Grid.Row="4" Grid.Column="1"
-            x:Name="SwitchHotel" IsToggled="{Binding Hotel}"
-            HorizontalOptions="Center" VerticalOptions="Center"/>
-    <Button Grid.Row="4" Grid.Column="2" Text="Editer" x:Name="ButtonEditHotel"
-            Command="{Binding EditHotelCommand}"
-            IsEnabled="{Binding Hotel}"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"/>
-    
-    <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"
-            Text="Sauvegarder" Command="{Binding ListPageCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
-  </Grid>
 
 </ContentPage>

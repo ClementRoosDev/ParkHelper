@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
+using GalaSoft.MvvmLight.Views;
+using Microsoft.Practices.ServiceLocation;
 using ParkHelper.Common.Models.Visite;
 using ParkHelper.Common.Models.RequeteListeLieux;
 using ParkHelper.ViewModels;
@@ -38,18 +41,14 @@ namespace ParkHelper.Views
             }
         }
 
-        protected override void OnBindingContextChanged()
+
+        private void VisiteDetailsPage_OnAppearing(object sender, EventArgs e)
         {
-            base.OnBindingContextChanged();
-
-            var vm = BindingContext as VisiteDetailsViewModel;
-
-            if (vm == null) return;
-            UiPicker.Items.Clear();
-            foreach (var it in vm.TempsEstime)
-            {
-                UiPicker.Items.Add(it);
-            }
+            OnAppearing();
+            var currentPageKeyString = ServiceLocator.Current
+            .GetInstance<INavigationService>()
+            .CurrentPageKey;
+            Debug.WriteLine("Current page key: " + currentPageKeyString);
         }
     }
 }
