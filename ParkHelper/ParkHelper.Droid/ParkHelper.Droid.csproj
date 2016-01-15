@@ -186,6 +186,14 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\logo.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\logo.png" />
     <AndroidResource Include="Resources\drawable-hdpi\logo.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\deplacement.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\deplacement.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\deplacement.png" />
+    <AndroidResource Include="Resources\drawable\deplacement.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\RollerCoaster32.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\RollerCoaster32.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\RollerCoaster32.png" />
+    <AndroidResource Include="Resources\drawable\RollerCoaster32.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ParkHelper\ParkHelper.csproj">

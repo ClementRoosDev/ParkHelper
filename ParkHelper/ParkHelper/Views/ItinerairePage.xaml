@@ -5,16 +5,42 @@
              Title ="Itineraire" 
              Disappearing="ItinerairePage_OnDisappearing"
              Appearing="ItinerairePage_OnAppearing">
+
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <Style x:Key="ImageTypeStyle" TargetType="Image">
+        <Setter Property="Source" Value="Itineraire.png" />
+        <Style.Triggers>
+          <DataTrigger Value="0" Binding="{Binding IdType}" TargetType="Image">
+            <Setter Property="Source" Value="deplacement.png"/>
+          </DataTrigger>
+          <DataTrigger Value="1" Binding="{Binding IdType}" TargetType="Image">
+            <Setter Property="Source" Value="RollerCoaster32.png"/>
+          </DataTrigger>
+        </Style.Triggers>
+      </Style>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  
+  
     <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
       </Grid.RowDefinitions>
       <ListView Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center"
                 x:Name="ListView"
-                IsGroupingEnabled="True"
-                GroupDisplayBinding="{Binding Libelle}"
-                IsVisible="{Binding IsLoadingCompleted}"
-                GroupShortNameBinding="{Binding Libelle}">
+                IsVisible="{Binding IsLoadingCompleted}">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <StackLayout Orientation="Horizontal" Spacing="0" Padding="10, 5, 10, 5">
+                <Image HorizontalOptions="Start" Style="{StaticResource ImageTypeStyle}" WidthRequest="32" HeightRequest="32" >
+                </Image>
+                <Label Text="{Binding Libelle}" HorizontalOptions="FillAndExpand"/>
+              </StackLayout>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
 
       </ListView>
       <ActivityIndicator x:Name="ActivityIndicator"

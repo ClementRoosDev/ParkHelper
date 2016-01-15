@@ -11,11 +11,12 @@ namespace ParkHelper.Data
         #region Fields
         private Lieu LieuDepart { get; set; }
         private Lieu LieuArrivee { get; set; }
-        [Required]
         public int Duree { get; set; }
         public int Ordre { get; set; }
         [Required]
         public string Libelle { get; set; }
+        [Required]
+        public int IdType { get { return 0; } } 
 
         public bool EstDejaDansLeParcours { get; set; }
 
@@ -30,7 +31,7 @@ namespace ParkHelper.Data
 
             CalculeDuree();
 
-            Libelle = string.Format("Déplacement : {0} minutes ", Duree);
+            Libelle = string.Format("Déplacement : {0} minutes ", Duree.ToString());
         }
 
         #endregion
