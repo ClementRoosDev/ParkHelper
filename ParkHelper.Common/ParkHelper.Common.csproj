@@ -46,6 +46,7 @@
     <Compile Include="Models\RequeteListeLieux\Indication.cs" />
     <Compile Include="Models\RequeteListeLieux\Lieu.cs" />
     <Compile Include="Models\RequeteListeLieux\EtatLieu.cs" />
+    <Compile Include="Models\RequeteListeLieux\Planning.cs" />
     <Compile Include="Models\RequeteListeLieux\RequeteListe.cs" />
     <Compile Include="Models\RequeteListeParcours.cs" />
     <Compile Include="Models\RequeteListeLieux\TypeDeLieu.cs" />

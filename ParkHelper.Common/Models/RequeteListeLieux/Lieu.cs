@@ -9,6 +9,7 @@ namespace ParkHelper.Common.Models.RequeteListeLieux
 
         public TypeDeLieu TypeDeLieu { get; set; }
         public List<Indication> Indications { get; set; }
+        public List<Planning> Plannings { get; set; } 
         public int Id { get; set; }
         public string Libelle { get; set; }
         public string Description { get; set; }

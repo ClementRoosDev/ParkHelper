@@ -109,28 +109,42 @@ namespace ParkHelper.ViewModels
         }
         public void CreateParcours()
         {
-            var extractSubList = Listes.GroupBy(i => i.Ordre);
-            foreach (var subList in extractSubList)
+            //var extractSubList = Listes.GroupBy(i => i.Ordre);
+            /**foreach (var subList in extractSubList)
             {
                 var etapeParcours = Listes.Where(i => i.Ordre == subList.Key).ToList().First();
                 var parcours = new Parcours(subList.Key.ToString(),
                     new EtapeParcours(etapeParcours));
-                for (var j = 1; j < subList.Count(); j++)
-                {
+                for (var j = 1; j < */
+                //subList.Count(); j++)
+                /*{
                     parcours.Add(subList.ElementAt(j));
                 }
                 ParcoursFinal.Add(parcours);
+            }*/
+            foreach (var newParcours in Context.ListeAppliSelectionnees.Select(itemLieu => ListesBis.Where(i => i.Id == itemLieu).ToList().Single()).Select(itemInListe => new Parcours("1", new EtapeParcours(itemInListe))))
+            {
+                ParcoursFinal.Add(newParcours);
             }
+            
         }
+
+        public List<ListeParcour> ListesToDisplay { get; set; }
 
         public void ConvertFrom(List<ListeParcour> listeParcours)
         {
+            //Listes from API,ListesBis from API with order, ListesToInsert = list with only ids to insert
             if (listeParcours == null) return;
-            ListesBis = listeParcours.OrderBy(i => i.Ordre).ToList();
-            Listes = ListesBis;
-            OrderListeParcours();
+            Listes = listeParcours;
+            ListesBis = listeParcours.OrderBy(i => i.Id).ToList();
+            ListesToInsert = listeParcours.OrderBy(i => i.Ordre).ToList();
+            ListesToInsert = ListesToInsert.Where(f => f.Ordre > 0).ToList();
+
+            //OrderListeParcours();
             CreateParcours();
         }
+
+        public List<ListeParcour> ListesToInsert { get; set; }
 
         #endregion
 

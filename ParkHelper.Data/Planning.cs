@@ -20,6 +20,11 @@ namespace ParkHelper.Data
         private int mois;
         private int v;
 
+        public Planning()
+        {
+            
+        }
+
         public Planning(int id, int lieu, int jourdebutMois, int numeroJour, int mois, int horaire, int etat)
         {
             this.id = id;
