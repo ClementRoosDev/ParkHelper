@@ -20,10 +20,7 @@ namespace ParkHelper.Common.WebService
                 // fututre query Lieux()?$filter=Latittude gt 1.0 and 
                 //Plannings /any(a:a/idNumeroJour ge 1 and a/idNumeroJour le 3 and a/idMois eq 1)
                 //&$expand=Plannings,Indications
-                
-                var response = await httpClient.GetAsync("Lieux()?$filter=Latittude%20gt%201.0%20and%20"+
-                    "Plannings/any(a:a/idNumeroJour%20ge%20"+ context.Entree.Day + "%20and%20a/idNumeroJour%20le%20"+context.Sortie.Day+"%20and%20a/"+
-                    "idMois%20eq%20"+ context.Entree.Month + ")&$expand=Plannings,Indications,TypeDeLieu").ConfigureAwait(false);
+                var response = await httpClient.GetAsync("Lieux?$filter=Latittude%20gt%201&$expand=TypeDeLieu,Indications,Plannings").ConfigureAwait(false);
                 if (response.IsSuccessStatusCode)
                 {
                     var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

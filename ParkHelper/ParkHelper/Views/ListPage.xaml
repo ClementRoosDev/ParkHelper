@@ -5,20 +5,27 @@
              Title="Attractions" Appearing="ListPage_OnAppearing">
 
   <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="50"/>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="50"/>
+    </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
       <RowDefinition Height="50"/>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="50"/>
     </Grid.RowDefinitions>
-      <SearchBar Grid.Row ="0" x:Name="SearchBar"
+      <SearchBar Grid.Row ="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="SearchBar"
                  VerticalOptions="Center"
                  HorizontalOptions="Center"
                  Placeholder="Rechercher..."
                  TextChanged="SearchBar_OnTextChanged"
-                 IsVisible="{Binding IsLoadingComplete}"
-      >
+                 IsVisible="{Binding IsLoadingComplete}">
       </SearchBar>
-      <ListView Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center"
+    <Button Grid.Row="0" Grid.Column="2" Text="Setttings" Command="{Binding VisiteDetailsCommand}"
+          IsVisible="{Binding IsLoadingComplete}"/>
+      <ListView Grid.Column="0" Grid.ColumnSpan="3"
+                Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center"
                 x:Name="ListViewCategories"
                 IsGroupingEnabled="True"
                 GroupDisplayBinding="{Binding Name}"
@@ -37,12 +44,13 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    <ActivityIndicator x:Name="ActivityIndicator" Grid.Row="1"
-                       VerticalOptions="Center" HorizontalOptions="Center"
+    <ActivityIndicator x:Name="ActivityIndicator" Grid.Row="1" Grid.Column="1"
+                       VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                          IsVisible="{Binding IsLoading}"
                          IsRunning="{Binding IsLoading}"
                          Color="Black" />
-    <Button Grid.Row="2" x:Name="ItineraireCommand"
+    <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
+            x:Name="ItineraireCommand"
           Text="Créer itinéraire"
           Command="{Binding CreateItineraire}"
           CommandParameter="{Binding}" IsEnabled="{Binding ItineraireCanBeGenerated}"

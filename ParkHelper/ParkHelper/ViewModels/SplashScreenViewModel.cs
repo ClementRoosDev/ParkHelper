@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -35,6 +36,7 @@ namespace ParkHelper.ViewModels
         {
             await Task.Delay(3000);
             _applicationContext = new ParkHelper();
+            _applicationContext.ListeAppliSelectionnees = new List<int>();
             HomeCommand.Execute(_applicationContext);
         }
     }
