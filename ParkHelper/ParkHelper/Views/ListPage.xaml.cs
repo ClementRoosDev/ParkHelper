@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 using ParkHelper.Common.Models.RequeteListeLieux;
 using ParkHelper.Common.Models.Visite;
-using ParkHelper.ViewModels;
 using ParkHelper.Common.WebService;
+using ParkHelper.ViewModels;
 using Xamarin.Forms;
 
 namespace ParkHelper.Views
 {
     public partial class ListPage
     {
-        readonly ListPageViewModel _viewModel;
+        private readonly ListPageViewModel _viewModel;
 
         public ListPage(ParkHelper context)
         {
@@ -40,22 +39,22 @@ namespace ParkHelper.Views
             }
         }
 
-        void InitializeTemplate()
+        private void InitializeTemplate()
         {
             ListViewCategories.ItemSelected += (sender, e) =>
             {
-                var attraction = (Lieu)ListViewCategories.SelectedItem;
+                var attraction = (Lieu) ListViewCategories.SelectedItem;
                 _viewModel.Parameter = attraction;
                 _viewModel.ItemDetailsCommand.Execute(_viewModel.Parameter);
             };
         }
 
-        async void ListPage_OnAppearing(object sender, EventArgs e)
+        private async void ListPage_OnAppearing(object sender, EventArgs e)
         {
             OnAppearing();
             var currentPageKeyString = ServiceLocator.Current
-            .GetInstance<INavigationService>()
-            .CurrentPageKey;
+                .GetInstance<INavigationService>()
+                .CurrentPageKey;
             Debug.WriteLine("Current page key: " + currentPageKeyString);
 
             if (_viewModel.Context.VisitePark == null)
@@ -84,8 +83,8 @@ namespace ParkHelper.Views
             {
                 try
                 {
-                    ParkHelperWebservice Ws = new ParkHelperWebservice();
-                    RequeteListe requeteLieux = await Ws.GetAttractions();
+                    var Ws = new ParkHelperWebservice();
+                    var requeteLieux = await Ws.GetAttractions();
 
                     _viewModel.ConvertFrom(requeteLieux.value);
 
@@ -104,7 +103,7 @@ namespace ParkHelper.Views
                 {
                     await DisplayAlert("Error", "Connection Error", "OK", "Cancel");
                     _viewModel.HomeCommand.Execute(null);
-                    System.Diagnostics.Debug.WriteLine(ex.Message);
+                    Debug.WriteLine(ex.Message);
                 }
             }
             else
@@ -114,11 +113,12 @@ namespace ParkHelper.Views
             _viewModel.IsLoading = false;
         }
 
-        void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
+        private void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             ListViewCategories.BeginRefresh();
 
-            ListViewCategories.ItemsSource = string.IsNullOrWhiteSpace(e.NewTextValue) ? _viewModel.Listes
+            ListViewCategories.ItemsSource = string.IsNullOrWhiteSpace(e.NewTextValue)
+                ? _viewModel.Listes
                 : _viewModel.Listes.Select(i => i.Where(a => a.Libelle.ToLower().Contains(e.NewTextValue.ToLower())));
 
             ListViewCategories.EndRefresh();
