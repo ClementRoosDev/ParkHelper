@@ -4,7 +4,6 @@ using System.Runtime.Serialization;
 // ReSharper disable once CheckNamespace
 namespace ParkHelper.Data
 {
-    [DataContract]
     [KnownType(typeof(Deplacement))]
     public class Deplacement : IElementDeParcours
     {
