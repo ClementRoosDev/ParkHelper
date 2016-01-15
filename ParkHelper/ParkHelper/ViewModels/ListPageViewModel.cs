@@ -42,6 +42,11 @@ namespace ParkHelper.ViewModels
                     _navigationService.NavigateTo(Locator.ItinerairePage, Context);
             });
 
+            VisiteDetailsCommand = new RelayCommand(() =>
+            {
+                _navigationService.NavigateTo(Locator.VisiteDetailsPage, Context);
+            });
+
             Listes = new List<Categorie>();
             ListeAppliSelectionnees = new List<int>();
             IsLoading = true;
@@ -94,6 +99,8 @@ namespace ParkHelper.ViewModels
         public ICommand ItemDetailsCommand { get; set; }
         #endregion
 
+        public ICommand VisiteDetailsCommand { get; set; }
+
         #region Itineraire
         public ICommand ItineraireCommand { get; set; }
         public CreateItineraireCommand CreateItineraire { get; set; }
@@ -144,6 +151,7 @@ namespace ParkHelper.ViewModels
             }
             
             ItineraireCanBeGenerated = CreateItineraire.CanExecute(ListeAppliSelectionnees);
+            Context.ListeAppliSelectionnees = ListeAppliSelectionnees;
             //TODO : Verifier possibilité d'ajout à l'itinéraire
             //System.Console.WriteLine("{0} has been toggled to {1}", Lieu.Libelle, Lieu.EstDejaDansLeParcours);
         }

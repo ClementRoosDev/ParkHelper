@@ -47,7 +47,7 @@ namespace ParkHelper.ViewModels
             VisiteCommand = new RelayCommand(() =>
             {
                 _navigationService.NavigateTo(
-                    Locator.VisiteDetailsPage,Context);
+                    Locator.ListPage,Context);
             });
             /**}else{
             ListPageCommand = new RelayCommand(() =>
