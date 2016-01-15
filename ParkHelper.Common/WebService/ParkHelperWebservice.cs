@@ -12,7 +12,7 @@ namespace ParkHelper.Common.WebService
 {
     public class ParkHelperWebservice
     {
-        public async Task<RequeteListe> GetAttractions(Informations context)
+        public async Task<RequeteListe> GetAttractions()
         {
             RequeteListe result = new RequeteListe();
             using (var httpClient = CreateClient(Path.ODATA))
