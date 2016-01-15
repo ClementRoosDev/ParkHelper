@@ -38,9 +38,9 @@ namespace ParkHelper.Views
 
                 if (objectWithFormat.ListeParcours != null)
                 {
-                    if (_viewModel.Listes.Count > 0)
+                    if (_viewModel.listeParcours.Count > 0)
                     {
-                        ListView.ItemsSource = _viewModel.ParcoursFinal;
+                        ListView.ItemsSource = _viewModel.listeParcours;
                         setUIElements(true);
                     }
                     else
@@ -65,7 +65,7 @@ namespace ParkHelper.Views
             }
 
 
-            _viewModel.IsLoading = true;
+            _viewModel.IsLoading = false;
 
         }
 

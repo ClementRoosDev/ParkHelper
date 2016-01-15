@@ -25,32 +25,7 @@ namespace ParkHelper.Apiv2.Models
         {
             ListeAttraction = new List<Lieu>();
             ListeAttraction = ConvertIdToAttraction(listeIdAttractions) as List<Lieu>;
-            //var userType = ObjectContext.GetObjectType(MyListeAttraction.GetType());
-            /*foreach (var attraction in MyListeAttraction)
-            {
-                Lieu l = new Lieu
-                {
-                    Attente = attraction.Attente,
-                    CapaciteWagon = attraction.CapaciteWagon,
-                    Description = attraction.Description,
-                    Duree = attraction.Duree,
-                    EstDejaDansLeParcours = attraction.EstDejaDansLeParcours,
-                    Id = attraction.Id,
-                    IdType = attraction.IdType,
-                    Indications = attraction.Indications,
-                    Latittude = attraction.Latittude,
-                    Libelle = attraction.Libelle,
-                    LienGif = attraction.LienGif,
-                    Longitude = attraction.Longitude,
-                    Ordre = attraction.Ordre,
-                    TypeDeLieu = new TypeDeLieu {
-                        Id = attraction.TypeDeLieu.Id,
-                        Libelle = attraction.TypeDeLieu.Libelle,
-                        Lieux = attraction.TypeDeLieu.Lieux
-                    }
-                    };
-                ListeAttraction.Add(l);
-            }*/
+
             Parcours = new Parcours { ListeParcours = ListeAttraction.Cast<IElementDeParcours>().ToList() };
         }
 

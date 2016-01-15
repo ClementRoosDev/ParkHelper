@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 // ReSharper disable once CheckNamespace
@@ -10,8 +11,11 @@ namespace ParkHelper.Data
         #region Fields
         private Lieu LieuDepart { get; set; }
         private Lieu LieuArrivee { get; set; }
+        [Required]
         public int Duree { get; set; }
         public int Ordre { get; set; }
+        [Required]
+        public string Libelle { get; set; }
 
         public bool EstDejaDansLeParcours { get; set; }
 
@@ -22,8 +26,11 @@ namespace ParkHelper.Data
         public Deplacement(Lieu LieuDepart, Lieu LieuArrivee)
         {
             this.LieuDepart = LieuDepart;
-            this.LieuArrivee = LieuArrivee;
+            this.LieuArrivee = LieuArrivee;           
+
             CalculeDuree();
+
+            Libelle = string.Format("Déplacement : {0} minutes ", Duree);
         }
 
         #endregion

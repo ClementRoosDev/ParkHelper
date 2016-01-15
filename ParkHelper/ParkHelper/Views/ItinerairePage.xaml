@@ -12,14 +12,15 @@
       <ListView Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center"
                 x:Name="ListView"
                 IsGroupingEnabled="True"
-                GroupDisplayBinding="{Binding Heure}"
+                GroupDisplayBinding="{Binding Libelle}"
                 IsVisible="{Binding IsLoadingCompleted}"
-                GroupShortNameBinding="{Binding}">
-        <ActivityIndicator x:Name="ActivityIndicator"
-                           VerticalOptions="Center" HorizontalOptions="Center"
-                        IsVisible="{Binding IsLoading}"
-                        IsRunning="{Binding IsLoading}"
-                        Color="Black" />
+                GroupShortNameBinding="{Binding Libelle}">
+
       </ListView>
+      <ActivityIndicator x:Name="ActivityIndicator"
+                   VerticalOptions="Center" HorizontalOptions="Center"
+                IsVisible="{Binding IsLoading}"
+                IsRunning="{Binding IsLoading}"
+                Color="Black" />
     </Grid>
 </ContentPage>
