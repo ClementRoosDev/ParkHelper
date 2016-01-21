@@ -44,7 +44,7 @@
             </ListView.ItemTemplate>
         </ListView>
     <ActivityIndicator x:Name="ActivityIndicator" Grid.Row="1" Grid.Column="1"
-                       VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                       HorizontalOptions="Center" VerticalOptions="Center"
                          IsVisible="{Binding IsLoading}"
                          IsRunning="{Binding IsLoading}"
                          Color="Black" />
@@ -76,7 +76,7 @@
            HorizontalOptions="Center" VerticalOptions="Center"/>
     <DatePicker Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
                 HorizontalOptions="Center" VerticalOptions="Center"
-                Date="{Binding Context.VisitePark.Entree}"/>
+                Date="{Binding Context.VisitePark.Entree, Mode=TwoWay}"/>
 
     <Label Grid.Row="1" Grid.Column="0" Text="Date Sortie :"
            HorizontalOptions="Center" VerticalOptions="Center"/>
@@ -98,14 +98,9 @@
     
     <Label Grid.Row="4" Grid.Column="0" Text="Sejour Hotel :"
            HorizontalOptions="Center" VerticalOptions="Center"/>
-    <Switch Grid.Row="4" Grid.Column="1"
+    <Switch Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
             x:Name="SwitchHotel" IsToggled="{Binding Hotel}"
             HorizontalOptions="Center" VerticalOptions="Center"/>
-    <Button Grid.Row="4" Grid.Column="2" Text="Editer" x:Name="ButtonEditHotel"
-            Command="{Binding EditHotelCommand}"
-            IsEnabled="{Binding Hotel}"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"/>
   </Grid>
       </ContentPage>
     </TabbedPage.Children>

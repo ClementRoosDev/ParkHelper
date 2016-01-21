@@ -42,13 +42,6 @@ namespace ParkHelper.ViewModels
             VisiteDetailsCommand =
                 new RelayCommand(() => { _navigationService.NavigateTo(Locator.VisiteDetailsPage, Context); });
 
-
-            EditHotelCommand = new RelayCommand(() =>
-            {
-                _navigationService.NavigateTo(
-                    Locator.EditHotelDetailsPage, Context);
-            });
-
             TempsEstime = new List<string>
             {
                 "0",

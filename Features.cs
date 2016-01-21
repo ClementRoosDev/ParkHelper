@@ -23,8 +23,8 @@ DONE - F : Améloriation de la GUI avec du style
 DONE - F : Création d'un objet présence qui contient les infos de visite de l'utilisateur (datetime picker and so on)
 - I : Vue Resa Hotel
 DONE - F : Vue Infos Visite
-- B : ActivityIndicator pas centré
-- I : Acceleration appel API
+DONE - B : ActivityIndicator pas centré
+DONE - I : Acceleration appel API
 
 4 :
 - F : Service d'écoute pour api
