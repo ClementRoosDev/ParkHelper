@@ -64,13 +64,6 @@ namespace ParkHelper.Views
                     Entree = DateTime.Now,
                     Sortie = DateTime.Now,
                     Nocturne = false,
-                    Reservation = new Sejour
-                    {
-                        NumeroResa = 0,
-                        Hotel = new Lieu(),
-                        Chambre = 0,
-                        NbPeople = 0
-                    }
                 };
             }
 
