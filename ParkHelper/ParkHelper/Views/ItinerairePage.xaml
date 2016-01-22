@@ -15,7 +15,22 @@
             <Setter Property="Source" Value="deplacement.png"/>
           </DataTrigger>
           <DataTrigger Value="1" Binding="{Binding IdType}" TargetType="Image">
-            <Setter Property="Source" Value="RollerCoaster32.png"/>
+            <Setter Property="Source" Value="Attraction.png"/>
+          </DataTrigger>
+          <DataTrigger Value="2" Binding="{Binding IdType}" TargetType="Image">
+            <Setter Property="Source" Value="Playground.png"/>
+          </DataTrigger>
+          <DataTrigger Value="3" Binding="{Binding IdType}" TargetType="Image">
+            <Setter Property="Source" Value="Boutique.png"/>
+          </DataTrigger>
+          <DataTrigger Value="4" Binding="{Binding IdType}" TargetType="Image">
+            <Setter Property="Source" Value="Show.png"/>
+          </DataTrigger>
+          <DataTrigger Value="5" Binding="{Binding IdType}" TargetType="Image">
+            <Setter Property="Source" Value="Service.png"/>
+          </DataTrigger>
+          <DataTrigger Value="7" Binding="{Binding IdType}" TargetType="Image">
+            <Setter Property="Source" Value="Restaurant.png"/>
           </DataTrigger>
         </Style.Triggers>
       </Style>
@@ -25,7 +40,7 @@
   
     <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
       <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
       <ListView Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center"
                 x:Name="ListView"
@@ -33,10 +48,10 @@
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
-              <StackLayout Orientation="Horizontal" Spacing="0" Padding="10, 5, 10, 5">
+              <StackLayout Orientation="Horizontal" Spacing="0" >
                 <Image HorizontalOptions="Start" Style="{StaticResource ImageTypeStyle}" WidthRequest="32" HeightRequest="32" >
                 </Image>
-                <Label Text="{Binding Libelle}" HorizontalOptions="FillAndExpand"/>
+                <Label Text="{Binding Libelle}" HorizontalOptions="FillAndExpand" />
               </StackLayout>
             </ViewCell>
           </DataTemplate>
