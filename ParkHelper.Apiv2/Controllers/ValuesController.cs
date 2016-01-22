@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using ParkHelper.Apiv2.Model;
 using ParkHelper.Data;
@@ -23,15 +24,14 @@ namespace ParkHelper.Apiv2.Controllers
         }*/
 
         [AllowAnonymous]
-        public Location[] Get([FromUri] Location[] locations)
+        public IEnumerable<Location> Get([FromUri] double[] lieux)
         {
-            var _randomLocations = CityProvider.GetRandomDestinations(locations);
+            var locations = CityProvider.ConvertFromList(lieux);
 
             lock (_algorithmLock)
-                _algorithm = new TravellingSalesmanAlgorithm(_startLocation, _randomLocations, _populationCount);
+                _algorithm = new TravellingSalesmanAlgorithm(_startLocation, locations, _populationCount);
 
-            var _bestSolutionSoFar = _algorithm.GetBestSolutionSoFar().ToArray();
-            return _bestSolutionSoFar;
+            return _algorithm.GetBestSolutionSoFar();
         }
 
         // GET api/values/5

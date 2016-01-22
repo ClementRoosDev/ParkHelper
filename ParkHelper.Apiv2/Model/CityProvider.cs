@@ -26,6 +26,7 @@ namespace ParkHelper.Apiv2.Model
             //    result[i] = new Location(x, y);
             //}
             Location[] result = new Location[locations.Length];
+
             result[0] = new Location(49.1, 2.1);
             return result;
         }
@@ -155,6 +156,19 @@ namespace ParkHelper.Apiv2.Model
                     }
                 }
             }
+        }
+
+        public static Location[] ConvertFromList(double[] lieux)
+        {
+            var compteurPos = 0;
+            var size = (lieux.Length/2);
+            var locations = new Location[size];
+            for(var i =0; i< size;i++)
+            {
+                locations[i] = new Location(lieux[compteurPos], lieux[compteurPos + 1]);
+                compteurPos+=2;
+            }
+            return locations;
         }
     }
 }

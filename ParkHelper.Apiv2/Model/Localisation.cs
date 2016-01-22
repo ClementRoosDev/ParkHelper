@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ParkHelper.Apiv2.Models
+namespace ParkHelper.Apiv2.Model
 {
     public class Localisation
     {

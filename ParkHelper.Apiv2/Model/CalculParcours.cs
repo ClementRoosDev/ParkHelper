@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
 
-namespace ParkHelper.Apiv2.Models
+namespace ParkHelper.Apiv2.Model
 {
     public class CalculParcours
     {

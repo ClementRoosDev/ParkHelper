@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace ParkHelper.Apiv2.Model
 {
+    [DataContract]
     public sealed class Location
     {
         public Location(double x, double y)
@@ -13,7 +15,9 @@ namespace ParkHelper.Apiv2.Model
         // We could add other properties, like the name, the description
         // or anything similar that we consider useful.
 
+        [DataMember]
         public double X { get; private set; }
+        [DataMember]
         public double Y { get; private set; }
 
         public double GetDistance(Location other)

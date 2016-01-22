@@ -85,11 +85,7 @@ namespace ParkHelper.Common.WebService
             foreach (var item in ListeIdLieux)
             {
                 //result += "locations=" + item + "&";
-                result += "locations=" + new
-                {
-                    item.X,
-                    item.Y
-                } + "&";
+                result += "locations=" + item.X + "&" + "locations=" + item.Y + "&";
             }
             var resultClean = result.Remove(result.Length - 1);
             
