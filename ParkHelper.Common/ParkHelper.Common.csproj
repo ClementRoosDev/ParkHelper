@@ -51,6 +51,7 @@
     <Compile Include="Models\RequeteListeParcours.cs" />
     <Compile Include="Models\RequeteListeLieux\TypeDeLieu.cs" />
     <Compile Include="Models\Visite\Informations.cs" />
+    <Compile Include="Models\Visite\Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebService\ParkHelperWebservice.cs" />
   </ItemGroup>

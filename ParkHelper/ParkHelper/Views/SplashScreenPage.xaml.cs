@@ -4,6 +4,7 @@ using ParkHelper.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ParkHelper.Common.Models.Visite;
 using Xamarin.Forms;
 
 namespace ParkHelper.Views
@@ -30,7 +31,7 @@ namespace ParkHelper.Views
             {
                 await DisplayAlert("Error", "Connection Error", "OK");
                 viewModel._applicationContext.HasApplicationList = false;
-                viewModel._applicationContext.ListeAppliSelectionnees = new List<int>();
+                viewModel._applicationContext.ListeAppliSelectionnees = new List<Location>();
                 viewModel.HomeCommand.Execute(viewModel._applicationContext);
             }
             

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ParkHelper.Common.Models.Visite;
 using ParkHelper.Common.WebService;
 
 namespace ParkHelper.ViewModels
@@ -39,7 +40,7 @@ namespace ParkHelper.ViewModels
             var Ws = new ParkHelperWebservice();
             _applicationContext.requeteLieux = await Ws.GetAttractions();
             _applicationContext.HasApplicationList = true;
-            _applicationContext.ListeAppliSelectionnees = new List<int>();
+            _applicationContext.ListeAppliSelectionnees = new List<Location>();
             HomeCommand.Execute(_applicationContext);
         }
     }

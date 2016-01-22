@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 using ParkHelper.Common.Models.ListeLieux;
+using ParkHelper.Common.Models.Visite;
 using ParkHelper.ViewModels;
 
 namespace ParkHelper.Commands
@@ -23,8 +24,8 @@ namespace ParkHelper.Commands
         {
             if(parameter != null)
             {
-                var liste = parameter as List<int>;
-                CanBeExecuted = liste != null && liste.Count > 0;
+                var liste = parameter as List<Location>;
+                CanBeExecuted = liste != null && liste.Count > 2;
             }
             else
             {

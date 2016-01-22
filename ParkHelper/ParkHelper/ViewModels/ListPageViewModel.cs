@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Views;
 using ParkHelper.Commands;
 using ParkHelper.Common.Models.ListeLieux;
 using ParkHelper.Common.Models.RequeteListeLieux;
+using ParkHelper.Common.Models.Visite;
 
 namespace ParkHelper.ViewModels
 {
@@ -65,7 +66,7 @@ namespace ParkHelper.ViewModels
 
 
             Listes = new List<Categorie>();
-            ListeAppliSelectionnees = new List<int>();
+            ListeAppliSelectionnees = new List<Location>();
             IsLoading = true;
 
             CreateItineraire = new CreateItineraireCommand(ItineraireCommand);
@@ -145,7 +146,7 @@ namespace ParkHelper.ViewModels
 
         public List<Categorie> Listes { get; set; }
         public int ListesCount { get; set; }
-        public List<int> ListeAppliSelectionnees { get; set; }
+        public List<Location> ListeAppliSelectionnees { get; set; }
 
 
         public ICommand ItemDetailsCommand { get; set; }
@@ -187,13 +188,14 @@ namespace ParkHelper.ViewModels
         private void ToggleSelection(object sender, EventArgs e)
         {
             var attraction = (Lieu) sender;
+            var location = new Location(attraction.Longitude, attraction.Latittude);
             if (attraction.EstDejaDansLeParcours)
             {
-                ListeAppliSelectionnees.Add(attraction.Id);
+                ListeAppliSelectionnees.Add(location);
             }
             else
             {
-                ListeAppliSelectionnees.Remove(attraction.Id);
+                ListeAppliSelectionnees.Remove(location);
             }
 
             ItineraireCanBeGenerated = CreateItineraire.CanExecute(ListeAppliSelectionnees);

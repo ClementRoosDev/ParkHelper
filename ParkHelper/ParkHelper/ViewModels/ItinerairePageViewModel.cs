@@ -7,6 +7,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using ParkHelper.Common.Models;
 using ParkHelper.Common.Models.Parcours;
+using ParkHelper.Common.Models.Visite;
 
 namespace ParkHelper.ViewModels
 {
@@ -37,7 +38,7 @@ namespace ParkHelper.ViewModels
                     Locator.ListPage, Context);
             });
 
-            ListeIdAttractions = new List<int>();
+            ListeIdAttractions = new List<Location>();
         }
 
 
@@ -74,7 +75,7 @@ namespace ParkHelper.ViewModels
             }
         }
 
-        public List<int> ListeIdAttractions { get; set; }
+        public List<Location> ListeIdAttractions { get; set; }
 
         public List<ListeParcour> listeParcours { get; set; }
 

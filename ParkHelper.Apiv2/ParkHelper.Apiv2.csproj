@@ -207,7 +207,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Model\CalculParcours.cs" />
+    <Compile Include="Model\CityProvider.cs" />
     <Compile Include="Model\Localisation.cs" />
+    <Compile Include="Model\Location.cs" />
+    <Compile Include="Model\TravellingSalesmanAlgorithm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AttractionRepository.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
