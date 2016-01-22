@@ -41,24 +41,37 @@
     <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
       <Grid.RowDefinitions>
         <RowDefinition Height="*"/>
+        <RowDefinition Height="3*"/>
       </Grid.RowDefinitions>
-      <ListView Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center"
+      
+      <ScrollView Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+        <StackLayout Orientation="Horizontal">
+          <Image Source="Park1.jpg"></Image>
+          <Image Source="Park2.jpg"></Image>
+          <Image Source="Park3.jpg"></Image>
+          <Image Source="Park4.jpg"></Image>
+        </StackLayout>
+      </ScrollView>
+      
+      <ListView Grid.Row="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
                 x:Name="ListView"
                 IsVisible="{Binding IsLoadingCompleted}">
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
               <StackLayout Orientation="Horizontal" Spacing="0" >
-                <Image HorizontalOptions="Start" Style="{StaticResource ImageTypeStyle}" WidthRequest="32" HeightRequest="32" >
+                <Image HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Style="{StaticResource ImageTypeStyle}" WidthRequest="32" HeightRequest="32" >
                 </Image>
-                <Label Text="{Binding Libelle}" HorizontalOptions="FillAndExpand" />
+                <Label Text="{Binding Libelle}" VerticalOptions="CenterAndExpand"  />
               </StackLayout>
             </ViewCell>
           </DataTemplate>
         </ListView.ItemTemplate>
 
       </ListView>
-      <ActivityIndicator x:Name="ActivityIndicator"
+      <ActivityIndicator
+        Grid.Row="1" Grid.Column="0" 
+              x:Name="ActivityIndicator"
                    VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
                 IsVisible="{Binding IsLoading}"
                 IsRunning="{Binding IsLoading}"

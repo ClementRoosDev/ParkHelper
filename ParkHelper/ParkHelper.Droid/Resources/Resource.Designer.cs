@@ -3462,32 +3462,56 @@ namespace ParkHelper.Droid
 			// aapt resource value: 0x7f020086
 			public const int mr_ic_settings_light = 2130837638;
 			
-			// aapt resource value: 0x7f02008f
-			public const int notification_template_icon_bg = 2130837647;
+			// aapt resource value: 0x7f020097
+			public const int notification_template_icon_bg = 2130837655;
 			
 			// aapt resource value: 0x7f020087
-			public const int PlanParcFinal = 2130837639;
+			public const int Park1 = 2130837639;
 			
 			// aapt resource value: 0x7f020088
-			public const int Playground = 2130837640;
+			public const int Park2 = 2130837640;
 			
 			// aapt resource value: 0x7f020089
-			public const int Restaurant = 2130837641;
+			public const int Park3 = 2130837641;
 			
 			// aapt resource value: 0x7f02008a
-			public const int RollerCoaster32 = 2130837642;
+			public const int Park4 = 2130837642;
 			
 			// aapt resource value: 0x7f02008b
-			public const int Service = 2130837643;
+			public const int Park5 = 2130837643;
 			
 			// aapt resource value: 0x7f02008c
-			public const int Show = 2130837644;
+			public const int Park6 = 2130837644;
 			
 			// aapt resource value: 0x7f02008d
-			public const int TabAttraction = 2130837645;
+			public const int Park7 = 2130837645;
 			
 			// aapt resource value: 0x7f02008e
-			public const int TabSettings = 2130837646;
+			public const int Park8 = 2130837646;
+			
+			// aapt resource value: 0x7f02008f
+			public const int PlanParcFinal = 2130837647;
+			
+			// aapt resource value: 0x7f020090
+			public const int Playground = 2130837648;
+			
+			// aapt resource value: 0x7f020091
+			public const int Restaurant = 2130837649;
+			
+			// aapt resource value: 0x7f020092
+			public const int RollerCoaster32 = 2130837650;
+			
+			// aapt resource value: 0x7f020093
+			public const int Service = 2130837651;
+			
+			// aapt resource value: 0x7f020094
+			public const int Show = 2130837652;
+			
+			// aapt resource value: 0x7f020095
+			public const int TabAttraction = 2130837653;
+			
+			// aapt resource value: 0x7f020096
+			public const int TabSettings = 2130837654;
 			
 			static Drawable()
 			{

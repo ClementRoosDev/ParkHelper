@@ -18,10 +18,10 @@
     
     <ScrollView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
       <StackLayout Orientation="Horizontal">
-        <Image Source="AmusementPark1.jpg"></Image>
-        <Image Source="AmusementPark3.jpg"></Image>
-        <Image Source="AmusementPark4.jpg"></Image>
-        <Image Source="AmusementPark2.jpg"></Image>
+        <Image Source="Park5.jpg"></Image>
+        <Image Source="Park6.jpg"></Image>
+        <Image Source="Park7.jpg"></Image>
+        <Image Source="Park8.jpg"></Image>
       </StackLayout>
     </ScrollView>
     
