@@ -14,12 +14,14 @@ namespace ParkHelper.Views
     public partial class ListPage
     {
         private readonly ListPageViewModel _viewModel;
+        RequeteListe requeteLieux;
 
         public ListPage(ParkHelper context)
         {
             InitializeComponent();
             _viewModel = App.Locator.ListPageView;
             _viewModel.Context = context;
+            requeteLieux = context.requeteLieux;
             BindingContext = _viewModel;
             InitializeTemplate();
         }
@@ -76,8 +78,8 @@ namespace ParkHelper.Views
             {
                 try
                 {
-                    var Ws = new ParkHelperWebservice();
-                    var requeteLieux = await Ws.GetAttractions();
+                    //var Ws = new ParkHelperWebservice();
+                    //RequeteListe requeteLieux = await Ws.GetAttractions();
 
                     _viewModel.ConvertFrom(requeteLieux.value);
 

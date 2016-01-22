@@ -35,6 +35,7 @@ namespace ParkHelper.ViewModels
         public ICommand VisiteCommand { get; set; }
         public ICommand MapCommand { get; set; }
         public ParkHelper Context { get; set; }
+        public bool IsListFilled { get; set; }
 
         #endregion
 

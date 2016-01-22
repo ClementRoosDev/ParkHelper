@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ParkHelper.Common.WebService;
 
 namespace ParkHelper.ViewModels
 {
@@ -13,7 +14,7 @@ namespace ParkHelper.ViewModels
         #region Fields
 
         readonly INavigationService _navigationService;
-        private ParkHelper _applicationContext;
+        public ParkHelper _applicationContext;
 
         #endregion
 
@@ -23,7 +24,7 @@ namespace ParkHelper.ViewModels
                 throw new ArgumentNullException("navigationService");
 
             _navigationService = navigationService;
-            
+
             HomeCommand = new RelayCommand(() =>
             {
                 _navigationService.NavigateTo(Locator.HomePage, _applicationContext);
@@ -32,10 +33,12 @@ namespace ParkHelper.ViewModels
 
         public ICommand HomeCommand { get; set; }
 
-        public async Task DelayExecution()
+        public async Task GetAttractionList()
         {
-            await Task.Delay(3000);
             _applicationContext = new ParkHelper();
+            var Ws = new ParkHelperWebservice();
+            _applicationContext.requeteLieux = await Ws.GetAttractions();
+            _applicationContext.HasApplicationList = true;
             _applicationContext.ListeAppliSelectionnees = new List<int>();
             HomeCommand.Execute(_applicationContext);
         }

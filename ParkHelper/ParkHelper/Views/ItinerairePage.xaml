@@ -44,7 +44,7 @@
 
       </ListView>
       <ActivityIndicator x:Name="ActivityIndicator"
-                   VerticalOptions="Center" HorizontalOptions="Center"
+                   VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
                 IsVisible="{Binding IsLoading}"
                 IsRunning="{Binding IsLoading}"
                 Color="Black" />

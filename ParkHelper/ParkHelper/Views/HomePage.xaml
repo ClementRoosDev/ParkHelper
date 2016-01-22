@@ -39,7 +39,7 @@
           x:Name="Button1"
           BackgroundColor="Transparent"
           Command="{Binding VisiteCommand}"
-          
+          IsEnabled="{Binding IsListFilled}"
           HeightRequest="50"
           BorderRadius="15"
           >

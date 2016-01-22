@@ -2,6 +2,7 @@
 using ParkHelper.Helper;
 using ParkHelper.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -21,8 +22,20 @@ namespace ParkHelper.Views
         async void SplashScreen_OnAppearing(object sender, EventArgs e)
         {
             OnAppearing();
+            try
+            {
+                await viewModel.GetAttractionList();
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Error", "Connection Error", "OK");
+                viewModel._applicationContext.HasApplicationList = false;
+                viewModel._applicationContext.ListeAppliSelectionnees = new List<int>();
+                viewModel.HomeCommand.Execute(viewModel._applicationContext);
+            }
+            
 
-            await viewModel.DelayExecution();
+            
         }
     }
 }

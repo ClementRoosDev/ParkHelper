@@ -733,8 +733,8 @@ namespace ParkHelper.Droid
 			global::Xamarin.Forms.Platform.Resource.Layout.select_dialog_multichoice_material = global::ParkHelper.Droid.Resource.Layout.select_dialog_multichoice_material;
 			global::Xamarin.Forms.Platform.Resource.Layout.select_dialog_singlechoice_material = global::ParkHelper.Droid.Resource.Layout.select_dialog_singlechoice_material;
 			global::Xamarin.Forms.Platform.Resource.Layout.support_simple_spinner_dropdown_item = global::ParkHelper.Droid.Resource.Layout.support_simple_spinner_dropdown_item;
-			global::Xamarin.Forms.Platform.Resource.String.ApplicationName = global::ParkHelper.Droid.Resource.String.ApplicationName;
-			global::Xamarin.Forms.Platform.Resource.String.Hello = global::ParkHelper.Droid.Resource.String.Hello;
+		//	global::Xamarin.Forms.Platform.Resource.String.ApplicationName = global::ParkHelper.Droid.Resource.String.ApplicationName;
+			//global::Xamarin.Forms.Platform.Resource.String.Hello = global::ParkHelper.Droid.Resource.String.Hello;
 			global::Xamarin.Forms.Platform.Resource.String.abc_action_bar_home_description = global::ParkHelper.Droid.Resource.String.abc_action_bar_home_description;
 			global::Xamarin.Forms.Platform.Resource.String.abc_action_bar_home_description_format = global::ParkHelper.Droid.Resource.String.abc_action_bar_home_description_format;
 			global::Xamarin.Forms.Platform.Resource.String.abc_action_bar_home_subtitle_description_format = global::ParkHelper.Droid.Resource.String.abc_action_bar_home_subtitle_description_format;
@@ -4074,12 +4074,6 @@ namespace ParkHelper.Droid
 		
 		public partial class String
 		{
-			
-			// aapt resource value: 0x7f050041
-			public const int ApplicationName = 2131034177;
-			
-			// aapt resource value: 0x7f050040
-			public const int Hello = 2131034176;
 			
 			// aapt resource value: 0x7f05002d
 			public const int abc_action_bar_home_description = 2131034157;
