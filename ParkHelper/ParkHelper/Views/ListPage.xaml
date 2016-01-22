@@ -4,7 +4,7 @@
              x:Class="ParkHelper.Views.ListPage"
              Title="Attractions" Appearing="ListPage_OnAppearing">
   <TabbedPage.Children>
-    <ContentPage Title="Attractions">
+    <ContentPage Title="Attractions" Icon="TabAttraction.png">
       <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="*"/>
@@ -54,7 +54,7 @@
       </Grid>
     </ContentPage>
 
-    <ContentPage Title="Settings">
+    <ContentPage Title="Settings" Icon="TabSettings.png">
       <Grid>
         <Grid.RowDefinitions>
           <RowDefinition Height="*"/>
