@@ -11,6 +11,9 @@ namespace ParkHelper.ViewModels
     {
         #region Fields
         readonly INavigationService _navigationService;
+        private Lieu lieu;
+        private bool isAttraction;
+
         #endregion
 
         #region Constructor
@@ -29,10 +32,37 @@ namespace ParkHelper.ViewModels
 
         #region Properties
         public ICommand ItineraireCommand { get; set; }
-        public Lieu Lieu { get; set; }
+
+        public Lieu Lieu
+        {
+            get { return lieu; }
+            set
+            {
+                lieu = value;
+                GetTexts(lieu);
+            }
+        }
+
+        public bool IsAttraction
+        {
+            get
+            {
+                return isAttraction;
+            }
+            set
+            {
+                isAttraction = value;
+                RaisePropertyChanged(() => IsAttraction);
+            }
+        }
         #endregion
 
         #region Methods
+        private void GetTexts(Lieu lieuWithDetails)
+        {
+            isAttraction = lieuWithDetails.IdType == 1;
+        }
+
         #endregion
     }
 }

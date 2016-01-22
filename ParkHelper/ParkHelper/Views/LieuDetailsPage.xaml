@@ -7,18 +7,16 @@
  
   <Label Text="{Binding Lieu.Libelle}" VerticalOptions="Center" HorizontalOptions="Center" />
 
-  <Label Text="{Binding Lieu.LienGif}" VerticalOptions="Center" HorizontalOptions="Center" />
-
   <Label Text="Description :" VerticalOptions="Center" HorizontalOptions="Center" />
   <Label Text="{Binding Lieu.Description}" VerticalOptions="Center" HorizontalOptions="Center" />
 
-  <Label Text="Capacite :" VerticalOptions="Center" HorizontalOptions="Center" />
-  <Label Text="{Binding Lieu.CapaciteWagon}" VerticalOptions="Center" HorizontalOptions="Center" />
+  <Label Text="Capacite :" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsAttraction}"/>
+  <Label Text="{Binding Lieu.CapaciteWagon}" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsAttraction}"/>
 
-  <Label Text="Durée d'attente moyenne :" VerticalOptions="Center" HorizontalOptions="Center" />
-  <Label Text="{Binding Lieu.Attente}" VerticalOptions="Center" HorizontalOptions="Center" />
+  <Label Text="Durée d'attente moyenne :" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsAttraction}"/>
+  <Label Text="{Binding Lieu.Attente}" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsAttraction}"/>
 
-  <Label Text="Durée de l'attraction :" VerticalOptions="Center" HorizontalOptions="Center" />
-  <Label Text="{Binding Lieu.Duree}" VerticalOptions="Center" HorizontalOptions="Center" />
+  <Label Text="Durée de l'attraction :" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsAttraction}"/>
+  <Label Text="{Binding Lieu.Duree}" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsAttraction}"/>
   </StackLayout>
 </ContentPage>
