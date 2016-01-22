@@ -210,7 +210,6 @@ namespace ParkHelper.ViewModels
                 var categorie = new Categorie(subList.Key);
                 foreach (var item in subList)
                 {
-                    item.LienGif = "http://aaa.com/a.gif";
                     categorie.Add(item);
                 }
                 Listes.Add(categorie);
