@@ -18,36 +18,36 @@ namespace ParkHelper.Apiv2.Controllers
     */
     public class TypeDeLieuxController : ODataController
     {
+        private ParcHelperEntities db = new ParcHelperEntities();
 
         // GET: odata/TypeDeLieux
         [EnableQuery]
         public IQueryable<TypeDeLieu> GetTypeDeLieux()
         {
-            using (var db = new ParcHelperEntities())
-            {
-                return db.TypeDeLieux;
-            }
+            return db.TypeDeLieux;
         }
 
         // GET: odata/TypeDeLieux(5)
         [EnableQuery]
         public SingleResult<TypeDeLieu> GetTypeDeLieu([FromODataUri] int key)
         {
-            using (var db = new ParcHelperEntities())
-            {
-                return SingleResult.Create(db.TypeDeLieux.Where(typeDeLieu => typeDeLieu.Id == key));
-            }
+            return SingleResult.Create(db.TypeDeLieux.Where(typeDeLieu => typeDeLieu.Id == key));
         }
 
         // GET: odata/TypeDeLieux(5)/Lieux
         [EnableQuery]
         public IQueryable<Lieu> GetLieux([FromODataUri] int key)
         {
-            using (var db = new ParcHelperEntities())
-            {
-                return db.TypeDeLieux.Where(m => m.Id == key).SelectMany(m => m.Lieux);
-            }
+            return db.TypeDeLieux.Where(m => m.Id == key).SelectMany(m => m.Lieux);
         }
-        
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
