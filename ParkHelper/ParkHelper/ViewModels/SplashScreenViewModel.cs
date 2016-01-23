@@ -40,7 +40,7 @@ namespace ParkHelper.ViewModels
             var Ws = new ParkHelperWebservice();
             _applicationContext.requeteLieux = await Ws.GetAttractions();
             _applicationContext.HasApplicationList = true;
-            _applicationContext.ListeAppliSelectionnees = new List<Location>();
+            _applicationContext.ListeAppliSelectionnees = new List<int>();
             HomeCommand.Execute(_applicationContext);
         }
     }

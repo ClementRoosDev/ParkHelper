@@ -38,7 +38,7 @@ namespace ParkHelper.ViewModels
                     Locator.ListPage, Context);
             });
 
-            ListeIdAttractions = new List<Location>();
+            ListeIdAttractions = new List<int>();
         }
 
 
@@ -75,7 +75,7 @@ namespace ParkHelper.ViewModels
             }
         }
 
-        public List<Location> ListeIdAttractions { get; set; }
+        public List<int> ListeIdAttractions { get; set; }
 
         public List<ListeParcour> listeParcours { get; set; }
 

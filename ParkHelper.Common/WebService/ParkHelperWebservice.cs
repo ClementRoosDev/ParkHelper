@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace ParkHelper.Common.WebService
             return result;
         }
 
-        public async Task<RequeteListeParcours> GetParcours(List<Location> ListeIdLieux)
+        public async Task<RequeteListeParcours> GetParcours(List<int> ListeIdLieux)
         {
             RequeteListeParcours result = new RequeteListeParcours();
             using (var httpClient = CreateClient(Path.API))
@@ -75,21 +76,13 @@ namespace ParkHelper.Common.WebService
             return httpClient;
         }
 
-        private string BuildParcoursQueryFromIds(List<Location> ListeIdLieux)
+        private string BuildParcoursQueryFromIds(List<int> ListeIdLieux)
         {
             string result = "values?";
-            /**foreach (var item in ListeIdLieux)
-            {
-                result += "values=" + item+"&";
-            }*/
-            foreach (var item in ListeIdLieux)
-            {
-                //result += "locations=" + item + "&";
-                result += "locations=" + item.X + "&" + "locations=" + item.Y + "&";
-            }
-            var resultClean = result.Remove(result.Length - 1);
-            
-            return resultClean;
+            result += "values=63&";
+            result = ListeIdLieux.Aggregate(result, (current, item) => current + ("values=" + item + "&"));
+            result += "values=63";
+            return result;
         }
     }
 

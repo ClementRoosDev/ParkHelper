@@ -3,35 +3,21 @@ using System.Linq;
 using System.Web.Http;
 using ParkHelper.Apiv2.Model;
 using ParkHelper.Data;
-using ParkHelper.Apiv2.Models;
 
 namespace ParkHelper.Apiv2.Controllers
 {
     [Authorize]
     public class ValuesController : ApiController
     {
-        private readonly object _algorithmLock = new object();
-        private TravellingSalesmanAlgorithm _algorithm;
-        private readonly Location _startLocation = new Location(50, 50);
-        private const int _populationCount = 114;
-
-        //[AllowAnonymous]
-        /**public Parcours Get([FromUri] int[] values)
-        {            
-            var CP = new CalculParcours(values);
-            CP.CalculeParcoursOptimal();
-            return CP.Parcours;
-        }*/
 
         [AllowAnonymous]
-        public IEnumerable<Location> Get([FromUri] double[] lieux)
+        public Parcours Get([FromUri] int[] values)
         {
-            var locations = CityProvider.ConvertFromList(lieux);
-
-            lock (_algorithmLock)
-                _algorithm = new TravellingSalesmanAlgorithm(_startLocation, locations, _populationCount);
-
-            return _algorithm.GetBestSolutionSoFar();
+            var tspSearch = new TSPSearch();
+            tspSearch.Search(values);
+            var CP = new CalculParcours(tspSearch.bestSol);
+            CP.CalculeParcoursOptimal();
+            return CP.Parcours;
         }
 
         // GET api/values/5

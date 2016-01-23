@@ -66,7 +66,7 @@ namespace ParkHelper.ViewModels
 
 
             Listes = new List<Categorie>();
-            ListeAppliSelectionnees = new List<Location>();
+            ListeAppliSelectionnees = new List<int>();
             IsLoading = true;
 
             CreateItineraire = new CreateItineraireCommand(ItineraireCommand);
@@ -146,7 +146,7 @@ namespace ParkHelper.ViewModels
 
         public List<Categorie> Listes { get; set; }
         public int ListesCount { get; set; }
-        public List<Location> ListeAppliSelectionnees { get; set; }
+        public List<int> ListeAppliSelectionnees { get; set; }
 
 
         public ICommand ItemDetailsCommand { get; set; }
@@ -188,14 +188,13 @@ namespace ParkHelper.ViewModels
         private void ToggleSelection(object sender, EventArgs e)
         {
             var attraction = (Lieu) sender;
-            var location = new Location(attraction.Longitude, attraction.Latittude);
             if (attraction.EstDejaDansLeParcours)
             {
-                ListeAppliSelectionnees.Add(location);
+                ListeAppliSelectionnees.Add(attraction.Id);
             }
             else
             {
-                ListeAppliSelectionnees.Remove(location);
+                ListeAppliSelectionnees.Remove(attraction.Id);
             }
 
             ItineraireCanBeGenerated = CreateItineraire.CanExecute(ListeAppliSelectionnees);

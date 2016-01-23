@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ParkHelper.Apiv2.Models;
+using ParkHelper.Apiv2.Model;
 using ParkHelper.Data;
 
 namespace ParkHelper.Apiv2.Repository

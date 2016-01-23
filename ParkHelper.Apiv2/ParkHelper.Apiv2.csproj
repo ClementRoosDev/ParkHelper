@@ -207,10 +207,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Model\CalculParcours.cs" />
-    <Compile Include="Model\CityProvider.cs" />
     <Compile Include="Model\Localisation.cs" />
-    <Compile Include="Model\Location.cs" />
-    <Compile Include="Model\TravellingSalesmanAlgorithm.cs" />
+    <Compile Include="Model\TSPEnvironment.cs" />
+    <Compile Include="Model\TSPSearch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AttractionRepository.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
@@ -305,6 +304,10 @@
     <ProjectReference Include="..\ParkHelper.Data\ParkHelper.Data.csproj">
       <Project>{c6be9cfa-57e8-4c90-a1e6-197cebabe6bc}</Project>
       <Name>ParkHelper.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParkHelper.TSP\ParkHelper.TSP.csproj">
+      <Project>{0463ACF0-8D7F-4A95-8780-030035B4311F}</Project>
+      <Name>ParkHelper.TSP</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

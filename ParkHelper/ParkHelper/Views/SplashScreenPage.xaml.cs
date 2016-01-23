@@ -31,7 +31,7 @@ namespace ParkHelper.Views
             {
                 await DisplayAlert("Error", "Connection Error", "OK");
                 viewModel._applicationContext.HasApplicationList = false;
-                viewModel._applicationContext.ListeAppliSelectionnees = new List<Location>();
+                viewModel._applicationContext.ListeAppliSelectionnees = new List<int>();
                 viewModel.HomeCommand.Execute(viewModel._applicationContext);
             }
             
