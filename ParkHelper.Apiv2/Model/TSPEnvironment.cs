@@ -1,4 +1,6 @@
-﻿namespace ParkHelper.Apiv2.Model
+﻿using System.Linq;
+
+namespace ParkHelper.Apiv2.Model
 {
     public class TspEnvironment
     {
@@ -13,7 +15,11 @@
 
             for (var i = 0; i < solution.Length - 1; i++)
             {
-                cost += Distances[solution[i]][solution[i + 1]];
+                var position = solution.ElementAt(i);
+                var newPosition = position - 1;
+                var x = Distances[newPosition];
+                var y = x.ElementAt(i + 1);
+                cost += y;
             }
             return cost;
         }

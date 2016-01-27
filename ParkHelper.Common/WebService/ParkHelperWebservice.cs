@@ -7,7 +7,6 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using ParkHelper.Common.Models;
 using ParkHelper.Common.Models.RequeteListeLieux;
-using ParkHelper.Common.Models.Visite;
 
 namespace ParkHelper.Common.WebService
 {
@@ -21,7 +20,7 @@ namespace ParkHelper.Common.WebService
                 // fututre query Lieux()?$filter=Latittude gt 1.0 and 
                 //Plannings /any(a:a/idNumeroJour ge 1 and a/idNumeroJour le 3 and a/idMois eq 1)
                 //&$expand=Plannings,Indications
-                var response = await httpClient.GetAsync("Lieux?$filter=Latittude%20gt%201&$expand=TypeDeLieu").ConfigureAwait(false);
+                var response = await httpClient.GetAsync("Lieux?$filter=Latittude%20gt%201.0%20and%20Id%20ne%2063&$expand=Indications").ConfigureAwait(false);
                 if (response.IsSuccessStatusCode)
                 {
                     var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -78,9 +77,13 @@ namespace ParkHelper.Common.WebService
 
         private string BuildParcoursQueryFromIds(List<int> ListeIdLieux)
         {
-            string result = "values?";
+            var result = "values?";
             result += "values=63&";
-            result = ListeIdLieux.Aggregate(result, (current, item) => current + ("values=" + item + "&"));
+            foreach (var item in ListeIdLieux)
+            {
+                result += "values=" + item + "&";
+            }
+            //result += ListeIdLieux.Aggregate(result, (current, item) => current + ("values=" + item + "&"));
             result += "values=63";
             return result;
         }

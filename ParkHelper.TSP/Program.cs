@@ -5,10 +5,10 @@ namespace ParkHelper.TSP
 {
     class Program
     {
-        private static TSPEnvironment _tspEnvironment;
+        private static TSPEnvironment2 _tspEnvironment;
 
         public static int[] GetBestNeighbour(TabuList tabuList,
-            TSPEnvironment tspEnviromnet,
+            TSPEnvironment2 tspEnviromnet,
             int[] initSolution)
         {
 
@@ -74,7 +74,7 @@ namespace ParkHelper.TSP
 
         static void Main(string[] args)
         {
-            _tspEnvironment = new TSPEnvironment
+            _tspEnvironment = new TSPEnvironment2
             {
                 distances = new[]
                 {

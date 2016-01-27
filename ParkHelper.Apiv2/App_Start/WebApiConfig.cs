@@ -36,12 +36,12 @@ namespace ParkHelper.Apiv2
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 
 
-            var json = config.Formatters.JsonFormatter;
-            json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All;
-            json.UseDataContractJsonSerializer = true;
-            json.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+            //var json = config.Formatters.JsonFormatter;
+            //json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All;
+            //json.UseDataContractJsonSerializer = true;
+            //json.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
 
-            config.Formatters.Remove(config.Formatters.XmlFormatter);
+            //config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
     }
 }

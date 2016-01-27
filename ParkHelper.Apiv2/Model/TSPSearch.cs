@@ -6,11 +6,11 @@ namespace ParkHelper.Apiv2.Model
 {
     public class TSPSearch
     {
-        private static TSPEnvironment _tspEnvironment;
+        private static TSPEnvironment2 _tspEnvironment2;
         public int[] bestSol;
 
         public static int[] GetBestNeighbour(TabuList tabuList,
-            TSPEnvironment tspEnviromnet,
+            TSPEnvironment2 tspEnviromnet,
             int[] initSolution)
         {
 
@@ -40,7 +40,7 @@ namespace ParkHelper.Apiv2.Model
 
 
 
-                    if ((newBestCost > bestCost || firstNeighbor) && _tspEnvironment.distances[i][j] == 0)
+                    if ((newBestCost > bestCost || firstNeighbor) && _tspEnvironment2.distances[i][j] == 0)
                     { //if better move found, store it
                         firstNeighbor = false;
                         city1 = i;
@@ -59,8 +59,6 @@ namespace ParkHelper.Apiv2.Model
                 tabuList.tabuMove(city1, city2);
             }
             return bestSol;
-
-
         }
 
         //swaps two cities
@@ -72,10 +70,9 @@ namespace ParkHelper.Apiv2.Model
             return solution;
         }
 
-
         internal void Search(int[] currSolution)
         {
-            _tspEnvironment = new TSPEnvironment
+            _tspEnvironment2 = new TSPEnvironment2
             {
                 distances = new[]
                 {
@@ -153,16 +150,14 @@ namespace ParkHelper.Apiv2.Model
 
             bestSol = new int[currSolution.Length]; //this is the best Solution So Far
             bestSol = Arraycopy(currSolution, 0, 0, bestSol.Length);
-            int bestCost = _tspEnvironment.GetObjectiveFunctionValue(bestSol);
+            int bestCost = _tspEnvironment2.GetObjectiveFunctionValue(bestSol);
 
             for (int i = 0; i < numberOfIterations; i++)
             { // perform iterations here
 
-                currSolution = GetBestNeighbour(tabuList, _tspEnvironment, currSolution);
-                //printSolution(currSolution);
-                int currCost = _tspEnvironment.GetObjectiveFunctionValue(currSolution);
+                currSolution = GetBestNeighbour(tabuList, _tspEnvironment2, currSolution);
 
-                //System.out.println("Current best cost = " + tspEnvironment.getObjectiveFunctionValue(currSolution));
+                int currCost = _tspEnvironment2.GetObjectiveFunctionValue(currSolution);
 
                 if (currCost < bestCost)
                 {
@@ -170,11 +165,6 @@ namespace ParkHelper.Apiv2.Model
                     bestCost = currCost;
                 }
             }
-
-            Console.WriteLine("Search done! \nBest Solution cost found = " + bestCost + "\nBest Solution :");
-
-            PrintSolution(bestSol);
-            Console.ReadKey();
         }
 
         private static int[] Arraycopy(IReadOnlyList<int> currSolution, int positionDepart, int debut, int fin)

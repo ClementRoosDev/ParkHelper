@@ -14,8 +14,39 @@ namespace ParkHelper.Apiv2.Controllers
         public Parcours Get([FromUri] int[] values)
         {
             var tspSearch = new TSPSearch();
-            tspSearch.Search(values);
-            var CP = new CalculParcours(tspSearch.bestSol);
+            var valuesCorrrected = new int[values.Length];
+            int size = 0;
+            foreach (var idLieu in values)
+            {
+                if(idLieu == 63)
+                {
+                    valuesCorrrected[size] = 58;
+                    size++;
+                }
+                else
+                {
+                    valuesCorrrected[size] = idLieu;
+                    size++;
+                }
+            }
+            tspSearch.Search(valuesCorrrected);
+
+            size = 0;
+            foreach (var idLieu in tspSearch.bestSol)
+            {
+                if (idLieu == 58)
+                {
+                    valuesCorrrected[size] = 63;
+                    size++;
+                }
+                else
+                {
+                    valuesCorrrected[size] = idLieu;
+                    size++;
+                }
+            }
+
+            var CP = new CalculParcours(valuesCorrrected);
             CP.CalculeParcoursOptimal();
             return CP.Parcours;
         }

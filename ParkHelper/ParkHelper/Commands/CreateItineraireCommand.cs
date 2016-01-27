@@ -24,7 +24,7 @@ namespace ParkHelper.Commands
         {
             if(parameter != null)
             {
-                var liste = parameter as List<Location>;
+                var liste = parameter as List<int>;
                 CanBeExecuted = liste != null && liste.Count > 2;
             }
             else

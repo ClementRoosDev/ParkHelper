@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ParkHelper.TSP
 {
-    public class TSPEnvironment
+    public class TSPEnvironment2
     {
         //Tabu Search Environment
         public int[][] distances;
 
-        public TSPEnvironment()
+        public TSPEnvironment2()
         {
 
         }
@@ -24,9 +24,13 @@ namespace ParkHelper.TSP
 
             int cost = 0;
 
-            for (int i = 0; i < solution.Length - 1; i++)
+            for (int i = 0; i < (solution.Length - 1); i++)
             {
-                cost += distances[solution[i]][solution[i + 1]];
+                var position = solution.ElementAt(i);
+                var newPosition = position - 1;
+                var x = distances[newPosition];
+                var y = x.ElementAt(i + 1);
+                cost += y;
             }
 
             return cost;
