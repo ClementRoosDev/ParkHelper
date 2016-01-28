@@ -5,7 +5,6 @@ using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 using ParkHelper.Common.Models.RequeteListeLieux;
 using ParkHelper.Common.Models.Visite;
-using ParkHelper.Common.WebService;
 using ParkHelper.ViewModels;
 using Xamarin.Forms;
 
