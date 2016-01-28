@@ -47,8 +47,7 @@ namespace ParkHelper.Common.WebService
                     var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                     if (!string.IsNullOrWhiteSpace(json))
                     {
-                        var jsonv2 = json.Replace("odata.metadata", "metadata");
-                        result = JsonConvert.DeserializeObject<RequeteListeParcours>(jsonv2);
+                        result = JsonConvert.DeserializeObject<RequeteListeParcours>(json);
                     }
                 }
             }
