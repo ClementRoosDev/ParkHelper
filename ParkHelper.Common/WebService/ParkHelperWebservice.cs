@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using ParkHelper.Common.Models;
 using ParkHelper.Common.Models.RequeteListeLieux;
+using ParkHelper.Common.WebService.TSP;
 
 namespace ParkHelper.Common.WebService
 {
@@ -34,12 +35,13 @@ namespace ParkHelper.Common.WebService
             return result;
         }
 
-        public async Task<RequeteListeParcours> GetParcours(List<int> ListeIdLieux)
+        public async Task<RequeteListeParcours> GetParcours(List<int> listeIdLieux)
         {
             RequeteListeParcours result = new RequeteListeParcours();
             using (var httpClient = CreateClient(Path.API))
             {
-                string query = BuildParcoursQueryFromIds(ListeIdLieux);
+                var listWithTSp = FindTSP(listeIdLieux);
+                string query = BuildParcoursQueryFromIds(listWithTSp);
 
                 var response = await httpClient.GetAsync(query).ConfigureAwait(false);
                 if (response.IsSuccessStatusCode)
@@ -52,6 +54,13 @@ namespace ParkHelper.Common.WebService
                 }
             }
             return result;
+        }
+
+        private List<int> FindTSP(List<int> values)
+        {
+            var tspSearch = new TSPSearch();
+            tspSearch.Search(values.ToArray());
+            return tspSearch.BestSol.ToList();
         }
 
         const string ODATA_BASE_ADDRESS = "http://parkhelperodata.azurewebsites.net/odata/";
@@ -74,16 +83,15 @@ namespace ParkHelper.Common.WebService
             return httpClient;
         }
 
-        private string BuildParcoursQueryFromIds(List<int> ListeIdLieux)
+        private string BuildParcoursQueryFromIds(List<int> listeIdLieux)
         {
             var result = "values?";
-            result += "values=63&";
-            foreach (var item in ListeIdLieux)
+            foreach (var item in listeIdLieux)
             {
                 result += "values=" + item + "&";
             }
-            result += "values=63";
-            return result;
+            var resultClean = result.Remove(result.Length - 1);
+            return resultClean;
         }
     }
 

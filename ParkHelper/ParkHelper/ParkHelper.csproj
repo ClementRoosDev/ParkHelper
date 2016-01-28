@@ -37,7 +37,6 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Commands\CreateItineraireCommand.cs" />
-    <Compile Include="Commands\GetItineraireCommand.cs" />
     <Compile Include="Helper\NavigationService.cs" />
     <Compile Include="Locator.cs" />
     <Compile Include="ParkHelper.cs" />
@@ -47,6 +46,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="TSP\TabuList.cs" />
+    <Compile Include="TSP\TspEnvironment.cs" />
+    <Compile Include="TSP\TSPSearch.cs" />
     <Compile Include="ViewModels\LieuDetailsViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\ItinerairePageViewModel.cs" />

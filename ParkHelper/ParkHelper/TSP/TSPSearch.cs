@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using ParkHelper.TSP;
+﻿using System.Collections.Generic;
 
-namespace ParkHelper.Apiv2.Model
+namespace ParkHelper.TSP
 {
     public class TSPSearch
     {
-        private static TSPEnvironment2 _tspEnvironment2;
+        private static TspEnvironment _tspEnvironment2;
         public int[] bestSol;
 
         public static int[] GetBestNeighbour(TabuList tabuList,
-            TSPEnvironment2 tspEnviromnet,
+            TspEnvironment tspEnviromnet,
             int[] initSolution)
         {
 
@@ -40,7 +38,7 @@ namespace ParkHelper.Apiv2.Model
 
 
 
-                    if ((newBestCost > bestCost || firstNeighbor) && _tspEnvironment2.distances[i][j] == 0)
+                    if ((newBestCost > bestCost || firstNeighbor) && _tspEnvironment2.Distances[i][j] == 0)
                     { //if better move found, store it
                         firstNeighbor = false;
                         city1 = i;
@@ -72,9 +70,9 @@ namespace ParkHelper.Apiv2.Model
 
         internal void Search(int[] currSolution)
         {
-            _tspEnvironment2 = new TSPEnvironment2
+            _tspEnvironment2 = new TspEnvironment
             {
-                distances = new[]
+                Distances = new[]
                 {
                     new[] {0,2,5,2,2,2,4,8,10,9,10,4,5,5,6,7,9,8,7,6,6,7,3,7,5,7,4,6,7,2,7,5,6,7,9,7,7,7,7,7,6,5,6,6,7,6,4,5,4,5,6,7,4,5,7,6,7,8},
                     new[] {2,0,5,3,2,2,4,9,11,10,11,4,5,5,6,7,9,8,7,6,6,7,3,7,5,7,4,6,6,2,7,5,6,7,10,7,7,7,7,7,6,5,6,6,7,6,4,4,4,5,5,5,4,5,7,6,5,8},
@@ -175,15 +173,6 @@ namespace ParkHelper.Apiv2.Model
                 result[i] = currSolution[i + debut];
             }
             return result;
-        }
-
-        public static void PrintSolution(int[] solution)
-        {
-            foreach (var t in solution)
-            {
-                Console.Write(t + " ");
-            }
-            Console.WriteLine("");
         }
     }
 }

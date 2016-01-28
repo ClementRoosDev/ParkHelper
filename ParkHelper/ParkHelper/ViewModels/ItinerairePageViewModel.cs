@@ -24,7 +24,7 @@ namespace ParkHelper.ViewModels
         #region Contructor
         public ItinerairePageViewModel(INavigationService navigationService)
         {
-            if (navigationService == null) throw new ArgumentNullException("navigationService");
+            if (navigationService == null) throw new ArgumentNullException(nameof(navigationService));
             _navigationService = navigationService;
 
             HomeCommand = new RelayCommand(() =>

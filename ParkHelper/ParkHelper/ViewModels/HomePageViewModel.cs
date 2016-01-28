@@ -17,7 +17,7 @@ namespace ParkHelper.ViewModels
         #region Constuctor
         public HomePageViewModel(INavigationService navigationService)
         {
-            if (navigationService == null) throw new ArgumentNullException("navigationService");
+            if (navigationService == null) throw new ArgumentNullException(nameof(navigationService));
             _navigationService = navigationService;
 
             MapCommand = new RelayCommand(() =>
@@ -25,7 +25,11 @@ namespace ParkHelper.ViewModels
                 _navigationService.NavigateTo(
                     Locator.MapPage);
             });
-            TryToOpenItineraire();
+            VisiteCommand = new RelayCommand(() =>
+            {
+                _navigationService.NavigateTo(
+                    Locator.ListPage, Context);
+            });
         }
         #endregion
         
@@ -37,27 +41,6 @@ namespace ParkHelper.ViewModels
         public ParkHelper Context { get; set; }
         public bool IsListFilled { get; set; }
 
-        #endregion
-
-        #region Methods
-
-        void TryToOpenItineraire()
-        {
-            //fileName = "";
-            //if()
-            VisiteCommand = new RelayCommand(() =>
-            {
-                _navigationService.NavigateTo(
-                    Locator.ListPage,Context);
-            });
-            /**}else{
-            ListPageCommand = new RelayCommand(() =>
-            {
-                _navigationService.NavigateTo(
-                    Locator.ItinerairePage, fileName);
-            });
-            }*/
-        }
         #endregion
     }
 }

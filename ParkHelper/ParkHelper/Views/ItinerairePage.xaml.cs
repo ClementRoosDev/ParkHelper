@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using ParkHelper.Common.WebService;
 using ParkHelper.ViewModels;
 
@@ -18,11 +17,6 @@ namespace ParkHelper.Views
             BindingContext = _viewModel;
         }
 
-        private void ItinerairePage_OnDisappearing(object sender, EventArgs e)
-        {
-            //viewModel.HomeCommand.Execute(null);
-        }
-
         async void ItinerairePage_OnAppearing(object sender, EventArgs e)
         {
             OnAppearing();
@@ -30,7 +24,6 @@ namespace ParkHelper.Views
 
             try
             {
-
                 var Ws = new ParkHelperWebservice();
                 var objectWithFormat = await Ws.GetParcours(_viewModel.ListeIdAttractions);
 

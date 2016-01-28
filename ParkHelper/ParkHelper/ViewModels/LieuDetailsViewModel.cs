@@ -11,15 +11,15 @@ namespace ParkHelper.ViewModels
     {
         #region Fields
         readonly INavigationService _navigationService;
-        private Lieu lieu;
-        private bool isAttraction;
+        private Lieu _lieu;
+        private bool _isAttraction;
 
         #endregion
 
         #region Constructor
         public LieuDetailsViewModel(INavigationService navigationService)
         {
-            if (navigationService == null) throw new ArgumentNullException("navigationService");
+            if (navigationService == null) throw new ArgumentNullException(nameof(navigationService));
             _navigationService = navigationService;
 
             ItineraireCommand = new RelayCommand(() =>
@@ -35,11 +35,11 @@ namespace ParkHelper.ViewModels
 
         public Lieu Lieu
         {
-            get { return lieu; }
+            get { return _lieu; }
             set
             {
-                lieu = value;
-                GetTexts(lieu);
+                _lieu = value;
+                GetTexts(_lieu);
             }
         }
 
@@ -47,11 +47,11 @@ namespace ParkHelper.ViewModels
         {
             get
             {
-                return isAttraction;
+                return _isAttraction;
             }
             set
             {
-                isAttraction = value;
+                _isAttraction = value;
                 RaisePropertyChanged(() => IsAttraction);
             }
         }
@@ -60,7 +60,7 @@ namespace ParkHelper.ViewModels
         #region Methods
         private void GetTexts(Lieu lieuWithDetails)
         {
-            isAttraction = lieuWithDetails.IdType == 1;
+            _isAttraction = lieuWithDetails.IdType == 1;
         }
 
         #endregion

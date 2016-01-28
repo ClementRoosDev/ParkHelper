@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace ParkHelper.Apiv2.Model
+namespace ParkHelper.TSP
 {
     public class TspEnvironment
     {

@@ -15,20 +15,20 @@ namespace ParkHelper.ViewModels
         #region Fields
 
         readonly INavigationService _navigationService;
-        public ParkHelper _applicationContext;
+        public ParkHelper ApplicationContext;
 
         #endregion
 
         public SplashScreenViewModel(INavigationService navigationService)
         {
             if (navigationService == null)
-                throw new ArgumentNullException("navigationService");
+                throw new ArgumentNullException(nameof(navigationService));
 
             _navigationService = navigationService;
 
             HomeCommand = new RelayCommand(() =>
             {
-                _navigationService.NavigateTo(Locator.HomePage, _applicationContext);
+                _navigationService.NavigateTo(Locator.HomePage, ApplicationContext);
             });
         }
 
@@ -36,12 +36,12 @@ namespace ParkHelper.ViewModels
 
         public async Task GetAttractionList()
         {
-            _applicationContext = new ParkHelper();
-            var Ws = new ParkHelperWebservice();
-            _applicationContext.requeteLieux = await Ws.GetAttractions();
-            _applicationContext.HasApplicationList = true;
-            _applicationContext.ListeAppliSelectionnees = new List<int>();
-            HomeCommand.Execute(_applicationContext);
+            ApplicationContext = new ParkHelper();
+            var ws = new ParkHelperWebservice();
+            ApplicationContext.requeteLieux = await ws.GetAttractions();
+            ApplicationContext.HasApplicationList = true;
+            ApplicationContext.ListeAppliSelectionnees = new List<int>();
+            HomeCommand.Execute(ApplicationContext);
         }
     }
 }

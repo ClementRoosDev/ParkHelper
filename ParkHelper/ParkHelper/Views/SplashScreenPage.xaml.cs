@@ -1,23 +1,17 @@
-﻿using GalaSoft.MvvmLight.Views;
-using ParkHelper.Helper;
-using ParkHelper.ViewModels;
+﻿using ParkHelper.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using ParkHelper.Common.Models.Visite;
-using Xamarin.Forms;
 
 namespace ParkHelper.Views
 {
     public partial class SplashScreenPage
     {
-        SplashScreenViewModel viewModel;
+        readonly SplashScreenViewModel _viewModel;
         public SplashScreenPage()
         {
-            InitializeComponent();           
-
-            viewModel = App.Locator.SplashScreenView;
-            BindingContext = viewModel;
+            InitializeComponent();
+            _viewModel = App.Locator.SplashScreenView;
+            BindingContext = _viewModel;
         }
 
         async void SplashScreen_OnAppearing(object sender, EventArgs e)
@@ -25,18 +19,15 @@ namespace ParkHelper.Views
             OnAppearing();
             try
             {
-                await viewModel.GetAttractionList();
+                await _viewModel.GetAttractionList();
             }
             catch (Exception)
             {
                 await DisplayAlert("Error", "Connection Error", "OK");
-                viewModel._applicationContext.HasApplicationList = false;
-                viewModel._applicationContext.ListeAppliSelectionnees = new List<int>();
-                viewModel.HomeCommand.Execute(viewModel._applicationContext);
-            }
-            
-
-            
+                _viewModel.ApplicationContext.HasApplicationList = false;
+                _viewModel.ApplicationContext.ListeAppliSelectionnees = new List<int>();
+                _viewModel.HomeCommand.Execute(_viewModel.ApplicationContext);
+            }   
         }
     }
 }

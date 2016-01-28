@@ -57,16 +57,9 @@ namespace ParkHelper.Apiv2.Model
 
         void DeterminePremiereAttraction()
         {
-            /*if (Settings.Default.FeatureGeolocalition)
-            {
-                //TODO : Calculer le manège le plus près de l'utilisateur
-            }
-            else
-            {*/
-                //On va dire que on doit commencer par le premier de la liste
-                ListeAttraction.First().Ordre = 1;
-                ListeAttraction.First().EstDejaDansLeParcours = true;
-           // }
+            //On va dire que on doit commencer par le premier de la liste
+            ListeAttraction.First().Ordre = 1;
+            ListeAttraction.First().EstDejaDansLeParcours = true;
         }
 
         void DetermineOrdreAttractions()

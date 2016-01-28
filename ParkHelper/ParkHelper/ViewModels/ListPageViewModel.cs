@@ -8,7 +8,6 @@ using GalaSoft.MvvmLight.Views;
 using ParkHelper.Commands;
 using ParkHelper.Common.Models.ListeLieux;
 using ParkHelper.Common.Models.RequeteListeLieux;
-using ParkHelper.Common.Models.Visite;
 
 namespace ParkHelper.ViewModels
 {
@@ -21,7 +20,7 @@ namespace ParkHelper.ViewModels
         private bool _itineraireCanBeGenerated;
 
 
-        public INavigationService _navigationService;
+        public INavigationService NavigationService;
 
         private bool _nocturne;
 
@@ -29,19 +28,19 @@ namespace ParkHelper.ViewModels
 
         public ListPageViewModel(INavigationService navigationService)
         {
-            if (navigationService == null) throw new ArgumentNullException("navigationService");
-            _navigationService = navigationService;
+            if (navigationService == null) throw new ArgumentNullException(nameof(navigationService));
+            NavigationService = navigationService;
 
-            HomeCommand = new RelayCommand(() => { _navigationService.NavigateTo(Locator.HomePage, Context); });
+            HomeCommand = new RelayCommand(() => { NavigationService.NavigateTo(Locator.HomePage, Context); });
 
             ItemDetailsCommand =
-                new RelayCommand(() => { _navigationService.NavigateTo(Locator.LieuDetailsPage, Parameter); });
+                new RelayCommand(() => { NavigationService.NavigateTo(Locator.LieuDetailsPage, Parameter); });
 
             ItineraireCommand =
-                new RelayCommand(() => { _navigationService.NavigateTo(Locator.ItinerairePage, Context); });
+                new RelayCommand(() => { NavigationService.NavigateTo(Locator.ItinerairePage, Context); });
 
             VisiteDetailsCommand =
-                new RelayCommand(() => { _navigationService.NavigateTo(Locator.VisiteDetailsPage, Context); });
+                new RelayCommand(() => { NavigationService.NavigateTo(Locator.VisiteDetailsPage, Context); });
 
             TempsEstime = new List<string>
             {
@@ -126,10 +125,7 @@ namespace ParkHelper.ViewModels
             }
         }
 
-        public bool IsLoadingComplete
-        {
-            get { return !_isLoading; }
-        }
+        public bool IsLoadingComplete => !_isLoading;
 
         public ParkHelper Context
         {
@@ -199,8 +195,6 @@ namespace ParkHelper.ViewModels
 
             ItineraireCanBeGenerated = CreateItineraire.CanExecute(ListeAppliSelectionnees);
             Context.ListeAppliSelectionnees = ListeAppliSelectionnees;
-            //TODO : Verifier possibilité d'ajout à l'itinéraire
-            //System.Console.WriteLine("{0} has been toggled to {1}", Lieu.Libelle, Lieu.EstDejaDansLeParcours);
         }
 
         internal void ConvertFrom(List<Lieu> attractions)
